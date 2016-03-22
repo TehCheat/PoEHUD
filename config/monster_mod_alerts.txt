@@ -21,7 +21,6 @@ MonsterThornsElemental1; Elemental Reflect nearby; attention.wav; ff00FFFF; eRef
 MonsterThornsPhysical1Large; Physical Reflect nearby; attention.wav; ffF7941D; pReflect.png
 MonsterThornsElemental1Large; Elemental Reflect nearby; attention.wav; ff00FFFF; eReflect.png
 
-
 TalismanMonsterUnsetAmulet; Has 1 Socket Talisman; ; ffCC3399; ms-talisman.png
 TalismanMonsterManaAmulet; Increased Mana Talisman; ; ffCC3399; ms-talisman.png
 TalismanMonsterFireDamageAmulet; Fire Damage Talisman; ; ffCC3399; ms-talisman.png
@@ -77,7 +76,7 @@ TalismanT3MonkeyTwins_; Monkey Twins Talisman; ; ffCC3399; ms-talisman.png
 TalismanT3Golden; Longtooth Talisman; ; ffCC3399; ms-talisman.png
 
 TalismanT4Rigwald; Greatwolf Talisman; ; ffCC3399; ms-talisman.png
-TalismanBeastBossShockwaveDaemon; Beast Boss Shockwave Daemon; ; ffCC3399; ms-talisman.png 
+TalismanBeastBossShockwaveDaemon; Beast Boss Shockwave Daemon; ; ffCC3399; ms-talisman.png
 MonsterNoTalisman_; No wealth; ; ffCC3399; ms-talisman.png
 MonsterRatTalismanPoisonOnHit; Rat Talisman Poison On Hit; ; ffCC3399; ms-talisman.png
 MonsterSpawnedWithTalisman; TalismanBonus; ; ffCC3399; ms-talisman.png
@@ -86,7 +85,6 @@ MonsterHasTalismanMagic; TalismanBonus Magic; ; ffCC3399; ms-talisman.png
 MonsterHasTalismanRare; TalismanBonus Rare; ; ffCC3399; ms-talisman.png
 MonsterHasTalismanUnique; TalismanBonus Unique; ; ffCC3399; ms-talisman.png
 TalismanRigwaldSideAreaInfo; Talisman Rigwald Side Area Info; ; ffCC3399; ms-talisman.png
-
 
 MonsterBloodlinesDamageCharges; Legacy of Zeal - Damage
 MonsterBloodlinesSpeedCharges; Legacy of Vigour - Speed
@@ -134,16 +132,3 @@ MonsterBloodlinesBeaconOnDeathLightning; Storm Bearers; attention.wav; ;volatile
 MonsterBloodlinesUnionOfSouls; Union of Souls
 MonsterBloodlinesShrouded; Shrouded
 MonsterBloodlinesPackDeathCountDaemon; Unnamed Bloodline Mod
-
-
-
-
-
-
-
-
-
-
-
-
-
