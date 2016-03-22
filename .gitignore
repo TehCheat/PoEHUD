@@ -75,3 +75,5 @@ bld/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+settings.json
