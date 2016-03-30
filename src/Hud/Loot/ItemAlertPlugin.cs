@@ -181,13 +181,19 @@ namespace PoeHUD.Hud.Loot
                 }
                 else
                 {
-                    ItemUsefulProperties props = initItem(item);
-                    if (props.ShouldAlert(currencyNames, Settings))
-                    {
-                        AlertDrawStyle drawStyle = props.GetDrawStyle();
-                        PrepareForDrawingAndPlaySound(entity, drawStyle);
+                    try {
+
+                        ItemUsefulProperties props = initItem(item);
+                        if (props.ShouldAlert(currencyNames, Settings))
+                        {
+                            AlertDrawStyle drawStyle = props.GetDrawStyle();
+                            PrepareForDrawingAndPlaySound(entity, drawStyle);
+                        }
+                        Settings.Alternative.Value = false;
                     }
-                    Settings.Alternative.Value = false;
+                    catch {
+                        //initItem threw an exception because the item.Path was an empty string. This catch just prevents a crash, it doesn't fix the root of the problem.
+                    }
                 }
             }
         }
