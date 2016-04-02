@@ -182,6 +182,8 @@ namespace PoeHUD.Hud.Loot
                 else
                 {
                     ItemUsefulProperties props = initItem(item);
+                    if (props == null)
+                        return;
                     if (props.ShouldAlert(currencyNames, Settings))
                     {
                         AlertDrawStyle drawStyle = props.GetDrawStyle();
@@ -353,7 +355,10 @@ namespace PoeHUD.Hud.Loot
 
         private ItemUsefulProperties initItem(IEntity item)
         {
-            string name = GameController.Files.BaseItemTypes.Translate(item.Path).BaseName;
+            BaseItemType bit = GameController.Files.BaseItemTypes.Translate(item.Path);
+            if (bit == null)
+                return null;
+            string name = bit.BaseName;
             CraftingBase craftingBase = new CraftingBase();
             if (Settings.Crafting)
             {

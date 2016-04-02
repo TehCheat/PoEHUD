@@ -17,7 +17,6 @@ namespace PoeHUD.Hud.Preload
         private readonly HashSet<PreloadConfigLine> alerts;
         private readonly Dictionary<string, PreloadConfigLine> alertStrings;
         private bool areaChanged = true;
-        private DateTime maxParseTime = DateTime.Now;
         private int lastCount;
         public static Color hasCorruptedArea { get; set; }
 
@@ -53,13 +52,11 @@ namespace PoeHUD.Hud.Preload
                     Parse();
                     lastCount = GetNumberOfObjects();
                 }
-                else if (DateTime.Now <= maxParseTime)
+                int count = GetNumberOfObjects();
+                if (lastCount != count)
                 {
-                    int count = GetNumberOfObjects();
-                    if (lastCount != count)
-                    {
-                        areaChanged = true;
-                    }
+                    Parse();
+                    lastCount = GetNumberOfObjects();
                 }
 
                 if (alerts.Count <= 0) return;
@@ -96,7 +93,6 @@ namespace PoeHUD.Hud.Preload
 
         private void OnAreaChange(AreaController area)
         {
-            maxParseTime = area.CurrentArea.TimeEntered.AddSeconds(10);
             areaChanged = true;
         }
 
@@ -119,11 +115,15 @@ namespace PoeHUD.Hud.Preload
                 if (alertStrings.ContainsKey(text)) { alerts.Add(alertStrings[text]); }
                 if (text.Contains("human_heart") || text.Contains("Demonic_NoRain.ogg"))
                 {
-                    if (Settings.CorruptedTitle) { hasCorruptedArea = Settings.HasCorruptedArea; }
+                    if (Settings.CorruptedTitle)
+                    {
+                        hasCorruptedArea = Settings.HasCorruptedArea;
+                    }
                     else
                     {
                         alerts.Add(new PreloadConfigLine { Text = "Corrupted Area", FastColor = () => Settings.HasCorruptedArea });
                     }
+                    continue;
                 }
 
                 Dictionary<string, PreloadConfigLine> PerandusLeague = new Dictionary<string, PreloadConfigLine>
@@ -152,7 +152,11 @@ namespace PoeHUD.Hud.Preload
 
                 PreloadConfigLine perandus_alert = PerandusLeague.Where(kv => text
                     .StartsWith(kv.Key, StringComparison.OrdinalIgnoreCase)).Select(kv => kv.Value).FirstOrDefault();
-                if (perandus_alert != null && Settings.PerandusBoxes) { alerts.Add(perandus_alert); }
+                if (perandus_alert != null && Settings.PerandusBoxes)
+                {
+                    alerts.Add(perandus_alert);
+                    continue;
+                }
 
                 Dictionary<string, PreloadConfigLine> Strongboxes = new Dictionary<string, PreloadConfigLine>
                 {
@@ -174,7 +178,11 @@ namespace PoeHUD.Hud.Preload
 
                 PreloadConfigLine _alert = Strongboxes.Where(kv => text
                     .StartsWith(kv.Key, StringComparison.OrdinalIgnoreCase)).Select(kv => kv.Value).FirstOrDefault();
-                if (_alert != null && Settings.Strongboxes) { alerts.Add(_alert); }
+                if (_alert != null && Settings.Strongboxes)
+                {
+                    alerts.Add(_alert);
+                    continue;
+                }
 
                 Dictionary<string, PreloadConfigLine> Preload = new Dictionary<string, PreloadConfigLine>
                 {
@@ -226,7 +234,12 @@ namespace PoeHUD.Hud.Preload
                 };
                 PreloadConfigLine alert = Preload.Where(kv => text
                     .EndsWith(kv.Key, StringComparison.OrdinalIgnoreCase)).Select(kv => kv.Value).FirstOrDefault();
-                if (alert != null && Settings.Exiles) { alerts.Add(alert); }
+                if (alert != null && Settings.Exiles)
+                {
+                    alerts.Add(alert);
+                    continue;
+                }
+
             }
         }
     }
