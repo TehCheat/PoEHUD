@@ -13,7 +13,7 @@ namespace PoeHUD.Hud.Menu
 
         public RootButton(Vector2 position)
         {
-            Bounds = new RectangleF(position.X - 5, position.Y - 3, DesiredWidth, DesiredHeight);
+            Bounds = new RectangleF(position.X - 5, position.Y - 20, DesiredWidth, DesiredHeight);
         }
 
         public override int DesiredWidth => 80;
