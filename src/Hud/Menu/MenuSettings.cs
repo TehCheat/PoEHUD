@@ -8,7 +8,7 @@ namespace PoeHUD.Hud.Menu
         public MenuSettings()
         {
             Enable = true;
-            X = 10; Y = 102;
+            X = 10; Y = 85;
             ShowMenu = true;
             TitleName = "X";
             TitleFontColor = new ColorBGRA(255, 0, 0, 255);
