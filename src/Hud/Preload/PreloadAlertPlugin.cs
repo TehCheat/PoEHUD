@@ -177,19 +177,10 @@ namespace PoeHUD.Hud.Preload
             };
             PreloadConfigLine perandus_alert = PerandusLeague.Where(kv => text
                 .StartsWith(kv.Key, StringComparison.OrdinalIgnoreCase)).Select(kv => kv.Value).FirstOrDefault();
-            if (perandus_alert != null && Settings.PerandusBoxes)
+            if (perandus_alert != null && alerts.Add(perandus_alert))
             {
-                foundSpecificPerandusChest = true;
-                if (alerts.Contains(new PreloadConfigLine { Text = "Unknown Perandus Chest", FastColor = () => Settings.PerandusChestStandard }))
-                {
-                    alerts.Remove(new PreloadConfigLine { Text = "Unknown Perandus Chest", FastColor = () => Settings.PerandusChestStandard });
-                }
                 alerts.Add(perandus_alert);
                 return;
-            }
-            if (Settings.PerandusBoxes && !foundSpecificPerandusChest && text.StartsWith("Metadata/Chests/PerandusChests/PerandusChest.ao"))
-            {
-                alerts.Add(new PreloadConfigLine { Text = "Unknown Perandus Chest", FastColor = () => Settings.PerandusChestStandard });
             }
 
             Dictionary<string, PreloadConfigLine> Strongboxes = new Dictionary<string, PreloadConfigLine>
