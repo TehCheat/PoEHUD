@@ -132,7 +132,7 @@ namespace PoeHUD.Hud.Loot
                         }
                         else
                         {
-                            if (Settings.ShowText & (!Settings.HideOthers | entityLabel.CanPickUp))
+                            if (Settings.ShowText && (!Settings.HideOthers || entityLabel.CanPickUp || entityLabel.MaxTimeForPickUp.TotalSeconds == 0))
                                 position = DrawText(playerPos, position, BOTTOM_MARGIN, kv, text);
                         }
                     }
