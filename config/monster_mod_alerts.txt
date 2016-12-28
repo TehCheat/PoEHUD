@@ -7,19 +7,19 @@
 
 MonsterNemesisUniqueDrop; Inner Treasure nearby;treasure.wav; ff00CC00; treasure.png
 MonsterImplicitNemesisUniqueDrop; Inner Treasure nearby;treasure.wav; ff00CC00; treasure.png
-MonsterAuraPhysicalThorns1; Physical Reflect nearby; attention.wav; ffF7941D; pReflect.png
-MonsterPhysicalThorns; Physical Reflect nearby; attention.wav; ffF7941D; pReflect.png
-MonsterAuraElementalThorns1; Elemental Reflect nearby; attention.wav; ff00FFFF; eReflect.png
-MonsterElementalThorns; Elemental Reflect nearby; attention.wav; ff00FFFF; eReflect.png
-MonsterNemesisCorruptedBlood; Corrupting Blood nearby; attention.wav; ffE60000; corrupted.png
+MonsterAuraPhysicalThorns1; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
+MonsterPhysicalThorns; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
+MonsterAuraElementalThorns1; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
+MonsterElementalThorns; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
+MonsterNemesisCorruptedBlood; Corrupting Blood nearby; corrupted.wav; ffE60000; corrupted.png
 MonsterItems1; Wealth monsters nearby; ; ffFFFF66; wealth.png
-MonsterExplodesOnDeathFire1; Volatile Flameblood nearby; attention.wav; ff669999; volatile.png
-MonsterExplodesOnDeathLightning1; Volatile Stormblood nearby; attention.wav; ff669999; volatile.png
-MonsterExplodesOnDeathCold1; Volatile Iceblood nearby; attention.wav; ff669999; volatile.png
-MonsterThornsPhysical1; Physical Reflect nearby; attention.wav; ffF7941D; pReflect.png
-MonsterThornsElemental1; Elemental Reflect nearby; attention.wav; ff00FFFF; eReflect.png
-MonsterThornsPhysical1Large; Physical Reflect nearby; attention.wav; ffF7941D; pReflect.png
-MonsterThornsElemental1Large; Elemental Reflect nearby; attention.wav; ff00FFFF; eReflect.png
+MonsterExplodesOnDeathFire1; Volatile Flameblood nearby; volatile.wav; ff669999; volatile.png
+MonsterExplodesOnDeathLightning1; Volatile Stormblood nearby; volatile.wav; ff669999; volatile.png
+MonsterExplodesOnDeathCold1; Volatile Iceblood nearby; volatile.wav; ff669999; volatile.png
+MonsterThornsPhysical1; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
+MonsterThornsElemental1; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
+MonsterThornsPhysical1Large; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
+MonsterThornsElemental1Large; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
 
 TalismanMonsterUnsetAmulet; Has 1 Socket Talisman; ; ffCC3399; ms-talisman.png
 TalismanMonsterManaAmulet; Increased Mana Talisman; ; ffCC3399; ms-talisman.png
@@ -119,16 +119,16 @@ MonsterBloodlinesGuardian; Bearers of the Guardian
 MonsterBloodlinesUnholyMight; Otherworldly
 MonsterBloodlinesPhylacteralLink1; Phylacteral Link
 MonsterBloodlinesDropRareItem; Keepers of the Trove; ; ffFFFF66; wealth.png
-MonsterBloodlinesCorruptedBlood; Corrupted Bloodline 1
-MonsterBloodlinesCorruptedBlood2; Corrupted Bloodline 2
-MonsterBloodlinesCorruptedBlood3; Corrupted Bloodline 3
-MonsterBloodlinesCorruptedBlood4; Corrupted Bloodline 4
-MonsterBloodlinesCorruptedBlood5; Corrupted Bloodline 5
+MonsterBloodlinesCorruptedBlood; Corrupted Bloodline 1; corrupted.wav
+MonsterBloodlinesCorruptedBlood2; Corrupted Bloodline 2; corrupted.wav
+MonsterBloodlinesCorruptedBlood3; Corrupted Bloodline 3; corrupted.wav
+MonsterBloodlinesCorruptedBlood4; Corrupted Bloodline 4; corrupted.wav
+MonsterBloodlinesCorruptedBlood5; Corrupted Bloodline 5; corrupted.wav
 MonsterBloodlinesVoidspawn; Voidspawn of Abaxoth
 MonsterBloodlinesNecrovigil1; Necrovigil
-MonsterBloodlinesBeaconOnDeathFire; Flame Bearers; attention.wav; ;volatile.png
-MonsterBloodlinesBeaconOnDeathCold; Frost Bearers; attention.wav; ;volatile.png
-MonsterBloodlinesBeaconOnDeathLightning; Storm Bearers; attention.wav; ;volatile.png
+MonsterBloodlinesBeaconOnDeathFire; Flame Bearers; bomb.wav; ;volatile.png
+MonsterBloodlinesBeaconOnDeathCold; Frost Bearers; bomb.wav; ;volatile.png
+MonsterBloodlinesBeaconOnDeathLightning; Storm Bearers; bomb.wav; ;volatile.png
 MonsterBloodlinesUnionOfSouls; Union of Souls
 MonsterBloodlinesShrouded; Shrouded
 MonsterBloodlinesPackDeathCountDaemon; Unnamed Bloodline Mod
