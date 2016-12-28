@@ -119,11 +119,11 @@ MonsterBloodlinesGuardian; Bearers of the Guardian
 MonsterBloodlinesUnholyMight; Otherworldly
 MonsterBloodlinesPhylacteralLink1; Phylacteral Link
 MonsterBloodlinesDropRareItem; Keepers of the Trove; ; ffFFFF66; wealth.png
-MonsterBloodlinesCorruptedBlood; Corrupted Bloodline 1
-MonsterBloodlinesCorruptedBlood2; Corrupted Bloodline 2
-MonsterBloodlinesCorruptedBlood3; Corrupted Bloodline 3
-MonsterBloodlinesCorruptedBlood4; Corrupted Bloodline 4
-MonsterBloodlinesCorruptedBlood5; Corrupted Bloodline 5
+MonsterBloodlinesCorruptedBlood; Corrupted Bloodline 1; corrupted.wav
+MonsterBloodlinesCorruptedBlood2; Corrupted Bloodline 2; corrupted.wav
+MonsterBloodlinesCorruptedBlood3; Corrupted Bloodline 3; corrupted.wav
+MonsterBloodlinesCorruptedBlood4; Corrupted Bloodline 4; corrupted.wav
+MonsterBloodlinesCorruptedBlood5; Corrupted Bloodline 5; corrupted.wav
 MonsterBloodlinesVoidspawn; Voidspawn of Abaxoth
 MonsterBloodlinesNecrovigil1; Necrovigil
 MonsterBloodlinesBeaconOnDeathFire; Flame Bearers; bomb.wav; ;volatile.png
