@@ -6,7 +6,7 @@ namespace PoeHUD.Poe.EntityComponents
 		{
 			get
 			{
-				return this.Address != 0 ? this.M.ReadInt(this.Address + 12) : 0;
+				return this.Address != 0 ? this.M.ReadInt(this.Address + 24) : 0;
 			}
 		}
 
@@ -14,14 +14,14 @@ namespace PoeHUD.Poe.EntityComponents
 		{
 			get
 			{
-				return this.Address != 0 ? this.M.ReadInt(this.Address + 8, 12) : 0;
+				return this.Address != 0 ? this.M.ReadInt(this.Address + 16, 20) : 0;
 			}
 		}
 		public int ChargesMax
 		{
 			get
 			{
-				return this.Address != 0 ? this.M.ReadInt(this.Address + 8, 8) : 0;
+				return this.Address != 0 ? this.M.ReadInt(this.Address + 16, 16) : 0;
 			}
 		}
 	}
