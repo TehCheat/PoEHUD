@@ -5,6 +5,7 @@ namespace PoeHUD.Models.Enums
         Normal,
         Magic,
         Rare,
-        Unique
+        Unique,
+		Relic
     }
 }
