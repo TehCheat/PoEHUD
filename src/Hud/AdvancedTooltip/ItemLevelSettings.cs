@@ -16,5 +16,6 @@ namespace PoeHUD.Hud.AdvancedTooltip
         public RangeNode<int> TextSize { get; set; }
         public ColorNode TextColor { get; set; }
         public ColorNode BackgroundColor { get; set; }
-    }
+
+	}
 }

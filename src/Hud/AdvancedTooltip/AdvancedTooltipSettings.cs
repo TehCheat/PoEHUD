@@ -12,6 +12,7 @@ namespace PoeHUD.Hud.AdvancedTooltip
             ItemLevel = new ItemLevelSettings();
             ItemMods = new ItemModsSettings();
             WeaponDps = new WeaponDpsSettings();
+			EstimatedPrice = new ToggleNode(true);
         }
 
         [JsonProperty("Item level")]
@@ -22,5 +23,8 @@ namespace PoeHUD.Hud.AdvancedTooltip
 
         [JsonProperty("Weapon DPS")]
         public WeaponDpsSettings WeaponDps { get; set; }
-    }
+
+		[JsonProperty("Estimated Price")]
+		public ToggleNode EstimatedPrice { get; set; }
+	}
 }

@@ -1,0 +1,1670 @@
+﻿#Weapons
+
+Rigwald's Savagery, Royal Axewiki	One Handed Axe	67	
++86.9%
+9.0 x Exalted Orb769.8 x Chaos Orb	@
+United in Dream, Cutlasswiki	One Handed Sword	69	
+-71.5%
+8.0 x Exalted Orb684.2 x Chaos Orb	@
+Rigwald's Command, Midnight Bladewiki	One Handed Sword	68	
++105.6%
+7.2 x Exalted Orb611.3 x Chaos Orb	@
+Reach of the Council, Spine Bowwiki	Bow	64	
++79.9%
+6.9 x Exalted Orb589.2 x Chaos Orb	@
+Atziri's Disfavour, Vaal Axewiki	Two Handed Axe	75	
+-2.6%
+5.5 x Exalted Orb470.4 x Chaos Orb	@
+Tipua Kaikohuru, Whalebone Rapierwiki	One Handed Sword	7	
++1.7%
+3.0 x Exalted Orb256.6 x Chaos Orb	@
+Starforge, Infernal Swordwiki	Two Handed Sword	67	
+-20.4%
+3.0 x Exalted Orb254.0 x Chaos Orb	@
+Void Battery, Prophecy Wandwiki	Wand	68	
+-10.1%
+2.3 x Exalted Orb195.1 x Chaos Orb	@
+Kitava's Feast, Void Axewiki	Two Handed Axe	68	
++4.4%
+2.0 x Exalted Orb168.1 x Chaos Orb	@
+The Goddess Unleashed, Eternal Swordwiki	One Handed Sword	51	
+-2.5%
+1.8 x Exalted Orb156.4 x Chaos Orb	@
+Severed in Sleep, Cutlasswiki	One Handed Sword	38	
+-78.1%
+1.5 x Exalted Orb128.3 x Chaos Orb	@
+Varunastra, Vaal Bladewiki	One Handed Sword	64	
+-24.8%
+1.5 x Exalted Orb127.2 x Chaos Orb	@
+Duskdawn, Maelström Staffwiki	Staff	64	
++29.4%
+1.2 x Exalted Orb103.8 x Chaos Orb	@
+Cospri's Malice, Jewelled Foilwiki	One Handed Sword	68	
+-22.9%
+1.0 x Exalted Orb85.5 x Chaos Orb	@
+Mjölner, Gavelwiki	One Handed Mace	60	
++334.6%
+80.5 x Chaos Orb	@
+Death's Opus, Death Bowwiki	Bow	44	
++124.3%
+67.0 x Chaos Orb	@
+Shade of Solaris, Sage Wandwiki	Wand	30	
++135.0%
+52.1 x Chaos Orb	@
+The Harvest, Jasper Chopperwiki	Two Handed Axe	37	
+-34.3%
+39.4 x Chaos Orb	@
+Jorrhast's Blacksteel, Steelheadwiki	Two Handed Mace	44	
+-6.4%
+37.4 x Chaos Orb	@
+Arakaali's Fang, Fiend Daggerwiki	Dagger	53	
+-1.0%
+36.6 x Chaos Orb	@
+Hand of Wisdom and Action, Imperial Clawwiki	Claw	68	
+-66.9%
+35.0 x Chaos Orb	@
+Kingmaker, Despot Axewiki	Two Handed Axe	66	
+-43.1%
+31.9 x Chaos Orb	@
+Soul Taker, Siege Axewiki	One Handed Axe	59	
++21.8%
+30.0 x Chaos Orb	@
+Uul-Netol's Embrace, Vaal Axewiki	Two Handed Axe	64	
+-65.0%
+28.3 x Chaos Orb	@
+Brutus' Lead Sprinkler, Ritual Sceptrewiki	One Handed Mace	28	
++257.1%
+25.0 x Chaos Orb	@
+The Scourge, Terror Clawwiki	Claw	70	
+-40.1%
+22.1 x Chaos Orb	@
+Ngamahu's Flame, Abyssal Axewiki	Two Handed Axe	55	
++31.3%
+19.8 x Chaos Orb	@
+The Consuming Dark, Fiend Daggerwiki	Dagger	53	
++23.7%
+19.1 x Chaos Orb	@
+The Goddess Scorned, Elegant Swordwiki	One Handed Sword	28	
++4.5%
+15.0 x Chaos Orb	@
+Doomfletch's Prism, Royal Bowwiki	Bow	40	
+-25.0%
+14.2 x Chaos Orb	@
+Agnerod West, Imperial Staffwiki	Staff	66	
+-6.4%
+14.0 x Chaos Orb	@
+Agnerod South, Imperial Staffwiki	Staff	66	
+-4.1%
+12.0 x Chaos Orb	@
+Agnerod North, Imperial Staffwiki	Staff	66	
+-12.9%
+11.7 x Chaos Orb	@
+The Cauteriser, Woodsplitterwiki	Two Handed Axe	40	
++16.2%
+11.6 x Chaos Orb	@
+Windripper, Imperial Bowwiki	Bow	66	
+-16.9%
+10.1 x Chaos Orb	@
+Agnerod East, Imperial Staffwiki	Staff	66	
+-26.8%
+10.0 x Chaos Orb	@
+Breath of the Council, Carnal Sceptrewiki	One Handed Mace	66	
+-62.2%
+10.0 x Chaos Orb	@
+Doryani's Catalyst, Vaal Sceptrewiki	One Handed Mace	75	
+-20.7%
+10.0 x Chaos Orb	@
+Hegemony's Era, Judgement Staffwiki	Staff	68	
+-60.0%
+10.0 x Chaos Orb	@
+Uul-Netol's Kiss, Labryswiki	Two Handed Axe	49	
+-65.7%
+9.2 x Chaos Orb	@
+The Gryphon, Jade Hatchetwiki	One Handed Axe	32	
++66.2%
+5.5 x Chaos Orb	@
+Queen's Escape, Ornate Swordwiki	Two Handed Sword	38	
+-17.6%
+5.0 x Chaos Orb	@
+The Tempest, Long Bowwiki	Bow	32	
++20.6%
+5.0 x Chaos Orb	@
+Xoph's Nurture, Citadel Bowwiki	Bow	64	
+-86.3%
+5.0 x Chaos Orb	@
+Bino's Kitchen Knife, Slaughter Knifewiki	Dagger	65	
+-34.3%
+5.0 x Chaos Orb	@
+Dreamfeather, Eternal Swordwiki	One Handed Sword	66	
++68.5%
+4.2 x Chaos Orb	@
+Slivertongue, Harbinger Bowwiki	Bow	68	
+-13.2%
+4.1 x Chaos Orb	@
+Trypanon, Great Malletwiki	Two Handed Mace	40	
+-73.3%
+4.0 x Chaos Orb	@
+Hand of Thought and Motion, Blinderwiki	Claw	22	
+-88.3%
+4.0 x Chaos Orb	@
+Hrimnor's Dirge, Sledgehammerwiki	Two Handed Mace	36	
++36.8%
+3.0 x Chaos Orb	@
+Touch of Anguish, Imperial Clawwiki	Claw	68	
++56.2%
+3.0 x Chaos Orb	@
+Xirgil's Crank, Coiled Staffwiki	Staff	28	
+-3.6%
+3.0 x Chaos Orb	@
+Razor of the Seventh Sun, Midnight Bladewiki	One Handed Sword	68	
+-23.6%
+3.0 x Chaos Orb	@
+Divinarius, Imperial Skeanwiki	Dagger	66	
++14.6%
+2.7 x Chaos Orb	@
+Amplification Rod, Spiraled Wandwiki	Wand	36	
+-19.9%
+2.3 x Chaos Orb	@
+Silverbough, Crude Bowwiki	Bow	36	
+-1.9%
+2.2 x Chaos Orb	@
+Death's Hand, Karui Sceptrewiki	One Handed Mace	56	
+-45.9%
+2.0 x Chaos Orb	@
+Doon Cuebiyari, Vaal Sceptrewiki	One Handed Mace	64	
+-62.9%
+2.0 x Chaos Orb	@
+Realm Ender, Iron Staffwiki	Staff	40	
+-38.7%
+2.0 x Chaos Orb	@
+The Searing Touch, Long Staffwiki	Staff	13	
+-28.3%
+1.8 x Chaos Orb	@
+Brain Rattler, Meatgrinderwiki	Two Handed Mace	63	
+0.0%
+1.0 x Chaos Orb	@
+Clayshaper, Rock Breakerwiki	One Handed Mace	41	
+0.0%
+1.0 x Chaos Orb	@
+Dying Breath, Coiled Staffwiki	Staff	23	
++102.4%
+1.0 x Chaos Orb	@
+Edge of Madness, Etched Greatswordwiki	Two Handed Sword	22	
+0.0%
+1.0 x Chaos Orb	@
+Essentia Sanguis, Eye Gougerwiki	Claw	64	
++161.2%
+1.0 x Chaos Orb	@
+Hezmana's Bloodlust, Vaal Axewiki	Two Handed Axe	64	
+0.0%
+1.0 x Chaos Orb	@
+Jack, the Axe, Vaal Hatchetwiki	One Handed Axe	65	
+0.0%
+1.0 x Chaos Orb	@
+Kongor's Undying Rage, Terror Maulwiki	Two Handed Mace	67	
+-50.3%
+1.0 x Chaos Orb	@
+Midnight Bargain, Engraved Wandwiki	Wand	40	
+-75.0%
+1.0 x Chaos Orb	@
+Mightflay, Flaying Knifewiki	Dagger	35	
+-2.1%
+1.0 x Chaos Orb	@
+Pledge of Hands, Judgement Staffwiki	Staff	68	
+-5.6%
+1.0 x Chaos Orb	@
+Quill Rain, Short Bowwiki	Bow	5	
++90.8%
+1.0 x Chaos Orb	@
+Apep's Rage, Opal Wandwiki	Wand	62	
+0.0%
+1.0 x Chaos Orb	@
+Singularity, Platinum Sceptrewiki	One Handed Mace	62	
+0.0%
+1.0 x Chaos Orb	@
+The Dark Seer, Shadow Sceptrewiki	One Handed Mace	32	
+-0.6%
+1.0 x Chaos Orb	@
+The Searing Touch, Lathiwiki	Staff	60	
++16.3%
+1.0 x Chaos Orb	@
+The Supreme Truth, Crystal Sceptrewiki	One Handed Mace	41	
+0.0%
+1.0 x Chaos Orb	@
+The Tempestuous Steel, War Swordwiki	One Handed Sword	20	
++40.2%
+1.0 x Chaos Orb	@
+Voltaxic Rift, Spine Bowwiki	Bow	64	
+-57.5%
+1.0 x Chaos Orb	@
+Xoph's Inception, Bone Bowwiki	Bow	23	
+-86.6%
+1.0 x Chaos Orb	@
+Tulfall, Tornado Wandwiki	Wand	65	
+-95.9%
+1.0 x Chaos Orb	@
+Rive, Terror Clawwiki	Claw	70	
+0.0%
+1.0 x Chaos Orb	@
+Death's Harp, Death Bowwiki	Bow	32	
++161.8%
+1.0 x Chaos Orb	@
+Lioneye's Glare, Imperial Bowwiki	Bow	66	
++151.3%
+0.9 x Chaos Orb	@
+The Whispering Ice, Vile Staffwiki	Staff	33	
+-28.6%
+0.9 x Chaos Orb	@
+Ephemeral Edge, Dusk Bladewiki	One Handed Sword	32	
+-23.4%
+0.8 x Chaos Orb	@
+Tulborn, Spiraled Wandwiki	Wand	24	
+-97.0%
+0.6 x Chaos Orb	@
+Taryn's Shiver, Maelström Staffwiki	Staff	64	
++59.4%
+0.6 x Chaos Orb	@
+Brightbeak, War Hammerwiki	One Handed Mace	20	
++35.8%
+0.6 x Chaos Orb	@
+Izaro's Dilemma, Imperial Clawwiki	Claw	68	
+-39.6%
+0.6 x Chaos Orb	@
+Doomsower, Lion Swordwiki	Two Handed Sword	65	
+-12.6%
+0.4 x Chaos Orb	@
+Hyaon's Fury, Legion Swordwiki	One Handed Sword	62	
+-8.7%
+0.4 x Chaos Orb	@
+Chin Sol, Assassin Bowwiki	Bow	62	
+-61.0%
+0.4 x Chaos Orb	@
+The Goddess Bound, Whalebone Rapierwiki	One Handed Sword	7	
+-10.3%
+0.4 x Chaos Orb	@
+Lifesprig, Driftwood Wandwiki	Wand		
+-10.8%
+0.4 x Chaos Orb	@
+Obliteration, Demon's Hornwiki	Wand	56	
+-13.3%
+0.3 x Chaos Orb	@
+Abberath's Horn, Goat's Hornwiki	Wand	6	
+-19.0%
+0.3 x Chaos Orb	@
+Advancing Fortress, Gut Ripperwiki	Claw	46	
+-19.0%
+0.3 x Chaos Orb	@
+Allure, Vaal Clawwiki	Claw	66	
+-61.8%
+0.3 x Chaos Orb	@
+Ashcaller, Quartz Wandwiki	Wand	18	
+-19.0%
+0.3 x Chaos Orb	@
+Aurumvorax, Basket Rapierwiki	One Handed Sword	17	
+-17.2%
+0.3 x Chaos Orb	@
+Axiom Perpetuum, Bronze Sceptrewiki	One Handed Mace	10	
+-19.0%
+0.3 x Chaos Orb	@
+Bloodplay, Stilettowiki	Dagger	15	
+-15.7%
+0.3 x Chaos Orb	@
+Bloodseeker, Hellion's Pawwiki	Claw	62	
+-49.9%
+0.3 x Chaos Orb	@
+Callinellus Malleus, Auric Macewiki	One Handed Mace	66	
+-39.4%
+0.3 x Chaos Orb	@
+Cameria's Maul, Gavelwiki	One Handed Mace	60	
++18.0%
+0.3 x Chaos Orb	@
+Chitus' Needle, Elegant Foilwiki	One Handed Sword	30	
+-19.0%
+0.3 x Chaos Orb	@
+Chober Chaber, Great Malletwiki	Two Handed Mace	40	
+-17.2%
+0.3 x Chaos Orb	@
+Cybil's Paw, Thresher Clawwiki	Claw	37	
+-10.6%
+0.3 x Chaos Orb	@
+Doomfletch, Royal Bowwiki	Bow	28	
+-18.8%
+0.3 x Chaos Orb	@
+Dyadus, Infernal Axewiki	One Handed Axe	69	
+-19.0%
+0.3 x Chaos Orb	@
+Femurs of the Saints, Primordial Staffwiki	Staff	58	
+-17.2%
+0.3 x Chaos Orb	@
+Fidelitas' Spike, Jagged Foilwiki	One Handed Sword	22	
+-17.2%
+0.3 x Chaos Orb	@
+Geofri's Baptism, Brass Maulwiki	Two Handed Mace	27	
+-17.3%
+0.3 x Chaos Orb	@
+Goredrill, Skinning Knifewiki	Dagger	5	
+-19.0%
+0.3 x Chaos Orb	@
+Heartbreaker, Royal Skeanwiki	Dagger	50	
+-19.0%
+0.3 x Chaos Orb	@
+Hiltless, Reaver Swordwiki	Two Handed Sword	59	
+-40.2%
+0.3 x Chaos Orb	@
+Infractem, Decimation Bowwiki	Bow	53	
+-19.0%
+0.3 x Chaos Orb	@
+Innsbury Edge, Elder Swordwiki	One Handed Sword	47	
+-19.0%
+0.3 x Chaos Orb	@
+Iron Commander, Death Bowwiki	Bow	32	
+-11.0%
+0.3 x Chaos Orb	@
+Kaom's Primacy, Karui Chopperwiki	Two Handed Axe	58	
+-19.7%
+0.3 x Chaos Orb	@
+Kondo's Pride, Ezomyte Bladewiki	Two Handed Sword	61	
+-19.0%
+0.3 x Chaos Orb	@
+Lakishu's Blade, Elegant Swordwiki	One Handed Sword	28	
+-17.5%
+0.3 x Chaos Orb	@
+Lavianga's Wisdom, War Hammerwiki	One Handed Mace	20	
++8.9%
+0.3 x Chaos Orb	@
+Limbsplit, Woodsplitterwiki	Two Handed Axe	13	
+-19.0%
+0.3 x Chaos Orb	@
+Mark of the Doubting Knight, Platinum Kriswiki	Dagger	64	
+-17.8%
+0.3 x Chaos Orb	@
+Marohi Erqi, Karui Maulwiki	Two Handed Mace	57	
+-51.5%
+0.3 x Chaos Orb	@
+Mon'tregul's Grasp, Void Sceptrewiki	One Handed Mace	68	
+-13.5%
+0.3 x Chaos Orb	@
+Moonbender's Wing, Tomahawkwiki	One Handed Axe	39	
+-17.1%
+0.3 x Chaos Orb	@
+Mortem Morsu, Fright Clawwiki	Claw	34	
+-19.0%
+0.3 x Chaos Orb	@
+Null's Inclination, Ranger Bowwiki	Bow	60	
+-19.0%
+0.3 x Chaos Orb	@
+Nuro's Harp, Harbinger Bowwiki	Bow	68	
+-19.0%
+0.3 x Chaos Orb	@
+Ornament of the East, Gut Ripperwiki	Claw	46	
+-17.9%
+0.3 x Chaos Orb	@
+Oro's Sacrifice, Infernal Swordwiki	Two Handed Sword	67	
+-55.6%
+0.3 x Chaos Orb	@
+Piscator's Vigil, Tornado Wandwiki	Wand	65	
+-18.9%
+0.3 x Chaos Orb	@
+Prismatic Eclipse, Twilight Bladewiki	One Handed Sword	53	
+-19.0%
+0.3 x Chaos Orb	@
+Quecholli, Jagged Maulwiki	Two Handed Mace	22	
+-14.3%
+0.3 x Chaos Orb	@
+Queen's Decree, Ornate Swordwiki	Two Handed Sword	27	
+-18.7%
+0.3 x Chaos Orb	@
+Realmshaper, Iron Staffwiki	Staff	18	
+-18.4%
+0.3 x Chaos Orb	@
+Reaper's Pursuit, Shadow Axewiki	Two Handed Axe	33	
+-19.0%
+0.3 x Chaos Orb	@
+Redbeak, Rusted Swordwiki	One Handed Sword		
+-19.0%
+0.3 x Chaos Orb	@
+Reverberation Rod, Spiraled Wandwiki	Wand	24	
+-17.6%
+0.3 x Chaos Orb	@
+Rigwald's Charge, Highland Bladewiki	Two Handed Sword	44	
+-18.2%
+0.3 x Chaos Orb	@
+Roth's Reach, Recurve Bowwiki	Bow	18	
+-19.0%
+0.3 x Chaos Orb	@
+Scaeva, Gladiuswiki	One Handed Sword	60	
+-68.5%
+0.3 x Chaos Orb	@
+Silverbranch, Crude Bowwiki	Bow		
+-18.8%
+0.3 x Chaos Orb	@
+Sire of Shards, Serpentine Staffwiki	Staff	49	
+-44.8%
+0.3 x Chaos Orb	@
+Spine of the First Claimant, Iron Sceptrewiki	One Handed Mace	20	
+-19.0%
+0.3 x Chaos Orb	@
+Terminus Est, Tiger Swordwiki	Two Handed Sword	51	
+-19.0%
+0.3 x Chaos Orb	@
+The Blood Thorn, Gnarled Branchwiki	Staff		
+-17.2%
+0.3 x Chaos Orb	@
+The Princess, Sabrewiki	One Handed Sword	10	
+-18.0%
+0.3 x Chaos Orb	@
+The Screaming Eagle, Jade Hatchetwiki	One Handed Axe	6	
+-19.0%
+0.3 x Chaos Orb	@
+Tremor Rod, Military Staffwiki	Staff	45	
+-19.0%
+0.3 x Chaos Orb	@
+Twyzel, Sage Wandwiki	Wand	30	
++12.2%
+0.3 x Chaos Orb	@
+Ungil's Gauche, Boot Knifewiki	Dagger	20	
+-18.4%
+0.3 x Chaos Orb	@
+Wideswing, Poleaxewiki	Two Handed Axe	18	
+-19.0%
+0.3 x Chaos Orb	@
+Wings of Entropy, Sundering Axewiki	Two Handed Axe	60	
+-18.7%
+0.3 x Chaos Orb	@
+Ewar's Mirage, Antique Rapierwiki	One Handed Sword	26	
+-18.7%
+0.3 x Chaos Orb	@
+Daresso's Passion, Estocwiki	One Handed Sword	43	
+-16.2%
+0.3 x Chaos Orb	@
+Darkscorn, Assassin Bowwiki	Bow	62	
+-15.8%
+0.3 x Chaos Orb	@
+The Blood Reaper, Headsman Axewiki	Two Handed Axe	45	
+-20.6%
+0.3 x Chaos Orb	@
+Storm Cloud, Long Bowwiki	Bow	9	
+-26.9%
+0.3 x Chaos Orb	@
+Last Resort, Nailed Fistwiki	Claw		
++66.3%
+0.3 x Chaos Orb	@
+Eclipse Solaris, Crystal Wandwiki	Wand	45	
+-16.6%
+0.3 x Chaos Orb	@
+Ichimonji, Corsair Swordwiki	One Handed Sword	58	
+-62.8%
+0.3 x Chaos Orb	@
+Relentless Fury, Decorative Axewiki	One Handed Axe	29	
+-17.4%
+0.3 x Chaos Orb	@
+Moonsorrow, Imbued Wandwiki	Wand	59	
+-19.8%
+0.3 x Chaos Orb	@
+Hrimnor's Hymn, Sledgehammerwiki	Two Handed Mace	17	
+-28.8%
+0.3 x Chaos Orb	@
+Rebuke of the Vaal, Vaal Bladewiki	One Handed Sword	64	
+-34.1%
+0.3 x Chaos Orb	@
+Widowmaker, Boot Bladewiki	Dagger	44	
+-34.7%
+0.3 x Chaos Orb	@
+Nycta's Lantern, Crystal Sceptrewiki	One Handed Mace	41	
+-35.8%
+0.2 x Chaos Orb	@
+The Dancing Dervish, Reaver Swordwiki	Two Handed Sword	59	
+-40.2%
+0.2 x Chaos Orb	@
+Frostbreath, Ornate Macewiki	One Handed Mace	50	
+-46.8%
+0.2 x Chaos Orb	@
+The Stormheart, Royal Staffwiki	Staff	28	
+-25.4%
+0.2 x Chaos Orb	@
+Al Dhih, Timeworn Clawwiki	Claw	26	
+-48.3%
+0.2 x Chaos Orb	@
+Storm Prison, Carved Wandwiki	Wand	12	
+-52.3%
+0.2 x Chaos Orb	@
+Voidhome, Dread Maulwiki	Two Handed Mace	54	
+-52.5%
+0.2 x Chaos Orb	@
+Bitterdream, Shadow Sceptrewiki	One Handed Mace	32	
+-34.7%
+0.2 x Chaos Orb	@
+Pillar of the Caged God, Long Staffwiki	Staff	13	
+-57.2%
+0.2 x Chaos Orb	@
+Gorebreaker, Spiked Clubwiki	One Handed Mace	10	
+-58.0%
+0.1 x Chaos Orb	@
+Flesh-Eater, Dream Macewiki	One Handed Mace	32	
+-43.5%
+0.1 x Chaos Orb	@
+Fencoil, Gnarled Branchwiki	Staff		
+-60.3%
+0.1 x Chaos Orb	@
+Wildslash, Awlwiki	Claw	12	
+-35.5%
+0.1 x Chaos Orb	@
+Dreadarc, Cleaverwiki	One Handed Axe	16	
+-74.8%
+0.1 x Chaos Orb	@
+Shiversting, Bastard Swordwiki	Two Handed Sword	14	
+-75.5%
+0.1 x Chaos Orb	@
+
+
+#Armors
+
+Demigod's Stride, Golden Caligaewiki	Boots	12	
++99.0%
+200.0 x Exalted Orb17106.0 x Chaos Orb	@
+Skyforth, Sorcerer Bootswiki	Boots	67	
+-1.4%
+35.0 x Exalted Orb2993.6 x Chaos Orb	@
+Demigod's Triumph, Golden Wreathwiki	Helmet	12	
++14.4%
+21.5 x Exalted Orb1835.9 x Chaos Orb	@
+Atziri's Acuity, Vaal Gauntletswiki	Gloves	75	
+-1.3%
+19.0 x Exalted Orb1625.1 x Chaos Orb	@
+Tukohama's Fortress, Ebony Tower Shieldwiki	Shield	61	
++13.2%
+10.6 x Exalted Orb905.8 x Chaos Orb	@
+Demigod's Touch, Golden Bracerswiki	Gloves	12	
+-62.6%
+7.9 x Exalted Orb678.8 x Chaos Orb	@
+Abberath's Hooves, Goathide Bootswiki	Boots	12	
+-12.8%
+6.5 x Exalted Orb558.0 x Chaos Orb	@
+Demigod's Dominance, Golden Mantlewiki	Body Armour	20	
++8.9%
+5.7 x Exalted Orb488.9 x Chaos Orb	@
+The Surrender, Ezomyte Tower Shieldwiki	Shield	64	
+-60.9%
+4.0 x Exalted Orb341.8 x Chaos Orb	@
+Heretic's Veil, Deicide Maskwiki	Helmet	67	
++150.6%
+3.8 x Exalted Orb325.8 x Chaos Orb	@
+Null and Void, Legion Gloveswiki	Gloves	57	
+-4.7%
+3.7 x Exalted Orb317.6 x Chaos Orb	@
+The Anticipation, Ezomyte Tower Shieldwiki	Shield	64	
+-31.6%
+3.0 x Exalted Orb256.6 x Chaos Orb	@
+Death's Door, Crusader Bootswiki	Boots	64	
++6.9%
+3.0 x Exalted Orb256.6 x Chaos Orb	@
+Shavronne's Wrappings, Occultist's Vestmentwiki	Body Armour	62	
++2.9%
+2.7 x Exalted Orb229.2 x Chaos Orb	@
+Ylfeban's Trickery, Hubris Circletwiki	Helmet	69	
++42.1%
+2.6 x Exalted Orb226.3 x Chaos Orb	@
+Rigwald's Quills, Two-Point Arrow Quiverwiki	Quiver	56	
+-4.4%
+1.9 x Exalted Orb165.7 x Chaos Orb	@
+Seven-League Step, Rawhide Bootswiki	Boots	55	
+-14.3%
+1.9 x Exalted Orb159.5 x Chaos Orb	@
+Shadows and Dust, Clasped Mittswiki	Gloves	52	
++18.6%
+1.5 x Exalted Orb128.3 x Chaos Orb	@
+The Gull, Raven Maskwiki	Helmet	38	
++1297.8%
+1.4 x Exalted Orb121.9 x Chaos Orb	@
+The Signal Fire, Fire Arrow Quiverwiki	Quiver	24	
++58.0%
+1.4 x Exalted Orb116.5 x Chaos Orb	@
+Kaom's Heart, Glorious Platewiki	Body Armour	68	
+-3.8%
+1.3 x Exalted Orb106.6 x Chaos Orb	@
+Scold's Bridle, Mind Cagewiki	Helmet	65	
+-2.5%
+78.0 x Chaos Orb	@
+Cospri's Will, Assassin's Garbwiki	Body Armour	68	
+-7.3%
+74.9 x Chaos Orb	@
+Atziri's Splendour, ES, Sacrificial Garbwiki	Body Armour	75	
+-23.5%
+50.0 x Chaos Orb	@
+The Brass Dome, Gladiator Platewiki	Body Armour	65	
+-48.9%
+45.0 x Chaos Orb	@
+Light of Lunaris, Jingling Spirit Shieldwiki	Shield	28	
++212.9%
+31.3 x Chaos Orb	@
+The Rat Cage, Sharkskin Tunicwiki	Body Armour	56	
++2.0%
+30.0 x Chaos Orb	@
+The Brine Crown, Prophet Crownwiki	Helmet	63	
++47.8%
+24.8 x Chaos Orb	@
+Atziri's Splendour, Armour, Sacrificial Garbwiki	Body Armour	75	
+-5.9%
+21.9 x Chaos Orb	@
+Aegis Aurora, Champion Kite Shieldwiki	Shield	62	
+-31.6%
+20.0 x Chaos Orb	@
+Atziri's Splendour, Armour/ES, Sacrificial Garbwiki	Body Armour	75	
+-31.3%
+20.0 x Chaos Orb	@
+Tabula Rasa, 6L, Simple Robewiki	Body Armour		
+-4.7%
+20.0 x Chaos Orb	@
+Crown of Eyes, Hubris Circletwiki	Helmet	69	
+-7.1%
+19.1 x Chaos Orb	@
+Steppan Eard, Sorcerer Bootswiki	Boots	67	
+-29.6%
+19.0 x Chaos Orb	@
+The Beast Fur Shawl, Vaal Regaliawiki	Body Armour	68	
+-42.0%
+17.5 x Chaos Orb	@
+Atziri's Splendour, Armour/Evasion/ES, Sacrificial Garbwiki	Body Armour	75	
++3.9%
+16.8 x Chaos Orb	@
+Atziri's Splendour, Evasion/ES, Sacrificial Garbwiki	Body Armour	75	
++1.0%
+16.0 x Chaos Orb	@
+Trolltimber Spire, Cedar Tower Shieldwiki	Shield	17	
+-65.8%
+15.6 x Chaos Orb	@
+Atziri's Splendour, Evasion, Sacrificial Garbwiki	Body Armour	75	
+-32.4%
+13.5 x Chaos Orb	@
+Flesh and Spirit, Ironscale Gauntletswiki	Gloves	15	
+-15.3%
+12.7 x Chaos Orb	@
+Drillneck, Penetrating Arrow Quiverwiki	Quiver	36	
+-1.9%
+11.9 x Chaos Orb	@
+Prism Guardian, Archon Kite Shieldwiki	Shield	68	
+-18.4%
+10.8 x Chaos Orb	@
+Atziri's Splendour, Evasion/ES/Life, Sacrificial Garbwiki	Body Armour	75	
+-32.6%
+10.0 x Chaos Orb	@
+Abyssus, Ezomyte Burgonetwiki	Helmet	60	
++1.9%
+10.0 x Chaos Orb	@
+Atziri's Splendour, Armour/Evasion, Sacrificial Garbwiki	Body Armour	75	
+-50.4%
+9.3 x Chaos Orb	@
+Atziri's Splendour, Armour/ES/Life, Sacrificial Garbwiki	Body Armour	75	
+-8.0%
+9.2 x Chaos Orb	@
+The Vertex, Vaal Maskwiki	Helmet	62	
+-10.7%
+9.0 x Chaos Orb	@
+Belly of the Beast, Full Wyrmscalewiki	Body Armour	46	
++18.0%
+9.0 x Chaos Orb	@
+Broadstroke, Heavy Quiverwiki	Quiver	5	
+-12.7%
+8.5 x Chaos Orb	@
+Great Old One's Ward, Corrugated Bucklerwiki	Shield	46	
+-13.8%
+8.0 x Chaos Orb	@
+Voidwalker, Murder Bootswiki	Boots	69	
++70.0%
+7.6 x Chaos Orb	@
+Crown of the Pale King, Regicide Maskwiki	Helmet	52	
+-27.2%
+7.3 x Chaos Orb	@
+Wall of Brambles, Plate Vestwiki	Body Armour	30	
+-28.5%
+7.0 x Chaos Orb	@
+Cragfall, Serrated Arrow Quiverwiki	Quiver	5	
+-77.5%
+6.0 x Chaos Orb	@
+Cloak of Tawm'r Isley, Savant's Robewiki	Body Armour	56	
+-0.5%
+6.0 x Chaos Orb	@
+Rat's Nest, Ursine Peltwiki	Helmet	55	
+-60.3%
+5.8 x Chaos Orb	@
+Shaper's Touch, Crusader Gloveswiki	Gloves	66	
++20.5%
+5.4 x Chaos Orb	@
+Maligaro's Virtuosity, Deerskin Gloveswiki	Gloves	21	
++1.6%
+5.0 x Chaos Orb	@
+Martyr's Crown, Vine Circletwiki	Helmet	52	
+-7.4%
+5.0 x Chaos Orb	@
+The Perfect Form, Zodiac Leatherwiki	Body Armour	65	
+-93.0%
+5.0 x Chaos Orb	@
+The Red Trail, Titan Greaveswiki	Boots	68	
+-85.9%
+5.0 x Chaos Orb	@
+Hrimburn, Goathide Gloveswiki	Gloves	24	
+-13.8%
+5.0 x Chaos Orb	@
+Rearguard, Broadhead Arrow Quiverwiki	Quiver	28	
+-10.9%
+4.8 x Chaos Orb	@
+The Formless Inferno, Royal Burgonetwiki	Helmet	65	
+-88.9%
+4.7 x Chaos Orb	@
+Devoto's Devotion, Nightmare Bascinetwiki	Helmet	67	
+-32.9%
+4.0 x Chaos Orb	@
+The Bringer of Rain, Nightmare Bascinetwiki	Helmet	67	
+-47.7%
+4.0 x Chaos Orb	@
+The Snowblind Grace, Coronal Leatherwiki	Body Armour	49	
+-93.4%
+3.0 x Chaos Orb	@
+Kintsugi, Exquisite Leatherwiki	Body Armour	62	
+-16.9%
+3.0 x Chaos Orb	@
+Esh's Visage, Vaal Spirit Shieldwiki	Shield	62	
+-95.2%
+3.0 x Chaos Orb	@
+Snakebite, Assassin's Mittswiki	Gloves	58	
++120.0%
+2.3 x Chaos Orb	@
+Shavronne's Gambit, Scholar Bootswiki	Boots	36	
+-32.6%
+2.0 x Chaos Orb	@
+Voidbringer, Conjurer Gloveswiki	Gloves	55	
+-18.4%
+2.0 x Chaos Orb	@
+Voll's Vision, Praetor Crownwiki	Helmet	68	
+-29.8%
+2.0 x Chaos Orb	@
+Grip of the Council, Arcanist Gloveswiki	Gloves	60	
+-48.1%
+2.0 x Chaos Orb	@
+Vaal Caress, Bronzescale Gauntletswiki	Gloves	27	
+-33.6%
+1.9 x Chaos Orb	@
+Obscurantis, Lion Peltwiki	Helmet	70	
+-64.0%
+1.8 x Chaos Orb	@
+Carcass Jack, Varnished Coatwiki	Body Armour	62	
+-49.5%
+1.5 x Chaos Orb	@
+Soul Strike, Spike-Point Arrow Quiverwiki	Quiver	64	
++51.0%
+1.5 x Chaos Orb	@
+Rainbowstride, Conjurer Bootswiki	Boots	53	
++8.1%
+1.5 x Chaos Orb	@
+Goldwyrm, Nubuck Bootswiki	Boots	34	
+-35.8%
+1.1 x Chaos Orb	@
+Alpha's Howl, Sinner Tricornewiki	Helmet	64	
+-1.2%
+1.0 x Chaos Orb	@
+Atziri's Step, Slink Bootswiki	Boots	69	
++0.2%
+1.0 x Chaos Orb	@
+Aurseize, Steelscale Gauntletswiki	Gloves	36	
++0.3%
+1.0 x Chaos Orb	@
+Black Sun Crest, Lacquered Helmetwiki	Helmet	51	
+-12.9%
+1.0 x Chaos Orb	@
+Brinerot Whalers, Trapper Bootswiki	Boots	41	
+-0.0%
+1.0 x Chaos Orb	@
+Broken Faith, Archon Kite Shieldwiki	Shield	68	
+0.0%
+1.0 x Chaos Orb	@
+Cherrubim's Maleficence, Triumphant Lamellarwiki	Body Armour	69	
+0.0%
+1.0 x Chaos Orb	@
+Darkray Vectors, Dragonscale Bootswiki	Boots	65	
++29.1%
+1.0 x Chaos Orb	@
+Death's Oath, Astral Platewiki	Body Armour	62	
+0.0%
+1.0 x Chaos Orb	@
+Deshret's Vise, Steel Gauntletswiki	Gloves	35	
++14.3%
+1.0 x Chaos Orb	@
+Empire's Grasp, Goliath Gauntletswiki	Gloves	53	
+0.0%
+1.0 x Chaos Orb	@
+Ezomyte Hold, Iron Hatwiki	Helmet		
++0.0%
+1.0 x Chaos Orb	@
+Facebreaker, Strapped Mittswiki	Gloves	16	
+-40.4%
+1.0 x Chaos Orb	@
+Gang's Momentum, Legion Bootswiki	Boots	58	
+0.0%
+1.0 x Chaos Orb	@
+Goldrim, Leather Capwiki	Helmet	52	
++22.5%
+1.0 x Chaos Orb	@
+Kitava's Thirst, Zealot Helmetwiki	Helmet	44	
+0.0%
+1.0 x Chaos Orb	@
+Leer Cast, Festival Maskwiki	Helmet	28	
++0.2%
+1.0 x Chaos Orb	@
+Lightning Coil, Desert Brigandinewiki	Body Armour	60	
++0.6%
+1.0 x Chaos Orb	@
+Lioneye's Vision, Crusader Platewiki	Body Armour	59	
++111.3%
+1.0 x Chaos Orb	@
+Mind of the Council, Harlequin Maskwiki	Helmet	57	
+0.0%
+1.0 x Chaos Orb	@
+Rathpith Globe, Titanium Spirit Shieldwiki	Shield	68	
+-65.4%
+1.0 x Chaos Orb	@
+Redblade Banner, Painted Tower Shieldwiki	Shield	35	
+0.0%
+1.0 x Chaos Orb	@
+Redblade Tramplers, Ancient Greaveswiki	Boots	46	
+0.0%
+1.0 x Chaos Orb	@
+Rise of the Phoenix, Mosaic Kite Shieldwiki	Shield	65	
++7.1%
+1.0 x Chaos Orb	@
+Skirmish, Two-Point Arrow Quiverwiki	Quiver	19	
++1.5%
+1.0 x Chaos Orb	@
+Southbound, Soldier Gloveswiki	Gloves	51	
++17.4%
+1.0 x Chaos Orb	@
+The Blood Dance, Sharkskin Bootswiki	Boots	44	
+0.0%
+1.0 x Chaos Orb	@
+The Oak, Plank Kite Shieldwiki	Shield	40	
+0.0%
+1.0 x Chaos Orb	@
+Thirst for Horrors, War Bucklerwiki	Shield	32	
+0.0%
+1.0 x Chaos Orb	@
+Thunderfist, Murder Mittswiki	Gloves	67	
++17.6%
+1.0 x Chaos Orb	@
+Titucus Span, Reinforced Tower Shieldwiki	Shield	30	
+0.0%
+1.0 x Chaos Orb	@
+Veruso's Battering Rams, Titan Gauntletswiki	Gloves	69	
+0.0%
+1.0 x Chaos Orb	@
+Victario's Charity, Laminated Kite Shieldwiki	Shield	50	
+0.0%
+1.0 x Chaos Orb	@
+Victario's Influence, Lacquered Garbwiki	Body Armour	52	
++5.3%
+1.0 x Chaos Orb	@
+Viper's Scales, Full Scale Armourwiki	Body Armour	28	
+0.0%
+1.0 x Chaos Orb	@
+Vis Mortis, Necromancer Silkswiki	Body Armour	59	
+0.0%
+1.0 x Chaos Orb	@
+Winds of Change, Ancient Gauntletswiki	Gloves	47	
+-68.0%
+1.0 x Chaos Orb	@
+Windscream, Reinforced Greaveswiki	Boots	33	
+-13.3%
+1.0 x Chaos Orb	@
+Lycosidae, Rawhide Tower Shieldwiki	Shield	11	
+0.0%
+1.0 x Chaos Orb	@
+The Formless Flame, Siege Helmetwiki	Helmet	48	
+-95.3%
+1.0 x Chaos Orb	@
+The Infinite Pursuit, Goliath Greaveswiki	Boots	54	
+-93.9%
+1.0 x Chaos Orb	@
+Esh's Mirror, Thorium Spirit Shieldwiki	Shield	53	
+-80.0%
+1.0 x Chaos Orb	@
+Alberon's Warpath, Soldier Bootswiki	Boots	49	
+-1.0%
+1.0 x Chaos Orb	@
+Hyrri's Ire, Zodiac Leatherwiki	Body Armour	65	
+-4.0%
+1.0 x Chaos Orb	@
+Mutewind Whispersteps, Serpentscale Bootswiki	Boots	42	
++31.1%
+0.9 x Chaos Orb	@
+Lioneye's Remorse, Pinnacle Tower Shieldwiki	Shield	70	
++116.8%
+0.8 x Chaos Orb	@
+Brinerot Flag, Tarnished Spirit Shieldwiki	Shield	23	
++77.6%
+0.7 x Chaos Orb	@
+Repentance, Crusader Gloveswiki	Gloves	66	
+-41.6%
+0.7 x Chaos Orb	@
+Greed's Embrace, Golden Platewiki	Body Armour	56	
+-40.0%
+0.6 x Chaos Orb	@
+Doryani's Fist, Vaal Gauntletswiki	Gloves	63	
+-53.0%
+0.5 x Chaos Orb	@
+Infernal Mantle, Occultist's Vestmentwiki	Body Armour	62	
+-27.7%
+0.4 x Chaos Orb	@
+Maloney's Nightfall, Blunt Arrow Quiverwiki	Quiver	55	
+-48.1%
+0.4 x Chaos Orb	@
+Wanderlust, Wool Shoeswiki	Boots		
+-38.0%
+0.4 x Chaos Orb	@
+Deidbellow, Gilded Salletwiki	Helmet	33	
+-59.0%
+0.3 x Chaos Orb	@
+Asenath's Gentle Touch, Silk Gloveswiki	Gloves	25	
+-17.2%
+0.3 x Chaos Orb	@
+Asenath's Mark, Iron Circletwiki	Helmet	8	
++150.8%
+0.3 x Chaos Orb	@
+Asphyxia's Wrath, Two-Point Arrow Quiverwiki	Quiver	10	
+-19.0%
+0.3 x Chaos Orb	@
+Atziri's Mirror, Golden Bucklerwiki	Shield	54	
+-18.7%
+0.3 x Chaos Orb	@
+Blackgleam, Cured Quiverwiki	Quiver	22	
+-19.0%
+0.3 x Chaos Orb	@
+Blackgleam, Fire Arrow Quiverwiki	Quiver	22	
+-19.0%
+0.3 x Chaos Orb	@
+Bones of Ullr, Silk Slipperswiki	Boots	22	
+-18.5%
+0.3 x Chaos Orb	@
+Bramblejack, Plate Vestwiki	Body Armour		
+-16.6%
+0.3 x Chaos Orb	@
+Bronn's Lithe, Cutthroat's Garbwiki	Body Armour	53	
+-62.2%
+0.3 x Chaos Orb	@
+Chernobog's Pillar, Ebony Tower Shieldwiki	Shield	61	
++0.5%
+0.3 x Chaos Orb	@
+Cloak of Defiance, Lacquered Garbwiki	Body Armour	52	
+-19.0%
+0.3 x Chaos Orb	@
+Cloak of Flame, Scholar's Robewiki	Body Armour	18	
+-18.2%
+0.3 x Chaos Orb	@
+Crown of Thorns, Vine Circletwiki	Helmet		
+-18.7%
+0.3 x Chaos Orb	@
+Daresso's Defiance, Full Dragonscalewiki	Body Armour	63	
+-19.0%
+0.3 x Chaos Orb	@
+Deidbell, Gilded Salletwiki	Helmet	33	
+-11.7%
+0.3 x Chaos Orb	@
+Doedre's Scorn, Lunaris Circletwiki	Helmet	39	
+-18.6%
+0.3 x Chaos Orb	@
+Doedre's Tenure, Velvet Gloveswiki	Gloves	12	
+-17.4%
+0.3 x Chaos Orb	@
+Dusktoe, Leatherscale Bootswiki	Boots	16	
+-16.3%
+0.3 x Chaos Orb	@
+Ezomyte Peak, Iron Hatwiki	Helmet		
+-14.9%
+0.3 x Chaos Orb	@
+Foxshade, Wild Leatherwiki	Body Armour	25	
+-12.1%
+0.3 x Chaos Orb	@
+Geofri's Crest, Great Crownwiki	Helmet	53	
+-19.0%
+0.3 x Chaos Orb	@
+Geofri's Sanctuary, Elegant Ringmailwiki	Body Armour	64	
+-19.0%
+0.3 x Chaos Orb	@
+Glitterdisc, Burnished Spiked Shieldwiki	Shield	27	
+-19.0%
+0.3 x Chaos Orb	@
+Hyrri's Bite, Sharktooth Arrow Quiverwiki	Quiver	10	
+-17.9%
+0.3 x Chaos Orb	@
+Icetomb, Latticed Ringmailwiki	Body Armour	39	
+-18.0%
+0.3 x Chaos Orb	@
+Incandescent Heart, Saintly Chainmailwiki	Body Armour	70	
+-56.2%
+0.3 x Chaos Orb	@
+Infernal Mantle, Widowsilk Robewiki	Body Armour	65	
+-19.0%
+0.3 x Chaos Orb	@
+Jaws of Agony, Supreme Spiked Shieldwiki	Shield	70	
+-18.9%
+0.3 x Chaos Orb	@
+Kaltensoul, Painted Bucklerwiki	Shield	16	
+-69.0%
+0.3 x Chaos Orb	@
+Kaom's Roots, Titan Greaveswiki	Boots	68	
+-19.8%
+0.3 x Chaos Orb	@
+Kingsguard, Conquest Chainmailwiki	Body Armour	61	
+-7.8%
+0.3 x Chaos Orb	@
+Kongming's Stratagem, Ivory Spirit Shieldwiki	Shield	41	
+-19.0%
+0.3 x Chaos Orb	@
+Lioneye's Paws, Bronzescale Bootswiki	Boots	30	
+-18.2%
+0.3 x Chaos Orb	@
+Lochtonial Caress, Iron Gauntletswiki	Gloves	25	
+-18.0%
+0.3 x Chaos Orb	@
+Malachai's Loop, Harmonic Spirit Shieldwiki	Shield	65	
+-65.2%
+0.3 x Chaos Orb	@
+Matua Tupuna, Tarnished Spirit Shieldwiki	Shield	23	
+-17.6%
+0.3 x Chaos Orb	@
+Mutewind Pennant, Enameled Bucklerwiki	Shield	42	
+-68.7%
+0.3 x Chaos Orb	@
+Ondar's Clasp, Wrapped Mittswiki	Gloves	5	
++12.4%
+0.3 x Chaos Orb	@
+Queen of the Forest, Destiny Leatherwiki	Body Armour	59	
+-44.4%
+0.3 x Chaos Orb	@
+Rime Gaze, Mind Cagewiki	Helmet	65	
+-17.9%
+0.3 x Chaos Orb	@
+Sadima's Touch, Wool Gloveswiki	Gloves	11	
+-19.0%
+0.3 x Chaos Orb	@
+Saemus' Gift, Spike-Point Arrow Quiverwiki	Quiver	45	
+-64.1%
+0.3 x Chaos Orb	@
+Saffell's Frame, Branded Kite Shieldwiki	Shield	59	
+-18.3%
+0.3 x Chaos Orb	@
+Sentari's Answer, Brass Spirit Shieldwiki	Shield	33	
+-19.0%
+0.3 x Chaos Orb	@
+Shavronne's Pace, Scholar Bootswiki	Boots	32	
+-18.2%
+0.3 x Chaos Orb	@
+Skullhead, Secutor Helmwiki	Helmet	36	
+-16.4%
+0.3 x Chaos Orb	@
+Slitherpinch, Bronzescale Gauntletswiki	Gloves	27	
+-17.2%
+0.3 x Chaos Orb	@
+Solaris Lorica, Copper Platewiki	Body Armour	17	
+-19.0%
+0.3 x Chaos Orb	@
+Soul Mantle, Spidersilk Robewiki	Body Armour	49	
+-15.7%
+0.3 x Chaos Orb	@
+Starkonja's Head, Silken Hoodwiki	Helmet	60	
+-18.6%
+0.3 x Chaos Orb	@
+Sundance, Clasped Bootswiki	Boots	27	
++20.7%
+0.3 x Chaos Orb	@
+The Covenant, Spidersilk Robewiki	Body Armour	49	
+-18.9%
+0.3 x Chaos Orb	@
+The Deep One's Hide, Studded Round Shieldwiki	Shield	20	
+-19.0%
+0.3 x Chaos Orb	@
+The Restless Ward, Carnal Armourwiki	Body Armour	71	
+-18.5%
+0.3 x Chaos Orb	@
+Victario's Flight, Goathide Bootswiki	Boots	12	
+-14.0%
+0.3 x Chaos Orb	@
+Wake of Destruction, Mesh Bootswiki	Boots	28	
+-17.5%
+0.3 x Chaos Orb	@
+Wyrmsign, Wyrmscale Gauntletswiki	Gloves	49	
+-41.7%
+0.3 x Chaos Orb	@
+Zahndethus' Cassock, Sage's Robewiki	Body Armour	37	
+-19.0%
+0.3 x Chaos Orb	@
+The Broken Crown, Prophet Crownwiki	Helmet	63	
++19.3%
+0.3 x Chaos Orb	@
+Wheel of the Stormsail, Rotted Round Shieldwiki	Shield	5	
+-19.3%
+0.3 x Chaos Orb	@
+Hrimsorrow, Goathide Gloveswiki	Gloves	9	
+-14.8%
+0.3 x Chaos Orb	@
+Briskwrap, Strapped Leatherwiki	Body Armour	9	
+-31.7%
+0.3 x Chaos Orb	@
+Voll's Protector, Holy Chainmailwiki	Body Armour	35	
+-30.5%
+0.3 x Chaos Orb	@
+Daresso's Courage, Baroque Round Shieldwiki	Shield	54	
+-29.5%
+0.3 x Chaos Orb	@
+Nomic's Storm, Strapped Bootswiki	Boots	16	
+-25.8%
+0.3 x Chaos Orb	@
+Surgebinders, Dragonscale Gauntletswiki	Gloves	67	
+-30.8%
+0.3 x Chaos Orb	@
+Hrimnor's Resolve, Samite Helmetwiki	Helmet	55	
+-39.9%
+0.3 x Chaos Orb	@
+Craghead, Serrated Arrow Quiverwiki	Quiver	5	
+-35.5%
+0.3 x Chaos Orb	@
+Three-step Assault, Shagreen Bootswiki	Boots	55	
+-10.7%
+0.3 x Chaos Orb	@
+Sin Trek, Stealth Bootswiki	Boots	62	
+-22.8%
+0.3 x Chaos Orb	@
+Ambu's Charge, Crusader Chainmailwiki	Body Armour	43	
+-36.3%
+0.2 x Chaos Orb	@
+Malachai's Simula, Iron Maskwiki	Helmet	17	
+-32.3%
+0.2 x Chaos Orb	@
+Mindspiral, Aventail Helmetwiki	Helmet	37	
+-22.4%
+0.2 x Chaos Orb	@
+The Three Dragons, Golden Maskwiki	Helmet	35	
+-39.6%
+0.2 x Chaos Orb	@
+Crest of Perandus, Pine Bucklerwiki	Shield	8	
+-47.8%
+0.2 x Chaos Orb	@
+Meginord's Vise, Steel Gauntletswiki	Gloves	35	
+-47.8%
+0.2 x Chaos Orb	@
+Thousand Ribbons, Simple Robewiki	Body Armour		
+-47.8%
+0.2 x Chaos Orb	@
+Titucius' Span, Reinforced Tower Shieldwiki	Shield	30	
+-42.9%
+0.2 x Chaos Orb	@
+The Peregrine, Visored Salletwiki	Helmet	23	
+-30.1%
+0.2 x Chaos Orb	@
+Springleaf, Plank Kite Shieldwiki	Shield	7	
++32.9%
+0.2 x Chaos Orb	@
+Kaltenhalt, Painted Bucklerwiki	Shield	16	
+-5.2%
+0.2 x Chaos Orb	@
+Maligaro's Lens, Compound Spiked Shieldwiki	Shield	45	
+-44.8%
+0.2 x Chaos Orb	@
+Veil of the Night, Great Helmetwiki	Helmet	22	
+-11.1%
+0.2 x Chaos Orb	@
+Deerstalker, Deerskin Bootswiki	Boots	22	
+-62.1%
+0.1 x Chaos Orb	@
+Chitus' Apex, Necromancer Circletwiki	Helmet	54	
+-48.2%
+0.1 x Chaos Orb	@
+Fairgraves' Tricorne, Tricornewiki	Helmet	12	
+-72.4%
+0.1 x Chaos Orb	@
+Dusktoe, Ironscale Bootswiki	Boots	18	
+-75.3%
+0.1 x Chaos Orb	@
+Heatshiver, Leather Hoodwiki	Helmet	20	
++9.0%
+0.1 x Chaos Orb	@
+Honourhome, Soldier Helmetwiki	Helmet	52	
+-12.8%
+0.1 x Chaos Orb	@
+Thousand Teeth Temu, Vaal Bucklerwiki	Shield	63	
+-41.3%
+0.1 x Chaos Orb	@
+Wondertrap, Velvet Slipperswiki	Boots	9	
++81.5%
+0.1 x Chaos Orb	@
+Ashrend, Buckskin Tunicwiki	Body Armour	17	
+-45.1%
+0.1 x Chaos Orb	@
+Chalice of Horrors, War Bucklerwiki	Shield	29	
+-58.7%
+0.1 x Chaos Orb	@
+Lightbane Raiment, Ornate Ringmailwiki	Body Armour	47	
+-68.9%
+0.1 x Chaos Orb	@
+Shackles of the Wretched, Chain Gloveswiki	Gloves	7	
+-74.7%
+0.1 x Chaos Orb	@
+
+#Jewelry
+
+
+Name	Type	Level	Last 7 days	Value	@
+Demigod's Presence, Gold Amuletwiki	Amulet	8	
+-50.9%
+313.4 x Exalted Orb26806.7 x Chaos Orb	@
+Headhunter, Leather Beltwiki	Belt	40	
++16.6%
+74.4 x Exalted Orb6360.1 x Chaos Orb	@
+Eyes of the Greatwolf, Greatwolf Talismanwiki	Amulet	52	
+-61.6%
+38.5 x Exalted Orb3289.7 x Chaos Orb	@
+Demigod's Bounty, Golden Obiwiki	Belt		
+-6.1%
+17.6 x Exalted Orb1507.5 x Chaos Orb	@
+Blightwell, Clutching Talismanwiki	Amulet	28	
+-6.3%
+17.6 x Exalted Orb1503.2 x Chaos Orb	@
+The Retch, Rustic Sashwiki	Belt	44	
+-6.8%
+7.0 x Exalted Orb598.7 x Chaos Orb	@
+Shavronne's Revelation, Moonstone Ringwiki	Ring	30	
+-29.5%
+7.0 x Exalted Orb598.7 x Chaos Orb	@
+Demigod's Eye, Golden Hoopwiki	Ring	12	
++3.9%
+6.8 x Exalted Orb583.7 x Chaos Orb	@
+Presence of Chayula, Onyx Amuletwiki	Amulet	60	
+-44.2%
+6.5 x Exalted Orb555.9 x Chaos Orb	@
+Natural Hierarchy, Rotfeather Talismanwiki	Amulet	44	
++2.2%
+6.3 x Exalted Orb537.6 x Chaos Orb	@
+Talisman of the Victor, Jet Amuletwiki	Amulet	12	
+-82.3%
+6.0 x Exalted Orb511.8 x Chaos Orb	@
+The Taming, Prismatic Ringwiki	Ring	30	
+-30.6%
+4.0 x Exalted Orb342.1 x Chaos Orb	@
+Faminebind, Rustic Sashwiki	Belt	18	
+-32.4%
+3.0 x Exalted Orb256.6 x Chaos Orb	@
+Voll's Devotion, Agate Amuletwiki	Amulet	32	
++18.8%
+3.0 x Exalted Orb256.6 x Chaos Orb	@
+Feastbind, Rustic Sashwiki	Belt	11	
+-11.5%
+3.0 x Exalted Orb252.1 x Chaos Orb	@
+Berek's Respite, Two-Stone Ringwiki	Ring	20	
+-46.7%
+2.5 x Exalted Orb213.8 x Chaos Orb	@
+Xoph's Blood, Amber Amuletwiki	Amulet	64	
+-66.7%
+2.5 x Exalted Orb213.8 x Chaos Orb	@
+Xoph's Heart, Amber Amuletwiki	Amulet	35	
+-46.9%
+2.0 x Exalted Orb171.1 x Chaos Orb	@
+Daresso's Salute, Citrine Amuletwiki	Amulet	16	
+-2.8%
+1.4 x Exalted Orb119.3 x Chaos Orb	@
+Choir of the Storm, Lapis Amuletwiki	Amulet	69	
+-73.5%
+1.3 x Exalted Orb107.0 x Chaos Orb	@
+Voidheart, Iron Ringwiki	Ring	48	
++4.0%
+1.2 x Exalted Orb100.0 x Chaos Orb	@
+The Halcyon, Jade Amuletwiki	Amulet	35	
+-83.7%
+1.1 x Exalted Orb93.5 x Chaos Orb	@
+Voice of the Storm, Lapis Amuletwiki	Amulet	40	
+-71.8%
+1.0 x Exalted Orb85.5 x Chaos Orb	@
+Victario's Acuity, Turquoise Amuletwiki	Amulet	16	
++12.0%
+1.0 x Exalted Orb85.5 x Chaos Orb	@
+Rigwald's Curse, Wereclaw Talismanwiki	Amulet	28	
+-14.2%
+1.0 x Exalted Orb85.0 x Chaos Orb	@
+Valako's Sign, Topaz Ringwiki	Ring	38	
++33.9%
+0.9 x Exalted Orb80.8 x Chaos Orb	@
+Astramentis, Onyx Amuletwiki	Amulet	20	
++16.5%
+70.0 x Chaos Orb	@
+Berek's Grip, Two-Stone Ringwiki	Ring	20	
++14.8%
+60.0 x Chaos Orb	@
+The Pariah, Unset Ringwiki	Ring	60	
+-9.6%
+56.5 x Chaos Orb	@
+Star of Wraeclast, Ruby Amuletwiki	Amulet	28	
++10.8%
+44.3 x Chaos Orb	@
+Snakepit, Sapphire Ringwiki	Ring	68	
+-28.8%
+40.0 x Chaos Orb	@
+Call of the Brotherhood, Two-Stone Ringwiki	Ring	20	
++186.0%
+38.3 x Chaos Orb	@
+Emberwake, Ruby Ringwiki	Ring	16	
++16.2%
+38.0 x Chaos Orb	@
+The Pandemonius, Jade Amuletwiki	Amulet	64	
+-67.8%
+32.4 x Chaos Orb	@
+Voideye, Unset Ringwiki	Ring	45	
+-46.8%
+25.0 x Chaos Orb	@
+Perandus Signet, Paua Ringwiki	Ring		
++9.8%
+22.9 x Chaos Orb	@
+Eye of Innocence, Citrine Amuletwiki	Amulet	68	
+-31.3%
+22.9 x Chaos Orb	@
+Gifts from Above, Diamond Ringwiki	Ring	28	
+-55.9%
+19.8 x Chaos Orb	@
+Kaom's Way, Coral Ringwiki	Ring	32	
++48.7%
+15.2 x Chaos Orb	@
+Blood of Corruption, Amber Amuletwiki	Amulet	20	
+-51.9%
+14.0 x Chaos Orb	@
+Pyre, Sapphire Ringwiki	Ring	11	
++858.9%
+13.4 x Chaos Orb	@
+Rigwald's Crest, Two-Stone Ringwiki	Ring	49	
++27.3%
+13.3 x Chaos Orb	@
+Karui Charge, Jade Amuletwiki	Amulet	24	
++39.2%
+10.0 x Chaos Orb	@
+Ngamahu Tiki, Coral Amuletwiki	Amulet	36	
+-31.0%
+10.0 x Chaos Orb	@
+Eye of Chayula, Onyx Amuletwiki	Amulet	20	
++22.8%
+10.0 x Chaos Orb	@
+Hinekora's Sight, Onyx Amuletwiki	Amulet	16	
+-30.9%
+9.7 x Chaos Orb	@
+Doryani's Invitation, Physical, Heavy Beltwiki	Belt	68	
+-0.2%
+9.5 x Chaos Orb	@
+Essence Worm, Unset Ringwiki	Ring	38	
++16.3%
+7.0 x Chaos Orb	@
+Andvarius, Gold Ringwiki	Ring	20	
++1.4%
+6.7 x Chaos Orb	@
+Umbilicus Immortalis, Leather Beltwiki	Belt	30	
+-33.9%
+5.4 x Chaos Orb	@
+Bloodgrip, Coral Amuletwiki	Amulet	55	
+-44.6%
+5.0 x Chaos Orb	@
+Perseverance, Vanguard Beltwiki	Belt	78	
+-42.8%
+5.0 x Chaos Orb	@
+Berek's Pass, Two-Stone Ringwiki	Ring	20	
+-7.4%
+4.6 x Chaos Orb	@
+Ventor's Gamble, Gold Ringwiki	Ring	65	
++37.4%
+4.2 x Chaos Orb	@
+Death Rush, Amethyst Ringwiki	Ring	46	
++2.0%
+4.0 x Chaos Orb	@
+Doedre's Damning, Paua Ringwiki	Ring		
+-30.7%
+4.0 x Chaos Orb	@
+Valyrium, Moonstone Ringwiki	Ring	38	
+-26.8%
+3.3 x Chaos Orb	@
+Ascent From Flesh, Chain Beltwiki	Belt	44	
+-4.6%
+2.0 x Chaos Orb	@
+Tasalio's Sign, Sapphire Ringwiki	Ring	20	
+0.0%
+2.0 x Chaos Orb	@
+Le Heup of All, Iron Ringwiki	Ring	24	
+-6.6%
+1.8 x Chaos Orb	@
+The Ascetic, Gold Amuletwiki	Amulet	8	
+-63.0%
+1.2 x Chaos Orb	@
+Night's Hold, Black Maw Talismanwiki	Amulet	10	
+-50.4%
+1.2 x Chaos Orb	@
+The Warden's Brand, Iron Ringwiki	Ring	30	
+-62.6%
+1.0 x Chaos Orb	@
+Brinerot Mark, Unset Ringwiki	Ring	44	
+-65.7%
+1.0 x Chaos Orb	@
+Dyadian Dawn, Heavy Beltwiki	Belt	52	
+0.0%
+1.0 x Chaos Orb	@
+Marylene's Fallacy, Lapis Amuletwiki	Amulet	40	
+-19.2%
+1.0 x Chaos Orb	@
+Meginord's Girdle, Heavy Beltwiki	Belt	8	
+0.0%
+1.0 x Chaos Orb	@
+Ming's Heart, Amethyst Ringwiki	Ring	69	
+0.0%
+1.0 x Chaos Orb	@
+Mutewind Seal, Unset Ringwiki	Ring	44	
+-50.0%
+1.0 x Chaos Orb	@
+Ngamahu's Sign, Ruby Ringwiki	Ring	29	
+0.0%
+1.0 x Chaos Orb	@
+Praxis, Paua Ringwiki	Ring	22	
+0.0%
+1.0 x Chaos Orb	@
+Redblade Band, Unset Ringwiki	Ring	44	
+-66.7%
+1.0 x Chaos Orb	@
+Romira's Banquet, Diamond Ringwiki	Ring	60	
++8.1%
+1.0 x Chaos Orb	@
+Auxium, Chain Beltwiki	Belt	70	
+0.0%
+1.0 x Chaos Orb	@
+The Anvil, Amber Amuletwiki	Amulet	45	
++28.6%
+1.0 x Chaos Orb	@
+Thief's Torment, Prismatic Ringwiki	Ring	30	
++122.6%
+1.0 x Chaos Orb	@
+Warped Timepiece, Turquoise Amuletwiki	Amulet	50	
+-47.9%
+1.0 x Chaos Orb	@
+Winterheart, Gold Amuletwiki	Amulet	42	
+-58.4%
+1.0 x Chaos Orb	@
+Doryani's Invitation, Fire, Heavy Beltwiki	Belt	68	
+0.0%
+1.0 x Chaos Orb	@
+Doryani's Invitation, Cold, Heavy Beltwiki	Belt	68	
+0.0%
+1.0 x Chaos Orb	@
+Doryani's Invitation, Lightning, Heavy Beltwiki	Belt	68	
+0.0%
+1.0 x Chaos Orb	@
+Shaper's Seed, Agate Amuletwiki	Amulet	16	
+-48.8%
+1.0 x Chaos Orb	@
+Bated Breath, Chain Beltwiki	Belt	22	
++18.3%
+1.0 x Chaos Orb	@
+Dream Fragments, Sapphire Ringwiki	Ring	11	
+-65.0%
+0.3 x Chaos Orb	@
+Kikazaru, Topaz Ringwiki	Ring	20	
+-65.2%
+0.3 x Chaos Orb	@
+Maligaro's Restraint, Chain Beltwiki	Belt	44	
+-7.0%
+0.3 x Chaos Orb	@
+Atziri's Foible, Paua Amuletwiki	Amulet	16	
+-18.9%
+0.3 x Chaos Orb	@
+Blackheart, Iron Ringwiki	Ring		
+-17.2%
+0.3 x Chaos Orb	@
+Carnage Heart, Onyx Amuletwiki	Amulet	20	
++15.2%
+0.3 x Chaos Orb	@
+Extractor Mentis, Agate Amuletwiki	Amulet		
+-10.8%
+0.3 x Chaos Orb	@
+Heartbound Loop, Moonstone Ringwiki	Ring	20	
+-18.9%
+0.3 x Chaos Orb	@
+Immortal Flesh, Leather Beltwiki	Belt	50	
+-19.0%
+0.3 x Chaos Orb	@
+Karui Ward, Jade Amuletwiki	Amulet	5	
+-19.0%
+0.3 x Chaos Orb	@
+Lori's Lantern, Prismatic Ringwiki	Ring	30	
+-19.0%
+0.3 x Chaos Orb	@
+Malachai's Artifice, Unset Ringwiki	Ring	5	
+-19.0%
+0.3 x Chaos Orb	@
+Mokou's Embrace, Ruby Ringwiki	Ring	16	
+-18.9%
+0.3 x Chaos Orb	@
+Perandus Blazon, Cloth Beltwiki	Belt	16	
+-16.9%
+0.3 x Chaos Orb	@
+Prismweave, Rustic Sashwiki	Belt	25	
+-19.0%
+0.3 x Chaos Orb	@
+Rashkaldor's Patience, Jade Amuletwiki	Amulet	61	
+-44.0%
+0.3 x Chaos Orb	@
+Sibyl's Lament, Coral Ringwiki	Ring	45	
++63.9%
+0.3 x Chaos Orb	@
+Sidhebreath, Paua Amuletwiki	Amulet		
+-19.0%
+0.3 x Chaos Orb	@
+Soulthirst, Cloth Beltwiki	Belt	45	
+-32.3%
+0.3 x Chaos Orb	@
+Stone of Lazhwar, Lapis Amuletwiki	Amulet	5	
+-45.2%
+0.3 x Chaos Orb	@
+Sunblast, Cloth Beltwiki	Belt	37	
+-19.0%
+0.3 x Chaos Orb	@
+Tear of Purity, Lapis Amuletwiki	Amulet	20	
+-13.4%
+0.3 x Chaos Orb	@
+The Aylardex, Agate Amuletwiki	Amulet	32	
+-19.0%
+0.3 x Chaos Orb	@
+The Ignomon, Gold Amuletwiki	Amulet	8	
+-17.2%
+0.3 x Chaos Orb	@
+The Magnate, Studded Beltwiki	Belt	16	
+-17.6%
+0.3 x Chaos Orb	@
+Wurm's Molt, Leather Beltwiki	Belt	8	
++7.0%
+0.3 x Chaos Orb	@
+Belt of the Deceiver, Heavy Beltwiki	Belt	20	
+-28.3%
+0.3 x Chaos Orb	@
+Timeclasp, Moonstone Ringwiki	Ring	22	
+-18.4%
+0.3 x Chaos Orb	@
+Ungil's Harmony, Turquoise Amuletwiki	Amulet	23	
+-30.4%
+0.2 x Chaos Orb	@
+Bloodboil, Coral Ringwiki	Ring	24	
+-37.2%
+0.2 x Chaos Orb	@
+Kaom's Sign, Coral Ringwiki	Ring		
+-61.4%
+0.1 x Chaos Orb	@
+Araku Tiki, Coral Amuletwiki	Amulet		
+-75.3%
+0.1 x Chaos Orb	@
+
+#Flasks
+
+Sin's Rebirth, Stibnite Flaskwiki	14	
+-5.2%
+8.0 x Exalted Orb687.9 x Chaos Orb	@
+Dying Sun, Ruby Flaskwiki	68	
+-22.9%
+3.6 x Exalted Orb310.6 x Chaos Orb	@
+Taste of Hate, Sapphire Flaskwiki	18	
+-15.7%
+1.1 x Exalted Orb93.4 x Chaos Orb	@
+Vessel of Vinktar, Penetration, Topaz Flaskwiki	68	
++11.4%
+1.0 x Exalted Orb89.1 x Chaos Orb	@
+Vessel of Vinktar, Added Spells, Topaz Flaskwiki	68	
+-3.0%
+68.6 x Chaos Orb	@
+Vessel of Vinktar, Added Attacks, Topaz Flaskwiki	68	
+-19.7%
+63.8 x Chaos Orb	@
+Vessel of Vinktar, Conversion, Topaz Flaskwiki	68	
+-21.6%
+55.0 x Chaos Orb	@
+Kiara's Determination, Silver Flaskwiki	22	
+-27.0%
+43.0 x Chaos Orb	@
+Lavianga's Spirit, Sanctified Mana Flaskwiki	50	
+-28.5%
+28.8 x Chaos Orb	@
+Blood of the Karui, Sanctified Life Flaskwiki	50	
++40.6%
+14.1 x Chaos Orb	@
+Witchfire Brew, Stibnite Flaskwiki	48	
+-34.9%
+13.0 x Chaos Orb	@
+Lion's Roar, Granite Flaskwiki	27	
+-23.1%
+10.0 x Chaos Orb	@
+Zerphi's Last Breath, Grand Mana Flaskwiki	18	
+-20.0%
+8.0 x Chaos Orb	@
+Rumi's Concoction, Granite Flaskwiki	68	
+-33.2%
+3.0 x Chaos Orb	@
+Divination Distillate, Large Hybrid Flaskwiki	30	
+-16.5%
+3.0 x Chaos Orb	@
+The Writhing Jar, Hallowed Hybrid Flaskwiki	60	
+-44.9%
+1.0 x Chaos Orb	@
+Coruscating Elixir, Ruby Flaskwiki	18	
+-0.3%
+1.0 x Chaos Orb	@
+Doedre's Elixir, Greater Mana Flaskwiki	12	
+-0.6%
+1.0 x Chaos Orb	@
+Atziri's Promise, Amethyst Flaskwiki	68	
+-15.8%
+0.6 x Chaos Orb	@
+Rotgut, Quicksilver Flaskwiki	40	
+-18.4%
+0.3 x Chaos Orb	@
+The Overflowing Chalice, Sulphur Flaskwiki	35	
+-36.8%
+0.3 x Chaos Orb	@
+The Sorrow of the Divine, Sulphur Flaskwiki	35	
+-19.0%
+0.3 x Chaos Orb	@
+Forbidden Taste, Quartz Flaskwiki	27	
+-0.5%
+0.1 x Chaos Orb	@
