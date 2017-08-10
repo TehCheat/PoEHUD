@@ -6,18 +6,20 @@ Metadata/QuestObjects/Labyrinth/LabyrinthTrialPortal; Labyrinth Trial; ffFF9966
 
 Metadata/Chests/Labyrinth/LabyrinthTreasureKey; Curious Lockbox; ff00ff00
 Metadata/Chests/Labyrinth/LabyrinthSpecificUnique; Intricate Locker; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthReward0Currency; Low Currency Chest; ffff99ff
-Metadata/Chests/Labyrinth/LabyrinthReward0CurrencyQuality; High Currency Chest; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthReward0Currency; Currency Chest; ffff99ff
+Metadata/Chests/Labyrinth/LabyrinthReward0CurrencyQuality; Currency Quality Chest; ffff00ff
 
 Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrency; Danger Currency Chest; ffff99ff
-Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrencyQuality; Danger Quality Currency Chest; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrencyQuality; Danger Currency Quality Chest; ffff00ff
 Metadata/Chests/Labyrinth/LabyrinthRewardDangerUnique; Danger Unique Chest; ffd2742d
 Metadata/Chests/Labyrinth/LabyrinthRewardDangerDivination; Danger Divination Chest; ffff0000
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerSkillGems; Danger Quality Gemcutter's chest; ffff0000
 
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrency; Silver Currency Chest; ffff00ff
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrencyQuality; Silver Currency Quality Chest; ffff00ff
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryUnique; Silver Jewelry Unique Chest; ffd2742d
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverDivination; Silver Divination Chest; ffff0000 
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverSkillGems; Silver Quality Gemcutter's chest; ffff0000
 
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique1; Silver Unique Chest 1; ffd2742d
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique2; Silver Unique Chest 2; ffd2742d
