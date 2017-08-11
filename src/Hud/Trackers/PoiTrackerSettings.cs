@@ -14,6 +14,7 @@ namespace PoeHUD.Hud.Trackers
             Strongboxes = true;
             PerandusChest = true;
             BreachChest = true;
+            Labyrinth = true;
 
             MastersIcon = new RangeNode<int>(8, 1, 16);
             CadiroIcon = new RangeNode<int>(8, 1, 16);
@@ -23,6 +24,7 @@ namespace PoeHUD.Hud.Trackers
             BreachChestIcon = new RangeNode<int>(10, 1, 28);
             PerandusChestColor = new ColorBGRA(153, 255, 51, 255);
             BreachChestColor = new ColorBGRA(240, 100, 255, 255);
+            LabyrinthIcon = new RangeNode<int>(14, 1, 28);
         }
 
         public ToggleNode Masters { get; set; }
@@ -39,5 +41,7 @@ namespace PoeHUD.Hud.Trackers
         public RangeNode<int> BreachChestIcon { get; set; }
         public ColorNode PerandusChestColor { get; set; }
         public ColorNode BreachChestColor { get; set; }
+        public ToggleNode Labyrinth { get; set; }
+        public RangeNode<int> LabyrinthIcon { get; set; }
     }
 }

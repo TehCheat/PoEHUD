@@ -47,6 +47,51 @@ namespace PoeHUD.Hud.Trackers
             "Metadata/Chests/PerandusChests/PerandusManorLostTreasureChest"
         };
 
+        private static readonly List<string> labyrinth = new List<string>
+        {
+            "Metadata/Chests/Labyrinth/LabyrinthTreasureKey",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest1",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest2",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest3",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest4",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest5",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest6",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest7",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest8",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest9",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest10",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest11",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest12",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest13",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest14",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest15",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest16",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest17",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest18",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest19",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest20",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest21",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest22",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest23",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest24",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest25",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest26",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest27",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest28",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest29",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest30",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest31",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest32",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest33",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest34",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest35",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest36",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest37",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest38",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest39",
+            "Metadata/Chests/Labyrinth/Izaro/IzaroChest40"
+    };
+
         public PoiTracker(GameController gameController, Graphics graphics, PoiTrackerSettings settings)
             : base(gameController, graphics, settings)
         { }
@@ -80,6 +125,174 @@ namespace PoeHUD.Hud.Trackers
             if (e.HasComponent<Chest>() && perandus.Contains(e.Path))
             {
                 return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.PerandusChestColor), () => Settings.PerandusChest, Settings.PerandusChestIcon);
+            }
+            if (e.HasComponent<Chest>() && labyrinth.Contains(e.Path))
+            {
+                if (e.Path.Contains("LabyrinthTreasureKey"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("treasureicon.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest1"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("1.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest2"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("2.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest3"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("3.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest4"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("4.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest5"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("5.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest6"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("6.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest7"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("7.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest8"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("8.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.EndsWith("Chest9"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("9.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest10"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("10.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest11"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("11.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest12"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("12.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest13"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("13.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest14"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("14.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest15"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("15.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest16"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("16.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest17"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("17.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest18"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("18.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest19"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("19.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest20"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("20.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest21"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("21.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest22"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("22.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest23"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("23.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest24"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("24.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest25"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("25.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest26"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("26.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest27"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("27.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest28"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("28.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest29"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("29.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest30"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("30.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest31"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("31.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest32"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("32.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest33"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("33.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest34"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("34.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest35"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("35.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest36"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("36.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest37"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("37.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest38"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("38.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest39"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("39.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                if (e.Path.Contains("Chest40"))
+                {
+                    return new ChestMapIcon(e, new HudTexture("40.png"), () => Settings.Labyrinth, Settings.LabyrinthIcon);
+                }
+                return new ChestMapIcon(e, new HudTexture("strongbox.png"), () => Settings.Strongboxes, Settings.StrongboxesIcon);
             }
             if (e.HasComponent<Chest>() && !e.GetComponent<Chest>().IsOpened)
             {

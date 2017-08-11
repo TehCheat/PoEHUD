@@ -1,27 +1,7 @@
 #Metadata; Text; Color (ARGB)
 #Example: Metadata/Chests/StrongBoxes/Strongbox; ; ff00FF00
 
-# LABYRINTH
 Metadata/QuestObjects/Labyrinth/LabyrinthTrialPortal; Labyrinth Trial; ffFF9966
-
-Metadata/Chests/Labyrinth/LabyrinthTreasureKey; Curious Lockbox; ff00ff00
-Metadata/Chests/Labyrinth/LabyrinthSpecificUnique; Intricate Locker; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthReward0Currency; Low Currency Chest; ffff99ff
-Metadata/Chests/Labyrinth/LabyrinthReward0CurrencyQuality; High Currency Chest; ffff00ff
-
-Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrency; Danger Currency Chest; ffff99ff
-Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrencyQuality; Danger Quality Currency Chest; ffff00ff
-Metadata/Chests/Labyrinth/LabyrinthRewardDangerUnique; Danger Unique Chest; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthRewardDangerDivination; Danger Divination Chest; ffff0000
-
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrency; Silver Currency Chest; ffff00ff
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrencyQuality; Silver Currency Quality Chest; ffff00ff
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryUnique; Silver Jewelry Unique Chest; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverDivination; Silver Divination Chest; ffff0000 
-
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique1; Silver Unique Chest 1; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique2; Silver Unique Chest 2; ffd2742d
-Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique3; Silver Unique Chest 3; ffd2742d
 
 # BREACH LEAGUE
 Metadata/Chests/Breach/BreachChest1Large; Xoph's Clasped Hand; ffFF5A5A
@@ -314,3 +294,101 @@ Metadata/Monsters/Daemon/TempestDaemonEnvironmentalPhysical; Tempest Daemon
 Metadata/Monsters/Daemon/TempestDaemonEnvironmentalUberPhysical; Tempest Daemon
 Metadata/Monsters/Daemon/TempestDaemonEnvironmentalCurses; Tempest Daemon
 Metadata/Monsters/Daemon/TempestDaemonEnvironmentalSmoke; Tempest Daemon
+
+# NEW LAB CHESTS
+# Metadata/Chests/Labyrinth/LabyrinthTreasureKey; Treasure Key Chest; ff00ff00
+Metadata/Chests/Labyrinth/LabyrinthSpecificUnique; Unique Drop Chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthReward0Currency; Low Currency Chest; ffff99ff
+Metadata/Chests/Labyrinth/LabyrinthReward0CurrencyQuality; High Currency Chest; ffff00ff
+
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrency; Danger Currency Chest; ffff99ff
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerCurrencyQuality; Danger Quality Currency Chest; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerUnique; Danger Unique Chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerDivination; Danger Divination Chest; ffff0000
+
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrency; Silver Currency Chest; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverCurrencyQuality; Silver Currency Quality Chest; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryUnique; Silver Jewelry Unique Chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverDivination; Silver Divination Chest; ffff0000 
+
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique1; Silver Unique Chest 1; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique2; Silver Unique Chest 2; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique3; Silver Unique Chest 3; ffd2742d
+
+Metadata/Chests/Labyrinth/Izaro/IzaroChest1; Low currency 1; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest2; Mid currency 2; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest3; Low currency 3; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest4; Izaro Chest 4; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest5; qCurrency 5; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest6; qCurrency 6; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest7; jewelry 7; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest8; jewelry 8; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest9; trash 9; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest10; trash 10; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest11; weapon trash 11; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest12; Izaro Chest 12; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest13; Diviner 13; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest14; trash 14; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest15; Generic 15; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest16; Generic 16; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest17; armour+weapon 17; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest18; 2 keys + uniq 18; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest19; Maps 19; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest20; Izaro Chest 20; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest21; 84ilvl armour21; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest22; Maps 22; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest23; Corrupted 2 midnights 23; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest24; Gems 24; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest25; High Currency 25; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest26; Mid currency 26; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest27; Low currency 27; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest28; qCurrency 28; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest29; Jewelry 29; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest30; Jewelry 30; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest31; Armour trash 31; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest32; Armour ~6S 32; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest33; Weapons trash 33; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest34; Generic 34; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest35; 3x Uniques 35; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest36; 2 keys + uniq 36; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest37; Corrupted 0 atziri 37; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest38; Gems 38; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest39; Offering to the goddes 39; ffffffff
+Metadata/Chests/Labyrinth/Izaro/IzaroChest40; 84ilvl weapons 40; ffffffff
+
+Metadata/Chests/Labyrinth/LabyrinthMaps1; MAPS; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthArmourAndCurrency1; Armour and Currency 1; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthArmourAndCurrency2; Armour and Currency 2; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthArmourAndCurrency3; Armour and Currency 3; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthGenericChestTier0; Generic chest 0; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthGenericChestTier1; Generic chest 1; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthGenericChestTier2; Generic chest 2; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthGenericChestTier3; Generic chest 3; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthGenericChestTier4; Generic chest 4; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthJewelryAndCurrency1; Jewelry and currency 1; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthJewelryAndCurrency2; Jewelry and currency 2; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthJewelryAndCurrency3; Jewelry and currency 3; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthReward0Armour; Amour chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthReward0Generic; Generic chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthReward0Jewelry; Jewelry chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthReward0Weapons; Weapons chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardChest; Labyrinth Reward Chest; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerCorruptedVaal; Danger corrupted chest; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerGeneric; Danger generic; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerJewelry; Danger jewelry; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerSkillGems; Danger gems; ffd2742d
+Metadata/Chests/Labyrinth/LabyrinthRewardDangerSockets; Danger sockets; ffd2742d
+
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverCorruptedVaal; Silver door corrupted; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryJewels; Silver door jewelry jewels; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverSkillGems; Silver door gems; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverSockets; Silver door sockets; ffff00ff
+
+Metadata/Chests/Labyrinth/LabyrinthWeaponsAndCurrency1; Weapons and currency 1; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthWeaponsAndCurrency2; Weapons and currency 2; ffff00ff
+Metadata/Chests/Labyrinth/LabyrinthWeaponsAndCurrency3; Weapons and currency 3; ffff00ff

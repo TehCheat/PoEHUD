@@ -443,6 +443,8 @@ namespace PoeHUD.Hud.Menu
             AddChild(mapIconsMenu, "Strongboxes", settingsHub.PoiTrackerSettings.Strongboxes);
             AddChild(mapIconsMenu, "Chests", settingsHub.PoiTrackerSettings.Chests);
             AddChild(mapIconsMenu, "Masters", settingsHub.PoiTrackerSettings.Masters);
+            AddChild(iconSizeMenu, "Labyrinth Icon", settingsHub.PoiTrackerSettings.LabyrinthIcon);
+            AddChild(mapIconsMenu, "Labyrinth Boxes", settingsHub.PoiTrackerSettings.Labyrinth);
 
             //Menu Settings
             var menuSettings = AddChild(MenuRootButton, "Menu settings", settingsHub.MenuSettings.ShowMenu, "F12");

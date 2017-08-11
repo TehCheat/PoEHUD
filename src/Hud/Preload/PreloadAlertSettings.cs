@@ -120,6 +120,7 @@ namespace PoeHUD.Hud.Preload
             AilentiaRac = new ColorBGRA(254, 192, 118, 255);
             UlyssesMorvant = new ColorBGRA(254, 192, 118, 255);
             AurelioVoidsinger = new ColorBGRA(254, 192, 118, 255);
+            TreasureKey = new ColorBGRA(254, 192, 118, 255);
         }
 
         public ColorNode CadiroTrader { get; set; }
@@ -199,6 +200,7 @@ namespace PoeHUD.Hud.Preload
         public ColorNode ArmourerStrongbox { get; set; }
         public ColorNode OrnateStrongbox { get; set; }
         public ColorNode LargeStrongbox { get; set; }
+        public ColorNode TreasureKey { get; set; }
         public ColorNode PerandusStrongbox { get; set; }
         public ColorNode KaomStrongbox { get; set; }
         public ColorNode MalachaiStrongbox { get; set; }
