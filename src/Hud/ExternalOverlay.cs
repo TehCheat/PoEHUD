@@ -48,9 +48,9 @@ namespace PoeHUD.Hud
             Text = MathHepler.GetRandomWord(MathHepler.Randomizer.Next(7) + 5);
             TransparencyKey = Color.Transparent;
             BackColor = Color.Black;
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = settings.MenuSettings.AreoMode ? FormBorderStyle.None : FormBorderStyle.Sizable;
             ShowIcon = false;
-            TopMost = true;
+            TopMost = settings.MenuSettings.AreoMode ? true : false;
             ResumeLayout(false);
             Load += OnLoad;
         }
@@ -98,7 +98,10 @@ namespace PoeHUD.Hud
                     clientRect.X = fpsRectangle.X + fpsRectangle.Width + 6;
                     break;
             }
-            return new Vector2(clientRect.X - 5, clientRect.Y + 5);
+            if (settings.MenuSettings.AreoMode)
+                return new Vector2(clientRect.X - 5, clientRect.Y + 5);
+            else
+                return new Vector2(this.Width - 25, clientRect.Y + 5);
         }
 
         private Vector2 GetUnderCornerMap()
@@ -137,13 +140,17 @@ namespace PoeHUD.Hud
 
         private async void OnLoad(object sender, EventArgs e)
         {
-            Bounds = WinApi.GetClientRectangle(gameHandle);
-            WinApi.EnableTransparent(Handle, Bounds);
+            var rect = WinApi.GetClientRectangle(gameHandle);
+            Bounds = settings.MenuSettings.AreoMode? rect:new Rectangle(rect.X+rect.Width,rect.Y,400,rect.Height);
+            if (settings.MenuSettings.AreoMode)
+                WinApi.EnableTransparent(Handle, Bounds);
             graphics = new Graphics2D(this, Bounds.Width, Bounds.Height);
-
-            plugins.Add(new HealthBarPlugin(gameController, graphics, settings.HealthBarSettings));
-            plugins.Add(new MinimapPlugin(gameController, graphics, GatherMapIcons, settings.MapIconsSettings));
-            plugins.Add(new LargeMapPlugin(gameController, graphics, GatherMapIcons, settings.MapIconsSettings));
+            if(settings.MenuSettings.AreoMode)
+            {
+                plugins.Add(new HealthBarPlugin(gameController, graphics, settings.HealthBarSettings));
+                plugins.Add(new MinimapPlugin(gameController, graphics, GatherMapIcons, settings.MapIconsSettings));
+                plugins.Add(new LargeMapPlugin(gameController, graphics, GatherMapIcons, settings.MapIconsSettings));
+            }
             plugins.Add(new MonsterTracker(gameController, graphics, settings.MonsterTrackerSettings));
             plugins.Add(new PoiTracker(gameController, graphics, settings.PoiTrackerSettings));
 
@@ -163,12 +170,12 @@ namespace PoeHUD.Hud
 
             plugins.Add(new AdvancedTooltipPlugin(gameController, graphics, settings.AdvancedTooltipSettings, settings));
             plugins.Add(new InventoryPreviewPlugin(gameController, graphics, settings.InventoryPreviewSettings));
-            plugins.Add(new MenuPlugin(gameController, graphics, settings));
+            plugins.Add(new MenuPlugin(gameController, graphics, settings,this.Handle));
 
             Deactivate += OnDeactivate;
             FormClosing += OnClosing;
-
-            CheckGameWindow();
+            if (settings.MenuSettings.AreoMode)
+                CheckGameWindow();
             CheckGameState();
             graphics.Render += OnRender;
             await Task.Run(() => graphics.RenderLoop());
@@ -176,7 +183,7 @@ namespace PoeHUD.Hud
 
         private void OnRender()
         {
-            if (gameController.InGame && WinApi.IsForegroundWindow(gameHandle) && !gameController.Game.IngameState.IngameUi.TreePanel.IsVisible && !gameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible)
+            if (gameController.InGame && (settings.MenuSettings.AreoMode ? WinApi.IsForegroundWindow(gameHandle) : true) && !gameController.Game.IngameState.IngameUi.TreePanel.IsVisible && !gameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible)
             {
                 gameController.RefreshState();
                 plugins.ForEach(x => x.Render());

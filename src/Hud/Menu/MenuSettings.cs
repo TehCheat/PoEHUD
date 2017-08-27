@@ -8,6 +8,7 @@ namespace PoeHUD.Hud.Menu
         public MenuSettings()
         {
             Enable = true;
+            AreoMode = true;
             X = 10; Y = 85;
             ShowMenu = true;
             TitleName = "≡";
@@ -21,7 +22,7 @@ namespace PoeHUD.Hud.Menu
             MenuFontSize = new RangeNode<int>(16, 10, 20);
             PickerFontSize = new RangeNode<int>(16, 10, 20);
         }
-
+        public bool AreoMode { get; set; }
         public string TitleName { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
