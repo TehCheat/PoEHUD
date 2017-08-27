@@ -77,3 +77,9 @@ bld/
 *.sln.iml
 
 settings.json
+/.vs/slnx.sqlite
+/.vs/slnx.sqlite
+*.sqlite
+/.vs
+/.vs/slnx.sqlite
+/.vs/slnx.sqlite

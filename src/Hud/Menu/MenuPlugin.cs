@@ -18,11 +18,12 @@ namespace PoeHUD.Hud.Menu
         private readonly Action<MouseInfo> onMouseDown, onMouseUp, onMouseMove;
         private bool holdKey;
         private RootButton root;
-
-        public MenuPlugin(GameController gameController, Graphics graphics, SettingsHub settingsHub)
+        private IntPtr handleHud;
+        public MenuPlugin(GameController gameController, Graphics graphics, SettingsHub settingsHub,IntPtr handleHud)
             : base(gameController, graphics, settingsHub.MenuSettings)
         {
             this.settingsHub = settingsHub;
+            this.handleHud = handleHud;
             CreateMenu();
             MouseHook.MouseDown += onMouseDown = info => info.Handled = OnMouseEvent(MouseEventID.LeftButtonDown, info.Position);
             MouseHook.MouseUp += onMouseUp = info => info.Handled = OnMouseEvent(MouseEventID.LeftButtonUp, info.Position);
@@ -426,13 +427,19 @@ namespace PoeHUD.Hud.Menu
 
         private bool OnMouseEvent(MouseEventID id, Point position)
         {
-            if (!Settings.Enable || !GameController.Window.IsForeground())
+            if (!Settings.Enable || !(Settings.AreoMode? GameController.Window.IsForeground() : WinApi.IsForegroundWindow(handleHud)))
             {
                 return false;
             }
 
-            Vector2 mousePosition = GameController.Window.ScreenToClient(position.X, position.Y);
+            Vector2 mousePosition = Settings.AreoMode ? GameController.Window.ScreenToClient(position.X, position.Y) : ScreenToHud(position.X, position.Y);
             return root.OnMouseEvent(id, mousePosition);
+        }
+        public Vector2 ScreenToHud(int x, int y)
+        {
+            System.Drawing.Point point = new System.Drawing.Point(x, y);
+            WinApi.ScreenToClient(this.handleHud, ref point);
+            return new Vector2(point.X, point.Y);
         }
     }
 }

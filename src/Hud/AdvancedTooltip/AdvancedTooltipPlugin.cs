@@ -58,7 +58,11 @@ namespace PoeHUD.Hud.AdvancedTooltip
                 Element tooltip = inventoryItemIcon.Tooltip;
                 Entity poeEntity = inventoryItemIcon.Item;
                 if (tooltip == null || poeEntity.Address == 0 || !poeEntity.IsValid) { return; }
-                RectangleF tooltipRect = tooltip.GetClientRect();
+                //not yet complete  2017.08.27
+                RectangleF tooltipRect = settingsHub.MenuSettings.AreoMode ? tooltip.GetClientRect() : new RectangleF(0, 0, 100, 100);               
+                /*var temp= tooltip.GetClientRect(); 
+                System.Diagnostics.Debug.Print(temp.X+","+temp.Y + "," +temp.Width + "," +temp.Height);
+                RectangleF tooltipRect = new RectangleF(0, 0, 100, 100);*/
                 var modsComponent = poeEntity.GetComponent<Mods>();
                 int id = 0;
                 if (inventoryItemIcon.ToolTipType == ToolTipType.InventoryItem)
