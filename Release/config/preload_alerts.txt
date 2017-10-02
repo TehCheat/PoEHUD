@@ -388,3 +388,12 @@ Metadata/Monsters/Avatar/Avatar32; Harbinger Avatar32; ffff00ff
 Metadata/Monsters/Avatar/Avatar33; Harbinger Avatar33; ffff00ff
 Metadata/Monsters/Avatar/Avatar34; Harbinger Avatar34; ffff00ff
 Metadata/Monsters/Avatar/Avatar35; Harbinger Avatar35; ffff00ff
+
+# SHAPER'S MEMORIES
+Metadata/NPC/Info/ShaperGlyph1; Shaper's Memory of Home (T8); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph2; Shaper's Memory of Intrigue (T9); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph3; Shaper's Memory of Wonder (T10); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph4; Shaper's Memory of Dream (T11); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph5; Shaper's Memory of Nightmare (T12); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph6; Shaper's Memory of Grief (T13); 9400d8ff
+Metadata/NPC/Info/ShaperGlyph7; Shaper's Memory of Awakening (T14); 9400d8ff
