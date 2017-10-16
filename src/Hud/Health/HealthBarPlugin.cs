@@ -213,14 +213,10 @@ namespace PoeHUD.Hud.Health
 
         private void DrawBackground(Color color, Color outline, RectangleF bg, float hpWidth, float esWidth)
         {
-            if (outline != Color.Black)
-            {
-                Graphics.DrawFrame(bg, 2, outline);
-            }
-            string healthBar = Settings.ShowIncrements ? "healthbar_increment.png" : "healthbar.png";
-            Graphics.DrawImage("healthbar_bg.png", bg, color);
+            Graphics.DrawFrame(bg, 2, outline);
+            Graphics.DrawImage("healthbar_bg.png", bg);
             var hpRectangle = new RectangleF(bg.X, bg.Y, hpWidth, bg.Height);
-            Graphics.DrawImage(healthBar, hpRectangle, color, hpWidth * 10 / bg.Width);
+            Graphics.DrawImage("healthbar.png", hpRectangle, color);
             if (Settings.ShowES)
             {
                 bg.Width = esWidth;
