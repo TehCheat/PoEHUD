@@ -77,3 +77,4 @@ bld/
 *.sln.iml
 
 settings.json
+preload_alerts_personal.txt
