@@ -1,0 +1,5 @@
+#Override/Add personal Preload Alerts
+
+#Metadata; Text; Color (ARGB)
+#Example: Metadata/Chests/StrongBoxes/Strongbox; ; ff00FF00
+
