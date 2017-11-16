@@ -13,10 +13,37 @@ using System.Windows.Forms;
 
 namespace PoeHUD.Hud.Preload
 {
+    public static class DictionaryExtensions
+    {
+        // Taken from: https://stackoverflow.com/a/2679857
+        // Works in C#3/VS2008:
+        // Returns a new dictionary of this ... others merged leftward.
+        // Keeps the type of 'this', which must be default-instantiable.
+        // Example: 
+        //   result = map.MergeLeft(other1, other2, ...)
+        public static T MergeLeft<T, K, V>(this T me, params IDictionary<K, V>[] others)
+            where T : IDictionary<K, V>, new()
+        {
+            T newMap = new T();
+            foreach (IDictionary<K, V> src in
+                (new List<IDictionary<K, V>> { me }).Concat(others))
+            {
+                // ^-- echk. Not quite there type-system.
+                foreach (KeyValuePair<K, V> p in src)
+                {
+                    newMap[p.Key] = p.Value;
+                }
+            }
+            return newMap;
+        }
+
+    }
+
     public class PreloadAlertPlugin : SizedPlugin<PreloadAlertSettings>
     {
         private readonly HashSet<PreloadConfigLine> alerts;
         private readonly Dictionary<string, PreloadConfigLine> alertStrings;
+        private readonly Dictionary<string, PreloadConfigLine> personalAlertStrings;
         private bool foundSpecificPerandusChest = false;
         private bool essencefound = false;
         private bool holdKey = false;
@@ -38,6 +65,8 @@ namespace PoeHUD.Hud.Preload
             this.settingsHub = settingsHub;
             alerts = new HashSet<PreloadConfigLine>();
             alertStrings = LoadConfig("config/preload_alerts.txt");
+            personalAlertStrings = LoadConfig("config/preload_alerts_personal.txt");
+            alertStrings = DictionaryExtensions.MergeLeft(alertStrings, personalAlertStrings);
             GameController.Area.OnAreaChange += OnAreaChange;
             AreaNameColor = Settings.AreaTextColor;
             SetupPredefinedConfigs();
@@ -55,8 +84,6 @@ namespace PoeHUD.Hud.Preload
                 return preloadAlerConfigLine;
             });
         }
-
-
 
         private void SetupPredefinedConfigs()
         {
