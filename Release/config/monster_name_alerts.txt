@@ -33,6 +33,12 @@ Metadata/Monsters/Exiles/ExileScion2; Exile Augustina Solaria nearby;attention.w
 Metadata/Monsters/Exiles/ExileWitch4; Exile Dena Lorenni;attention.wav; ffFEC076; ms-orange.png
 Metadata/Monsters/Exiles/ExileScion4; Exile Vanth Agiel;attention.wav; ffFEC076; ms-orange.png
 Metadata/Monsters/Exiles/ExileScion3; Exile Lael Furia;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileShadow5; Exile Ulysses Morvant;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileWitch5; Exile Ultima Thule;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileMarauder6__; Exile Bolt Brownfur;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileTemplar5; Exile Aurelio Voidsinger;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileRanger5; Exile Ailentia Rac;attention.wav; ffFEC076; ms-orange.png
+Metadata/Monsters/Exiles/ExileDuelist5; Exile Oyra Ona;attention.wav; ffFEC076; ms-orange.png
 
 Metadata/Monsters/Spirit/TormentedArsonist; Tormented Arsonist; ; ff99FF99; ms-ghost.png
 Metadata/Monsters/Spirit/TormentedFreezer; Tormented Aurora Cultist; ; ff99FF99; ms-ghost.png
