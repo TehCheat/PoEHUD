@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PoeHUD.Framework
 {
     public class Runner
     {
         readonly List<Coroutine> _coroutines = new List<Coroutine>();
-
-        readonly List<(string name, string owner, long ticks, DateTime end, DateTime start)> _finishedCoroutines =
-            new List<(string name, string owner, long ticks, DateTime end, DateTime start)>();
-
+        readonly  List<Tuple<string,string,long,DateTime,DateTime>> _finishedCoroutines = new List<Tuple<string, string, long, DateTime, DateTime>>();
         public bool IsRunning => _coroutines.Count > 0;
 
-        public IEnumerable<(string Name, string Owner, long Ticks, DateTime End, DateTime Started)>
+        public IEnumerable<Tuple<string,string,long,DateTime,DateTime>>
             FinishedCoroutines => _finishedCoroutines;
 
         public int FinishedCoroutineCount { get; private set; }
@@ -97,9 +92,7 @@ namespace PoeHUD.Framework
                     {
                         if (_coroutines[i] != null)
                         {
-                            _finishedCoroutines.Add(
-                                (_coroutines[i].Name, _coroutines[i].Owner, _coroutines[i].Ticks, DateTime.Now,
-                                _coroutines[i].Started));
+                            _finishedCoroutines.Add(new Tuple<string, string, long, DateTime, DateTime>(_coroutines[i].Name,_coroutines[i].Owner,_coroutines[i].Ticks,_coroutines[i].Started,DateTime.Now));
                             FinishedCoroutineCount++;
                         }
                         _coroutines.RemoveAt(i);
