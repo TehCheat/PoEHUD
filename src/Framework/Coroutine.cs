@@ -36,7 +36,7 @@ namespace PoeHUD.Framework
                 {
                     a?.Invoke();
                     Ticks++;
-                    yield return TimeoutForAction > 0 ? new WaitTime(TimeoutForAction) : new YieldBase();
+                    yield return TimeoutForAction > 0 ? new WaitTime(TimeoutForAction) : null;
                 }
             }
 
@@ -106,16 +106,19 @@ namespace PoeHUD.Framework
 
     public class WaitRender : YieldBase
     {
+        private long _howManyRenderCountWait;
+
         public WaitRender(long howManyRenderCountWait = 1)
         {
-            Current = Enumerator(howManyRenderCountWait);
+            _howManyRenderCountWait = howManyRenderCountWait;
+            Current = GetEnumerator();
         }
 
-        IEnumerator Enumerator(long howManyRenderCountWait)
+        public sealed override IEnumerator GetEnumerator()
         {
             var prevRenderCount = GameController.Instance.RenderCount;
-            howManyRenderCountWait += GameController.Instance.RenderCount;
-            while (prevRenderCount < howManyRenderCountWait)
+            _howManyRenderCountWait += GameController.Instance.RenderCount;
+            while (prevRenderCount < _howManyRenderCountWait)
             {
                 prevRenderCount = GameController.Instance.RenderCount;
                 yield return null;
@@ -129,27 +132,30 @@ namespace PoeHUD.Framework
         {
             while (fn())
             {
-                Current = Enumerator();
+                Current = GetEnumerator();
             }
+        }
 
-            IEnumerator Enumerator()
-            {
-                yield return null;
-            }
+        public sealed override IEnumerator GetEnumerator()
+        {
+            yield return null;
         }
     }
 
     public class WaitTime : YieldBase
     {
+        private readonly int _milliseconds;
+
+
         public WaitTime(int milliseconds)
         {
-            Current = Enumerator(milliseconds);
+            _milliseconds = milliseconds;
+            Current = GetEnumerator();
         }
 
-
-        IEnumerator Enumerator(int ms)
+        public sealed override IEnumerator GetEnumerator()
         {
-            var waiter = GameController.Instance.MainTimer.ElapsedMilliseconds + ms;
+            var waiter = GameController.Instance.MainTimer.ElapsedMilliseconds + _milliseconds;
             while (GameController.Instance.MainTimer.ElapsedMilliseconds < waiter)
             {
                 yield return null;
@@ -157,19 +163,14 @@ namespace PoeHUD.Framework
         }
     }
 
-    public class YieldBase : IEnumerator
+    public abstract class YieldBase : IEnumerable
     {
-        public bool MoveNext()
-        {
-            return Current != null && ((IEnumerator) Current).MoveNext();
-        }
-
-        public void Reset()
-        {
-            ((IEnumerator) Current)?.Reset();
-        }
-
         public object Current { get; protected set; }
+
+        public virtual IEnumerator GetEnumerator()
+        {
+            return (IEnumerator) Current;
+        }
     }
 
     public enum CoroutinePriority
