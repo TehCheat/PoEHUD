@@ -18,7 +18,7 @@ namespace PoeHUD.Framework
         public long Ticks { get; private set; } = -1;
         public CoroutinePriority Priority { get; set; } = CoroutinePriority.Normal;
         public DateTime Started { get; set; }
-        public Action Action { get; private set; } = null;
+        public Action Action { get; private set; }
 
         public bool ThisIsSimple => Action != null;
 
@@ -99,10 +99,7 @@ namespace PoeHUD.Framework
         public string RandomString()
         {
             int size = 16;
-            byte[] data = new byte[size];
-            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
-            crypto.GetBytes(data);
-            return BitConverter.ToString(data).Replace("-", String.Empty);
+            return Guid.NewGuid().ToString().Substring(0, size).Replace("-", String.Empty);
         }
     }
 
@@ -111,10 +108,10 @@ namespace PoeHUD.Framework
     {
         public WaitRender(long howManyRenderCountWait = 1)
         {
-            Current = WR(howManyRenderCountWait);
+            Current = Enumerator(howManyRenderCountWait);
         }
 
-        IEnumerator WR(long howManyRenderCountWait)
+        IEnumerator Enumerator(long howManyRenderCountWait)
         {
             var prevRenderCount = GameController.Instance.RenderCount;
             howManyRenderCountWait += GameController.Instance.RenderCount;
@@ -132,10 +129,10 @@ namespace PoeHUD.Framework
         {
             while (fn())
             {
-                Current = Wf();
+                Current = Enumerator();
             }
 
-            IEnumerator Wf()
+            IEnumerator Enumerator()
             {
                 yield return null;
             }
@@ -146,14 +143,14 @@ namespace PoeHUD.Framework
     {
         public WaitTime(int milliseconds)
         {
-            Current = WaitMs(milliseconds);
+            Current = Enumerator(milliseconds);
         }
 
 
-        IEnumerator WaitMs(int ms)
+        IEnumerator Enumerator(int ms)
         {
-            var waiter = GameController.Instance.mainSw.ElapsedMilliseconds + ms;
-            while (GameController.Instance.mainSw.ElapsedMilliseconds < waiter)
+            var waiter = GameController.Instance.MainTimer.ElapsedMilliseconds + ms;
+            while (GameController.Instance.MainTimer.ElapsedMilliseconds < waiter)
             {
                 yield return null;
             }

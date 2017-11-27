@@ -46,7 +46,7 @@ namespace PoeHUD.Models
 
         public Entity LocalPlayer => _localPlayer ?? (_localPlayer = _gameController.Game.IngameState.Data.LocalPlayerReal);
 
-        public Actor LocalPlayer_Actor => _localPlayerActor ?? (_localPlayerActor =
+        public Actor LocalPlayerActor => _localPlayerActor ?? (_localPlayerActor =
                                               _gameController.Game.IngameState.Data.LocalPlayerReal.GetComponent<Actor>());
 
         public RectangleF Window => _window.IsEmpty ? (_window = _gameController.Window.GetWindowRectangleReal()) : _window;

@@ -19,7 +19,7 @@ namespace PoeHUD.Framework
         public IEnumerable<(string Name, string Owner, long Ticks, DateTime End, DateTime Started)>
             FinishedCoroutines => _finishedCoroutines;
 
-        public int FinishedCoroutineCount { get; private set; } = 0;
+        public int FinishedCoroutineCount { get; private set; }
         public IEnumerable<Coroutine> Coroutines => _coroutines;
         public IEnumerable<Coroutine> WorkingCoroutines => _coroutines.Where(x => x.DoWork);
         private readonly HashSet<Coroutine> _autorestartCoroutines = new HashSet<Coroutine>();
@@ -28,10 +28,6 @@ namespace PoeHUD.Framework
         public int CountAddCoroutines { get; private set; }
         public int CountFalseAddCoroutines { get; private set; }
         public int RunPerLoopIter { get; set; } = 3;
-
-        public Runner()
-        {
-        }
 
         public Coroutine Run(IEnumerator enumerator, string owner, string name = null)
         {
@@ -61,11 +57,6 @@ namespace PoeHUD.Framework
             return routine;
         }
 
-
-        private bool CheckExists(Coroutine coroutine)
-        {
-            return true;
-        }
 
         public void StopCoroutines(IEnumerable<Coroutine> coroutines)
         {
@@ -121,7 +112,7 @@ namespace PoeHUD.Framework
 
         public void AddToAutoupdate(Coroutine coroutine)
         {
-            this._autorestartCoroutines.Add(coroutine.GetCopy(coroutine));
+            _autorestartCoroutines.Add(coroutine.GetCopy(coroutine));
         }
     }
 }

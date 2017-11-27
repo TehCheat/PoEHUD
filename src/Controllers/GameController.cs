@@ -43,7 +43,7 @@ namespace PoeHUD.Controllers
         public Cache Cache { get; private set; }
         public Memory Memory { get; private set; }
 
-        public Stopwatch mainSw = Stopwatch.StartNew();
+        public Stopwatch MainTimer = Stopwatch.StartNew();
         public IEnumerable<EntityWrapper> Entities => EntityListWrapper.Entities;
 
         public EntityWrapper Player => EntityListWrapper.Player;
@@ -58,7 +58,7 @@ namespace PoeHUD.Controllers
 
         public Action Render;
         public Action Clear;
-        public Dictionary<string, float> DebugInformation = new Dictionary<string, float>();
+        public readonly Dictionary<string, float> DebugInformation = new Dictionary<string, float>();
         public readonly Runner CoroutineRunner;
         public PerformanceSettings Performance;
 
@@ -98,11 +98,11 @@ namespace PoeHUD.Controllers
 
             var updateEntity = (new Coroutine(() => { EntityListWrapper.RefreshState(); }, 50, nameof(GameController), "Update Entity") { Priority = CoroutinePriority.High });
 
-            var updateGameState = (new Coroutine(() => {
-                InGame = InGameReal;
-                IsForeGroundCache = WinApi.IsForegroundWindow(Window.Process.MainWindowHandle);
-            }, 100, nameof(GameController), "Update Game State")
-            { Priority = CoroutinePriority.Critical }).Run();
+            (new Coroutine(() => {
+                    InGame = InGameReal;
+                    IsForeGroundCache = WinApi.IsForegroundWindow(Window.Process.MainWindowHandle);
+                }, 100, nameof(GameController), "Update Game State")
+                { Priority = CoroutinePriority.Critical }).Run();
 
 
 
@@ -150,7 +150,7 @@ namespace PoeHUD.Controllers
             }
 
             var updateCoroutine = new Coroutine(Action, 250, nameof(GameController), "$#Main#$") { Priority = CoroutinePriority.Critical };
-            updateCoroutine = CoroutineRunner.Run(updateCoroutine);
+            CoroutineRunner.Run(updateCoroutine);
             sw.Restart();
             while (true)
             {
