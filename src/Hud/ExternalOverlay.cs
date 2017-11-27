@@ -128,7 +128,7 @@ namespace PoeHUD.Hud
         {
             SettingsHub.Save(settings);
             plugins.ForEach(plugin => plugin.Dispose());
-            graphics.Dispose();  
+            graphics.Dispose();
         }
 
         private void OnDeactivate(object sender, EventArgs e)
@@ -172,17 +172,11 @@ namespace PoeHUD.Hud
 
             CheckGameWindow();
             CheckGameState();
-            graphics.Render += OnRender;
-            await Task.Run(() => graphics.RenderLoop());
-        }
-        
-        private void OnRender()
-        {
-            if (gameController.InGame && WinApi.IsForegroundWindow(gameHandle) && !gameController.Game.IngameState.IngameUi.TreePanel.IsVisible && !gameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible)
-            {
-                gameController.RefreshState();
-                plugins.ForEach(x => x.Render());
-            }
+            gameController.Performance = settings.PerformanceSettings;
+            graphics.Render += () => plugins.ForEach(x => x.Render());
+            gameController.Clear += graphics.Clear;
+            gameController.Render += graphics.TryRender;
+            await Task.Run(() => gameController.WhileLoop());
         }
     }
 }

@@ -121,6 +121,10 @@
       <HintPath>packages\Antlr4.Runtime.4.6.4\lib\net45\Antlr4.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Release\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -144,6 +148,9 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -157,7 +164,9 @@
     <Compile Include="Controllers\FsController.cs" />
     <Compile Include="Framework\Aero.cs" />
     <Compile Include="Framework\ChooseColor.cs" />
+    <Compile Include="Framework\Coroutine.cs" />
     <Compile Include="Framework\Helpers\ActionHelper.cs" />
+    <Compile Include="Framework\Helpers\CoroutineExtension.cs" />
     <Compile Include="Framework\Helpers\LinqHelper.cs" />
     <Compile Include="Framework\Helpers\MathHepler.cs" />
     <Compile Include="Framework\Helpers\ConvertHelper.cs" />
@@ -169,6 +178,7 @@
     <Compile Include="Framework\InputHooks\MouseHook.cs" />
     <Compile Include="Framework\InputHooks\Structures\MouseLLHookStruct.cs" />
     <Compile Include="Framework\MemoryControl.cs" />
+    <Compile Include="Framework\Runner.cs" />
     <Compile Include="Framework\WinApi.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipPlugin.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipSettings.cs" />
@@ -203,6 +213,7 @@
     <Compile Include="Hud\Menu\MenuSettings.cs" />
     <Compile Include="Hud\Menu\RootButton.cs" />
     <Compile Include="Hud\Menu\SimpleMenu.cs" />
+    <Compile Include="Hud\Performance.cs" />
     <Compile Include="Hud\PluginExtension\ExternalPlugin.cs" />
     <Compile Include="Hud\PluginExtension\FileOperationAPIWrapper.cs" />
     <Compile Include="Hud\PluginExtension\PluginExtensionPlugin.cs" />
@@ -218,6 +229,7 @@
     <Compile Include="Hud\SizedPlugin.cs" />
     <Compile Include="Hud\SizedPluginWithMapIcons.cs" />
     <Compile Include="Models\BaseItemType.cs" />
+    <Compile Include="Models\Cache.cs" />
     <Compile Include="Models\ConfigLineBase.cs" />
     <Compile Include="Models\Enums\DiagnosticInfoType.cs" />
     <Compile Include="Models\Enums\InventoryType.cs" />
