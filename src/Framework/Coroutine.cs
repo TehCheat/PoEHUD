@@ -163,14 +163,12 @@ namespace PoeHUD.Framework
         }
     }
 
-    public abstract class YieldBase : IEnumerable
+    public abstract class YieldBase : IEnumerable, IEnumerator
     {
+        public bool MoveNext() => Current != null && ((IEnumerator) Current).MoveNext();
         public object Current { get; protected set; }
-
-        public virtual IEnumerator GetEnumerator()
-        {
-            return (IEnumerator) Current;
-        }
+        public abstract IEnumerator GetEnumerator();
+        public void Reset(){}
     }
 
     public enum CoroutinePriority
