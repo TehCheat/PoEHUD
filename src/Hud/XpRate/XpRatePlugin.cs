@@ -200,7 +200,7 @@ namespace PoeHUD.Hud.XpRate
             xpRate = "0.00 xp/h";
             timeLeft = "-h -m -s  to level up";
             getXp = 0;
-            yield return new WaitFunction(() => !GameController.InGameReal || GameController.Game.GameIsLoading);
+            yield return new WaitFunction(() => !GameController.InGameReal);
             yield return new WaitTime(100);
             startTime = lastTime = DateTime.Now;
             startXp = GameController.Player.GetComponent<Player>().XP;
