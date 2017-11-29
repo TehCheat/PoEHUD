@@ -17,5 +17,6 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public IngameState IngameStateReal => ReadObject<IngameState>(Address + 0x38);
 
         public int AreaChangeCount => M.ReadInt(M.AddressOfProcess + Offsets.AreaChangeCount);
+        public bool IsGameLoading => M.ReadInt(M.AddressOfProcess + Offsets.isLoadingScreenOffset) == 1;
       }
 }
