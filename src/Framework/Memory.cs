@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PoeHUD.Framework
 {
@@ -69,14 +70,28 @@ namespace PoeHUD.Framework
 
         public int ReadInt(int addr, params int[] offsets)
         {
+            //Simple for better then LINQ for often operation
             int num = ReadInt(addr);
-            return offsets.Aggregate(num, (current, num2) => ReadInt(current + num2));
+            int result = num;
+            for (var index = 0; index < offsets.Length; index++)
+            {
+                var offset = offsets[index];
+                result = ReadInt(result + offset);
+            }
+            return result;
         }
 
         public int ReadInt(long addr, params long[] offsets)
         {
+            //Simple for better then LINQ for often operation
             long num = ReadLong(addr);
-            return (int)offsets.Aggregate(num, (current, num2) => ReadLong(current + num2));
+            long result = num;
+            for (var index = 0; index < offsets.Length; index++)
+            {
+                var offset = offsets[index];
+                result = ReadLong(result + offset);
+            }
+            return (int)result;
         }
 
       
@@ -94,8 +109,15 @@ namespace PoeHUD.Framework
 
         public long ReadLong(long addr, params long[] offsets)
         {
+            //Simple for better then LINQ for often operation
             long num = ReadLong(addr);
-            return offsets.Aggregate(num, (current, num2) => ReadLong(current + num2));
+            long result = num;
+            for (var index = 0; index < offsets.Length; index++)
+            {
+                var offset = offsets[index];
+                result = ReadLong(result + offset);
+            }
+            return result;
         }
 
         public uint ReadUInt(long addr)
@@ -182,8 +204,9 @@ namespace PoeHUD.Framework
         {
             byte[] exeImage = ReadBytes(AddressOfProcess, 0x2000000); //33mb
             var address = new long[patterns.Length];
-
-            for (int iPattern = 0; iPattern < patterns.Length; iPattern++)
+            //Little faster start hud
+            //For me ~1400 vs ~800ms
+            Parallel.For(0, patterns.Length, iPattern =>
             {
                 Pattern pattern = patterns[iPattern];
                 byte[] patternData = pattern.Bytes;
@@ -207,13 +230,21 @@ namespace PoeHUD.Framework
                     //System.Windows.Forms.MessageBox.Show("Pattern " + iPattern + " is not found!");
                     DebugStr += "Pattern " + iPattern + " is not found!" + Environment.NewLine;
                 }
-            }
+            });
             return address;
         }
 
         private bool CompareData(Pattern pattern, byte[] data, int offset)
         {
-            return !pattern.Bytes.Where((t, i) => pattern.Mask[i] == 'x' && t != data[offset + i]).Any();
+            //Better than linq for me ~700ms vs ~60ms
+            bool any = false;
+            for (int i = 0; i < pattern.Bytes.Length; i++)
+                if (pattern.Mask[i] == 'x' && pattern.Bytes[i] != data[offset + i])
+                {
+                    any = true;
+                    break;
+                }
+            return !any;
         }
     }
 }
