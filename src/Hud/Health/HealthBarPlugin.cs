@@ -35,6 +35,11 @@ namespace PoeHUD.Hud.Health
 
             string json = File.ReadAllText("config/debuffPanel.json");
             debuffPanelConfig = JsonConvert.DeserializeObject<DebuffPanelConfig>(json);
+            (new Coroutine(() => {foreach (var healthBar in healthBars)
+                {
+                    healthBar.Value.RemoveAll(hp => !hp.Entity.IsValid);
+                } }, new WaitRender(10), nameof(HealthBarPlugin), "RemoveAll"))
+                .AutoRestart(GameController.CoroutineRunner).Run();
         }
 
         public override void Render()
@@ -53,10 +58,7 @@ namespace PoeHUD.Hud.Health
                 Func<HealthBar, bool> showHealthBar = x => x.IsShow(Settings.ShowEnemies);
                 //Not Parallel better for performance
                 //Parallel.ForEach(healthBars, x => x.Value.RemoveAll(hp => !hp.Entity.IsValid));
-                foreach (var healthBar in healthBars)
-                {
-                    healthBar.Value.RemoveAll(hp => !hp.Entity.IsValid);
-                }
+                
                 foreach (HealthBar healthBar in healthBars.SelectMany(x => x.Value).Where(hp => showHealthBar(hp) && hp.Entity.IsAlive))
                 {
                     Vector3 worldCoords = healthBar.Entity.Pos;
