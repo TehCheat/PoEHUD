@@ -129,8 +129,8 @@ namespace PoeHUD.Hud.Loot
                         }
                     }
                 }
-
-                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in currentAlerts.Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid))
+                var currentAlertsArray = currentAlerts.Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid).ToArray();
+                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in currentAlertsArray)
                 {
                     //
                     //                       _oo0oo_
