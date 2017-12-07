@@ -7,6 +7,8 @@ namespace PoeHUD.Framework
 {
     public class Runner
     {
+        public string Name { get; }
+
         readonly List<Coroutine> _coroutines = new List<Coroutine>();
         readonly  List<Tuple<string,string,long,DateTime,DateTime>> _finishedCoroutines = new List<Tuple<string, string, long, DateTime, DateTime>>();
         public bool IsRunning => _coroutines.Count > 0;
@@ -24,10 +26,14 @@ namespace PoeHUD.Framework
         public int CountFalseAddCoroutines { get; private set; }
         public int RunPerLoopIter { get; set; } = 3;
 
-        public Coroutine Run(IEnumerator enumerator, string owner, string name = null)
+        public Runner(string name)
         {
-            var routine = new Coroutine(enumerator, owner, name);
-
+            Name = name;
+        }
+        public Coroutine Run(IEnumerator enumerator, string owner, string name =null)
+        {
+            var routine = new Coroutine(enumerator,owner,name);
+            
             var first = _coroutines.FirstOrDefault(x => x.Name == routine.Name && x.Owner == routine.Owner);
             if (first != null)
             {
@@ -65,14 +71,10 @@ namespace PoeHUD.Framework
                 if (coroutine.AutoResume)
                     coroutine.Resume();
         }
-
         public bool HasName(string name) => _coroutines.Any(x => x.Name == name);
-
+        
         public int Count => _coroutines.Count;
-
-        public bool Done(Coroutine coroutine) =>
-            coroutine.Priority != CoroutinePriority.Critical && coroutine.Priority != CoroutinePriority.High &&
-            coroutine.Done();
+       
 
         public bool Update()
         {
@@ -84,9 +86,10 @@ namespace PoeHUD.Framework
                     {
                         if (_coroutines[i].DoWork)
                         {
-                            if (_coroutines[i].MoveNext()) continue;
+                            if(_coroutines[i].MoveNext()) continue;
                             _coroutines[i].Done();
                         }
+                            
                     }
                     else
                     {

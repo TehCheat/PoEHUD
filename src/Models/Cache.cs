@@ -59,11 +59,6 @@ namespace PoeHUD.Models
             _window = RectangleF.Empty;
             _gameController = GameController.Instance;
             _gameController.Area.OnAreaChange += controller => { UpdateCache(); };
-            (new Coroutine(() =>
-            {
-                _window = _gameController.Window.GetWindowRectangleReal();
-            }, 100, nameof(Cache), "UpdateCache")
-            { Priority = CoroutinePriority.Critical }).AutoRestart().Run();
         }
 
         public static Dictionary<string, int> ForDevolopDeleteThis = new Dictionary<string, int>();
