@@ -176,6 +176,8 @@
     <Compile Include="Framework\InputHooks\Structures\MouseLLHookStruct.cs" />
     <Compile Include="Framework\MemoryControl.cs" />
     <Compile Include="Framework\Runner.cs" />
+    <Compile Include="Framework\Tools\Generator.cs" />
+    <Compile Include="Framework\Tools\Scrambler.cs" />
     <Compile Include="Framework\WinApi.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipPlugin.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipSettings.cs" />
@@ -407,11 +409,6 @@
     <ProjectReference Include="PoeFilterParser\PoeFilterParser.csproj">
       <Project>{8f5d7d56-7a81-433a-b358-ab297a136183}</Project>
       <Name>PoeFilterParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="Tools\Tools.fsproj">
-      <Project>{5f2ae016-51d1-42c4-95cd-4e12118e3a6e}</Project>
-      <Name>Tools</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
