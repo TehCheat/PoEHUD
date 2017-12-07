@@ -3,7 +3,6 @@ using PoeHUD.Models.Interfaces;
 using PoeHUD.Poe;
 using PoeHUD.Poe.Components;
 using System.Collections.Generic;
-using System.Linq;
 using Vector3 = SharpDX.Vector3;
 
 namespace PoeHUD.Models
@@ -12,6 +11,7 @@ namespace PoeHUD.Models
     {
         private readonly long cachedId;
         private readonly Dictionary<string, long> components;
+        private readonly Dictionary<string, object> cacheComponents;
         private readonly GameController gameController;
         private readonly Entity internalEntity;
         public bool IsInList = true;
@@ -21,6 +21,14 @@ namespace PoeHUD.Models
             gameController = Poe;
             internalEntity = entity;
             components = internalEntity.GetComponents();
+            if (gameController.Cache.Enable)
+            {
+                cacheComponents = new Dictionary<string, object>();
+                foreach (var component in components)
+                {
+                    cacheComponents[component.Key] = null;
+                }
+            }
             Path = internalEntity.Path;
             cachedId = internalEntity.Id;
             LongId = internalEntity.Id;
@@ -48,10 +56,19 @@ namespace PoeHUD.Models
                 return new Vector3(p.X, p.Y, GetComponent<Render>().Z);
             }
         }
-
+    
         public T GetComponent<T>() where T : Component, new()
         {
             string name = typeof(T).Name;
+            if (gameController.Cache.Enable)
+            {
+                if (!cacheComponents.ContainsKey(name) || cacheComponents[name] == null)
+                {
+                    cacheComponents[name] =
+                        gameController.Game.GetObject<T>(components.ContainsKey(name) ? components[name] : 0);
+                }
+                return (T) cacheComponents[name];
+            }
             return gameController.Game.GetObject<T>(components.ContainsKey(name) ? components[name] : 0);
         }
 
