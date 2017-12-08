@@ -76,7 +76,7 @@ namespace PoeHUD.Poe.Elements
                 {
                     case ToolTipType.ItemOnGround:
 
-                        ItemsOnGroundLabelElement le = Game.IngameState.IngameUi.ReadObjectAt<ItemsOnGroundLabelElement>(0xD00);
+                        ItemsOnGroundLabelElement le = Game.IngameState.IngameUi.ReadObjectAt<ItemsOnGroundLabelElement>(0xD08);
                         if (le == null)
                             return null;
                         Entity e = le.ItemOnHover;
@@ -84,7 +84,7 @@ namespace PoeHUD.Poe.Elements
                             return null;
                         return e.GetComponent<WorldItem>().ItemEntity;
                     case ToolTipType.InventoryItem:
-                        return ReadObject<Entity>(Address + 0xB58);
+                        return ReadObject<Entity>(Address + 0xB60);
                 }
                 return null;
             }

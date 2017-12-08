@@ -15,8 +15,8 @@ namespace PoeHUD.Poe.Elements
         public Element Label => ReadObjectAt<Element>(0x10); // LabelsOnGround
         public Entity ItemOnGround => ReadObjectAt<Entity>(0x18); //ItemsOnGround
 
-        public Element LabelOnHover => ReadObjectAt<Element>(OffsetBuffers + 0x32C);
-        public Entity ItemOnHover => ReadObjectAt<Entity>(OffsetBuffers + 0x334);
+        public Element LabelOnHover => ReadObjectAt<Element>(OffsetBuffers + 0x334);
+        public Entity ItemOnHover => ReadObjectAt<Entity>(OffsetBuffers + 0x33C);
 
         public bool CanPickUp => labelInfo.Value == 0;
 
@@ -40,7 +40,7 @@ namespace PoeHUD.Poe.Elements
         {
             get
             {
-                long address = M.ReadLong(Address + OffsetBuffers + 0x344);
+                long address = M.ReadLong(Address + OffsetBuffers + 0x34C);
 
                 for (long nextAddress = M.ReadLong(address); nextAddress != address; nextAddress = M.ReadLong(nextAddress))
                 {
@@ -51,7 +51,7 @@ namespace PoeHUD.Poe.Elements
 
         private long GetLabelInfo()
         {
-            return Label.Address != 0 ? M.ReadLong(Label.Address + OffsetBuffers + 0x66C) : 0;
+            return Label.Address != 0 ? M.ReadLong(Label.Address + OffsetBuffers + 0x694) : 0;
         }
     }
 }

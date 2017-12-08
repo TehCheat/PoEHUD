@@ -31,7 +31,7 @@ namespace PoeHUD.Poe.Components
             }
         }
 
-        public bool CorpseUsable => M.ReadBytes(Address + 0x238, 1)[0] == 1; // Total guess, didn't verify
+        //public bool CorpseUsable => M.ReadBytes(Address + 0x238, 1)[0] == 1; // Total guess, didn't verify
 
         public List<Buff> Buffs
         {
@@ -48,7 +48,13 @@ namespace PoeHUD.Poe.Components
                 }
                 for (int i = 0; i < count; i++)
                 {
-                    list.Add(ReadObject<Buff>(M.ReadLong(start + i * 8) + 8));
+                    long addr = M.ReadLong(start + i * 8);
+                    if (addr == 0)
+                        continue;
+                    long addr2 = M.ReadLong(addr + 8);
+                    if (addr2 == 0)
+                        continue;
+                    list.Add(ReadObject<Buff>(addr2));
                 }
                 return list;
             }

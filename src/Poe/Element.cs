@@ -20,8 +20,8 @@ namespace PoeHUD.Poe
         public float X => M.ReadFloat(Address + 0xD4 + OffsetBuffers);
         public float Y => M.ReadFloat(Address + 0xD8 + OffsetBuffers);
         public float Scale => M.ReadFloat(Address + 0x1D0 + OffsetBuffers);
-        public float Width => M.ReadFloat(Address + 0x204 + OffsetBuffers);
-        public float Height => M.ReadFloat(Address + 0x208 + OffsetBuffers);
+        public float Width => M.ReadFloat(Address + 0x20C + OffsetBuffers);
+        public float Height => M.ReadFloat(Address + 0x210 + OffsetBuffers);
 
         public bool IsVisible
         {

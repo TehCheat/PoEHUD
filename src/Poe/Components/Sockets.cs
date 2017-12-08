@@ -80,7 +80,7 @@ namespace PoeHUD.Poe.Components
                 for (int i = 0; i < 6; i++)
                 {
                     int num2 = M.ReadInt(num);
-                    if (num2 >= 1 && num2 <= 4)
+                    if (num2 >= 1 && num2 <= 5)
                     {
                         list.Add(M.ReadInt(num));
                     }
@@ -120,6 +120,8 @@ namespace PoeHUD.Poe.Components
                                 sb.Append("B"); break;
                             case 4:
                                 sb.Append("W"); break;
+                            case 5:
+                                sb.Append('A'); break;
                         }
                     }
                     list.Add(sb.ToString());
