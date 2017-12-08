@@ -129,10 +129,41 @@ namespace PoeHUD.Hud.Loot
                         }
                     }
                 }
-
-                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in currentAlerts.Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid))
+                var currentAlertsArray = currentAlerts.Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid).ToArray();
+                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in currentAlertsArray)
                 {
-                    string text = GetItemName(kv);
+                    //
+                    //                       _oo0oo_
+                    //                      o8888888o
+                    //                      88" . "88
+                    //                      (| -_- |)
+                    //                      0\  =  /0
+                    //                    ___/`---'\___
+                    //                  .' \\|     |// '.
+                    //                 / \\|||  :  |||// \
+                    //                / _||||| -:- |||||- \
+                    //               |   | \\\  -  /// |   |
+                    //               | \_|  ''\---/''  |_/ |
+                    //               \  .-\__  '-'  ___/-. /
+                    //             ___'. .'  /--.--\  `. .'___
+                    //          ."" '<  `.___\_<|>_/___.' >' "".
+                    //         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+                    //         \  \ `_.   \_ __\ /__ _/   .-` /  /
+                    //     =====`-.____`.___ \_____/___.-`___.-'=====
+                    //                       `=---='
+                    //
+                    //
+                    //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    //feature! until not be fixed offsets
+                    string text = "";
+                    if (true)
+                    {
+                        text = kv.Value.Text; 
+                    }
+                    else
+                    {
+                        text = GetItemName(kv);
+                    }
 
                     if (text == null)
                     {

@@ -101,19 +101,22 @@ namespace PoeHUD.Poe
         }, "xxxxxxxxxxxxxxxxx");
 
         /*
-             8B 0F                              mov     ecx, [edi]
-             6A 01                              push    1
-             51                                 push    ecx
-             FF 15 54 5A B9 00                  call    ds:shutdown
-             88 9F 80 00 00 00                  mov     [edi+80h], bl
-             C7 86 BC 30 00 00 01 00 00 00      mov     dword ptr [esi+30BCh], 1
-             EB 11                              jmp     short loc_5F3972
+        PathOfExile_x64.exe+853E28 - 48 89 05 E9ABC400     - mov [PathOfExile_x64.exe+149EA18],rax { [00000000] }
+        PathOfExile_x64.exe+853E2F - 48 8B 44 24 40        - mov rax,[rsp+40]
+        PathOfExile_x64.exe+853E34 - 48 89 06              - mov [rsi],rax
+        PathOfExile_x64.exe+853E37 - 48 8B C6              - mov rax,rsi
+        PathOfExile_x64.exe+853E3A - 48 83 C4 20           - add rsp,20 { 32 }
+        PathOfExile_x64.exe+853E3E - 5E                    - pop rsi
+        PathOfExile_x64.exe+853E3F - C3                    - ret 
         */
 
-        private static readonly Pattern inGameOffsetPattern =
-            new Pattern(@"\x8B\x0F\x6A\x01\x51\xFF\x15\x00\x00\x00\x00\x88\x9F\x00\x00\x00\x00\xC7\x86\x00\x00\x00\x00\x00\x00\x00\x00\xEB\x11",
-                "xxxxxxx????xx????xx????????xx");
-
+        private static readonly Pattern isLoadingScreenPattern = new Pattern(new byte[]
+        {
+            0x48, 0x89, 0x05, 0x00, 0x00, 0x00, 0x00,
+            0x48, 0x8B, 0x00, 0x00, 0x00,
+            0x48, 0x89, 0x00,
+            0x48, 0x8B, 0xC6
+        }, "xxx????xx???xx?xxx");
 
         public long AreaChangeCount { get; private set; }
         public long Base { get; private set; }
@@ -121,16 +124,17 @@ namespace PoeHUD.Poe
         public long FileRoot { get; private set; }
         public int IgsDelta { get; private set; }
         public int IgsOffset { get; private set; }
-        //public int InGameOffset { get; private set; }
-
         public int IgsOffsetDelta => IgsOffset + IgsDelta;
-        public long areaCC_pointer;
+        public long isLoadingScreenOffset { get; private set; }
+
         public void DoPatternScans(Memory m)
         {
-            long[] array = m.FindPatterns(basePtrPattern, fileRootPattern, areaChangePattern);
+            long[] array = m.FindPatterns(basePtrPattern, fileRootPattern, areaChangePattern, isLoadingScreenPattern);
             System.Console.WriteLine("Base Pattern: " + (m.AddressOfProcess + array[0]).ToString("x8"));
+
             Base = m.ReadInt(m.AddressOfProcess + array[0] + 0x4) + array[0] + 0x8;
             System.Console.WriteLine("Base Address: " + (Base + m.AddressOfProcess).ToString("x8"));
+
             long InGameState = m.ReadLong(Base + m.AddressOfProcess, 0x8, 0xF8, 0x38);
             System.Console.WriteLine("InGameState: " + InGameState.ToString("x8"));
 
@@ -138,8 +142,10 @@ namespace PoeHUD.Poe
             System.Console.WriteLine("FileRoot Pointer: " + (FileRoot + m.AddressOfProcess).ToString("x8"));
 
             AreaChangeCount = m.ReadInt(m.AddressOfProcess + array[2] + 0x25) + array[2] + 0x29;
-            System.Console.WriteLine("AreaChangeCount Pointer: " + (AreaChangeCount + m.AddressOfProcess).ToString("x8"));
             System.Console.WriteLine("AreaChangeCount: " + m.ReadInt(AreaChangeCount + m.AddressOfProcess).ToString());
+
+            isLoadingScreenOffset = m.ReadInt(m.AddressOfProcess + array[3] + 0x03) + array[3] + 0x07;
+            System.Console.WriteLine("Is Loading Screen Offset:" + (isLoadingScreenOffset + m.AddressOfProcess).ToString("x8"));
         }
     }
 }

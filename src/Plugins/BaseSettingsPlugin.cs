@@ -48,6 +48,10 @@ namespace PoeHUD.Plugins
 
             if (Settings.Enable == null)
                 Settings.Enable = false;
+            if (!GameController.pluginsSettings.TryGetValue(SettingsFileName, out _))
+            {
+                GameController.pluginsSettings.Add(Settings.ToString().Split('.')[0],Settings);
+            }
         }
 
         private void SaveSettings()
@@ -132,7 +136,7 @@ namespace PoeHUD.Plugins
                     else if (propType == typeof(ListNode) || propType.IsSubclassOf(typeof(ListNode)))
                     {
                         ListNode option = property.GetValue(Settings) as ListNode;
-                        var listButton  = MenuPlugin.AddChild(parentMenu, menuAttrib.MenuName, option);
+                        var listButton = MenuPlugin.AddChild(parentMenu, menuAttrib.MenuName, option);
                         resultItem = listButton;
                     }
                     else if (propType.IsGenericType)
@@ -196,13 +200,13 @@ namespace PoeHUD.Plugins
                         }
                         else
                             LogError($"{PluginName}: Generic option node is not defined in code: " + genericType.Name, 5);
-                        
+
                     }
                     else
                         LogError($"{PluginName}: Type of option node is not defined: " + propType.Name, 5);
 
 
-                    if(resultItem != null)
+                    if (resultItem != null)
                     {
                         resultItem.TooltipText = menuAttrib.Tooltip;
 
@@ -217,11 +221,11 @@ namespace PoeHUD.Plugins
                                 LogError($"{PluginName}: Can't add menu '{menuAttrib.MenuName}', plugin already contains menu with index '{menuAttrib.index}'!", 5);
                             }
                         }
-                    }  
+                    }
                 }
             }
         }
 
- 
+
     }
 }

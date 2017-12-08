@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace PoeHUD.Hud.Settings
 {
     public sealed class RangeNode<T> where T : struct
     {
+        private T _value;
         public RangeNode()
         {
         }
@@ -15,8 +17,17 @@ namespace PoeHUD.Hud.Settings
             Max = max;
         }
 
-        public T Value { get; set; }
+        public T Value
+        {
+            get => _value;
+            set
+            {
+                OnValueChanged?.Invoke();
+                _value = value;
+            }
+        }
 
+        public event Action OnValueChanged;
         [JsonIgnore]
         public T Min { get; set; }
 

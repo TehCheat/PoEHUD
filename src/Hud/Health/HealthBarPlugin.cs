@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Color = SharpDX.Color;
 using Graphics = PoeHUD.Hud.UI.Graphics;
@@ -36,6 +35,11 @@ namespace PoeHUD.Hud.Health
 
             string json = File.ReadAllText("config/debuffPanel.json");
             debuffPanelConfig = JsonConvert.DeserializeObject<DebuffPanelConfig>(json);
+            (new Coroutine(() => {foreach (var healthBar in healthBars)
+                {
+                    healthBar.Value.RemoveAll(hp => !hp.Entity.IsValid);
+                } }, new WaitRender(10), nameof(HealthBarPlugin), "RemoveAll"))
+                .AutoRestart(GameController.CoroutineRunner).Run();
         }
 
         public override void Render()
@@ -52,9 +56,10 @@ namespace PoeHUD.Hud.Health
 
                 Camera camera = GameController.Game.IngameState.Camera;
                 Func<HealthBar, bool> showHealthBar = x => x.IsShow(Settings.ShowEnemies);
-                Parallel.ForEach(healthBars, x => x.Value.RemoveAll(hp => !hp.Entity.IsValid));
-                foreach (HealthBar healthBar in healthBars.SelectMany(x => x.Value).AsParallel().AsOrdered()
-                    .Where(hp => showHealthBar(hp) && hp.Entity.IsAlive))
+                //Not Parallel better for performance
+                //Parallel.ForEach(healthBars, x => x.Value.RemoveAll(hp => !hp.Entity.IsValid));
+                
+                foreach (HealthBar healthBar in healthBars.SelectMany(x => x.Value).Where(hp => showHealthBar(hp) && hp.Entity.IsAlive))
                 {
                     Vector3 worldCoords = healthBar.Entity.Pos;
                     Vector2 mobScreenCoords = camera.WorldToScreen(worldCoords.Translate(0, 0, -170), healthBar.Entity);
@@ -68,7 +73,8 @@ namespace PoeHUD.Hud.Health
                         float hpWidth = hpPercent * scaledWidth;
                         float esWidth = esPercent * scaledWidth;
                         var bg = new RectangleF(mobScreenCoords.X - scaledWidth / 2, mobScreenCoords.Y - scaledHeight / 2, scaledWidth, scaledHeight);
-
+                        if (!GameController.Window.GetWindowRectangle().Intersects(bg))
+                            continue;
                         if (hpPercent <= 0.1f)
                         {
                             color = healthBar.Settings.Under10Percent;
@@ -147,7 +153,7 @@ namespace PoeHUD.Hud.Health
                     else if (HasDebuff(debuffPanelConfig.Poisoned, buffName, isHostile))
                         debuffTable |= 2;
                     else if (HasDebuff(debuffPanelConfig.Chilled, buffName, isHostile) ||
-                        HasDebuff(debuffPanelConfig.Frozen, buffName, isHostile))
+                             HasDebuff(debuffPanelConfig.Frozen, buffName, isHostile))
                         debuffTable |= 4;
                     else if (HasDebuff(debuffPanelConfig.Burning, buffName, isHostile))
                         debuffTable |= 8;

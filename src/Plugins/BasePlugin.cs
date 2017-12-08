@@ -29,11 +29,17 @@ namespace PoeHUD.Plugins
         protected Action eLoadSettings = delegate { };
 
         public virtual bool bAllowRender => true;
-
+        private bool _initialized = false;
         #region ExternalInvokeMethods
         public void iInitialise()
         {
-            try { Initialise(); }
+            //If plugin disabled dont init when start
+            if (!bAllowRender) return;
+            try
+            {
+                Initialise();
+                _initialized = true;
+            }
             catch (Exception e)
             {
                 HandlePluginError("Initialise", e);
@@ -42,7 +48,8 @@ namespace PoeHUD.Plugins
         public void iRender()
         {
             if (!bAllowRender) return;
-
+            //init if load disabled plugin
+            if(!_initialized) iInitialise();
             try { Render(); }
             catch (Exception e)
             {

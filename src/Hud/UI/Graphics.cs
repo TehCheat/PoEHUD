@@ -53,38 +53,42 @@ namespace PoeHUD.Hud.UI
         }
 
         public event Action Render;
-
-        public void RenderLoop()
+        public void Clear()
         {
-            while (running)
+            device.Clear(ClearFlags.Target, Color.Transparent, 0, 0);
+            device.Present();
+        }
+
+        public void TryRender()
+        {
+            try
             {
+                if (resized)
+                { 
+                    reset();
+                }
+                device.Clear(ClearFlags.Target, Color.Transparent, 0, 0);
+                device.SetRenderState(RenderState.AlphaBlendEnable, true);
+                device.SetRenderState(RenderState.CullMode, Cull.Clockwise);
+                device.BeginScene();
+                fontRenderer.Begin();
+                textureRenderer.Begin();
                 try
                 {
-                    if (resized)
-                    {
-                        reset();
-                    }
-                    device.Clear(ClearFlags.Target, Color.Transparent, 0, 0);
-                    device.SetRenderState(RenderState.AlphaBlendEnable, true);
-                    device.SetRenderState(RenderState.CullMode, Cull.Clockwise);
-                    device.BeginScene();
-                    fontRenderer.Begin();
-                    textureRenderer.Begin();
-                    try
-                    {
-                        Render.SafeInvoke();
-                    }
-                    finally
-                    {
-                        textureRenderer.End();
-                        fontRenderer.End();
-                        device.EndScene();
-                        device.Present();
-                    }
+                    Render.SafeInvoke();
                 }
-                catch (SharpDXException) { }
+                finally
+                {
+                    textureRenderer.End();
+                    fontRenderer.End();
+                    device.EndScene();
+                    device.Present();
+                }
+                renderLocker.Set();
             }
-            renderLocker.Set();
+            catch (SharpDXException)
+            {
+            }
         }
 
         public void Dispose()

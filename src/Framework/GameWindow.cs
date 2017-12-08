@@ -1,6 +1,7 @@
 using SharpDX;
 using System;
 using System.Diagnostics;
+using PoeHUD.Controllers;
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
 
@@ -19,6 +20,14 @@ namespace PoeHUD.Framework
         public Process Process { get; private set; }
 
         public RectangleF GetWindowRectangle()
+        {
+            if (GameController.Instance.Cache.Enable)
+            {
+                return GameController.Instance.Cache.Window;
+            }
+            return GetWindowRectangleReal();
+        }
+        public RectangleF GetWindowRectangleReal()
         {
             Rectangle rectangle = WinApi.GetClientRectangle(handle);
             return new RectangleF(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);

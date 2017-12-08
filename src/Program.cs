@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Tools;
+using PoEHUD.Tools;
 
 namespace PoeHUD
 {
@@ -117,7 +117,7 @@ namespace PoeHUD
                 sb.Append(System.Environment.NewLine);
 
 
-                sb.Append("Area change: " + memory.ReadLong(offs.AreaChangeCount + memory.AddressOfProcess));
+                sb.Append("Area change: " + memory.ReadInt(offs.AreaChangeCount + memory.AddressOfProcess));
                 sb.Append(System.Environment.NewLine);
                 sb.Append(System.Environment.NewLine);
 

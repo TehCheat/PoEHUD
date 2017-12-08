@@ -12,6 +12,7 @@ using PoeHUD.Hud.Trackers;
 using PoeHUD.Hud.XpRate;
 using System;
 using System.IO;
+using PoeHUD.Hud.Performance;
 
 namespace PoeHUD.Hud.Settings
 {
@@ -48,6 +49,7 @@ namespace PoeHUD.Hud.Settings
             XpRateSettings = new XpRateSettings();
             HealthBarSettings = new HealthBarSettings();
             KillCounterSettings = new KillCounterSettings();
+            PerformanceSettings = new PerformanceSettings();
         }
 
         [JsonProperty("Menu")]
@@ -82,6 +84,8 @@ namespace PoeHUD.Hud.Settings
 
         [JsonProperty("Kills Counter")]
         public KillCounterSettings KillCounterSettings { get; private set; }
+        [JsonProperty("Performance")]
+        public PerformanceSettings PerformanceSettings { get; private set; }
 
         public static SettingsHub Load()
         {
