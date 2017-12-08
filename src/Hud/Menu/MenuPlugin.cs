@@ -461,7 +461,14 @@ namespace PoeHUD.Hud.Menu
             AddChild(menuSettings, "Menu font size", settingsHub.MenuSettings.MenuFontSize);
             AddChild(menuSettings, "Title font size", settingsHub.MenuSettings.TitleFontSize);
             AddChild(menuSettings, "Picker font size", settingsHub.MenuSettings.PickerFontSize);
-
+            
+            var performanceSettings = AddChild(MenuRootButton, "Performance", settingsHub.PerformanceSettings.Enable);
+            AddChild(performanceSettings, "FPS Render limit", settingsHub.PerformanceSettings.RenderLimit);
+            AddChild(performanceSettings, "FPS Update entity limit", settingsHub.PerformanceSettings.UpdateEntityDataLimit);
+            AddChild(performanceSettings, "Update areachange every N ms", settingsHub.PerformanceSettings.UpdateAreaLimit);
+            AddChild(performanceSettings, "Use cache for most data", settingsHub.PerformanceSettings.Cache);
+            AddChild(performanceSettings, "Update entity in parallel thread(Experimental/Unstable) [Need restart]", settingsHub.PerformanceSettings.ParallelEntityUpdate);
+            AddChild(performanceSettings, "Update ingame state every N ms", settingsHub.PerformanceSettings.UpdateIngemeStateLimit);
             eInitMenu(MenuRootButton);//Spawning the menu in external plugins
         }
 
