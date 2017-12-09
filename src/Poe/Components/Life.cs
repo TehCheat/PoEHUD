@@ -51,10 +51,10 @@ namespace PoeHUD.Poe.Components
                     long addr = M.ReadLong(start + i * 8);
                     if (addr == 0)
                         continue;
-                    long addr2 = M.ReadLong(addr + 8);
-                    if (addr2 == 0)
-                        continue;
-                    list.Add(ReadObject<Buff>(addr2));
+                    /*long addr2 = M.ReadLong(addr + 8);
+                     if (addr2 == 0)
+                         continue;*/
+                    list.Add(ReadObject<Buff>(addr+8));
                 }
                 return list;
             }
