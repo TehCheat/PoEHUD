@@ -400,3 +400,9 @@ Metadata/NPC/Info/ShaperGlyph4; Shaper's Memory of Dream (T11); 9400d8ff
 Metadata/NPC/Info/ShaperGlyph5; Shaper's Memory of Nightmare (T12); 9400d8ff
 Metadata/NPC/Info/ShaperGlyph6; Shaper's Memory of Grief (T13); 9400d8ff
 Metadata/NPC/Info/ShaperGlyph7; Shaper's Memory of Awakening (T14); 9400d8ff
+
+# ABYSS
+Metadata/Chests/Abyss/AbyssFinalChest; Abyss #1; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest2; Abyss #2; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest3; Abyss #3; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest4; Abyss #4; ff00AA00
