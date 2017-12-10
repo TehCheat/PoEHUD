@@ -2,7 +2,7 @@ namespace PoeHUD.Models.Enums
 {
     public enum InventoryIndex
     {
-        //None,
+        None,
         Helm,
         Amulet,
         Chest,
