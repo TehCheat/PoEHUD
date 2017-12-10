@@ -7,6 +7,9 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
     public class Inventory : RemoteMemoryObject
     {
         public long ItemCount => M.ReadLong(Address + 0x410, 0x630, 0x50);
+        public long SizeInv => M.ReadInt(Address + 0x410, 0x630, 0x20);
+        public long SizeInv2 => M.ReadInt(Address + 0x410, 0x630, 0x0C);
+        public long Clicks => M.ReadLong(Address + 0x410, 0x630, 0xA0);
 
         private InventoryType GetInvType()
         {
@@ -28,6 +31,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                     return InventoryType.DivinationStash;
                 case 0x01:
                     // Normal Stash and Quad Stash is same.
+                    if (SizeInv2 == 24)
+                    {
+                        return InventoryType.QuadStash;
+                    }
                     return InventoryType.NormalStash;
                 default:
                     return InventoryType.InvalidInventory;
