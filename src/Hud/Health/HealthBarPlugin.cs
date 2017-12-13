@@ -73,7 +73,9 @@ namespace PoeHUD.Hud.Health
                         float hpWidth = hpPercent * scaledWidth;
                         float esWidth = esPercent * scaledWidth;
                         var bg = new RectangleF(mobScreenCoords.X - scaledWidth / 2, mobScreenCoords.Y - scaledHeight / 2, scaledWidth, scaledHeight);
-                        if (!GameController.Window.GetWindowRectangle().Intersects(bg))
+                        var windowRect = GameController.Window.GetWindowRectangle();
+                        var fixNotFullscreen = new RectangleF(windowRect.X + bg.X, windowRect.Y + bg.Y, bg.Width, bg.Height);
+                        if (!windowRect.Intersects(fixNotFullscreen))
                             continue;
                         if (hpPercent <= 0.1f)
                         {
