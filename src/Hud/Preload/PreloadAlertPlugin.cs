@@ -7,6 +7,7 @@ using PoeHUD.Models;
 using SharpDX;
 using SharpDX.Direct3D9;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -231,12 +232,12 @@ namespace PoeHUD.Hud.Preload
                 return;
             }
             
-            if (isAreaChanged)
+           /* if (isAreaChanged)
             {
                 ResetArea();
                 Parse();
                 isAreaChanged = false;
-            }
+            }*/
 
             Vector2 startPosition = StartDrawPointFunc();
             Vector2 position = startPosition;
@@ -269,10 +270,15 @@ namespace PoeHUD.Hud.Preload
         {
             ResetArea();
             essencefound = false;
-            Parse();
+            (new Coroutine(ParseCoroutine(), nameof(PreloadAlertPlugin), "Area Change Preload Parse")).Run();
             isAreaChanged = true;
         }
 
+        IEnumerator ParseCoroutine()
+        {
+            yield return new WaitTime(100);
+            Parse();
+        }
         private void Parse()
         {
             Memory memory = GameController.Memory;
