@@ -469,6 +469,7 @@ namespace PoeHUD.Hud.Menu
             AddChild(performanceSettings, "Use cache for most data", settingsHub.PerformanceSettings.Cache);
             AddChild(performanceSettings, "Update entity in parallel thread(Experimental/Unstable) [Need restart]", settingsHub.PerformanceSettings.ParallelEntityUpdate);
             AddChild(performanceSettings, "Update ingame state every N ms", settingsHub.PerformanceSettings.UpdateIngemeStateLimit);
+            AddChild(performanceSettings, "Always Foreground", settingsHub.PerformanceSettings.AlwaysForeground); 
             eInitMenu(MenuRootButton);//Spawning the menu in external plugins
         }
 

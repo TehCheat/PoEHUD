@@ -155,7 +155,7 @@ namespace PoeHUD.Controllers
           //Control cache for game status
             var updateGameState = (new Coroutine(() => { 
                InGame = InGameReal;
-                IsForeGroundCache = WinApi.IsForegroundWindow(Window.Process.MainWindowHandle);
+                IsForeGroundCache = Performance.AlwaysForeground || WinApi.IsForegroundWindow(Window.Process.MainWindowHandle); 
                Cache.ForceUpdateWindowCache();
                IsLoading = Game.IsGameLoading;
            }, updateIngameState, nameof(GameController), "Update Game State"){Priority = CoroutinePriority.Critical}).Run();

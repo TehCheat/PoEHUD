@@ -20,6 +20,7 @@ namespace PoeHUD.Hud.Performance
             DpsUpdateTime = new RangeNode<int>(200, 20,600);
             Cache = new ToggleNode(true);
             ParallelEntityUpdate = new ToggleNode(false);
+            AlwaysForeground = new ToggleNode(false); 
         }
 
 
@@ -33,6 +34,7 @@ namespace PoeHUD.Hud.Performance
         public RangeNode<int> DpsUpdateTime { get; set; }
         public ToggleNode Cache { get; set; }
         public ToggleNode ParallelEntityUpdate { get; set; }
+        public ToggleNode AlwaysForeground { get; set; } 
         
     }
 }
