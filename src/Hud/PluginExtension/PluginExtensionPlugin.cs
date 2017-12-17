@@ -162,6 +162,20 @@ namespace PoeHUD.Hud.PluginExtension
         }
 
 
+        private Dictionary<string, Action<object[]>> PluginEvents = new Dictionary<string, Action<object[]>>();
+        public void SubscribePluginEvent(string uniqEventName, Action<object[]> func)
+        {
+            if (!PluginEvents.ContainsKey(uniqEventName))
+                PluginEvents.Add(uniqEventName, func);
+            else
+                LogMessage("Event '" + uniqEventName + "' is already exist!", 10);
+        }
+
+        public void CallPluginEvent(string uniqEventName, object[] args)
+        {
+            if (PluginEvents.ContainsKey(uniqEventName))
+                PluginEvents[uniqEventName](args);
+        }
 
         private void TryLoadDll(string path, string dir)
         {

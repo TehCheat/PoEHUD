@@ -65,7 +65,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             get
             {
                 var InvRoot = InventoryUiElement;
-                if (InvRoot == null || InvRoot.Address == 0x00 || InvRoot.ChildCount == 0x00)
+                if (InvRoot == null || InvRoot.Address == 0x00)
                     return null;
                 else if (!InvRoot.IsVisible)
                     return null;

@@ -36,6 +36,11 @@ namespace PoeHUD.Hud.Icons
                     return;
                 }
 
+                if (GameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible)
+                    return;
+                if (GameController.Game.IngameState.IngameUi.TreePanel.IsVisible)
+                    return;
+
                 Vector2 playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 float posZ = GameController.Player.GetComponent<Render>().Z;
 

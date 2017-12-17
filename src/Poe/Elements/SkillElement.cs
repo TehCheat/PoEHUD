@@ -17,7 +17,7 @@
         public bool isUsing => M.ReadInt(unknown3 + 0x08) > 2;
 
         // A variable is unknown.
-        private long unknown1 => M.ReadLong( Address + OffsetBuffers + 0x22C);
-        private long unknown3 => M.ReadLong(Address + OffsetBuffers + 0x314);
+        private long unknown1 => M.ReadLong( Address + OffsetBuffers + 0x234);
+        private long unknown3 => M.ReadLong(Address + OffsetBuffers + 0x31C);
     }
 }

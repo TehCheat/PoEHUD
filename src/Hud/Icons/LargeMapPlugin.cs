@@ -32,6 +32,11 @@ namespace PoeHUD.Hud.Icons
                     return;
                 }
 
+                if (GameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible)
+                    return;
+                if (GameController.Game.IngameState.IngameUi.TreePanel.IsVisible)
+                    return;
+
                 Camera camera = GameController.Game.IngameState.Camera;
                 Map mapWindow = GameController.Game.IngameState.IngameUi.Map;
                 RectangleF mapRect = mapWindow.GetClientRect();

@@ -231,14 +231,12 @@ namespace PoeHUD.Hud.Preload
                 Size = new Size2F();
                 return;
             }
-            
            /* if (isAreaChanged)
             {
                 ResetArea();
                 Parse();
                 isAreaChanged = false;
             }*/
-
             Vector2 startPosition = StartDrawPointFunc();
             Vector2 position = startPosition;
             int maxWidth = 0;

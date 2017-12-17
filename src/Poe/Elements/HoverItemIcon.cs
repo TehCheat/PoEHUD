@@ -22,7 +22,7 @@ namespace PoeHUD.Poe.Elements
         {
             toolTipOnground = () => Game.IngameState.IngameUi.ItemOnGroundTooltip;
             inventoryItemTooltip = () => ReadObject<Element>(Address + 0xB10);
-            itemInChatTooltip = () => ReadObject<Element>(Address + 0x7B8);
+            itemInChatTooltip = () => ReadObject<Element>(Address + 0x7E8);
         }
 
         public ToolTipType ToolTipType {
@@ -48,7 +48,7 @@ namespace PoeHUD.Poe.Elements
                     case ToolTipType.InventoryItem:
                         return inventoryItemTooltip();
                     case ToolTipType.ItemInChat:
-                        return itemInChatTooltip();
+                        return itemInChatTooltip().Children[1];
                 }
                 return null;
             }
@@ -62,6 +62,8 @@ namespace PoeHUD.Poe.Elements
                 {
                     case ToolTipType.ItemOnGround:
                         return toolTipOnground().ItemFrame;
+                    case ToolTipType.ItemInChat:
+                        return itemInChatTooltip().Children[0];
                     default:
                         return null;
                 }
@@ -85,6 +87,9 @@ namespace PoeHUD.Poe.Elements
                         return e.GetComponent<WorldItem>().ItemEntity;
                     case ToolTipType.InventoryItem:
                         return ReadObject<Entity>(Address + 0xB60);
+                    case ToolTipType.ItemInChat:
+                        // currently cannot find it.
+                        return null;
                 }
                 return null;
             }
@@ -100,7 +105,10 @@ namespace PoeHUD.Poe.Elements
             {
                 return ToolTipType.ItemOnGround;
             }
-            
+            if (itemInChatTooltip() != null && itemInChatTooltip().IsVisible && itemInChatTooltip().ChildCount > 1 && itemInChatTooltip().Children[0].IsVisible && itemInChatTooltip().Children[1].IsVisible)
+            {
+                return ToolTipType.ItemInChat;
+            }
             return ToolTipType.None;
         }
     }
