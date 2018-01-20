@@ -21,8 +21,6 @@ namespace PoeHUD.Hud.UI.Renderers
             this.device = device;
             sprite = new Sprite(device);
             textures = new Dictionary<string, Texture>();
-            System.Timers.Timer t = new System.Timers.Timer(1000);
-            t.Start();
 
         }
 
