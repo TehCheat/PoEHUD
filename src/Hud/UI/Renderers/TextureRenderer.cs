@@ -23,7 +23,6 @@ namespace PoeHUD.Hud.UI.Renderers
             textures = new Dictionary<string, Texture>();
             System.Timers.Timer t = new System.Timers.Timer(1000);
             t.Start();
-            t.Elapsed += T_Elapsed;
 
         }
 
@@ -120,9 +119,8 @@ namespace PoeHUD.Hud.UI.Renderers
             DrawColoredVertices(PrimitiveType.TriangleStrip, 8, data);
         }
 
-        public void DrawImage(string fileName, TexturedVertex[] data, Color color, float repeatX)
+        public void DrawImage(string fileName, TexturedVertex[] data)
         {
-            color = new Color(color.ToBgra());
             device.SetTexture(0, GetTexture(fileName));
             device.SetSamplerState(0, SamplerState.AddressU, TextureAddress.Wrap);
             DrawTexturedVertices(PrimitiveType.TriangleFan, 2, data);
@@ -142,29 +140,8 @@ namespace PoeHUD.Hud.UI.Renderers
             device.SetSamplerState(0, SamplerState.AddressU, TextureAddress.Wrap);
             DrawTexturedVertices(PrimitiveType.TriangleFan, 2, data);
         }
-
-        private Dictionary<string, int> textureCleaner = new Dictionary<string, int>();
+        
         private Dictionary<string, int> ch = new Dictionary<string, int>();
-
-        private void T_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            ch = new Dictionary<string, int>(textureCleaner);
-            foreach (var t in ch)
-            {
-                if (t.Value < 0)
-                {
-                    if (textures.TryGetValue(t.Key, out var text))
-                    {
-                        text.Dispose();
-                        textureCleaner.Remove(t.Key);
-                        textures.Remove(t.Key);
-                    }
-                    continue;
-                }
-                textureCleaner[t.Key] -= 1001;
-            }
-            ch.Clear();
-        }
 
         public void DrawImage(byte[] by, RectangleF rect, Color color, string name)
         {
@@ -182,7 +159,6 @@ namespace PoeHUD.Hud.UI.Renderers
                 textures.Add(name, baseTexture);
 
             }
-            textureCleaner[name] = 5000;
             device.SetSamplerState(2, SamplerState.AddressU, TextureAddress.Wrap);
             device.SetTexture(0, baseTexture);
 
