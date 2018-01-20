@@ -138,8 +138,6 @@ namespace PoeHUD.Hud.UI.Renderers
             device.SetSamplerState(0, SamplerState.AddressU, TextureAddress.Wrap);
             DrawTexturedVertices(PrimitiveType.TriangleFan, 2, data);
         }
-        
-        private Dictionary<string, int> ch = new Dictionary<string, int>();
 
         public void DrawImage(byte[] by, RectangleF rect, Color color, string name)
         {
