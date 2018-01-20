@@ -176,11 +176,11 @@ namespace PoeHUD.Hud.UI
             }
         }
 
-        public void DrawPluginImage(string fileName, Vertexes.TexturedVertex[] data, Color color, float repeatX = 1f)
+        public void DrawPluginImage(string fileName, Vertexes.TexturedVertex[] data)
         {
             try
             {
-                textureRenderer.DrawImage(fileName, data, color, repeatX);
+                textureRenderer.DrawImage(fileName, data);
             }
             catch (Exception e)
             {
@@ -207,11 +207,11 @@ namespace PoeHUD.Hud.UI
             }
         }
 
-        public void DrawImage(string fileName, Vertexes.TexturedVertex[] data, Color color, float repeatX = 1f)
+        public void DrawImage(string fileName, Vertexes.TexturedVertex[] data)
         {
             try
             {
-                textureRenderer.DrawImage("textures/" + fileName, data, color, repeatX);
+                textureRenderer.DrawImage("textures/" + fileName, data);
             }
             catch (Exception e)
             {
