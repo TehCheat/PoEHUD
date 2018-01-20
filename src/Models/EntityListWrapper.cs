@@ -121,10 +121,7 @@ namespace PoeHUD.Models
             {
                 key = BitConverter.ToInt32(bytes, i);
                 value = BitConverter.ToInt32(bytes, i + 0x04);
-                if (value != 0)
-                    PlayerStats[(Enums.PlayerStats)key] = value;
-                else if (PlayerStats.ContainsKey((Enums.PlayerStats)key))
-                    PlayerStats.Remove((Enums.PlayerStats)key);
+                PlayerStats[(Enums.PlayerStats)key] = value;
             }
         }
         public EntityWrapper GetEntityById(long id)
