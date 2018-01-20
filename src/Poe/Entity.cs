@@ -1,8 +1,6 @@
 using System;
 using PoeHUD.Models.Interfaces;
 using System.Collections.Generic;
-using PoeHUD.Controllers;
-using PoeHUD.Poe.Components;
 
 namespace PoeHUD.Poe
 {
