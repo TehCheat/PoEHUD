@@ -1,4 +1,3 @@
-using System;
 using PoeHUD.Controllers;
 using PoeHUD.Models.Interfaces;
 using PoeHUD.Poe;
