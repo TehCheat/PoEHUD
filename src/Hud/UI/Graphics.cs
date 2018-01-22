@@ -66,9 +66,10 @@ namespace PoeHUD.Hud.UI
             try
             {
                 if (resized)
-                { 
+                {
                     reset();
                 }
+                ImGuiRender.UpdateImGuiInput();
                 device.Clear(ClearFlags.Target, Color.Transparent, 0, 0);
                 device.SetRenderState(RenderState.AlphaBlendEnable, true);
                 device.SetRenderState(RenderState.CullMode, Cull.Clockwise);

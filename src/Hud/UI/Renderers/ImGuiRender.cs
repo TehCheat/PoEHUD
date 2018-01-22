@@ -6,6 +6,10 @@ using SharpDX.Mathematics.Interop;
 using SharpDX.Windows;
 using System;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using PoeHUD.Controllers;
+using Blend = SharpDX.Direct3D9.Blend;
+using ImVector2 = System.Numerics.Vector2;
 
 namespace PoeHUD.Hud.UI.Renderers
 {
@@ -21,7 +25,7 @@ namespace PoeHUD.Hud.UI.Renderers
             UpdateCanvasSize(form.ClientSize.Width, form.ClientSize.Height);
             PrepareTextureImGui();
         }
-        private unsafe static void memcpy(void* dst, void* src, int count)
+        private static unsafe void memcpy(void* dst, void* src, int count)
         {
             const int blockSize = 4096;
             byte[] block = new byte[blockSize];
@@ -42,7 +46,7 @@ namespace PoeHUD.Hud.UI.Renderers
             var io = ImGui.GetIO();
             var texDataAsRgba32 = io.FontAtlas.GetTexDataAsRGBA32();
             var t = new Texture(device, texDataAsRgba32.Width, texDataAsRgba32.Height, 1, Usage.Dynamic,
-                Format.A8R8G8B8, Pool.Default);
+                    Format.A8R8G8B8, Pool.Default);
             var rect = t.LockRectangle(0, LockFlags.None);
             for (int y = 0; y < texDataAsRgba32.Height; y++)
             {
@@ -51,6 +55,28 @@ namespace PoeHUD.Hud.UI.Renderers
             t.UnlockRectangle(0);
             io.FontAtlas.SetTexID(t.NativePointer);
             io.FontAtlas.ClearTexData();
+        }
+
+        public static void UpdateImGuiInput()
+        {
+            var io = ImGui.GetIO();
+            var point = Control.MousePosition;
+            var windowPoint = GameController.Instance.Window.ScreenToClient(point.X, point.Y);
+            io.MousePosition = new ImVector2(windowPoint.X, windowPoint.Y);
+            UpdateModifiers();
+
+            //Mouse button for work with HUD.
+            io.MouseDown[0] = Control.MouseButtons == MouseButtons.Middle;
+            io.MouseDown[1] = Control.MouseButtons == MouseButtons.Right;
+            // io.MouseDown[2] = Form.MouseButtons == MouseButtons.Middle;
+        }
+
+        private static void UpdateModifiers()
+        {
+            var io = ImGui.GetIO();
+            io.AltPressed = Control.ModifierKeys == Keys.Alt;
+            io.CtrlPressed = Control.ModifierKeys == Keys.Control;
+            io.ShiftPressed = Control.ModifierKeys == Keys.Shift;
         }
 
         public void UpdateCanvasSize(float width, float height)
@@ -62,7 +88,7 @@ namespace PoeHUD.Hud.UI.Renderers
         public void SampleUI()
         {
             ImGui.SetNextWindowSize(new System.Numerics.Vector2(500, 500), Condition.Appearing);
-            ImGui.SetNextWindowPos(new System.Numerics.Vector2(960 + 250,540 + 250), Condition.Appearing, new System.Numerics.Vector2(1, 1));
+            ImGui.SetNextWindowPos(new System.Numerics.Vector2(960 + 250, 540 + 250), Condition.Appearing, new System.Numerics.Vector2(1, 1));
             ImGui.BeginWindow("Sample UI", WindowFlags.Default);
             ImGui.EndWindow();
         }
