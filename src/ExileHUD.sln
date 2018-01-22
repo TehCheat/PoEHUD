@@ -1,12 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeHUD", "PoeHUD.csproj", "{E86368B2-AE1E-4489-A749-E29A0AB48F83}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5F2AE016-51D1-42C4-95CD-4E12118E3A6E} = {5F2AE016-51D1-42C4-95CD-4E12118E3A6E}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeFilterParser", "PoeFilterParser\PoeFilterParser.csproj", "{8F5D7D56-7A81-433A-B358-AB297A136183}"
 EndProject
@@ -47,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2B5144F-207D-4F84-A8F1-8000326C38D2}
 	EndGlobalSection
 EndGlobal

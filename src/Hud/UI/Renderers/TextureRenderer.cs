@@ -4,9 +4,7 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
-using ImGuiNET;
-using SharpDX.Mathematics.Interop;
-using Vector2 = SharpDX.Vector2;
+
 
 namespace PoeHUD.Hud.UI.Renderers
 {
@@ -223,113 +221,6 @@ namespace PoeHUD.Hud.UI.Renderers
                 textures.Add(fileName, texture);
             }
             return texture;
-        }
- 
-        public unsafe void DrawImGui()
-        {
-
-            var data = ImGui.GetDrawData();
-            ImGuiRenderDraw(data);
-
-        }
-
-        private unsafe void ImGuiRenderDraw(DrawData* drawData)
-        {
-            if (drawData == null)
-                return;
-            var io = ImGui.GetIO();
-            if (io.DisplaySize.X <= 0.0f || io.DisplaySize.Y <= 0.0f)
-                return;
-            var st = new StateBlock(device, StateBlockType.All);
-            var vp = new Viewport();
-            vp.X = vp.Y = 0;
-            vp.Width = (int)io.DisplaySize.X;
-            vp.Height = (int)io.DisplaySize.Y;
-            vp.MinDepth = 0.0f;
-            vp.MaxDepth = 1.0f;
-            device.Viewport = vp;
-            device.PixelShader = null;
-            device.VertexShader = null;
-            device.SetRenderState(RenderState.CullMode, Cull.None);
-            device.SetRenderState(RenderState.Lighting, false);
-            device.SetRenderState(RenderState.ZEnable, false);
-            device.SetRenderState(RenderState.AlphaBlendEnable, true);
-            device.SetRenderState(RenderState.AlphaTestEnable, false);
-            device.SetRenderState(RenderState.BlendOperation, BlendOperation.Add);
-            device.SetRenderState(RenderState.SourceBlend, Blend.SourceAlpha);
-            device.SetRenderState(RenderState.DestinationBlend, Blend.BothInverseSourceAlpha);
-            device.SetRenderState(RenderState.ScissorTestEnable, true);
-            device.SetTextureStageState(0, TextureStage.ColorOperation, TextureOperation.Modulate);
-            device.SetTextureStageState(0, TextureStage.ColorArg1, TextureArgument.Texture);
-            device.SetTextureStageState(0, TextureStage.ColorArg2, TextureArgument.Diffuse);
-            device.SetTextureStageState(0, TextureStage.AlphaOperation, TextureOperation.Modulate);
-            device.SetTextureStageState(0, TextureStage.AlphaArg1, TextureArgument.Texture);
-            device.SetTextureStageState(0, TextureStage.AlphaArg2, TextureArgument.Diffuse);
-            device.SetSamplerState(0, SamplerState.MinFilter, TextureFilter.Linear);
-            device.SetSamplerState(0, SamplerState.MagFilter, TextureFilter.Linear);
-            // Setup orthographic projection matrix
-            {
-                const float L = 0.5f;
-                float R = io.DisplaySize.X + 0.5f;
-                const float T = 0.5f;
-                float B = io.DisplaySize.Y + 0.5f;
-                RawMatrix mat_identity = new Matrix(1.0f, 0.0f, 0.0f, 0.0f,
-                    0.0f, 1.0f, 0.0f, 0.0f,
-                    0.0f, 0.0f, 1.0f, 0.0f,
-                    0.0f, 0.0f, 0.0f, 1.0f);
-                RawMatrix mat_projection = new Matrix(
-                    2.0f / (R - L), 0.0f, 0.0f, 0.0f,
-                    0.0f, 2.0f / (T - B), 0.0f, 0.0f,
-                    0.0f, 0.0f, 0.5f, 0.0f,
-                    (L + R) / (L - R), (T + B) / (B - T), 0.5f, 1.0f);
-                device.SetTransform(TransformState.World, ref mat_identity);
-                device.SetTransform(TransformState.View, ref mat_identity);
-                device.SetTransform(TransformState.Projection, ref mat_projection);
-            }
-            using (device.VertexDeclaration = new VertexDeclaration(device, GuiVertex.VertexElements))
-            {
-                for (var n = 0; n < drawData->CmdListsCount; n++)
-                {
-                    NativeDrawList* cmdList = drawData->CmdLists[n];
-                    DrawVert* vtx_buffer = (DrawVert*)cmdList->VtxBuffer.Data;
-                    ushort* idx_buffer = (ushort*)cmdList->IdxBuffer.Data;
-
-                    var myCustomVertices = new GuiVertex[cmdList->VtxBuffer.Size];
-                    for (var i = 0; i < myCustomVertices.Length; i++)
-                    {
-                        var cl = (vtx_buffer[i].col & 0xFF00FF00) | ((vtx_buffer[i].col & 0xFF0000) >> 16) | ((vtx_buffer[i].col & 0xFF) << 16);
-                        myCustomVertices[i] =
-                            new GuiVertex(vtx_buffer[i].pos.X, vtx_buffer[i].pos.Y, vtx_buffer[i].uv.X, vtx_buffer[i].uv.Y, cl);
-                    }
-
-                    for (var i = 0; i < cmdList->CmdBuffer.Size; i++)
-                    {
-                        DrawCmd* pcmd = &(((DrawCmd*)cmdList->CmdBuffer.Data)[i]);
-                        if (pcmd->UserCallback != IntPtr.Zero)
-                        {
-                            throw new NotImplementedException();
-                        }
-                        else
-                        {
-                            device.SetTexture(0, new Texture(pcmd->TextureId));
-                            device.ScissorRect = new RectangleF((int)pcmd->ClipRect.X,
-                                (int)pcmd->ClipRect.Y,
-                                (int)(pcmd->ClipRect.Z - pcmd->ClipRect.X),
-                                (int)(pcmd->ClipRect.W - pcmd->ClipRect.Y));
-                            ushort[] indices = new ushort[pcmd->ElemCount];
-                            for (int j = 0; j < indices.Length; j++)
-                            {
-                                indices[j] = idx_buffer[j];
-                            }
-
-                            device.DrawIndexedUserPrimitives(PrimitiveType.TriangleList, 0, myCustomVertices.Length, (int)(pcmd->ElemCount / 3), indices, Format.Index16, myCustomVertices);
-                        }
-                        idx_buffer += pcmd->ElemCount;
-                    }
-                }
-            }
-            st.Apply();
-            st.Dispose();
         }
     }
 }

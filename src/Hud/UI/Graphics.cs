@@ -16,6 +16,7 @@ namespace PoeHUD.Hud.UI
         private readonly Direct3DEx direct3D;
         private readonly FontRenderer fontRenderer;
         private readonly TextureRenderer textureRenderer;
+        private readonly ImGuiRender imguiRenderer;
         private readonly Action reset;
         private PresentParameters presentParameters;
         private bool resized;
@@ -49,6 +50,7 @@ namespace PoeHUD.Hud.UI
             device = new DeviceEx(direct3D, 0, DeviceType.Hardware, form.Handle, CREATE_FLAGS, presentParameters);
             fontRenderer = new FontRenderer(device);
             textureRenderer = new TextureRenderer(device);
+            imguiRenderer = new ImGuiRender(device, form);
             renderLocker.Reset();
         }
 
@@ -75,7 +77,9 @@ namespace PoeHUD.Hud.UI
                 textureRenderer.Begin();
                 try
                 {
+                    imguiRenderer.GetNewFrame();
                     Render.SafeInvoke();
+                    imguiRenderer.Draw();
                 }
                 finally
                 {
@@ -111,6 +115,8 @@ namespace PoeHUD.Hud.UI
             {
                 presentParameters.BackBufferWidth = width;
                 presentParameters.BackBufferHeight = height;
+                //ImGUI stuff
+                imguiRenderer.UpdateCanvasSize(width, height);
                 resized = true;
             }
         }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <AssemblyName>PoeHUD</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <WarningLevel>4</WarningLevel>
@@ -122,8 +122,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ImGui.NET, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Release\ImGui.NET.dll</HintPath>
+      <HintPath>packages\ImGui.NET.0.4.0\lib\netstandard1.1\ImGui.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -147,8 +146,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -236,6 +235,7 @@
     <Compile Include="Hud\Settings\ListNode.cs" />
     <Compile Include="Hud\SizedPlugin.cs" />
     <Compile Include="Hud\SizedPluginWithMapIcons.cs" />
+    <Compile Include="Hud\UI\Renderers\ImGuiRender.cs" />
     <Compile Include="Hud\UI\Vertexes\GuiVertex.cs" />
     <Compile Include="Models\BaseItemType.cs" />
     <Compile Include="Models\Cache.cs" />

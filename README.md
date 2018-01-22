@@ -1,3 +1,10 @@
+
+Branch Information
+======
+This branch serves as the transition platform to develoment and intergrate IMGUI (a more modern and widely use 2d rendering backbone) into the core of HUD.
+
+This branch should not be considered a stable/mainstream version of PoeHUD, and thus support will not be offered if users face issues while attempting to use it as such.
+
 PoeHud
 ======
 
