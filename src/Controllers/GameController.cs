@@ -256,6 +256,7 @@ namespace PoeHUD.Controllers
                         if(!CoroutineRunnerParallel.HasName(autorestartCoroutine.Name))
                             autorestartCoroutine.GetCopy().RunParallel();
                     }
+                    Game.RefreshTheGameState();
                 }
                 fpsLoop++;
                 DebugInformation["ElapsedMilliseconds"] = sw.ElapsedMilliseconds;

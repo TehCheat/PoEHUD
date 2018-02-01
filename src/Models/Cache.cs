@@ -138,6 +138,7 @@ namespace PoeHUD.Models
         }
         public void UpdateCache()
         {
+            _gameController.Game.RefreshTheGameState();
             _ingameState = null;
             _camera = null;
             _uiRoot = null;
