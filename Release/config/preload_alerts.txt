@@ -42,6 +42,7 @@ Metadata/Chests/Labyrinth/LabyrinthRewardSilverUnique3; Silver Unique Chest 3; f
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverSkillGems; Silver Skill Gems; ff00ff00
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverCorruptedVaal; Silver Corrupted Chest; ffff0000 
 Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryJewelry; Silver Jewelry Chest; ff00ff00
+Metadata/Chests/Labyrinth/LabyrinthRewardSilverJewelryJewels; Silver Jewels Chest; ff00ff00
 
 #Izaro Phases (Phase, How to get extra key)
 Metadata/Monsters/Labyrinth/IzaroPortalCold; Portals, Don't Kill; ff00ff00
@@ -421,3 +422,10 @@ Metadata/NPC/Info/ShaperGlyph7; Shaper's Memory of Awakening (T14); 9400d8ff
 
 # Hillock Event
 Metadata/Monsters/ZombieBoss/ZombieBossHillockSpecialEvent_; Uber Hillock; ff00ff00
+
+
+# ABYSS
+Metadata/Chests/Abyss/AbyssFinalChest; Abyss #1; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest2; Abyss #2; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest3; Abyss #3; ff00AA00
+Metadata/Chests/Abyss/AbyssFinalChest4; Abyss #4; ff00AA00
