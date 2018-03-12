@@ -7,8 +7,10 @@ using PoeHUD.Controllers;
 using PoeHUD.Framework;
 using PoeHUD.Hud.Health;
 using PoeHUD.Hud.Loot;
+using PoeHUD.Hud.PluginExtension;
 using PoeHUD.Hud.Settings;
 using PoeHUD.Hud.UI;
+using PoeHUD.Plugins;
 using SharpDX;
 
 namespace PoeHUD.Hud.Menu
@@ -58,10 +60,39 @@ namespace PoeHUD.Hud.Menu
             }
         }
 
+        private string SelectedPluginName = null;
+
         private void CreateImGuiMenu()
         {
             bool tmp = Settings.Enable.Value;
-            ImGuiNative.igShowDemoWindow(ref tmp);
+
+            if (ImGui.BeginWindow("PoeHUD", ref tmp, WindowFlags.Default))
+            {
+                ImGui.Columns(2, "Columns", true);
+                BasePlugin selectedPlugin = null;
+                if (ImGui.BeginChild("Child1", true))
+                {
+                    var pluginNames = PluginExtensionPlugin.Plugins.Select(x => x.PluginName).ToList();
+                    if (SelectedPluginName == null)
+                        SelectedPluginName = pluginNames.FirstOrDefault();
+                    SelectedPluginName = ImGuiExtension.ComboBox("Plugins", SelectedPluginName, pluginNames);
+
+                    selectedPlugin = PluginExtensionPlugin.Plugins.FirstOrDefault(x => x.PluginName == SelectedPluginName);
+                    ImGui.EndChild();
+                }
+
+                ImGui.NextColumn();
+
+                if (ImGui.BeginChild("Child2", true))
+                {
+                    if (selectedPlugin != null)
+                        selectedPlugin.Render();
+                    else ImGui.Text("No plugin selected");
+                    ImGui.EndChild();
+                }
+                ImGui.EndWindow();
+            }
+
             Settings.Enable.Value = tmp;
         }
         private bool ImGuiWantCaptureMouse(IO io)
