@@ -86,7 +86,7 @@ namespace PoeHUD.Hud.Menu
                 if (ImGui.BeginChild("Child2", true))
                 {
                     if (selectedPlugin != null)
-                        selectedPlugin.Render();
+                        selectedPlugin.RenderMenu();
                     else ImGui.Text("No plugin selected");
                     ImGui.EndChild();
                 }

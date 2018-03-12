@@ -65,7 +65,7 @@ namespace PoeHUD.Plugins
             }
         }
 
-        public override void Render()
+        public override void RenderMenu()
         {
             if (!MenuInitialized)
                 InitializeMenu();

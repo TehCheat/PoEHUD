@@ -106,6 +106,7 @@ namespace PoeHUD.Plugins
 
         public virtual void Initialise() { }
         public virtual void Render() { }
+        public virtual void RenderMenu() { }
         public virtual void EntityAdded(EntityWrapper entityWrapper) { }
         public virtual void EntityRemoved(EntityWrapper entityWrapper) { }
         public virtual void OnClose() { }
