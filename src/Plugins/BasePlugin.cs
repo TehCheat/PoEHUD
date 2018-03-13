@@ -1,4 +1,11 @@
-﻿using PoeHUD.Controllers;
+﻿using Newtonsoft.Json;
+using PoeHUD.Hud.Menu;
+using PoeHUD.Hud.Settings;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using SharpDX;
+using PoeHUD.Controllers;
 using PoeHUD.Framework;
 using PoeHUD.Hud.Menu;
 using PoeHUD.Hud.PluginExtension;
@@ -9,114 +16,109 @@ using Graphics = PoeHUD.Hud.UI.Graphics;
 
 namespace PoeHUD.Plugins
 {
-    public abstract class BasePlugin
+    public class BasePlugin
     {
-        public BasePlugin()
+        internal BasePlugin()
         {
             PluginName = GetType().Name;
         }
+        public string PluginDirectory { get; private set; }
+        public string LocalPluginDirectory { get; private set; }
+        public string PluginName;
+
+        internal void InitPlugin(ExternalPlugin pluginData)
+        {
+            PluginDirectory = pluginData.PluginDir;
+            LocalPluginDirectory = PluginDirectory.Substring(PluginDirectory.IndexOf($@"\{PluginExtensionPlugin.PluginsDirectory}\") + 1);
+        }
+
         public static PluginExtensionPlugin API;
         public GameController GameController => API.GameController;
         public Graphics Graphics => API.Graphics;
         public Memory Memory => GameController.Memory;
 
+        public virtual void Initialise() { }
+        public virtual void Render() { }
+        public virtual void EntityAdded(EntityWrapper entityWrapper) { }
+        public virtual void EntityRemoved(EntityWrapper entityWrapper) { }
+        public virtual void OnClose() { }
 
-        public string PluginDirectory { get; private set; }
-        public string LocalPluginDirectory { get; private set; }
-        public string PluginName;
 
-        protected Action eSaveSettings = delegate { };
-        protected Action eLoadSettings = delegate { };
-
-        public virtual bool bAllowRender => true;
+        #region PluginMethods
+        internal virtual bool _allowRender => true;
         private bool _initialized = false;
-        #region ExternalInvokeMethods
-        public void iInitialise()
+
+        internal void _Initialise()
         {
+            if (_initialized) return;
+
             //If plugin disabled dont init when start
-            if (!bAllowRender) return;
-            try
-            {
-                Initialise();
-                _initialized = true;
-            }
-            catch (Exception e)
-            {
-                HandlePluginError("Initialise", e);
-            }   
-        }
-        public void iRender()
-        {
-            if (!bAllowRender) return;
-            //init if load disabled plugin
-            if(!_initialized) iInitialise();
-            try { Render(); }
-            catch (Exception e)
-            {
-                HandlePluginError("Render", e);
-            }
-        }
-        public void iEntityAdded(EntityWrapper entityWrapper)
-        {
-            try {
-                if (!_initialized || !bAllowRender)
-                    return;
-                EntityAdded(entityWrapper);
-            }
-            catch (Exception e)
-            {
-                HandlePluginError("EntityAdded", e);
-            }
-        }
-        public void iEntityRemoved(EntityWrapper entityWrapper)
-        {
-            try {
-                if (!_initialized || !bAllowRender)
-                    return;
-                EntityRemoved(entityWrapper);
-            }
-            catch (Exception e)
-            {
-                HandlePluginError("EntityRemoved", e);
-            }
-        }
-        public void iOnClose()
-        { 
-            try {
-                if (!_initialized)
-                    return;
-                OnClose();
-            }
-            catch (Exception e)
-            {
-                HandlePluginError("OnClose", e);
-            }
-            eSaveSettings();
+            if (!_allowRender) return;
+
+            try { Initialise(); }
+            catch (Exception e) { HandlePluginError("Initialise", e); }
+
+            _initialized = true;
         }
 
-        public void iLoadSettings()
+        internal void _Render()
         {
-            try { eLoadSettings(); }
-            catch (Exception e)
-            {
-                HandlePluginError("LoadSettings", e);
-            }
+            if (!_initialized) _Initialise();//init if load disabled plugin
+
+            if (!_allowRender) return;
+
+            try { Render(); }
+            catch (Exception e) { HandlePluginError("Render", e); }
         }
+
+        internal void _EntityAdded(EntityWrapper entityWrapper)
+        {
+            if (!_initialized || !_allowRender)
+                return;
+
+            try { EntityAdded(entityWrapper); }
+            catch (Exception e) { HandlePluginError("EntityAdded", e); }
+        }
+
+        internal void _EntityRemoved(EntityWrapper entityWrapper)
+        {
+            if (!_initialized || !_allowRender) return;
+
+            try { EntityRemoved(entityWrapper); }
+            catch (Exception e) { HandlePluginError("EntityRemoved", e); }
+        }
+
+        internal void _OnClose()
+        {
+            if (!_initialized) return;
+
+            try { OnClose(); }
+            catch (Exception e) { HandlePluginError("OnClose", e); }
+
+            try { SaveSettings(); }
+            catch (Exception e) { HandlePluginError("SaveSettings", e); }
+        }
+
         #endregion
 
+<<<<<<< HEAD
         public virtual void Initialise() { }
         public virtual void Render() { }
         public virtual void RenderMenu() { }
         public virtual void EntityAdded(EntityWrapper entityWrapper) { }
         public virtual void EntityRemoved(EntityWrapper entityWrapper) { }
         public virtual void OnClose() { }
+=======
+        internal virtual void _LoadSettings() { }
+        internal virtual void SaveSettings() { }
+>>>>>>> a69f31c5cb975407a3afee9dfedc990145a7cf51
 
-        public float PluginErrorDisplayTime = 3;
+        #region Error Logging
+        public float PluginErrorDisplayTime = 2;
         private string LogFileName = "ErrorLog.txt";
-
         private string logPath => PluginDirectory + "\\" + LogFileName;
 
-        private void HandlePluginError(string methodName, Exception exception)
+        internal void HandlePluginError(string methodName, Exception exception)
         {
             LogError($"Plugin: '{PluginName}', Error in function: '{methodName}' : '{exception.Message}'", PluginErrorDisplayTime);
 
@@ -135,53 +137,46 @@ namespace PoeHUD.Plugins
                 LogError(" Can't save error log. Error: " + e.Message, 5);
             }
         }
+        #endregion
+
+        #region Logging
+
+
+        public static void LogError(string message, float displayTime) => LogError((object)message, displayTime);
+        public static void LogMessage(string message, float displayTime) => LogMessage((object)message, displayTime);
+
+
         public static void LogError(object message, float displayTime)
         {
-            if(message == null)
-                LogError("null", displayTime);
+            if (message == null)
+                LogMessage("null", displayTime, Color.Red);
             else
-                LogError(message.ToString(), displayTime);
-        }
-        public static void LogError(string message, float displayTime)
-        {
-            if(API == null)
-                return;
-
-            API.LogError(message, displayTime);
+                LogMessage(message.ToString(), displayTime, Color.Red);
         }
 
         public static void LogMessage(object message, float displayTime)
         {
             if (message == null)
-                LogMessage("null", displayTime);
+                LogMessage("null", displayTime, Color.White);
             else
-                LogMessage(message.ToString(), displayTime);
+                LogMessage(message.ToString(), displayTime, Color.White);
         }
-        public static void LogMessage(string message, float displayTime)
+
+        public static void LogWarning(object message, float displayTime)
         {
-            if (API == null)
-                return;
-
-            API.LogMessage(message, displayTime);
+            if (message == null)
+                LogMessage("null", displayTime, Color.Yellow);
+            else
+                LogMessage(message.ToString(), displayTime, Color.Yellow);
         }
 
-        public static void LogMessage(object message, float displayTime, SharpDX.Color color)
+        public static void LogMessage(object message, float displayTime, Color color)
         {
             if (message == null)
                 DebugPlug.DebugPlugin.LogMsg("null", displayTime, color);
             else
                 DebugPlug.DebugPlugin.LogMsg(message.ToString(), displayTime, color);
         }
-
-        public void iInit(PluginExtensionPlugin api, ExternalPlugin pluginData)
-        {
-            API = api;
-            PluginDirectory = pluginData.PluginDir;
-            LocalPluginDirectory = PluginDirectory.Substring(PluginDirectory.IndexOf(@"\plugins\") + 1); 
-        }
-
-        public void Destroy()
-        {
-        }
+        #endregion
     }
 }

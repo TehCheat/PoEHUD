@@ -443,18 +443,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hud\Menu\MainMenuWindow.cs" />
     <Content Include="poehud.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF "$(ConfigurationName)"=="Debug" (
-mkdir .\config
-mkdir .\sounds
-mkdir .\textures
-
-copy /Y $(ProjectDir)..\Release\config .\config
-copy /Y $(ProjectDir)..\Release\sounds .\sounds
-copy /Y $(ProjectDir)..\Release\textures .\textures
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
