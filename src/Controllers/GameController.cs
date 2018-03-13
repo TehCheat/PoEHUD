@@ -59,8 +59,10 @@ namespace PoeHUD.Controllers
         public readonly Runner CoroutineRunner;
         public readonly Runner CoroutineRunnerParallel;
         public PerformanceSettings Performance;
-      
-        
+
+        public bool IsForeGroundLast = false;
+        public static event Action<bool> eIsForegroundChanged = delegate { };
+
         public  long RenderCount { get; private set; }
         public void WhileLoop()
         {
@@ -217,7 +219,11 @@ namespace PoeHUD.Controllers
                     }
                 }
                
-
+                if(IsForeGroundLast != IsForeGroundCache)
+                {
+                    IsForeGroundLast = IsForeGroundCache;
+                    eIsForegroundChanged(IsForeGroundCache);
+                }
                 if (sw.Elapsed.TotalMilliseconds >= nextRenderTick && InGame && IsForeGroundCache && !IsLoading)
                 {
                     Render.SafeInvoke();

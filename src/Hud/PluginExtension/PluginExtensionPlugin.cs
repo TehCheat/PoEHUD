@@ -9,6 +9,7 @@ using System.Reflection;
 using Graphics = PoeHUD.Hud.UI.Graphics;
 using System.Collections.Generic;
 using Trinet.Core.IO.Ntfs;
+using System.Diagnostics;
 
 namespace PoeHUD.Hud.PluginExtension
 {
@@ -16,32 +17,48 @@ namespace PoeHUD.Hud.PluginExtension
     {
         public readonly GameController GameController;
         public readonly Graphics Graphics;
+        public const string PluginsDirectory = "plugins";
+
+        public event Action eCheckPluginsDllReload = delegate { };
+
         public PluginExtensionPlugin(GameController gameController, Graphics graphics)
         {
+            BasePlugin.API = this;
             GameController = gameController;
             Graphics = graphics;
             SearchPlugins();
-            LoadSettings();
             InitPlugins();
             gameController.EntityListWrapper.EntityAdded += OnEntityAdded;
             gameController.EntityListWrapper.EntityRemoved += OnEntityRemoved;
+
+            GameController.eIsForegroundChanged += GameController_eIsForegroundChanged;
+        }
+        
+        private bool SkipFirstIsForegroundChanged;
+        private void GameController_eIsForegroundChanged(bool state)
+        {
+           if(!SkipFirstIsForegroundChanged || !state)
+            {
+                SkipFirstIsForegroundChanged = true;
+                return;
+            }
+
+            eCheckPluginsDllReload();
         }
 
         public event Action eInitialise = delegate { };
         public event Action eRender = delegate { };
         public event Action<EntityWrapper> eEntityAdded = delegate { };
         public event Action<EntityWrapper> eEntityRemoved = delegate { };
-        public event Action eLoadSettings = delegate { };
         public event Action eClose = delegate { };
         public static List<BasePlugin> Plugins = new List<BasePlugin>();
         private List<string> PluginUpdateLog;
         public const string UpdateTempDir = "%PluginUpdate%";//Do not change this value. Otherwice this value in PoeHUD_PluginsUpdater plugin should be also changed.
         public const string UpdateBackupDir = "%Backup%";
 
-
         private void SearchPlugins()
         {
-            DirectoryInfo PluginsDir = new DirectoryInfo("plugins");
+            DirectoryInfo PluginsDir = new DirectoryInfo(PluginsDirectory);
             if (!PluginsDir.Exists) return;
 
             foreach (var pluginDirectoryInfo in PluginsDir.GetDirectories())
@@ -170,13 +187,13 @@ namespace PoeHUD.Hud.PluginExtension
 
         private void TryLoadDll(string path, string dir)
         {
-            if(ProcessFile_Real(path))
+            if (ProcessFile_Real(path))
             {
                 LogMessage("Can't unblock plugin: " + path, 5);
                 return;
             }
 
-            var myAsm = Assembly.LoadFrom(path);
+            var myAsm = Assembly.Load(File.ReadAllBytes(path));
             if (myAsm == null) return;
 
             var asmTypes = myAsm.GetTypes();
@@ -186,9 +203,8 @@ namespace PoeHUD.Hud.PluginExtension
             {
                 if (type.IsSubclassOf(typeof(BasePlugin)) && !type.IsAbstract)
                 {
-                    var extPlugin = new ExternalPlugin(type, this, dir);
+                    var extPlugin = new ExternalPlugin(this, path, type.FullName);
                     Plugins.Add(extPlugin.BPlugin);
-                    LogMessage("Loaded plugin: " + type.Name, 1);
                 }
             }
         }
@@ -219,10 +235,7 @@ namespace PoeHUD.Hud.PluginExtension
         {
             eInitialise();
         }
-        public void LoadSettings()
-        {
-            eLoadSettings();
-        }
+
         public void Render()
         {
             eRender();

@@ -1,53 +1,112 @@
 ﻿using PoeHUD.Plugins;
 using System;
 using System.Reflection;
+using System.IO;
 
 namespace PoeHUD.Hud.PluginExtension
 {
-    public sealed class ExternalPlugin
+    internal sealed class ExternalPlugin
     {
-        private object PluginInstance;
-        public BasePlugin BPlugin;
         public string PluginDir; //Will be used for loading resources (images, sounds, etc.) from plugin floder
-        private Type PluginType;
         private PluginExtensionPlugin API;
 
-        public string PluginName { get { return PluginType.Name; } }
+        private object PluginInstance;
+        public BasePlugin BPlugin;
 
-        public ExternalPlugin(Type type, PluginExtensionPlugin api, string pluginDir)
+        private readonly string FullTypeName;
+        private readonly string DllPath;
+
+        public PluginState State { get; private set; }//Will be used by poehud main menu to display why plugin is not loaded/reloaded
+
+        public ExternalPlugin(PluginExtensionPlugin api, string dllPath, string fullTypeName)
         {
-            PluginDir = pluginDir;
-            PluginType = type;
             API = api;
-            InitPlugin();
+            DllPath = dllPath;
+            FullTypeName = fullTypeName;
+            
+            PluginDir = Path.GetDirectoryName(dllPath);
+
+            var dllInfo = new FileInfo(DllPath);
+            DllTimeVersion = dllInfo.LastWriteTime;
+
+            ReloadPlugin();
+            API.eCheckPluginsDllReload += API_eCheckPluginsDllReload;
         }
 
-        //////////////////////////////////////////////////////
-        //Also can be used for restarting the plugin
-        public void InitPlugin()
+        private void API_eCheckPluginsDllReload()
         {
-            try
+            var dllInfo = new FileInfo(DllPath);
+            if((dllInfo.LastWriteTime - DllTimeVersion).Seconds > 2)
             {
-                PluginInstance = Activator.CreateInstance(PluginType);
-                BPlugin = PluginInstance as BasePlugin;
+                DllTimeVersion = dllInfo.LastWriteTime;
+                BasePlugin.LogMessage("Reloading dll: " + DllPath, 3);
+                ReloadPlugin();
             }
-            catch (Exception e)
+        }
+
+        private DateTime DllTimeVersion;
+
+        public void ReloadPlugin()
+        {
+            UnloadPlugin();
+
+            var myAsm = Assembly.Load(File.ReadAllBytes(DllPath));
+            if (myAsm == null)
             {
-                API.LogError($"Error in plugin constructor! Plugin: {PluginName}, Error: " + e.Message, 5);//TODO: Test this exception
+                State = PluginState.Reload_DllNotFound;
                 return;
             }
 
-            BPlugin.iInit(API, this);
-            API.eRender += BPlugin.iRender;
-            API.eEntityAdded += BPlugin.iEntityAdded;
-            API.eEntityRemoved += BPlugin.iEntityRemoved;
-            API.eClose += BPlugin.iOnClose;
-            API.eInitialise += BPlugin.iInitialise;
-            API.eLoadSettings += BPlugin.iLoadSettings;
+            var type = myAsm.GetType(FullTypeName);
+            if (type == null)
+            {
+                State = PluginState.Reload_ClassNotFound;
+                return;
+            }
+
+            LoadPlugin(type);
         }
 
-        
-        
-        //////////////////////////////////////////////////////    
+        public void LoadPlugin(Type pluginType)
+        {
+            var pluginInstance = Activator.CreateInstance(pluginType);
+            BPlugin = pluginInstance as BasePlugin;
+
+            BPlugin.InitPlugin(this);
+            BPlugin._LoadSettings();
+
+
+            API.eRender += BPlugin._Render;
+            API.eEntityAdded += BPlugin._EntityAdded;
+            API.eEntityRemoved += BPlugin._EntityRemoved;
+            API.eClose += BPlugin._OnClose;
+            API.eInitialise += BPlugin._Initialise;
+        }
+
+        private void UnloadPlugin()
+        {
+            if (BPlugin != null)
+            {
+                BPlugin._OnClose();//saving settings, closing opened threads (on plugin side)
+
+                API.eRender -= BPlugin._Render;
+                API.eEntityAdded -= BPlugin._EntityAdded;
+                API.eEntityRemoved -= BPlugin._EntityRemoved;
+                API.eClose -= BPlugin._OnClose;
+                API.eInitialise -= BPlugin._Initialise;
+                BPlugin = null;
+
+                GC.Collect();
+            }
+        }
+
+        public enum PluginState
+        {
+            Unknown,
+            Loaded,
+            Reload_CantUnload,
+            Reload_DllNotFound,
+            Reload_ClassNotFound
+        }
     }
 }
