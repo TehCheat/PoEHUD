@@ -34,7 +34,7 @@ namespace PoeHUD.Hud.Loot
             WithBorder = true;
             WithSound = false;
             Alternative = true;
-            FilePath = "config/neversink's.filter";
+            FilePath = "config/NeverSink-SEMI-STRICT.filter";
         }
 
         public ToggleNode ShowItemOnMap { get; set; }

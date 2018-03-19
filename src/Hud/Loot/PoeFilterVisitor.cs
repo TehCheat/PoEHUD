@@ -56,7 +56,16 @@ namespace PoeHUD.Hud.Loot
             var mods = entity.GetComponent<Mods>();
             var isSkillHGem = entity.HasComponent<SkillGem>();
             var isMap = entity.HasComponent<Map>();
-            var isShapedMap = itemBase.isShaped && isMap;
+
+            var isShapedMap = false;
+            var isElderMap = false;
+            if (isMap)
+                foreach (var mod in mods.ItemMods)
+                    if (mod.Name == "MapElder")
+                        isElderMap = (mod.Value1 == 1);
+                    else if (mod.Name == "MapShaped")
+                        isShapedMap = (mod.Value1 == 1);
+
             var itemRarity = mods.ItemRarity;
             var quality = 0;
             if (entity.HasComponent<Quality>()) { quality = entity.GetComponent<Quality>().ItemQuality; }
@@ -96,6 +105,7 @@ namespace PoeHUD.Hud.Loot
                 var poeElderCondition = true;
                 var poeShaperCondition = true;
                 var poeShapedMapCondition = true;
+                var poeElderMapCondition = true;
                 var backgroundColor = AlertDrawStyle.DefaultBackgroundColor;
                 var borderColor = Color.White;
                 var textColor = defaultTextColor;
@@ -254,6 +264,13 @@ namespace PoeHUD.Hud.Loot
                                                                                                 {
                                                                                                     poeShapedMapCondition &= isShapedMap == Convert.ToBoolean(poeShapedMapContext.Boolean().GetText());
                                                                                                 }
+                                                                                                else {
+                                                                                                    var poeElderMapContext = statement.poeElderMap();
+                                                                                                    if(poeElderMapContext != null)
+                                                                                                    {
+                                                                                                        poeElderMapCondition &= isElderMap == Convert.ToBoolean(poeElderMapContext.Boolean().GetText());
+                                                                                                    }
+                                                                                                }
                                                                                             }
                                                                                         }
                                                                                     }
@@ -278,7 +295,7 @@ namespace PoeHUD.Hud.Loot
                 if (itemLevelCondition && dropLevelCondition && poeClassCondition && poeBaseTypeCondition &&
                     poeRarityCondition && poeQualityCondition && poeWidthCondition && poeHeightCondition &&
                     poeSocketsCondition && poeLinkedSocketsCondition && poeSocketGroupCondition && poeIdentifiedCondition && poeCorruptedCondition
-                    && poeElderCondition && poeShaperCondition && poeShapedMapCondition)
+                    && poeElderCondition && poeShaperCondition && poeShapedMapCondition && poeElderMapCondition)
                 {
                     if (!isShow || (filterEnabled && !(settings.WithBorder && borderWidth > 0 || settings.WithSound && sound >= 0)))
                         return null;

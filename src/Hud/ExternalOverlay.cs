@@ -109,8 +109,17 @@ namespace PoeHUD.Hud
             Element gemPanel = gameController.Game.IngameState.IngameUi.GemLvlUpPanel;
             RectangleF questPanelRect = questPanel.GetClientRect();
             RectangleF gemPanelRect = gemPanel.GetClientRect();
-            RectangleF clientRect = gameController.Game.IngameState.IngameUi.Map.SmallMinimap.GetClientRect();
-            if (gemPanel.IsVisible && Math.Abs(gemPanelRect.Right - clientRect.Right) < EPSILON)
+			RectangleF clientRect;
+			if (gameController.Game.IngameState.IngameUi.Map.LargeMap.IsVisible)
+			{
+				// large map is visible, use orange words' parent
+				clientRect = gameController.Game.IngameState.IngameUi.Map.OrangeWords.Parent.GetClientRect();
+			}
+			else
+			{
+				clientRect = gameController.Game.IngameState.IngameUi.Map.SmallMinimap.GetClientRect();
+			}
+			if (gemPanel.IsVisible && Math.Abs(gemPanelRect.Right - clientRect.Right) < EPSILON)
             {
                 // gem panel is visible, add its height
                 clientRect.Height += gemPanelRect.Height;
