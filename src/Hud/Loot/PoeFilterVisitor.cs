@@ -5,7 +5,6 @@ using PoeHUD.Controllers;
 using PoeHUD.Models.Enums;
 using PoeHUD.Models.Interfaces;
 using PoeHUD.Poe.Components;
-using PoeHUD.Poe.EntityComponents;
 using SharpDX;
 using System;
 using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace PoeHUD.Hud.Loot
             var dropLevel = baseItemType.DropLevel;
             Models.ItemClass tmp;
             string className;
-            if (gameController.Files.itemClasses.contents.TryGetValue(baseItemType.ClassName, out tmp))
+            if (gameController.Files.ItemClasses.contents.TryGetValue(baseItemType.ClassName, out tmp))
                 className = tmp.ClassName;
             else
                 className = baseItemType.ClassName;

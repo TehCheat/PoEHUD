@@ -9,64 +9,82 @@ namespace PoeHUD.Controllers
 {
     public class FsController
     {
-        public readonly BaseItemTypes BaseItemTypes;
-        public readonly ItemClasses itemClasses;
-        public readonly ModsDat Mods;
-        public readonly StatsDat Stats;
-        public readonly TagsDat Tags;
-        public readonly WorldAreas WorldAreas;
-        public readonly PassiveSkills PassiveSkills;
-        public readonly LabyrinthTrials LabyrinthTrials;
-        public readonly UniversalFileWrapper<Quest> Quests;
-        public readonly QuestStates QuestStates;
-        public readonly BestiaryCapturableMonsters BestiaryCapturableMonsters;
-        public readonly UniversalFileWrapper<BestiaryRecipe> BestiaryRecipes;
-        public readonly UniversalFileWrapper<BestiaryRecipeComponent> BestiaryRecipeComponents;
-        public readonly UniversalFileWrapper<BestiaryGroup> BestiaryGroups;
-        public readonly UniversalFileWrapper<BestiaryFamily> BestiaryFamilies;
-        public readonly UniversalFileWrapper<BestiaryGenus> BestiaryGenuses;
-        public readonly MonsterVarieties MonsterVarieties;
-        public readonly PropheciesDat Prophecies;
+        public ItemClasses ItemClasses;
+        public BaseItemTypes BaseItemTypes;
+        public ModsDat Mods;
+        public StatsDat Stats;
+        public TagsDat Tags;
+
+        //Will be loaded on first access:
+        private WorldAreas worldAreas;
+        public WorldAreas WorldAreas => worldAreas != null ? worldAreas :
+            worldAreas = new WorldAreas(mem, FindFile("Data/WorldAreas.dat"));
+
+        private PassiveSkills passiveSkills;
+        public PassiveSkills PassiveSkills => passiveSkills != null ? passiveSkills :
+            passiveSkills = new PassiveSkills(mem, FindFile("Data/PassiveSkills.dat"));
+
+        private LabyrinthTrials labyrinthTrials;
+        public LabyrinthTrials LabyrinthTrials => labyrinthTrials != null ? labyrinthTrials :
+            labyrinthTrials = new LabyrinthTrials(mem, FindFile("Data/LabyrinthTrials.dat"));
+
+        private UniversalFileWrapper<Quest> quests;
+        public UniversalFileWrapper<Quest> Quests => quests != null ? quests :
+            quests = new UniversalFileWrapper<Quest>(mem, FindFile("Data/Quest.dat"));
+
+        private QuestStates questStates;
+        public QuestStates QuestStates => questStates != null ? questStates :
+            questStates = new QuestStates(mem, FindFile("Data/QuestStates.dat"));
+
+        private BestiaryCapturableMonsters bestiaryCapturableMonsters;
+        public BestiaryCapturableMonsters BestiaryCapturableMonsters => bestiaryCapturableMonsters != null ? bestiaryCapturableMonsters :
+            bestiaryCapturableMonsters = new BestiaryCapturableMonsters(mem, FindFile("Data/BestiaryCapturableMonsters.dat"));
+
+        private UniversalFileWrapper<BestiaryRecipe> bestiaryRecipes;
+        public UniversalFileWrapper<BestiaryRecipe> BestiaryRecipes => bestiaryRecipes != null ? bestiaryRecipes :
+            bestiaryRecipes = new UniversalFileWrapper<BestiaryRecipe>(mem, FindFile("Data/BestiaryRecipes.dat"));
+
+        private UniversalFileWrapper<BestiaryRecipeComponent> bestiaryRecipeComponents;
+        public UniversalFileWrapper<BestiaryRecipeComponent> BestiaryRecipeComponents => bestiaryRecipeComponents != null ? bestiaryRecipeComponents :
+            bestiaryRecipeComponents = new UniversalFileWrapper<BestiaryRecipeComponent>(mem, FindFile("Data/BestiaryRecipeComponent.dat"));
+
+        private UniversalFileWrapper<BestiaryGroup> bestiaryGroups;
+        public UniversalFileWrapper<BestiaryGroup> BestiaryGroups => bestiaryGroups != null ? bestiaryGroups :
+            bestiaryGroups = new UniversalFileWrapper<BestiaryGroup>(mem, FindFile("Data/BestiaryGroups.dat"));
+
+        private UniversalFileWrapper<BestiaryFamily> bestiaryFamilies;
+        public UniversalFileWrapper<BestiaryFamily> BestiaryFamilies => bestiaryFamilies != null ? bestiaryFamilies :
+            bestiaryFamilies = new UniversalFileWrapper<BestiaryFamily>(mem, FindFile("Data/BestiaryFamilies.dat"));
+
+        private UniversalFileWrapper<BestiaryGenus> bestiaryGenuses;
+        public UniversalFileWrapper<BestiaryGenus> BestiaryGenuses => bestiaryGenuses != null ? bestiaryGenuses :
+            bestiaryGenuses = new UniversalFileWrapper<BestiaryGenus>(mem, FindFile("Data/BestiaryGenus.dat"));
+
+        private MonsterVarieties monsterVarieties;
+        public MonsterVarieties MonsterVarieties => monsterVarieties != null ? monsterVarieties :
+            monsterVarieties = new MonsterVarieties(mem, FindFile("Data/MonsterVarieties.dat"));
+
+        private PropheciesDat prophecies;
+        public PropheciesDat Prophecies => prophecies != null ? prophecies :
+            prophecies = new PropheciesDat(mem, FindFile("Data/Prophecies.dat"));
+
+        private UniversalFileWrapper<AtlasNode> atlasNodes;
+        public UniversalFileWrapper<AtlasNode> AtlasNodes => atlasNodes != null ? atlasNodes :
+            atlasNodes = new UniversalFileWrapper<AtlasNode>(mem, FindFile("Data/AtlasNode.dat"));
+
 
         private readonly Dictionary<string, long> files;
         private readonly Memory mem;
-
-        //Debug for DeveloperTool
-        private PassiveSkills _PassiveSkills => PassiveSkills;
-        private WorldAreas _WorldAreas => WorldAreas;
-        private BestiaryCapturableMonsters _BestiaryCapturableMonsters => BestiaryCapturableMonsters;
-        private UniversalFileWrapper<BestiaryRecipe> _BestiaryRecipes => BestiaryRecipes;
-        private UniversalFileWrapper<BestiaryRecipeComponent> _BestiaryRecipeComponents => BestiaryRecipeComponents;
-        private UniversalFileWrapper<BestiaryGroup> _BestiaryGroups => BestiaryGroups;
-        private UniversalFileWrapper<BestiaryFamily> _BestiaryFamilies => BestiaryFamilies;
-        private UniversalFileWrapper<BestiaryGenus> _BestiaryGenuses => BestiaryGenuses;
-        private MonsterVarieties _MonsterVarieties => MonsterVarieties;
-        private PropheciesDat _Prophecies => Prophecies;
-
-
 
         public FsController(Memory mem)
         {
             this.mem = mem;
             files = GetAllFiles();
-            itemClasses = new ItemClasses();
+            ItemClasses = new ItemClasses();
             BaseItemTypes = new BaseItemTypes(mem, FindFile("Data/BaseItemTypes.dat"));
-            Tags = new TagsDat(mem, FindFile("Data/Tags.dat"));
             Stats = new StatsDat(mem, FindFile("Data/Stats.dat"));
+            Tags = new TagsDat(mem, FindFile("Data/Tags.dat"));
             Mods = new ModsDat(mem, FindFile("Data/Mods.dat"), Stats, Tags);
-            WorldAreas = new WorldAreas(mem, FindFile("Data/WorldAreas.dat"));
-            PassiveSkills = new PassiveSkills(mem, FindFile("Data/PassiveSkills.dat"));
-            LabyrinthTrials = new LabyrinthTrials(mem, FindFile("Data/LabyrinthTrials.dat"));
-            Quests = new UniversalFileWrapper<Quest>(mem, FindFile("Data/Quest.dat"));
-            QuestStates = new QuestStates(mem, FindFile("Data/QuestStates.dat"));
-            BestiaryCapturableMonsters = new BestiaryCapturableMonsters(mem, FindFile("Data/BestiaryCapturableMonsters.dat"));
-            BestiaryRecipes = new UniversalFileWrapper<BestiaryRecipe>(mem, FindFile("Data/BestiaryRecipes.dat"));
-            BestiaryRecipeComponents = new UniversalFileWrapper<BestiaryRecipeComponent>(mem, FindFile("Data/BestiaryRecipeComponent.dat"));
-            BestiaryGroups = new UniversalFileWrapper<BestiaryGroup>(mem, FindFile("Data/BestiaryGroups.dat"));
-            BestiaryFamilies = new UniversalFileWrapper<BestiaryFamily>(mem, FindFile("Data/BestiaryFamilies.dat"));
-            BestiaryGenuses = new UniversalFileWrapper<BestiaryGenus>(mem, FindFile("Data/BestiaryGenus.dat"));
-            MonsterVarieties = new MonsterVarieties(mem, FindFile("Data/MonsterVarieties.dat"));
-            Prophecies = new PropheciesDat(mem, FindFile("Data/Prophecies.dat"));
         }
 
         public Dictionary<string, long> GetAllFiles()

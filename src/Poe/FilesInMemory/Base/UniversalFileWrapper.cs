@@ -12,7 +12,7 @@ namespace PoeHUD.Poe.FilesInMemory
 {
     public class UniversalFileWrapper<RecordType> : FileInMemory where RecordType : RemoteMemoryObject, new()
     {
-        //We mark this fields as private coz we don't allow to read them directly dut to optimisation. Use methods instead.
+        //We mark this fields as private coz we don't allow to read them directly dut to optimisation. Use EntriesList and methods instead.
         protected Dictionary<long, RecordType> EntriesAddressDictionary { get; set; } = new Dictionary<long, RecordType>();
         protected List<RecordType> CachedEntriesList { get; set; } = new List<RecordType>();
         public List<RecordType> EntriesList

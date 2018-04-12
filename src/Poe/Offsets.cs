@@ -118,6 +118,22 @@ namespace PoeHUD.Poe
             0x48, 0x8B, 0xC6
         }, "xxx????xx???xx?xxx");
 
+
+        private static readonly Pattern GameStatePattern = new Pattern(new byte[]
+        {
+            0x4c, 0x8B, 0x35, 0x48, 0x25, 0x5B, 0x01,
+            0x4D, 0x85, 0xF6,
+            0x0F, 0x94, 0xC0,
+            0x84, 0xC0,
+        }, "xxx????xxxxxxxx");
+
+        /*
+        PathOfExile_x64.exe+118FD9 - 4C 8B 35 48255B01     - mov r14,[PathOfExile_x64.exe+16CB528] { [C6151734A0] }<<here
+        PathOfExile_x64.exe+118FE0 - 4D 85 F6              - test r14,r14
+        PathOfExile_x64.exe+118FE3 - 0F94 C0               - sete al
+        PathOfExile_x64.exe+118FE6 - 84 C0                 - test al,al
+        */
+
         public long AreaChangeCount { get; private set; }
         public long Base { get; private set; }
         public string ExeName { get; private set; }
@@ -126,10 +142,11 @@ namespace PoeHUD.Poe
         public int IgsOffset { get; private set; }
         public int IgsOffsetDelta => IgsOffset + IgsDelta;
         public long isLoadingScreenOffset { get; private set; }
+        public long GameStateOffset { get; private set; }
 
         public void DoPatternScans(Memory m)
         {
-            long[] array = m.FindPatterns(basePtrPattern, fileRootPattern, areaChangePattern, isLoadingScreenPattern);
+            long[] array = m.FindPatterns(basePtrPattern, fileRootPattern, areaChangePattern, isLoadingScreenPattern, GameStatePattern);
             System.Console.WriteLine("Base Pattern: " + (m.AddressOfProcess + array[0]).ToString("x8"));
 
             Base = m.ReadInt(m.AddressOfProcess + array[0] + 0x4) + array[0] + 0x8;
@@ -146,6 +163,9 @@ namespace PoeHUD.Poe
 
             isLoadingScreenOffset = m.ReadInt(m.AddressOfProcess + array[3] + 0x03) + array[3] + 0x07;
             System.Console.WriteLine("Is Loading Screen Offset:" + (isLoadingScreenOffset + m.AddressOfProcess).ToString("x8"));
+
+            GameStateOffset = m.ReadInt(m.AddressOfProcess + array[4] + 0x03) + array[4] + 0x07;
+            System.Console.WriteLine("Game State Offset:" + (GameStateOffset + m.AddressOfProcess).ToString("x8"));
         }
     }
 }

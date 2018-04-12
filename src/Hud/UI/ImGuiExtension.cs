@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PoeHUD.Hud.Menu;
 using ImGuiVector2 = System.Numerics.Vector2;
 using ImGuiVector4 = System.Numerics.Vector4;
 
@@ -145,24 +146,25 @@ namespace PoeHUD.Hud.UI
             if (buttonName.Contains("##"))
                 buttonName = buttonName.Substring(0, buttonName.LastIndexOf("##"));
             ImGui.PushID(buttonName);
-            if (ImGui.Button($"{buttonName}: {currentKey} ")) ImGui.OpenPopup(buttonName);
+            if (ImGui.Button($"{buttonName}: {currentKey} "))
+            {
+                MenuPlugin.HandleForKeySelector = true;
+                ImGui.OpenPopup(buttonName);
+            }
             if (ImGui.BeginPopupModal(buttonName, (WindowFlags)35))
             {
-                ImGui.Text($"Press a key to set as {buttonName}");
-                foreach (var key in KeyCodes())
+                if (!MenuPlugin.HandleForKeySelector)
                 {
-                    if (!WinApi.IsKeyDown(key)) continue;
-                    if (key != Keys.Escape && key != Keys.RButton && key != Keys.LButton)
-                    {
-                        ImGui.CloseCurrentPopup();
-                        ImGui.EndPopup();
-                        ImGui.PopID();
-                        return key;
-                    }
+                    ImGui.CloseCurrentPopup();
+                    ImGui.EndPopup();
+                    ImGui.PopID();
 
-                    break;
+                    if (MenuPlugin.HandledForKeySelectorKey != Keys.Escape)
+                        return MenuPlugin.HandledForKeySelectorKey;
+                    else
+                        return currentKey;
                 }
-
+                ImGui.Text($"Press a key to set as {buttonName}");
                 ImGui.EndPopup();
             }
 
@@ -178,21 +180,18 @@ namespace PoeHUD.Hud.UI
             if (ImGui.Button($"{buttonName}: {currentKey} ")) ImGui.OpenPopup(popupTitle);
             if (ImGui.BeginPopupModal(popupTitle, (WindowFlags)35))
             {
-                ImGui.Text($"Press a key to set as {buttonName}");
-                foreach (var key in KeyCodes())
+                if (!MenuPlugin.HandleForKeySelector)
                 {
-                    if (!WinApi.IsKeyDown(key)) continue;
-                    if (key != Keys.Escape && key != Keys.RButton && key != Keys.LButton)
-                    {
-                        ImGui.CloseCurrentPopup();
-                        ImGui.EndPopup();
-                        ImGui.PopID();
-                        return key;
-                    }
+                    ImGui.CloseCurrentPopup();
+                    ImGui.EndPopup();
+                    ImGui.PopID();
 
-                    break;
+                    if (MenuPlugin.HandledForKeySelectorKey != Keys.Escape)
+                        return MenuPlugin.HandledForKeySelectorKey;
+                    else
+                        return currentKey;
                 }
-
+                ImGui.Text($"Press a key to set as {buttonName}");
                 ImGui.EndPopup();
             }
 
@@ -227,9 +226,9 @@ namespace PoeHUD.Hud.UI
             return currentSelectedItem;
         }
 
-        public static string ComboBox(string sideLabel, string currentSelectedItem, List<string> objectList, ComboFlags comboFlags = ComboFlags.HeightRegular)
+        public static string ComboBox(string sideLabel, string previewString, string currentSelectedItem, List<string> objectList, ComboFlags comboFlags = ComboFlags.HeightRegular)
         {
-            if (ImGui.BeginCombo(sideLabel, currentSelectedItem, comboFlags))
+            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null? previewString : currentSelectedItem, comboFlags))
             {
                 var refObject = currentSelectedItem;
                 for (var n = 0; n < objectList.Count; n++)
@@ -250,9 +249,9 @@ namespace PoeHUD.Hud.UI
             return currentSelectedItem;
         }
 
-        public static string ComboBox(string sideLabel, string currentSelectedItem, List<string> objectList, out bool didChange, ComboFlags comboFlags = ComboFlags.HeightRegular)
+        public static string ComboBox(string sideLabel, string previewString, string currentSelectedItem, List<string> objectList, out bool didChange, ComboFlags comboFlags = ComboFlags.HeightRegular)
         {
-            if (ImGui.BeginCombo(sideLabel, currentSelectedItem, comboFlags))
+            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null? previewString : currentSelectedItem, comboFlags))
             {
                 var refObject = currentSelectedItem;
                 for (var n = 0; n < objectList.Count; n++)

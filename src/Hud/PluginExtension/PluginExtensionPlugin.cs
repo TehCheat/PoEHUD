@@ -160,7 +160,7 @@ namespace PoeHUD.Hud.PluginExtension
         }
 
         #region Plugins Events
-        private Dictionary<string, Action<object[]>> PluginEvents = new Dictionary<string, Action<object[]>>();
+        private Dictionary<string, List<Action<object[]>>> PluginEvents = new Dictionary<string, List<Action<object[]>>>();
         public void UnsubscribePluginEvent(string uniqEventName)
         {
             PluginEvents.Remove(uniqEventName);
@@ -168,14 +168,14 @@ namespace PoeHUD.Hud.PluginExtension
         public void SubscribePluginEvent(string uniqEventName, Action<object[]> func)
         {
             if (!PluginEvents.ContainsKey(uniqEventName))
-                PluginEvents.Add(uniqEventName, func);
+                PluginEvents.Add(uniqEventName, new List<Action<object[]>>() { func });
             else
-                LogMessage("Event '" + uniqEventName + "' is already exist!", 10);
+                PluginEvents[uniqEventName].Add(func);
         }
         public void CallPluginEvent(string uniqEventName, object[] args)
         {
             if (PluginEvents.ContainsKey(uniqEventName))
-                PluginEvents[uniqEventName](args);
+                PluginEvents[uniqEventName].ForEach(x => x(args));
         }
         #endregion
 
@@ -184,7 +184,7 @@ namespace PoeHUD.Hud.PluginExtension
             var dInfo = new DirectoryInfo(directory);
             if (!dInfo.Exists)
             {
-                BasePlugin.LogMessage("Dir not exist: " + directory, 10);
+                BasePlugin.LogMessage("PoeHUD.LoadPluginFromDirectory: Directory doesn't exist: " + directory, 10);
                 return;
             }
 

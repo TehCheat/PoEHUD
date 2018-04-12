@@ -14,13 +14,14 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             ? GameController.Instance.Cache.IngameState
             : (GameController.Instance.Cache.Enable
                 ? GameController.Instance.Cache.IngameState =
-                    IngameStateReal 
+                    IngameStateReal
                 : IngameStateReal);
 
-        private IngameState IngameStateReal => ReadObject<IngameState>(Address + 0x38);
+        private IngameState IngameStateReal => GameController.UseGameStateController ? GameStateController.IngameState : ReadObject<IngameState>(Address + 0x38);
 
         public int AreaChangeCount => M.ReadInt(M.AddressOfProcess + Offsets.AreaChangeCount);
-        public bool IsGameLoading => M.ReadInt(M.AddressOfProcess + Offsets.isLoadingScreenOffset) == 1;
+        public bool IsGameLoading => GameController.UseGameStateController ? GameStateController.IsLoading :
+            M.ReadInt(M.AddressOfProcess + Offsets.isLoadingScreenOffset) == 1;
         public void RefreshTheGameState()
         {
             Address = M.ReadLong(Offsets.Base + M.AddressOfProcess, 0x8, 0xF8);

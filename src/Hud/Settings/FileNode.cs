@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace PoeHUD.Hud.Settings
 {
@@ -13,7 +14,8 @@ namespace PoeHUD.Hud.Settings
             Value = value;
         }
 
-        public Action OnFileChanged;
+        [JsonIgnore]
+        public Action OnFileChanged = delegate { };
 
         private string value;
 
@@ -23,7 +25,7 @@ namespace PoeHUD.Hud.Settings
             set
             {
                 this.value = value;
-                OnFileChanged?.Invoke();
+                OnFileChanged();
             }
         }
 

@@ -63,13 +63,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public class InventSlotItem : RemoteMemoryObject
         {
             public Entity Item => ReadObject<Entity>(Address);
-            public int PosX => M.ReadInt(Address + 0x10);
-            public int PosY => M.ReadInt(Address + 0x14);
-
-
-            public int WeirdPosX => M.ReadInt(Address + 0x8);
-            public int WeirdPosY1 => M.ReadInt(Address + 0xc);
-
+            public int PosX => M.ReadInt(Address + 0x8);
+            public int PosY => M.ReadInt(Address + 0xc);
          
             public override string ToString()
             {

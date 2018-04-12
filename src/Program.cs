@@ -82,6 +82,9 @@ namespace PoeHUD
                 sb.Append("GameController: " + (offs.Base + memory.AddressOfProcess).ToString("X"));
                 sb.Append(System.Environment.NewLine);
 
+                sb.Append("GameState: " + (offs.GameStateOffset + memory.AddressOfProcess).ToString("X"));
+                sb.Append(System.Environment.NewLine);
+
                 sb.Append("TheGame: " + gameController.Game.Address.ToString("X"));
                 sb.Append(System.Environment.NewLine);
 

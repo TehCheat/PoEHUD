@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace PoeHUD.Hud.Settings
 {
-    public sealed class ToggleNode
+    public class TextNode
     {
         [JsonIgnore]
         public Action OnValueChanged = delegate { };
-        private bool value;
+        private string value;
 
-        public ToggleNode()
+        public TextNode()
         {
         }
 
-        public ToggleNode(bool value)
+        public TextNode(string value)
         {
             Value = value;
         }
 
-        public void SetValueNoEvent(bool newValue)
+        public void SetValueNoEvent(string newValue)
         {
             value = newValue;
         }
 
-        public bool Value
+        public string Value
         {
             get { return value; }
             set
@@ -31,26 +35,28 @@ namespace PoeHUD.Hud.Settings
                 if (this.value != value)
                 {
                     this.value = value;
+                 
                     try
                     {
                         OnValueChanged();
                     }
                     catch (Exception)
                     {
-                        DebugPlug.DebugPlugin.LogMsg("Error in function that subscribed for: ToggleNode.OnValueChanged", 10, SharpDX.Color.Red);
+
+                        DebugPlug.DebugPlugin.LogMsg("Error in function that subscribed for: TextNode.OnValueChanged", 10, SharpDX.Color.Red);
                     }
                 }
             }
         }
 
-        public static implicit operator bool(ToggleNode node)
+        public static implicit operator string(TextNode node)
         {
             return node.Value;
         }
 
-        public static implicit operator ToggleNode(bool value)
+        public static implicit operator TextNode(string value)
         {
-            return new ToggleNode(value);
+            return new TextNode(value);
         }
     }
 }

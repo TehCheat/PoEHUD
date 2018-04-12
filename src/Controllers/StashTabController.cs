@@ -16,40 +16,37 @@ namespace PoeHUD.Controllers
     {
         public static Action<StashTabNode, int> OnStashTabMoveRegistered = delegate { };
         public static Action<StashTabNode, string> OnStashTabRenameRegistered = delegate { };
+        private static List<StashTabNode> CachedStashTabs = new List<StashTabNode>();
+        internal static string[] StashTabNames = new string[0];
+        private bool StashTabsIsInitialized = false;
 
         public StashTabController()
         {
-            GameController.Instance.Area.OnAreaChange += Area_OnAreaChange;
+            GameController.Instance.Area.OnAreaChange += delegate { StashTabsIsInitialized = false; };
             CheckCacheStashTabs();
+            StashTabsIsInitialized = true;
         }
-        private void Area_OnAreaChange(AreaController obj) => CheckCacheStashTabs();
 
-        //private string League;
-        //private string PlayerName;
+        //Nobody know why but after area change stash tabs get shifted in ServerData.PlayerStashTabs.
+        //Happens randomly, not always. Maybe the problem in premium Map tab.
+        //So we gonna refresh stash tab Id (index in ServerData.PlayerStashTabs).
+
+        //Stash tabs never change their order in ServerData.PlayerStashTabs while stash is opened (even after moving tabs).
+        //so this allows us to detect stash moving (changing VisibleIndex) and stash rename.
+
+        //Notes:
+        //Premium Map tab creates a new tab for each map name. This new tabs marked as Hidden (in tab Flags), 
+        //so we skipping them when reading in ServerData.PlayerStashTabs
         private void CheckCacheStashTabs()
         {
             //Fixed a bug when server stash tabs change their position on area change
-            /*
-            var serverData = GameController.Instance.Game.IngameState.ServerData;
-            var playerName = GameController.Instance.Player.GetComponent<Player>().PlayerName;
-            var league = serverData.League;
-
-            //We gonna check everything, fx if player have multiple accounts. Also will called once at start
-            if (League != league || PlayerName != playerName)
-            {
-                League = league;
-                PlayerName = playerName;
-
-                CacheStashTabs(GameController.Instance.Game.IngameState.ServerData.PlayerStashTabs);
-                UpdateRegisteredStashTabNodes();
-            }
-            */
             CacheStashTabs(GameController.Instance.Game.IngameState.ServerData.PlayerStashTabs);
-            UpdateRegisteredStashTabNodes();
-        }
 
-        private static List<StashTabNode> CachedStashTabs = new List<StashTabNode>();
-        internal static string[] StashTabNames = new string[0];
+            foreach (var node in SubscribedNodes)
+            {
+                UpdateRegisteredNode(node);
+            }
+        }
 
         //We are not going to iterate throught all subscribed settings stash nodes,
         //so let's detect changes in cached tabs and then apply cahnges to subscribed nodes
@@ -93,7 +90,7 @@ namespace PoeHUD.Controllers
             }
         }
 
-        public static StashTabNode GetStashTabNodeByVisibleIndex(int visibleIndex)
+        internal static StashTabNode GetStashTabNodeByVisibleIndex(int visibleIndex)
         {
             return CachedStashTabs.Find(x => x.VisibleIndex == visibleIndex);
         }
@@ -131,8 +128,15 @@ namespace PoeHUD.Controllers
             if (!GameController.Instance.Area.CurrentArea.IsHideout && !GameController.Instance.Area.CurrentArea.IsTown)
                 return;
 
-            if (!GameController.Instance.Game.IngameState.IngameUi.OpenLeftPanel.IsVisible)
+            if (!GameController.Instance.Game.IngameState.IngameUi.InventoryPanel.IsVisible)
                 return;
+
+            if(!StashTabsIsInitialized)
+            {
+                //This will be called once when player open stash after area change
+                CheckCacheStashTabs();
+                StashTabsIsInitialized = true;
+            }
 
             var serverStashTabs = GameController.Instance.Game.IngameState.ServerData.PlayerStashTabs;
             var serverTabsCount = serverStashTabs.Count;
@@ -195,16 +199,7 @@ namespace PoeHUD.Controllers
             }
         }
 
-        //This thing will be called on start and after player change his account or league
-        private void UpdateRegisteredStashTabNodes()
-        {
-            foreach (var node in SubscribedNodes)
-            {
-                UpdateRegisteredNode(node);
-            }
-        }
-
-        public static void UpdateRegisteredNode(StashTabNode node)
+        private static void UpdateRegisteredNode(StashTabNode node)
         {
             StashTabNode foundNode = null;
             bool foundMulptiple = false;

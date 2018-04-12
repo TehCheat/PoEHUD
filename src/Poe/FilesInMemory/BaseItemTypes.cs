@@ -17,6 +17,9 @@ namespace PoeHUD.Poe.FilesInMemory
 
         public BaseItemType Translate(string metadata)
         {
+            //if (string.IsNullOrEmpty(metadata))//this shit shows all the time....
+            //    throw new Exception("Item metadata is null or empty. Try restart the game to fix this error. \"BaseItemType.Translate(metadata)\"");
+
             if (!contents.ContainsKey(metadata))
             {
                 LoadItemTypes();

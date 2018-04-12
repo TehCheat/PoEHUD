@@ -24,19 +24,26 @@ namespace PoeHUD.Controllers
         {
             Instance = this;
             Memory = memory;
+            Game = new TheGame(memory);
+            GameStateController = new GameStateController(memory, Game);
             CoroutineRunner = new Runner("Main Coroutine");
             CoroutineRunnerParallel = new Runner("Parallel Coroutine");
             Area = new AreaController(this);
             EntityListWrapper = new EntityListWrapper(this);
             Window = new GameWindow(memory.Process);
             Cache = new Cache();
-            Game = new TheGame(memory);
+          
             Files = new FsController(memory);
             StashController = new StashTabController();
             InGame = InGameReal;
             IsForeGroundCache = WinApi.IsForegroundWindow(Window.Process.MainWindowHandle);
             MainTimer = Stopwatch.StartNew();
+
         }
+
+        public GameStateController GameStateController { get; private set; }
+        //BETA, temporary
+        public static bool UseGameStateController => PoeHUD.Hud.MainMenuWindow.Settings != null ? PoeHUD.Hud.MainMenuWindow.Settings.UseStateController.Value : false;
 
         public EntityListWrapper EntityListWrapper { get; }
         public GameWindow Window { get; private set; }
@@ -48,7 +55,8 @@ namespace PoeHUD.Controllers
         public IEnumerable<EntityWrapper> Entities => EntityListWrapper.Entities;
         //This need for pause coroutines from plugins when it disabled
         public readonly Dictionary<string,SettingsBase> pluginsSettings = new Dictionary<string, SettingsBase>();
-        
+      
+
         public EntityWrapper Player => EntityListWrapper.Player;
         public bool InGame { get; private set; }
         public bool IsLoading { get; private set; }

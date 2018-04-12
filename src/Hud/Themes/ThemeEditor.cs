@@ -85,7 +85,7 @@ namespace PoeHUD.Hud.Themes
         internal override void DrawSettingsMenu()
         {
             #region
-            var newSelectedTheme = ImGuiExtension.ComboBox("Select Theme", SelectedThemeName, MainMenuWindow.Settings.Theme.Values);
+            var newSelectedTheme = ImGuiExtension.ComboBox("Select Theme", "Themes", SelectedThemeName, MainMenuWindow.Settings.Theme.Values);
             if(SelectedThemeName != newSelectedTheme)
             {
                 SelectedThemeName = newSelectedTheme;

@@ -6,7 +6,7 @@ namespace PoeHUD.Poe.Elements
         public virtual int InventPosY => M.ReadInt(Address + 0xb74);
         public Entity Item => ReadObject<Entity>(Address + 0xB68);
         public ToolTipType toolTipType => ToolTipType.InventoryItem;
-        public Element ToolTip => ReadObject<Element>(Address + 0xB10);
+        public Element ToolTip => ReadObject<Element>(Address + 0xB18);
 
     }
 }

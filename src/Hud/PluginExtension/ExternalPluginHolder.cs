@@ -45,18 +45,21 @@ namespace PoeHUD.Hud.PluginExtension
 
         internal override bool CanBeEnabledInOptions { get => BPlugin != null && BPlugin.CanPluginBeEnabledInOptions;  }
 
-        DateTime lastChangedEvent = DateTime.MinValue;
+        DateTime lastWrite = DateTime.MinValue;
         private void DllChanged(object sender, FileSystemEventArgs e)
         {
-            if (e.FullPath != DllPath) return;//Watchin only dll file
             if (!MainMenuWindow.Settings.AutoReloadDllOnChanges.Value) return;
+            if (e.FullPath != DllPath) return;//Watchin only dll file
 
             //Events being raised multiple times https://stackoverflow.com/questions/1764809/filesystemwatcher-changed-event-is-raised-twice
-            if ((DateTime.Now - lastChangedEvent).TotalSeconds < 1)
+            DateTime lastWriteTime = File.GetLastWriteTime(e.FullPath);
+            if (Math.Abs((lastWriteTime - lastWrite).TotalSeconds) < 1)
+            {
                 return;
-
-            lastChangedEvent = DateTime.Now;
+            }
+            lastWrite = lastWriteTime;
        
+
             if (!File.Exists(DllPath))
             {
                 State = PluginState.Reload_DllNotFound;

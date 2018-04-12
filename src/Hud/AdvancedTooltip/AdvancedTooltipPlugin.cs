@@ -83,10 +83,18 @@ namespace PoeHUD.Hud.AdvancedTooltip
                     itemEntity = poeEntity;
                 }
 
+                int t1 = 0;
                 foreach (string tier in from item in mods where item.CouldHaveTiers() && item.Tier == 1 select " \u2605 ")
                 {
-                    Graphics.DrawText(tier, 18, tooltipRect.TopLeft.Translate(0, 56), Settings.ItemMods.T1Color);
+                    Graphics.DrawText(tier, 18, tooltipRect.TopLeft.Translate(0 + 14 * t1++, 56), Settings.ItemMods.T1Color);
                 }
+
+                int t2 = 0;
+                foreach (string tier in from item in mods where item.CouldHaveTiers() && item.Tier == 2 select " \u2605 ")
+                {
+                    Graphics.DrawText(tier, 18, tooltipRect.TopLeft.Translate(t1 * 14 + 14 * t2++, 56), Settings.ItemMods.T2Color);
+                }
+
                 if (Settings.ItemLevel.Enable)
                 {
                     string itemLevel = Convert.ToString(modsComponent.ItemLevel);

@@ -104,8 +104,8 @@ namespace PoeHUD.DebugPlug
             }
 
             rezult = new DisplayMessage(message, delay, color);
-            MessagesCache.Add(message, rezult);
-            DebugLog.Add(rezult);
+            MessagesCache?.Add(message, rezult);
+            DebugLog?.Add(rezult);
         }
        
         public class DisplayMessage

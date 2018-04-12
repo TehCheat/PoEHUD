@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PoeHUD.Controllers;
 using System.Runtime.InteropServices;
+using PoeHUD.Poe.RemoteMemoryObjects;
 
 namespace PoeHUD.Framework
 {
@@ -20,7 +21,7 @@ namespace PoeHUD.Framework
         private readonly Dictionary<string, int> modules;
         private bool closed;
         public Offsets offsets;
-        private IntPtr procHandle;
+        public IntPtr procHandle;
 
         public Memory(Offsets offs, int pId)
         {
@@ -157,6 +158,8 @@ namespace PoeHUD.Framework
             return num > 0 ? text.Substring(0, num) : text;
         }
 
+        public string ReadNativeString(long addr) => NativeStringReader.ReadString(addr);
+
         /// <summary>
         /// Read string as Unicode
         /// </summary>
@@ -225,19 +228,39 @@ namespace PoeHUD.Framework
         }
 
         //I hope in future all of this next shit will be replaced with GrayMagic:
-        public List<T> ReadStructsArray<T>(long startAddress, long endAddress, int structSize) where T : RemoteMemoryObject, new()
+        public List<T> ReadStructsArray<T>(long startAddress, long endAddress, int structSize, int maxCountLimit) where T : RemoteMemoryObject, new()
         {
             var result = new List<T>();
+            var range = endAddress - startAddress;
+            if (range < 0 || range / structSize > maxCountLimit)
+            {
+                if(PoeHUD.Hud.MainMenuWindow.Settings.DeveloperMode.Value)
+                    DebugPlug.DebugPlugin.LogMsg($"Fixed possible memory leak while reading array of struct '{typeof(T).Name}'", 1, SharpDX.Color.Yellow);
+                return result;
+            }
+
             for (var address = startAddress; address < endAddress; address += structSize)
                 result.Add(GameController.Instance.Game.GetObject<T>(address));
             return result;
         }
 
-        public List<T> ReadClassesArray<T>(long startAddress, long endAddress, int structSize) where T : RemoteMemoryObject, new()
+        public List<T> ReadDoublePtrVectorClasses<T>(long address, bool noNullPointers = false) where T : RemoteMemoryObject, new()
         {
+            var start = ReadLong(address);
+            //var end = ReadLong(address + 0x8);
+            var last = ReadLong(address + 0x10);
+
+            var length = (int)(last - start);
+            var bytes = ReadBytes(start, length);
+
             var result = new List<T>();
-            for (var address = startAddress; address < endAddress; address += structSize)
-                result.Add(GameController.Instance.Game.ReadObject<T>(address));
+            for (int readOffset = 0; readOffset < length; readOffset += 16)
+            {
+                var pointer = BitConverter.ToInt64(bytes, readOffset);
+                if (pointer == 0 && noNullPointers)
+                    continue;
+                result.Add(GameController.Instance.Game.GetObject<T>(pointer));
+            }
             return result;
         }
 

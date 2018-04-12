@@ -81,6 +81,8 @@ namespace PoeHUD.Hud.Menu
             return GameController.Game.IngameState.UIHoverTooltip.Address != 0x00;
         }
 
+
+
         #region KeyboardMouseHandler
         private void KeyboardMouseEvents_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -106,10 +108,21 @@ namespace PoeHUD.Hud.Menu
             io.ShiftPressed = false;
             io.KeysDown[e.KeyValue] = false;
         }
+
+        public static bool HandleForKeySelector = false;
+        public static Keys HandledForKeySelectorKey;
         private void KeyboardMouseEvents_KeyDown(object sender, KeyEventArgs e)
         {
             if (isPoeGameVisible)
             {
+                if (HandleForKeySelector)
+                {
+                    HandledForKeySelectorKey = e.KeyCode;
+                    e.Handled = true;
+                    HandleForKeySelector = false;
+                    return;
+                }
+
                 if (e.KeyCode == Settings.MainMenuKeyToggle)
                 {
                     Settings.Enable.Value = !Settings.Enable.Value;
@@ -132,6 +145,7 @@ namespace PoeHUD.Hud.Menu
                     }
                 }
             }
+
             var io = ImGui.GetIO();
             io.CtrlPressed = e.Control || e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey;
             // Don't know why but Alt is LMenu/RMenu
@@ -145,6 +159,7 @@ namespace PoeHUD.Hud.Menu
             {
                 if (ImGuiWantTextInput(io))
                 {
+               
                     io.KeysDown[e.KeyValue] = true;
                     if(e.KeyCode != Keys.Capital &&
                         e.KeyCode != Keys.LShiftKey && e.KeyCode != Keys.RShiftKey &&

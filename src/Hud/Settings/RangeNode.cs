@@ -27,7 +27,7 @@ namespace PoeHUD.Hud.Settings
                     _value = value;
                     try
                     {
-                        OnValueChanged?.Invoke();
+                        OnValueChanged();
                     }
                     catch (Exception)
                     {
@@ -37,8 +37,8 @@ namespace PoeHUD.Hud.Settings
                 }
             }
         }
-
-        public event Action OnValueChanged;
+        
+        public event Action OnValueChanged = delegate { };
 
         [JsonIgnore]
         public T Min { get; set; }

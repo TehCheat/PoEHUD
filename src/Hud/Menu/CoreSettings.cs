@@ -56,5 +56,8 @@ namespace PoeHUD.Hud.Menu
 
         [Menu("Show plugins Render Time", 103, 102)]
         public ToggleNode ShowPluginsMS { get; set; } = false;
+
+        [Menu("Use State Controller (BETA)", "Everything should works same, even better, but if you got some bugs - don't use it")]
+        public ToggleNode UseStateController { get; set; } = false;
     }
 }

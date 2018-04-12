@@ -68,5 +68,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                 name = name.Substring(0, ixDigits);
             }
         }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Value1}, {Value2}, {Value3}, {Value4}";
+        }
     }
 }

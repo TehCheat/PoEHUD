@@ -13,8 +13,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
     {
         public int Width => M.ReadInt(Address + 0x4);
         public int Height => M.ReadInt(Address + 0x8);
-        public float ZFar => M.ReadFloat(Address + 0x204);
-        public Vector3 Position => new Vector3(M.ReadFloat(Address + 0x15C), M.ReadFloat(Address + 0x160), M.ReadFloat(Address + 0x164));
+        public float ZFar => M.ReadFloat(Address + 0x1FC);
+        public Vector3 Position => new Vector3(M.ReadFloat(Address + 0x154), M.ReadFloat(Address + 0x158), M.ReadFloat(Address + 0x15C));
 
         //cameraarray 0x17c
 
@@ -29,7 +29,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             isMoving = GameController.Instance.Cache.Enable ? GameController.Instance.Cache.Player.Actor.isMoving : localPlayer.GetComponent<Actor>().isMoving;
             var playerMoving = isplayer && isMoving;
             float x, y;
-            long addr = Address + 0xE4;
+            long addr = Address + 0xDC;
             fixed (byte* numRef = M.ReadBytes(addr, 0x40))
             {
                 Matrix4x4 matrix = *(Matrix4x4*)numRef;

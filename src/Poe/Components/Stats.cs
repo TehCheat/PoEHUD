@@ -7,7 +7,7 @@ namespace PoeHUD.Poe.Components
     public class Stats : Component
     {
         //Stats goes as sequence of 2 values, 4 byte each. First goes stat ID then goes stat value
-        public Dictionary<PlayerStats, int> StatDictionary
+        public Dictionary<GameStat, int> StatDictionary
         {
             get
             {
@@ -18,12 +18,12 @@ namespace PoeHUD.Poe.Components
                 int value = 0;
                 int total_stats = (int)(statPtrEnd - statPtrStart);
                 var bytes = M.ReadBytes(statPtrStart, total_stats);
-                var result = new Dictionary<PlayerStats, int>(total_stats / 8);
+                var result = new Dictionary<GameStat, int>(total_stats / 8);
                 for (int i = 0; i < bytes.Length; i += 8)
                 {
                     key = BitConverter.ToInt32(bytes, i);
                     value = BitConverter.ToInt32(bytes, i + 0x04);
-                    result[(PlayerStats)key] = value;
+                    result[(GameStat)key] = value;
                 }
                 return result;
             }

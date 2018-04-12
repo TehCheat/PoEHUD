@@ -39,11 +39,16 @@ namespace PoeHUD.Hud
         private InbuildPluginMenu CoreMenu;
         public static CoreSettings Settings;
         private readonly SettingsHub SettingsHub;
-
+        private string PoeHUDVersion;
         public MainMenuWindow(CoreSettings settings, SettingsHub settingsHub)
         {
             Settings = settings;
             SettingsHub = settingsHub;
+            
+            //https://stackoverflow.com/questions/826777/how-to-have-an-auto-incrementing-version-number-visual-studio
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            //DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+            PoeHUDVersion = $"v{version.Major}.{version.Minor}.{version.Build}";
 
             if (Settings.MenuWindowSize == ImGuiVector2.Zero)
             {
@@ -99,7 +104,7 @@ namespace PoeHUD.Hud
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Perfomance", settingsHub.PerformanceSettings) });
 
 
-        
+
             var themeEditorDraw = new ThemeEditor();
             themeEditorDraw.CanBeEnabledInOptions = false;
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = themeEditorDraw });
@@ -112,13 +117,12 @@ namespace PoeHUD.Hud
             public List<InbuildPluginMenu> Childs = new List<InbuildPluginMenu>();
         }
 
-        
         public void Render()
         {
             if (!Settings.Enable.Value) return;
 
             var opened = Settings.Enable.Value;
-            Settings.IsCollapsed = !DrawInfoWindow("PoeHUD", ref opened,
+            Settings.IsCollapsed = !DrawInfoWindow("PoeHUD  " + PoeHUDVersion, ref opened,
                 Settings.MenuWindowPos.X, Settings.MenuWindowPos.Y, Settings.MenuWindowSize.X, Settings.MenuWindowSize.Y,
                  WindowFlags.Default, Condition.Appearing);
             Settings.Enable.Value = opened;

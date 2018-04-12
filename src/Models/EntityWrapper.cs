@@ -55,6 +55,15 @@ namespace PoeHUD.Models
             get
             {
                 var p = GetComponent<Render>();
+                return new Vector3(p.X, p.Y, p.Z + p.Bounds.Z);
+            }
+        }
+
+        public Vector3 BoundsCenterPos
+        {
+            get
+            {
+                var p = GetComponent<Render>();
                 return new Vector3(p.X, p.Y, p.Z);
             }
         }

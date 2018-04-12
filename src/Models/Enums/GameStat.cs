@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel;
-using System;
 
 namespace PoeHUD.Models.Enums
 {
-    [Obsolete("Use GameStat instead")]
-    public enum PlayerStats
+    public enum GameStat
     {
         [Description("Level")]
         Level = 1,

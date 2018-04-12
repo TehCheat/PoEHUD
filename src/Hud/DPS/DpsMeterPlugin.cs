@@ -18,11 +18,14 @@ namespace PoeHUD.Hud.Dps
         private const double DPS_PERIOD = 0.2;
         private DateTime lastTime;
         private readonly Dictionary<long, int> lastMonsters = new Dictionary<long, int>();
-        private double MaxDps;
-        private double CurrentDps;
-        private double CurrentDmg;
-        private double[] damageMemory = new double[5];
-        private int damageMemoryIndex;
+        private double MaxDpsAoe;
+        private double MaxDpsSingle;
+        private double CurrentDpsAoe;
+        private double CurrentDpsSingle;
+        private double CurrentDmgAoe;
+        private double CurrentDmgSingle;
+        private double[] SingleDamageMemory = new double[5];
+        private double[] AOEDamageMemory = new double[5];
 
         public DpsMeterPlugin(GameController gameController, Graphics graphics, DpsMeterSettings settings)
             : base(gameController, graphics, settings)
@@ -38,12 +41,16 @@ namespace PoeHUD.Hud.Dps
 
         private void Clear()
         {
-            MaxDps = 0;
-            CurrentDps = 0;
-            CurrentDmg = 0;
+            MaxDpsAoe = 0;
+            MaxDpsSingle = 0;
+            CurrentDpsAoe = 0;
+            CurrentDpsSingle = 0;
+            CurrentDmgAoe = 0;
+            CurrentDmgSingle = 0;
             lastMonsters.Clear();
             lastTime = DateTime.Now;
-            damageMemory = new double[5];
+            SingleDamageMemory = new double[5];
+            AOEDamageMemory = new double[5];
             lastMonsters.Clear();
         }
 
@@ -59,19 +66,26 @@ namespace PoeHUD.Hud.Dps
             TimeSpan elapsedTime = nowTime - lastTime;
             if (elapsedTime.TotalSeconds > DPS_PERIOD)
             {
-                damageMemoryIndex++;
-                if (damageMemoryIndex >= damageMemory.Length)
-                {
-                    damageMemoryIndex = 0;
-                }
-                var curDmg = CalculateDps(Settings.CalcAOE);
-                damageMemory[damageMemoryIndex] = curDmg;
+                CalculateDps(out var aoe, out var single);
 
-                if (curDmg > 0)
-                {
-                    CurrentDmg = curDmg;
-                    CurrentDps = damageMemory.Sum();
-                    MaxDps = Math.Max(CurrentDps, MaxDps);
+                //Shift array
+                //{ 1, 2, 3, 4, 5 }
+                //{ 0, 1, 2, 3, 4 }
+                Array.Copy(AOEDamageMemory, 0, AOEDamageMemory, 1, AOEDamageMemory.Length - 1);
+                Array.Copy(SingleDamageMemory, 0, SingleDamageMemory, 1, SingleDamageMemory.Length - 1);
+
+                AOEDamageMemory[0] = aoe;
+                SingleDamageMemory[0] = single;
+
+                if (single > 0)
+                { 
+                    CurrentDmgAoe = aoe;
+                    CurrentDmgSingle = single;
+                    CurrentDpsAoe = AOEDamageMemory.Sum();
+                    CurrentDpsSingle = SingleDamageMemory.Sum();
+
+                    MaxDpsAoe = Math.Max(CurrentDpsAoe, MaxDpsAoe);
+                    MaxDpsSingle = Math.Max(CurrentDpsSingle, MaxDpsSingle);
                 }
 
                 lastTime = nowTime;
@@ -79,12 +93,26 @@ namespace PoeHUD.Hud.Dps
 
             Vector2 position = StartDrawPointFunc();
 
-            Size2 dpsSize = Graphics.DrawText(CurrentDps + " dps", Settings.DpsTextSize, position, Settings.DpsFontColor, FontDrawFlags.Right);
-            Size2 peakSize = Graphics.DrawText(MaxDps + " top dps", Settings.PeakDpsTextSize, position.Translate(0, dpsSize.Height), Settings.PeakFontColor, FontDrawFlags.Right);
 
-            int width = Math.Max(peakSize.Width, dpsSize.Width);
-            int height = dpsSize.Height + peakSize.Height;
-            var bounds = new RectangleF(position.X - 5 - width - 41, position.Y - 5, width + 50, height + 10);
+            string layoutFix = Settings.ShowAOE.Value ? "      " : "";
+            int offsetY = 0;
+            if (Settings.ShowCurrentHitDamage.Value)
+            {
+                if(Settings.ShowAOE.Value)
+                offsetY += Graphics.DrawText($"{CurrentDmgAoe}{layoutFix}  aoe hit", Settings.TextSize, position, Settings.DpsFontColor, FontDrawFlags.Right).Height;
+                offsetY += Graphics.DrawText($"{CurrentDmgSingle}{layoutFix}        hit", Settings.TextSize, position.Translate(0, offsetY), Settings.PeakFontColor, FontDrawFlags.Right).Height;
+            }
+
+            if (Settings.ShowAOE.Value)
+                offsetY += Graphics.DrawText($"{CurrentDpsAoe}{layoutFix} aoe dps", Settings.TextSize, position.Translate(0, offsetY), Settings.PeakFontColor, FontDrawFlags.Right).Height;
+            offsetY += Graphics.DrawText($"{CurrentDpsSingle}{layoutFix}       dps", Settings.TextSize, position.Translate(0, offsetY), Settings.PeakFontColor, FontDrawFlags.Right).Height;
+
+            if (Settings.ShowAOE.Value)
+                offsetY += Graphics.DrawText($"{MaxDpsAoe} max aoe dps", Settings.TextSize, position.Translate(0, offsetY), Settings.PeakFontColor, FontDrawFlags.Right).Height;
+            offsetY += Graphics.DrawText($"{MaxDpsSingle}{layoutFix} max dps", Settings.TextSize, position.Translate(0, offsetY), Settings.PeakFontColor, FontDrawFlags.Right).Height;
+
+            var width = 150;
+            var bounds = new RectangleF(position.X - 5 - width - 41, position.Y - 5, width + 50, offsetY + 10);
 
             Graphics.DrawImage("preload-start.png", bounds, Settings.BackgroundColor);
             Graphics.DrawImage("preload-end.png", bounds, Settings.BackgroundColor);
@@ -93,13 +121,33 @@ namespace PoeHUD.Hud.Dps
             Margin = new Vector2(0, 5);
         }
 
-        private double CalculateDps(bool aoe)
+        private List<EntityWrapper> CachedMonsters = new List<EntityWrapper>();
+        protected override void OnEntityAdded(EntityWrapper entityWrapper)
         {
-            int totalDamage = 0;
-            foreach (EntityWrapper monster in GameController.Entities.Where(x => x.HasComponent<Monster>() && x.IsHostile))
+            if (!entityWrapper.HasComponent<Monster>() || !entityWrapper.IsHostile || !entityWrapper.IsAlive) return;
+
+            if (!CachedMonsters.Contains(entityWrapper))
+                CachedMonsters.Add(entityWrapper);
+        }
+
+        protected override void OnEntityRemoved(EntityWrapper entityWrapper)
+        {
+            CachedMonsters.Remove(entityWrapper);
+        }
+
+        private void CalculateDps(out int aoeDamage, out int singleDamage)
+        {
+            aoeDamage = 0;
+            singleDamage = 0;
+            foreach (var monster in CachedMonsters)
             {
                 var life = monster.GetComponent<Life>();
+                if(!monster.IsAlive && Settings.HasCullingStrike.Value)
+                {
+                    continue;
+                }
                 int hp = monster.IsAlive ? life.CurHP + life.CurES : 0;
+
                 if (hp > -1000000 && hp < 10000000)
                 {
                     int lastHP;
@@ -107,16 +155,14 @@ namespace PoeHUD.Hud.Dps
                     {
                         if (lastHP != hp)
                         {
-                            if (aoe)
-                                totalDamage += lastHP - hp;
-                            else
-                                totalDamage = Math.Max(totalDamage, lastHP - hp);
+                            int dmg = lastHP - hp;
+                            aoeDamage += dmg;
+                            singleDamage = Math.Max(singleDamage, dmg);
                         }
                     }
                     lastMonsters[monster.Id] = hp;
                 }
             }
-            return totalDamage < 0 ? 0 : totalDamage;
         }
     }
 }

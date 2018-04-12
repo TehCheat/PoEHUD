@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PoeHUD.Poe.Components
 {
-    public class Animated : Component
+    public class ClientAnimationController : Component
     {
-        public Entity BaseAnimatedObjectEntity => GetObject<Entity>(M.ReadLong(Address + 0x78));
+        public int AnimKey => M.ReadInt(Address + 0x9c);
     }
 }

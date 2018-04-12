@@ -68,7 +68,7 @@ namespace PoeHUD.Hud.PluginExtension
                     //We are not going to make IF on this childs coz we don't want inteface jumping while scrollings
                     ImGui.BeginChild($"##{ChildUniqId++}", new Vector2(newcontentRegionArea.X, drawer.ChildHeight + 40), true, WindowFlags.NoScrollWithMouse);
 
-                    drawer.Draw();
+                    drawer.DrawWithTooltip();
                     childSize += 30;
                     ImGui.Text("    ");
                     ImGui.SameLine();
@@ -77,13 +77,13 @@ namespace PoeHUD.Hud.PluginExtension
                     ImGui.BeginChild($"##{ChildUniqId++}", new Vector2(newcontentRegionArea2.X, drawer.ChildHeight), false, WindowFlags.NoScrollWithMouse);
 
                     DrawSettingsRecursively(drawer.Children, drawer);
-                    childSize += drawer.ChildHeight + 10;
+                    childSize += drawer.ChildHeight + 15;
                     ImGui.EndChild();
                     ImGui.EndChild();
                 }
                 else
                 {
-                    drawer.Draw();
+                    drawer.DrawWithTooltip();
                     childSize += 21;
                 }
             }
@@ -276,6 +276,7 @@ namespace PoeHUD.Hud.PluginExtension
                     if (drawer != null)
                     {
                         drawer.SettingName = menuAttrib.MenuName;
+                        drawer.SettingTooltip = menuAttrib.Tooltip;
 
                         if (menuAttrib.index == -1)
                             drawer.SettingId = GetUniqDrawerId();

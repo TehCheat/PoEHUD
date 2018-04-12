@@ -132,8 +132,8 @@
       <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PoeFilterParser, Version=1.0.22.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\PoeFilterParser.1.0.22\lib\net46\PoeFilterParser.dll</HintPath>
+    <Reference Include="PoeFilterParser, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PoeFilterParser.1.0.24\lib\net46\PoeFilterParser.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\FsController.cs" />
+    <Compile Include="Controllers\GameStateController.cs" />
     <Compile Include="Framework\Aero.cs" />
     <Compile Include="Framework\ChooseColor.cs" />
     <Compile Include="Framework\Coroutine.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Hud\Settings\HotkeyNode.cs" />
     <Compile Include="Hud\Settings\ListNode.cs" />
     <Compile Include="Hud\Settings\StashTabNode.cs" />
+    <Compile Include="Hud\Settings\TextNode.cs" />
     <Compile Include="Hud\SizedPlugin.cs" />
     <Compile Include="Hud\SizedPluginWithMapIcons.cs" />
     <Compile Include="Controllers\StashTabController.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Models\CacheComponent\PlayerCache.cs" />
     <Compile Include="Models\ConfigLineBase.cs" />
     <Compile Include="Models\Enums\DiagnosticInfoType.cs" />
+    <Compile Include="Models\Enums\GameStat.cs" />
     <Compile Include="Models\Enums\InventoryType.cs" />
     <Compile Include="Models\Enums\PlayerStats.cs" />
     <Compile Include="Models\ItemClass.cs" />
@@ -279,6 +282,7 @@
     <Compile Include="Plugins\BaseSettingsPlugin.cs" />
     <Compile Include="Plugins\MenuAttribute.cs" />
     <Compile Include="Poe\Components\Animated.cs" />
+    <Compile Include="Poe\Components\AnimatedComponents\ClientAnimationController.cs" />
     <Compile Include="Poe\Components\Portal.cs" />
     <Compile Include="Poe\Components\Prophecy.cs" />
     <Compile Include="Poe\Extensions.cs" />
@@ -287,7 +291,9 @@
     <Compile Include="Poe\FilesInMemory\BestiaryCapturableMonsters.cs" />
     <Compile Include="Poe\FilesInMemory\MonsterVarieties.cs" />
     <Compile Include="Poe\FilesInMemory\QuestStates.cs" />
+    <Compile Include="Poe\Pathfinding.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\AreaTemplate.cs" />
+    <Compile Include="Poe\RemoteMemoryObjects\AtlasNode.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\BestiaryCapturableMonster.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\BestiaryFamily.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\BestiaryGroup.cs" />
