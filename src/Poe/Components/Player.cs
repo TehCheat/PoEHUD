@@ -14,7 +14,6 @@ namespace PoeHUD.Poe.Components
     public class Player : Component
     {
         public string PlayerName => GetObject<NativeStringReader>(Address + 0x20).Value;
-
         public uint XP => Address != 0 ? M.ReadUInt(Address + 0x48) : 0;
 		public int Strength => Address != 0 ? M.ReadInt(Address + 0x4c) : 0;
 		public int Dexterity => Address != 0 ? M.ReadInt(Address + 0x50) : 0;

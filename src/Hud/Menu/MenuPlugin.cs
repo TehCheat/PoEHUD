@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
 using ImGuiNET;
 using PoeHUD.Controllers;
-using PoeHUD.Framework;
-using PoeHUD.Hud.Health;
-using PoeHUD.Hud.Loot;
 using PoeHUD.Hud.Settings;
 using PoeHUD.Hud.UI;
 using SharpDX;
@@ -48,6 +44,7 @@ namespace PoeHUD.Hud.Menu
             KeyboardMouseEvents.KeyPress -= KeyboardMouseEvents_KeyPress;
             KeyboardMouseEvents.MouseDownExt -= KeyboardMouseEvents_MouseDownExt;
             KeyboardMouseEvents.MouseUpExt -= KeyboardMouseEvents_MouseUpExt;
+            KeyboardMouseEvents.MouseMove -= KeyboardMouseEvents_MouseMove;
             KeyboardMouseEvents.Dispose();
         }
 
