@@ -450,7 +450,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)packages\ImGui.NET.0.4.0\runtimes\win-x64\native\cimgui.dll" "$(TargetDir)" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
