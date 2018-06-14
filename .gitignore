@@ -77,3 +77,4 @@ bld/
 *.sln.iml
 
 settings.json
+src/.vs/
