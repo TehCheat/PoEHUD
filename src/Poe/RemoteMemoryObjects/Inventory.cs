@@ -57,9 +57,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                 case InventoryType.FragmentStash:
                     return this.AsObject<Element>().Parent;
                 case InventoryType.DivinationStash:
+                    // There are many children  but we are only interested in one of them i.e. Owned Cards
                     return GetObject<Element>(M.ReadLong(Address + Element.OffsetBuffers + 0x24, 0x08));
                 case InventoryType.MapStash:
-                    return this.AsObject<Element>().Parent.Children[3];
+                    return this.AsObject<Element>().Parent;
                 default:
                     return null;
             }
@@ -143,7 +144,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                         }
                         break;
                     case InventoryType.MapStash:
-                        foreach (var subInventories in InvRoot.Children)
+                        // Children[3] is where all the inventories are, rest of the childrens are just buttons.
+                        foreach (var subInventories in InvRoot.Children[3].Children)
                         {
                             // VisibleInventoryItems would only be found in Visible Sub Inventory :p
                             if (!subInventories.IsVisible)
