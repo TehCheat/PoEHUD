@@ -284,6 +284,7 @@
     <Compile Include="Poe\Components\AnimatedComponents\ClientAnimationController.cs" />
     <Compile Include="Poe\Components\Portal.cs" />
     <Compile Include="Poe\Components\Prophecy.cs" />
+    <Compile Include="Poe\Elements\InventoryElements\MapStashTabElement.cs" />
     <Compile Include="Poe\Extensions.cs" />
     <Compile Include="Poe\FilesInMemory\PropheciesDat.cs" />
     <Compile Include="Poe\FilesInMemory\Base\UniversalFileWrapper.cs" />
