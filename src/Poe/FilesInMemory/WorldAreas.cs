@@ -28,6 +28,11 @@ namespace PoeHUD.Poe.FilesInMemory
             return area;
         }
 
+        public WorldArea GetAreaByAreaId(string id)
+        {
+            CheckCache();
+            return AreasIndexDictionary.Where(area => area.Value.Id == id).First().Value;
+        }
         private int IndexCounter;
         protected override void EntryAdded(long addr, WorldArea entry)
         {

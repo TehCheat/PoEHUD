@@ -54,6 +54,7 @@ namespace PoeHUD.Hud.Loot
             var blocks = context.block();
             var mods = entity.GetComponent<Mods>();
             var isSkillHGem = entity.HasComponent<SkillGem>();
+            var SkillGemLevel = isSkillHGem ? entity.GetComponent<SkillGem>().GemLevel : 0;
             var isMap = entity.HasComponent<Map>();
 			var stackSize = entity.GetComponent<Stack>().Size;
 
@@ -118,9 +119,9 @@ namespace PoeHUD.Hud.Loot
                 var borderWidth = defaultBorderWidth;
                 var sound = -1;
                 var statements = block.statement();
-				var poeGemLevelCondition = true;
-				var poeStackSizeCondition = true;
-				var poeHasExplicitModCondition = true;
+                var poeGemLevelCondition = true;
+                var poeStackSizeCondition = true;
+                var poeHasExplicitModCondition = true;
 
                 foreach (var statement in statements)
                 {
@@ -295,6 +296,15 @@ namespace PoeHUD.Hud.Loot
 																												poeHasExplicitModCondition &= poeExplicitModContext.@params()
 																													.strValue().Any(y => explicitMods.Contains(GetRawText(y)));
 																											}
+                                                                                                            else
+                                                                                                            {
+                                                                                                                var poeGemSkillContext = statement.poeGemLevel();
+                                                                                                                if (poeGemSkillContext != null)
+                                                                                                                {
+                                                                                                                    poeGemLevelCondition &= CalculateDigitsCondition(poeGemSkillContext.compareOpNullable(),
+                                                                                                                        poeGemSkillContext.digitsParams(), SkillGemLevel);
+                                                                                                                }
+                                                                                                            }
 																										}
 																									}
                                                                                                 }

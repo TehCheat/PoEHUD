@@ -284,12 +284,14 @@
     <Compile Include="Poe\Components\AnimatedComponents\ClientAnimationController.cs" />
     <Compile Include="Poe\Components\Portal.cs" />
     <Compile Include="Poe\Components\Prophecy.cs" />
+    <Compile Include="Poe\Elements\InventoryElements\MapStashTabElement.cs" />
     <Compile Include="Poe\Extensions.cs" />
     <Compile Include="Poe\FilesInMemory\PropheciesDat.cs" />
     <Compile Include="Poe\FilesInMemory\Base\UniversalFileWrapper.cs" />
     <Compile Include="Poe\FilesInMemory\MonsterVarieties.cs" />
     <Compile Include="Poe\FilesInMemory\QuestStates.cs" />
     <Compile Include="Poe\Pathfinding.cs" />
+    <Compile Include="Poe\RemoteMemoryObjects\ActorVaalSkill.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\AreaTemplate.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\AtlasNode.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\Labyrinth\LabyrinthData.cs" />

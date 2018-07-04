@@ -30,7 +30,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 
         public bool IsAtlasMap => Id.StartsWith("MapAtlas");
         public bool IsMapWorlds => Id.StartsWith("MapWorlds");
-        public bool IsCorruptedArea => Id.Contains("SideArea");
+        public bool IsCorruptedArea => Id.Contains("SideArea") || Id.Contains("Sidearea");
         public bool IsMissionArea => Id.Contains("Mission");
         public bool IsDailyArea => Id.Contains("Daily");
         public bool IsMapTrialArea => Id.StartsWith("EndGame_Labyrinth_trials");

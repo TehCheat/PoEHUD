@@ -69,13 +69,13 @@ namespace PoeHUD.Hud.Loot
                 }
                 else
                 {
-                    Settings.Alternative.Value = false;
+                    Settings.ShouldUseFilterFile.Value = false;
                 }
             }
             catch (SyntaxErrorException ex)
             {
                 Settings.FilePath.Value = string.Empty;
-                Settings.Alternative.Value = false;
+                Settings.ShouldUseFilterFile.Value = false;
                 MessageBox.Show($"Line: {ex.Line}:{ex.CharPositionInLine}, " +
                                 $"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 visitor = null;
@@ -83,7 +83,7 @@ namespace PoeHUD.Hud.Loot
             catch (Exception ex)
             {
                 Settings.FilePath.Value = string.Empty;
-                Settings.Alternative.Value = false;
+                Settings.ShouldUseFilterFile.Value = false;
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -117,58 +117,13 @@ namespace PoeHUD.Hud.Loot
                 const int BOTTOM_MARGIN = 2;
                 bool shouldUpdate = false;
 
-                if (Settings.BorderSettings.Enable)
-                {
-                    Dictionary<EntityWrapper, AlertDrawStyle> tempCopy = new Dictionary<EntityWrapper, AlertDrawStyle>(currentAlerts);
-                    var keyValuePairs = tempCopy.AsParallel().Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid).ToList();
-                    foreach (var kv in keyValuePairs)
-                    {
-                        if (DrawBorder(kv.Key.Address) && !shouldUpdate)
-                        {
-                            shouldUpdate = true;
-                        }
-                    }
-                }
-                var currentAlertsArray = currentAlerts.Where(x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid).ToArray();
-                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in currentAlertsArray)
-                {
-                    //
-                    //                       _oo0oo_
-                    //                      o8888888o
-                    //                      88" . "88
-                    //                      (| -_- |)
-                    //                      0\  =  /0
-                    //                    ___/`---'\___
-                    //                  .' \\|     |// '.
-                    //                 / \\|||  :  |||// \
-                    //                / _||||| -:- |||||- \
-                    //               |   | \\\  -  /// |   |
-                    //               | \_|  ''\---/''  |_/ |
-                    //               \  .-\__  '-'  ___/-. /
-                    //             ___'. .'  /--.--\  `. .'___
-                    //          ."" '<  `.___\_<|>_/___.' >' "".
-                    //         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-                    //         \  \ `_.   \_ __\ /__ _/   .-` /  /
-                    //     =====`-.____`.___ \_____/___.-`___.-'=====
-                    //                       `=---='
-                    //
-                    //
-                    //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    //feature! until not be fixed offsets
-                    string text = "";
-                    if (true)
-                    {
-                        text = kv.Value.Text; 
-                    }
-                    else
-                    {
-                        text = GetItemName(kv);
-                    }
+                var validAlerts = currentAlerts.ToList().Where(
+                    x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid);
 
-                    if (text == null)
-                    {
+                foreach (KeyValuePair<EntityWrapper, AlertDrawStyle> kv in validAlerts)
+                {
+                    if (string.IsNullOrEmpty(kv.Value.Text))
                         continue;
-                    }
 
                     ItemsOnGroundLabelElement entityLabel;
                     if (!currentLabels.TryGetValue(kv.Key.Address, out entityLabel))
@@ -177,48 +132,41 @@ namespace PoeHUD.Hud.Loot
                     }
                     else
                     {
+                        if (Settings.BorderSettings.Enable)
+                            DrawBorder(entityLabel);
+
                         if (Settings.ShowText)
                         {
-                            if (Settings.HideOthers)
+                            if (entityLabel.CanPickUp || entityLabel.MaxTimeForPickUp.TotalSeconds == 0)
                             {
-                                if (entityLabel.CanPickUp || entityLabel.MaxTimeForPickUp.TotalSeconds == 0)
-                                {
-                                    position = DrawText(playerPos, position, BOTTOM_MARGIN, kv, text);
-                                }
+                                position = DrawText(playerPos, position, BOTTOM_MARGIN, kv, kv.Value.Text);
                             }
-                            else
+                            else if (!Settings.HideOthers)
                             {
-                                if (entityLabel.CanPickUp || entityLabel.MaxTimeForPickUp.TotalSeconds == 0)
+                                // get current values
+                                Color TextColor = kv.Value.TextColor;
+                                Color BorderColor = kv.Value.BorderColor;
+                                Color BackgroundColor = kv.Value.BackgroundColor;
+
+                                if (Settings.DimOtherByPercentToggle)
                                 {
-                                    position = DrawText(playerPos, position, BOTTOM_MARGIN, kv, text);
+                                    // edit values to new ones
+                                    double ReduceByPercent = (double)Settings.DimOtherByPercent / 100;
+
+                                    TextColor = ReduceNumbers(TextColor, ReduceByPercent);
+                                    BorderColor = ReduceNumbers(BorderColor, ReduceByPercent);
+                                    BackgroundColor = ReduceNumbers(BackgroundColor, ReduceByPercent);
+
+                                    // backgrounds with low alpha start to look a little strange when dark so im adding an alpha threshold
+                                    if (BackgroundColor.A < 210)
+                                        BackgroundColor.A = 210;
                                 }
-                                else
-                                {
-                                    // get current values
-                                    Color TextColor = kv.Value.TextColor;
-                                    Color BorderColor = kv.Value.BorderColor;
-                                    Color BackgroundColor = kv.Value.BackgroundColor;
 
-                                    if (Settings.DimOtherByPercentToggle)
-                                    {
-                                        // edit values to new ones
-                                        double ReduceByPercent = (double)Settings.DimOtherByPercent / 100;
+                                // Complete new KeyValuePair with new stuff
+                                AlertDrawStyle ModifiedDrawStyle = new AlertDrawStyle(kv.Value.Text, TextColor, kv.Value.BorderWidth, BorderColor, BackgroundColor, kv.Value.IconIndex);
+                                KeyValuePair<EntityWrapper, AlertDrawStyle> NewKV = new KeyValuePair<EntityWrapper, AlertDrawStyle>(kv.Key, ModifiedDrawStyle);
 
-                                        TextColor = ReduceNumbers(TextColor, ReduceByPercent);
-                                        BorderColor = ReduceNumbers(BorderColor, ReduceByPercent);
-                                        BackgroundColor = ReduceNumbers(BackgroundColor, ReduceByPercent);
-
-                                        // backgrounds with low alpha start to look a little strange when dark so im adding an alpha threshold
-                                        if (BackgroundColor.A < 210)
-                                            BackgroundColor.A = 210;
-                                    }
-
-                                    // Complete new KeyValuePair with new stuff
-                                    AlertDrawStyle ModifiedDrawStyle = new AlertDrawStyle(text, TextColor, kv.Value.BorderWidth, BorderColor, BackgroundColor, kv.Value.IconIndex);
-                                    KeyValuePair<EntityWrapper, AlertDrawStyle> NewKV = new KeyValuePair<EntityWrapper, AlertDrawStyle>(kv.Key, ModifiedDrawStyle);
-
-                                    position = DrawText(playerPos, position, BOTTOM_MARGIN, NewKV, text);
-                                }
+                                position = DrawText(playerPos, position, BOTTOM_MARGIN, NewKV, kv.Value.Text);
                             }
                         }
                     }
@@ -266,7 +214,7 @@ namespace PoeHUD.Hud.Loot
 
                 IEntity item = entity.GetComponent<WorldItem>().ItemEntity;
 
-                if (Settings.Alternative && !string.IsNullOrEmpty(Settings.FilePath))
+                if (Settings.ShouldUseFilterFile && !string.IsNullOrEmpty(Settings.FilePath))
                 {
                     var result = visitor.Visit(item);
                     if (result != null)
@@ -286,7 +234,7 @@ namespace PoeHUD.Hud.Loot
                         AlertDrawStyle drawStyle = props.GetDrawStyle();
                         PrepareForDrawingAndPlaySound(entity, drawStyle);
                     }
-                    Settings.Alternative.Value = false;
+                    Settings.ShouldUseFilterFile.Value = false;
                 }
             }
         }
@@ -377,41 +325,30 @@ namespace PoeHUD.Hud.Loot
             return hashSet;
         }
 
-        private bool DrawBorder(long entityAddress)
+        private void DrawBorder(ItemsOnGroundLabelElement entityLabel)
         {
             IngameUIElements ui = GameController.Game.IngameState.IngameUi;
-            ItemsOnGroundLabelElement entityLabel;
-            bool shouldUpdate = false;
-            if (currentLabels.TryGetValue(entityAddress, out entityLabel))
+            if (entityLabel.IsVisible)
             {
-                if (entityLabel.IsVisible)
-                {
-                    RectangleF rect = entityLabel.Label.GetClientRect();
-                    if ((ui.OpenLeftPanel.IsVisible && ui.OpenLeftPanel.GetClientRect().Intersects(rect)) ||
-                        (ui.OpenRightPanel.IsVisible && ui.OpenRightPanel.GetClientRect().Intersects(rect)))
-                    {
-                        return false;
-                    }
+                RectangleF rect = entityLabel.Label.GetClientRect();
+                if ((ui.OpenLeftPanel.IsVisible && ui.OpenLeftPanel.GetClientRect().Intersects(rect)) ||
+                    (ui.OpenRightPanel.IsVisible && ui.OpenRightPanel.GetClientRect().Intersects(rect)))
+                    return;
 
-                    ColorNode borderColor = Settings.BorderSettings.BorderColor;
-                    if (!entityLabel.CanPickUp)
+
+                ColorNode borderColor = Settings.BorderSettings.BorderColor;
+                if (!entityLabel.CanPickUp)
+                {
+                    borderColor = Settings.BorderSettings.NotMyItemBorderColor;
+                    TimeSpan timeLeft = entityLabel.TimeLeft;
+                    if (Settings.BorderSettings.ShowTimer && timeLeft.TotalMilliseconds > 0)
                     {
-                        borderColor = Settings.BorderSettings.NotMyItemBorderColor;
-                        TimeSpan timeLeft = entityLabel.TimeLeft;
-                        if (Settings.BorderSettings.ShowTimer && timeLeft.TotalMilliseconds > 0)
-                        {
-                            borderColor = Settings.BorderSettings.CantPickUpBorderColor;
-                            Graphics.DrawText(timeLeft.ToString(@"mm\:ss"), Settings.BorderSettings.TimerTextSize, rect.TopRight.Translate(4, 0));
-                        }
+                        borderColor = Settings.BorderSettings.CantPickUpBorderColor;
+                        Graphics.DrawText(timeLeft.ToString(@"mm\:ss"), Settings.BorderSettings.TimerTextSize, rect.TopRight.Translate(4, 0));
                     }
-                    Graphics.DrawFrame(rect, Settings.BorderSettings.BorderWidth, borderColor);
                 }
+                Graphics.DrawFrame(rect, Settings.BorderSettings.BorderWidth, borderColor);
             }
-            else
-            {
-                shouldUpdate = true;
-            }
-            return shouldUpdate;
         }
 
         private Vector2 DrawItem(AlertDrawStyle drawStyle, Vector2 delta, Vector2 position, Vector2 padding, string text)
