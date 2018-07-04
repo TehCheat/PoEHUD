@@ -9,14 +9,14 @@ namespace PoeHUD.Hud.Trackers
         {
             Enable = true;
             Masters = true;
-            Cadiro = true;
+            LeagueSpecificNPC = true;
             Chests = true;
             Strongboxes = true;
             PerandusChest = true;
             BreachChest = true;
 
             MastersIcon = new RangeNode<int>(8, 1, 16);
-            CadiroIcon = new RangeNode<int>(8, 1, 16);
+            LeagueSpecificNPCIcon = new RangeNode<int>(8, 1, 16);
             StrongboxesIcon = new RangeNode<int>(14, 1, 28);
             ChestsIcon = new RangeNode<int>(3, 1, 6);
             PerandusChestIcon = new RangeNode<int>(14, 1, 28);
@@ -26,13 +26,13 @@ namespace PoeHUD.Hud.Trackers
         }
 
         public ToggleNode Masters { get; set; }
-        public ToggleNode Cadiro { get; set; }
+        public ToggleNode LeagueSpecificNPC { get; set; }
         public ToggleNode Chests { get; set; }
         public ToggleNode Strongboxes { get; set; }
         public ToggleNode PerandusChest { get; set; }
         public ToggleNode BreachChest { get; set; }
         public RangeNode<int> MastersIcon { get; set; }
-        public RangeNode<int> CadiroIcon { get; set; }
+        public RangeNode<int> LeagueSpecificNPCIcon { get; set; }
         public RangeNode<int> ChestsIcon { get; set; }
         public RangeNode<int> StrongboxesIcon { get; set; }
         public RangeNode<int> PerandusChestIcon { get; set; }

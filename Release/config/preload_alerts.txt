@@ -1,6 +1,9 @@
 #Metadata; Text; Color (ARGB)
 #Example: Metadata/Chests/StrongBoxes/Strongbox; ; ff00FF00
 
+# INCURSION LEAGUE
+Metadata/NPC/League/TreasureHunter; Alva Valai; FF36B400
+
 # ABYSS LEAGUE
 Metadata/MiscellaneousObjects/Abyss/AbyssSubAreaTransition; Abyssal Depths; ff36B400
 Metadata/Monsters/ReligiousTemplar/AbyssLichBoss1; Abyss Lich - Ulaman; ff00FF00

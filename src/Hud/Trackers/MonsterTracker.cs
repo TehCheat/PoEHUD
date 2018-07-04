@@ -206,7 +206,9 @@ namespace PoeHUD.Hud.Trackers
             "MonsterFireTrap2",
             "MonsterBlastRainTrap",
             "Metadata/Monsters/Frog/FrogGod/SilverOrb",
-            "Metadata/Monsters/Frog/FrogGod/SilverPool"
+            "Metadata/Monsters/Frog/FrogGod/SilverPool",
+            "Metadata/Monsters/LeagueIncursion/VaalSaucerRoomTurret",
+            "Metadata/Monsters/LeagueIncursion/VaalSaucerTurret"
         };
 
         private MapIcon GetMapIconForMonster(EntityWrapper entity, MonsterConfigLine monsterConfigLine)

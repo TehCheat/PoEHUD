@@ -16,12 +16,13 @@ namespace PoeHUD.Hud.Trackers
             "Metadata/NPC/Missions/Wild/Str",
             "Metadata/NPC/Missions/Wild/StrDex",
             "Metadata/NPC/Missions/Wild/StrDexInt",
-            "Metadata/NPC/Missions/Wild/StrInt"
+            "Metadata/NPC/Missions/Wild/StrInt",
         };
 
-        private static readonly List<string> cadiro = new List<string>
+        private static readonly List<string> leagueSpecificNPC = new List<string>
         {
-            "Metadata/NPC/League/Cadiro"
+            "Metadata/NPC/League/Cadiro",
+            "Metadata/NPC/League/TreasureHunter"
         };
 
         private static readonly List<string> perandus = new List<string>
@@ -73,9 +74,9 @@ namespace PoeHUD.Hud.Trackers
             {
                 return new CreatureMapIcon(e, "ms-cyan.png", () => Settings.Masters, Settings.MastersIcon);
             }
-            if (e.HasComponent<NPC>() && cadiro.Contains(e.Path))
+            if (e.HasComponent<NPC>() && leagueSpecificNPC.Contains(e.Path))
             {
-                return new CreatureMapIcon(e, "ms-green.png", () => Settings.Cadiro, Settings.CadiroIcon);
+                return new CreatureMapIcon(e, "ms-green.png", () => Settings.LeagueSpecificNPC, Settings.LeagueSpecificNPCIcon);
             }
             if (e.HasComponent<Chest>() && perandus.Contains(e.Path))
             {
