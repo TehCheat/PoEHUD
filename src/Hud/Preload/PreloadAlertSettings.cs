@@ -47,7 +47,7 @@ namespace PoeHUD.Hud.Preload
             EssenceOfDelirium = new ColorBGRA(255, 255, 0, 255);
             EssenceOfAnguish = new ColorBGRA(255, 255, 0, 255);
 
-            CadiroTrader = new ColorBGRA(255, 128, 0, 255);
+            LeagueSpecificNPC = new ColorBGRA(255, 128, 0, 255);
             PerandusChestStandard = new ColorBGRA(153, 255, 51, 255);
             PerandusChestRarity = new ColorBGRA(153, 255, 51, 255);
             PerandusChestQuantity = new ColorBGRA(153, 255, 51, 255);
@@ -122,7 +122,7 @@ namespace PoeHUD.Hud.Preload
             AurelioVoidsinger = new ColorBGRA(254, 192, 118, 255);
         }
 
-        public ColorNode CadiroTrader { get; set; }
+        public ColorNode LeagueSpecificNPC { get; set; }
 
         public ToggleNode Essence { get; set; }
         public ColorNode RemnantOfCorruption { get; set; }
