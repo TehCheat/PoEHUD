@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Media;
 
 namespace PoeHUD.Hud
@@ -18,7 +19,8 @@ namespace PoeHUD.Hud
             {
                 try
                 {
-                    var soundPlayer = new SoundPlayer($"sounds/{name}");
+                    String path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase), $"sounds/{name}");
+                    var soundPlayer = new SoundPlayer(path); 
                     soundPlayer.Load();
                     soundLib[name] = soundPlayer;
                 }

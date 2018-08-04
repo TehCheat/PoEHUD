@@ -44,7 +44,9 @@ namespace PoeHUD.Hud
             }
             for (int i = 0; i < index; i++)
             {
-                CurrentIcons.Remove(toRemove[index]);
+                EntityWrapper entityToRemove = toRemove[index];
+                if (entityToRemove != null)
+                    CurrentIcons.Remove(entityToRemove);
             }
         }
     }
