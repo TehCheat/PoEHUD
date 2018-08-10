@@ -21,13 +21,16 @@ namespace PoeHUD.Hud.UI.Renderers
         {
             device = dev;
             IO io = ImGui.GetIO();
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
-            UpdateCanvasSize(form.ClientSize.Width, form.ClientSize.Height);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
+            //io.FontAtlas.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
+
+            io.FontAtlas.AddFontFromFileTTF("W6.ttf", 16f);
+
+           UpdateCanvasSize(form.ClientSize.Width, form.ClientSize.Height);
             PrepareTextureImGui();
             SetupKeyMapping(io);
         }
