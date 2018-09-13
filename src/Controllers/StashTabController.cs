@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PoeHUD.Hud.Settings;
-using PoeHUD.Controllers;
 using PoeHUD.Poe.RemoteMemoryObjects;
-using PoeHUD.Poe.Components;
 using SharpDX;
 using PoeHUD.Hud;
 
@@ -18,7 +14,7 @@ namespace PoeHUD.Controllers
         public static Action<StashTabNode, string> OnStashTabRenameRegistered = delegate { };
         private static List<StashTabNode> CachedStashTabs = new List<StashTabNode>();
         internal static string[] StashTabNames = new string[0];
-        private bool StashTabsIsInitialized = false;
+        private bool StashTabsIsInitialized;
 
         public StashTabController()
         {
@@ -55,37 +51,47 @@ namespace PoeHUD.Controllers
             CachedStashTabs.Clear();
             StashTabNames = new string[playerStashTabs.Count];
 
-            bool upgradeStashTabFix = false;
-            string upgradeStashTabFixName = "???";
+            //bool upgradeStashTabFix = false;
+            //string upgradeStashTabFixName = "%NULL%";
 
-            for (int i = 0; i < playerStashTabs.Count; i++)
+            for (var i = 0; i < playerStashTabs.Count; i++)
             {      
                 var serverTab = playerStashTabs[i];
                 var serverTabVisibleIndex = serverTab.VisibleIndex;
                 string serverTabName = serverTab.Name;
 
                 //After upgrading stash tab the VisibleIndex of new tab will be out of range (poe added one more tab (premium) and deleted the old one but not fix the index)
-                upgradeStashTabFix = serverTabVisibleIndex >= playerStashTabs.Count;
+                var upgradeStashTabFix = serverTabVisibleIndex >= playerStashTabs.Count;
                 if (upgradeStashTabFix)
                 {
-                    upgradeStashTabFixName = serverTabName;
-                    DebugPlug.DebugPlugin.LogMsg($"StashTabController: You just purcased a stash tab {serverTabName}. Move this tab once to fix poe bug with stash tab or restart poe.", 20, Color.Red);
+                    //upgradeStashTabFixName = serverTabName;
+                    DebugPlug.DebugPlugin.LogMsg($"StashTabController: You just purchased a stash tab {serverTabName}. " +
+                                                 "Move any tab once to some other position to fix poe bug with stash tab.", 20, Color.Yellow);
                 }
                 else
                 {
-                    StashTabNames[serverTabVisibleIndex] = serverTabName;
+					if(serverTabVisibleIndex >= StashTabNames.Length)//Should never happen
+						DebugPlug.DebugPlugin.LogMsg("StashTabController: Index of new tab is out of range. (Fix: Move any tab once to some other position). " +
+						                             $"Tab index: {serverTabVisibleIndex}, Name: {serverTabName}, Total amount: {StashTabNames.Length}.", 10, Color.Red);
+                    
+	                if(StashTabNames[serverTabVisibleIndex] != null)
+		                DebugPlug.DebugPlugin.LogMsg("StashTabController: Move any tab once to some other position to fix poe bug with stash tab.", 10, Color.Yellow);
+	                else
+						StashTabNames[serverTabVisibleIndex] = serverTabName;	
                 }
 
                 CachedStashTabs.Add(new StashTabNode(serverTab, i));
             }
 
-            if(upgradeStashTabFix)
+            //if(upgradeStashTabFix)
+			//I commented this, because check for null should be present anyway (Imgui will crash if there will be any NULL value)
             {
                 //imgui can throw error if some item in list is null (not tested, but happen)
                 for (int i = 0; i < StashTabNames.Length; i++)
                 {
-                    if (string.IsNullOrEmpty(StashTabNames[i]))
-                        StashTabNames[i] = upgradeStashTabFixName;
+	                //if (string.IsNullOrEmpty(StashTabNames[i]))//poe allow to stash tabs name be empty. We are checking only null (not set) stash names
+	                if (StashTabNames[i] == null)
+		                StashTabNames[i] = "ERROR. Move any stash tab to any other position";// upgradeStashTabFixName;
                 }
             }
         }

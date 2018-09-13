@@ -98,14 +98,6 @@ Metadata/Monsters/Perandus/PerandusGuardMapBoss4Clone; Osmea, Servant of Prosper
 Metadata/Monsters/Perandus/PerandusGuardMapBoss5; Pallias, Servant of Prospero; ffFFD700
 Metadata/Monsters/Perandus/PerandusGuardMapBoss6; Argient, Servant of Prospero; ffFFD700
 Metadata/Monsters/Perandus/PerandusGuardMapBoss7; Rheniot, Servant of Prospero; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant1; Junith Perandus, Keeper of Vaults; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant2; Tantalo Perandus, Seller of Secrets; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant3; Actaeo Perandus, Master of Beasts; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant4; Vitorica Perandus, Maker of Marvels; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant4Clone; Vitorica Perandus, Maker of Marvels; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant5; Stasius Perandus, Merchant of Corpses; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant6; Darsia Perandus, Collector of Debts; ffFFD700
-Metadata/Monsters/Perandus/PerandusGuardLieutenant7; Milo Perandus, Handler of Swords; ffFFD700
 Metadata/Monsters/Perandus/PerandusGuardBasic1; Celona, Vault Sentry; ffFFD700
 Metadata/Monsters/Perandus/PerandusGuardBasic2; Hortus, Knee Breaker; ffFFD700
 Metadata/Monsters/Perandus/PerandusGuardBasic3; Kuto, Hired Muscle; ffFFD700

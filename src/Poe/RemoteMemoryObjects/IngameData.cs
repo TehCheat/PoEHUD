@@ -12,15 +12,15 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public AreaTemplate CurrentArea => ReadObject<AreaTemplate>(Address + 0x28);
         public WorldArea CurrentWorldArea => GameController.Instance.Files.WorldAreas.GetByAddress(M.ReadLong(Address + 0x28));
         public int CurrentAreaLevel => (int)M.ReadByte(Address + 0x40);
-        public uint CurrentAreaHash => M.ReadUInt(Address + 0x68);
+        public uint CurrentAreaHash => M.ReadUInt(Address + 0xB0);
 
         public Entity LocalPlayer => GameController.Instance.Cache.Enable && GameController.Instance.Cache.LocalPlayer != null
             ? GameController.Instance.Cache.LocalPlayer
             : GameController.Instance.Cache.Enable ? GameController.Instance.Cache.LocalPlayer = LocalPlayerReal : LocalPlayerReal;
-        private Entity LocalPlayerReal => ReadObject<Entity>(Address + 0x300);
-        public EntityList EntityList => GetObject<EntityList>(Address + 0x3B0);
+        private Entity LocalPlayerReal => ReadObject<Entity>(Address + 0x370);
+        public EntityList EntityList => GetObject<EntityList>(Address + 0x3F8);
 
-        private long LabDataPtr => M.ReadLong(Address + 0x70);
+        private long LabDataPtr => M.ReadLong(Address + 0xB8);
         public LabyrinthData LabyrinthData => LabDataPtr == 0 ? null : GetObject<LabyrinthData>(LabDataPtr);
 
 

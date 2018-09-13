@@ -186,10 +186,11 @@ namespace PoeHUD.Hud
                     {
                         foreach (var plugin in PluginExtensionPlugin.Plugins)
                         {
-                            
                             if (Settings.DeveloperMode.Value && Settings.ShowPluginsMS.Value)
                             {
                                 var extPlugin = (plugin as ExternalPluginHolder).BPlugin;
+	                            if (extPlugin == null)//This can happen while plugin update (using plugin updator) or recompile
+		                            continue;
                                 ImGuiExtension.Label(extPlugin.AwerageMs.ToString());
                                 ImGui.SameLine();
                             }

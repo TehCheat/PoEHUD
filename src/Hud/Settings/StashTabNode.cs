@@ -35,5 +35,10 @@ namespace PoeHUD.Hud.Settings
         internal int Id { get; set; } = -1;
         [JsonIgnore]
         public bool IsRemoveOnly { get; set; }
+
+	    public override string ToString()
+	    {
+		    return $"Name: {Name}, Id: {Id}, Exist: {Exist}, IsRemoveOnly: {IsRemoveOnly}";
+	    }
     }
 }

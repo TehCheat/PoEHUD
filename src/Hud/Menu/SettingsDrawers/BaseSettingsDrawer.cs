@@ -188,7 +188,7 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
 
             if (MainMenuWindow.Settings.DeveloperMode.Value)
             {
-                ImGuiExtension.Label($"Ex:{StashNode.Exist}, Ind:{StashNode.VisibleIndex}, Id:{StashNode.Id}, Name: {StashNode.Name}");
+                ImGuiExtension.Label($"(Debug: Exist:{StashNode.Exist}, Index:{StashNode.VisibleIndex}, Id:{StashNode.Id}, Name: {StashNode.Name})");
                 ImGui.SameLine();
             }
 
