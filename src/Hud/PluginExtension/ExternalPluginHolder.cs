@@ -22,7 +22,6 @@ namespace PoeHUD.Hud.PluginExtension
         internal BasePlugin BPlugin;
         private readonly string FullTypeName;
         private readonly string DllPath;
-        //private DateTime DllTimeVersion;
         private FileSystemWatcher DllChangeWatcher;
 
         public PluginState State { get; private set; }//Will be used by poehud main menu to display why plugin is not loaded/reloaded

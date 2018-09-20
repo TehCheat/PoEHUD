@@ -359,8 +359,8 @@ namespace PoeHUD.Framework
 
                 list.Add(new Tuple<long, int>(node.Ptr2_Key, node.Value));
             }
-            if (list.Count > 0)
-                list.RemoveAt(list.Count - 1);//bug fix, useless reading last element
+
+            list.RemoveAt(list.Count - 1);//bug fix, useless reading last element
             return list;
         }
         private unsafe ListDoublePointerIntNode ReadDoublePointerIntListNode(long pointer)

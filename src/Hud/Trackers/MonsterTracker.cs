@@ -40,7 +40,7 @@ namespace PoeHUD.Hud.Trackers
             }
             else
             {
-                File.Create(MOD_ALERTS_PERSONAL);
+                File.WriteAllText(MOD_ALERTS_PERSONAL , string.Empty);
             }
 
             if (File.Exists(TYPE_ALERTS_PERSONAL))
@@ -49,7 +49,7 @@ namespace PoeHUD.Hud.Trackers
             }
             else
             {
-                File.Create(TYPE_ALERTS_PERSONAL);
+                File.WriteAllText(TYPE_ALERTS_PERSONAL, string.Empty);
             }
             Func<bool> monsterSettings = () => Settings.Monsters;
             iconCreators = new Dictionary<MonsterRarity, Func<EntityWrapper, Func<string, string>, CreatureMapIcon>>

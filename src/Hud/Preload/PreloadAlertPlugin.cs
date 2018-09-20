@@ -52,7 +52,7 @@ namespace PoeHUD.Hud.Preload
             }
             else
             {
-                File.Create(PRELOAD_ALERTS_PERSONAL);
+                File.WriteAllText(PRELOAD_ALERTS_PERSONAL, string.Empty);
             }
 
             GameController.Area.OnAreaChange += OnAreaChange;

@@ -109,13 +109,12 @@ namespace PoeHUD.Hud.Loot
 
             if (Settings.Enable)
             {
-                Positioned pos = GameController.Player.GetComponent<Positioned>();
-                if (pos == null)
-                    return;
-                Vector2 playerPos = pos.GridPos;
-                Vector2 position = StartDrawPointFunc();
+                var pos = GameController.Player.GetComponent<Positioned>();
+
+                var playerPos = pos.GridPos;
+                var position = StartDrawPointFunc();
                 const int BOTTOM_MARGIN = 2;
-                bool shouldUpdate = false;
+                var shouldUpdate = false;
 
                 var validAlerts = currentAlerts.ToList().Where(
                     x => x.Key != null && x.Key.Address != 0 && x.Key.IsValid);

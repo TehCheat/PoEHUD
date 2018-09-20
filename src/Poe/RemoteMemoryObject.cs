@@ -58,7 +58,7 @@ namespace PoeHUD.Poe
             // Check for null on left side.
             if (Object.ReferenceEquals(lhs, null) || lhs.Address == 0)
             {
-                if (Object.ReferenceEquals(rhs, null) || lhs.Address == 0)
+                if (Object.ReferenceEquals(rhs, null) || rhs.Address == 0)
                 {
                     // null == null = true.
                     return true;

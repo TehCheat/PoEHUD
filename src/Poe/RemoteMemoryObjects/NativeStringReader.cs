@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PoeHUD.Controllers;
+﻿using PoeHUD.Controllers;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
@@ -14,8 +9,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public static string ReadString(long address)
         {
             var M = GameController.Instance.Memory;
-            uint Size = M.ReadUInt(address + 0x8);
-            uint Reserved = M.ReadUInt(address + 0x10);
+            //uint Size = M.ReadUInt(address + 0x8);
+            var Reserved = M.ReadUInt(address + 0x10);
 
             //var size = Size;
             //if (size == 0)

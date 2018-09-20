@@ -15,6 +15,8 @@ namespace PoeHUD.Controllers
         public StatsDat Stats;
         public TagsDat Tags;
 
+	    public StatsDat _Stats => Stats;
+
         //Will be loaded on first access:
         private WorldAreas worldAreas;
         public WorldAreas WorldAreas => worldAreas != null ? worldAreas :

@@ -119,17 +119,22 @@ namespace PoeHUD.Hud
 			{
 				clientRect = gameController.Game.IngameState.IngameUi.Map.SmallMinimap.GetClientRect();
 			}
-			if (gemPanel.IsVisible && Math.Abs(gemPanelRect.Right - clientRect.Right) < EPSILON)
-            {
-                // gem panel is visible, add its height
-                clientRect.Height += gemPanelRect.Height;
-            }
-            if (questPanel.IsVisible && Math.Abs(gemPanelRect.Right - clientRect.Right) < EPSILON)
-            {
-                // quest panel is visible, add its height
-                clientRect.Height += questPanelRect.Height;
-            }
 
+	        if (Math.Abs(gemPanelRect.Right - clientRect.Right) < EPSILON)
+	        {
+		        if (gemPanel.IsVisible)
+		        {
+			        // gem panel is visible, add its height
+			        clientRect.Height += gemPanelRect.Height;
+		        }
+		        if (questPanel.IsVisible)
+		        {
+			        // quest panel is visible, add its height
+			        clientRect.Height += questPanelRect.Height;
+		        }
+	        }
+
+			
             return new Vector2(clientRect.X + clientRect.Width, clientRect.Y + clientRect.Height + 10);
         }
 

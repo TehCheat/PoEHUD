@@ -151,7 +151,7 @@ namespace PoeHUD.Controllers
             if (serverTabsCount != cachedTabsCount)
             {
                 CacheStashTabs(serverStashTabs);
-                cachedTabsCount = CachedStashTabs.Count;
+                //cachedTabsCount = CachedStashTabs.Count;
             }
 
             StashTabNames = new string[serverTabsCount];

@@ -55,7 +55,10 @@ namespace PoeHUD.Hud.UI
         }
 
         public event Action Render;
-        public void Clear()
+
+	    public DeviceEx Device => device;
+
+	    public void Clear()
         {
             device.Clear(ClearFlags.Target, Color.Transparent, 0, 0);
             device.Present();
