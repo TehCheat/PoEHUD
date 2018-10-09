@@ -24,12 +24,12 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public LabyrinthData LabyrinthData => LabDataPtr == 0 ? null : GetObject<LabyrinthData>(LabDataPtr);
 
 
-        /*public Dictionary<GameStat, int> MapStats
+        public Dictionary<GameStat, int> MapStats
         {
             get
             {
-                var statPtrStart = M.ReadLong(Address + 0x320);
-                var statPtrEnd = M.ReadLong(Address + 0x328);
+                var statPtrStart = M.ReadLong(Address + 0x98);
+                var statPtrEnd = M.ReadLong(Address + 0xA0);
 
                 int key = 0;
                 int value = 0;
@@ -44,7 +44,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                 }
                 return result;
             }
-        }*/
+        }
 
         public List<PortalObject> TownPortals
         {
