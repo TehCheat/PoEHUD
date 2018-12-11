@@ -421,3 +421,29 @@ Metadata/Chests/Abyss/AbyssFinalChest; Abyss #1; ff00AA00
 Metadata/Chests/Abyss/AbyssFinalChest2; Abyss #2; ff00AA00
 Metadata/Chests/Abyss/AbyssFinalChest3; Abyss #3; ff00AA00
 Metadata/Chests/Abyss/AbyssFinalChest4; Abyss #4; ff00AA00
+
+# BETRAYAL
+Metadata/NPC/League/BetrayalNinjaCopRaid; Syndicate Laboratory; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalCatarina; Catarina, Master of Undeath; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalBreach;It That Fled; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalGravicius;Gravicius Reborn; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalRin; Rin Yuushu; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalTora; Tora, the Culler; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalLeo; Leo, Wolf of the Pits; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalGrenn; Guff "Tiny" Grenn; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalVorici; Vorici, Silent Brother; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalAislin; Aisling Laffrey; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalHaku; Haku, Warmaster; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalHillock; Hillock, the Blacksmith; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalCameria; Cameria, the Coldblooded; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalRiker; Riker Maloney; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalElreon; Elreon, Light's Judge; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalJanus; Janus Perandus; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalVagan; Vagan, Victory's Herald; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalThane; Thane Jorgin the Banished; ff36b4b4
+Metadata/Monsters/LeagueBetrayal/BetrayalKeema; Korell Goya, Son of Stone; ff36b4b4
+
+Metadata/Terrain/Leagues/Delve/Objects/DelveMineralVein; Delve Minerals ; ff3bd30c
+Metadata/Terrain/Leagues/Delve/Objects/DelveMineralChest; Delve Minerals ; ff3bd30c
+Metadata/Terrain/Leagues/Incursion/Objects/IncursionPortal1; Incursion Portal ; ff3bd30c
+Metadata/Monsters/Masters/Einhar; Einhar; ff3bd30c
