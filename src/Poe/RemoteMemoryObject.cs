@@ -1,5 +1,6 @@
 using PoeHUD.Framework;
 using PoeHUD.Poe.RemoteMemoryObjects;
+using System;
 
 namespace PoeHUD.Poe
 {
@@ -50,6 +51,29 @@ namespace PoeHUD.Poe
         {
             var remoteMemoryObject = obj as RemoteMemoryObject;
             return remoteMemoryObject != null && remoteMemoryObject.Address == Address;
+        }
+
+        public static bool operator ==(RemoteMemoryObject lhs, RemoteMemoryObject rhs)
+        {
+            // Check for null on left side.
+            if (Object.ReferenceEquals(lhs, null) || lhs.Address == 0)
+            {
+                if (Object.ReferenceEquals(rhs, null) || rhs.Address == 0)
+                {
+                    // null == null = true.
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(RemoteMemoryObject lhs, RemoteMemoryObject rhs)
+        {
+            return !(lhs == rhs);
         }
 
         public override int GetHashCode()

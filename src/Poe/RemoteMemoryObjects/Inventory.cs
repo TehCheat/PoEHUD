@@ -4,10 +4,13 @@ using System.Collections.Generic;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
+    using System;
+    using System.Linq;
+
     public class Inventory : RemoteMemoryObject
     {
-        public long ItemCount => M.ReadLong(Address + 0x410, 0x638, 0x50);//This one is correct
-        public long TotalBoxesInInventoryRow => M.ReadInt(Address + 0x410, 0x638, 0x0C);
+        public long ItemCount => M.ReadLong(Address + 0x410, 0x640, 0x50);//This one is correct
+        public long TotalBoxesInInventoryRow => M.ReadInt(Address + 0x410, 0x640, 0x0C);
 
         private InventoryType GetInvType()
         {
@@ -67,18 +70,23 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         }
         public Element InventoryUiElement => getInventoryElement();
 
+        //I'm using this to debug all items (NormalInventoryItem.InventPosX), etc..
+        //public List<NormalInventoryItem> _DebugVisibleInventoryItems => InventoryUiElement.Children.Select(x => InventoryUiElement.GetObject<NormalInventoryItem>(x.Address)).ToList();
+
         // Shows Item details of visible inventory/stashes
         public List<NormalInventoryItem> VisibleInventoryItems
         {
             get
             {
+                var list = new List<NormalInventoryItem>();
                 var InvRoot = InventoryUiElement;
                 if (InvRoot == null || InvRoot.Address == 0x00)
-                    return null;
-                else if (!InvRoot.IsVisible)
-                    return null;
-
-                var list = new List<NormalInventoryItem>();
+                    //throw new InvalidOperationException("InventoryUiElement is incorrect (address is '0')");
+                    return list;
+                if (!InvRoot.IsVisible)
+                    //throw new InvalidOperationException("InventoryUiElement is not visible");
+                return list;
+           
 
                 switch (InvType)
                 {
@@ -177,7 +185,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         {
             get
             {
-                long invAddr = M.ReadLong(Address + 0x410, 0x638, 0x30);
+                long invAddr = M.ReadLong(Address + 0x410, 0x640, 0x30);
                 y = y * xLength;
                 long itmAddr = M.ReadLong(invAddr + ((x + y) * 8));
                 if (itmAddr <= 0)

@@ -52,7 +52,7 @@ namespace PoeHUD.Hud.Preload
             }
             else
             {
-                File.Create(PRELOAD_ALERTS_PERSONAL);
+                File.WriteAllText(PRELOAD_ALERTS_PERSONAL, string.Empty);
             }
 
             GameController.Area.OnAreaChange += OnAreaChange;
@@ -150,7 +150,11 @@ namespace PoeHUD.Hud.Preload
 
             Preload = new Dictionary<string, PreloadConfigLine>
             {
-                {"Wild/StrDexInt", new PreloadConfigLine { Text = "Zana, Master Cartographer", FastColor = () => Settings.MasterZana }},
+				{"Metadata/NPC/League/DelveMiner", new PreloadConfigLine {Text = "Niko the Mad", FastColor = () => Settings.MasterNiko }},
+				{"Metadata/NPC/League/Einhar", new PreloadConfigLine {Text = "Einhar Frey", FastColor = () => Settings.MasterEinhar}},
+				{"Metadata/NPC/League/TreasureHunter", new PreloadConfigLine {Text = "Alva Valai", FastColor = () => Settings.MasterAlva }},
+				{"Metadata/NPC/League/BetrayalNinja", new PreloadConfigLine {Text = "Jun Ortoi", FastColor = () => Settings.MasterJun }},
+				{"Wild/StrDexInt", new PreloadConfigLine { Text = "Zana, Master Cartographer", FastColor = () => Settings.MasterZana }},
                 {"Wild/Int", new PreloadConfigLine { Text = "Catarina, Master of the Dead", FastColor = () => Settings.MasterCatarina }},
                 {"Wild/Dex", new PreloadConfigLine { Text = "Tora, Master of the Hunt", FastColor = () => Settings.MasterTora }},
                 {"Wild/DexInt", new PreloadConfigLine { Text = "Vorici, Master Assassin", FastColor = () => Settings.MasterVorici }},
@@ -293,7 +297,7 @@ namespace PoeHUD.Hud.Preload
         IEnumerator ParseCoroutine()
         {
             yield return new WaitFunction(() => { return GameController.Game.IsGameLoading; });
-            yield return new WaitTime(300);
+            //yield return new WaitTime(300);
             Parse();
         }
         private void Parse()

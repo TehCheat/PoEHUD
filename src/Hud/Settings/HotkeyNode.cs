@@ -57,7 +57,8 @@ namespace PoeHUD.Hud.Settings
         {
             if(WinApi.IsKeyDown(value))
             {
-                if (_pressed) return false;
+                if (_pressed) 
+	                return false;
                 _pressed = true;
                 return true;
             }
@@ -65,5 +66,24 @@ namespace PoeHUD.Hud.Settings
             _pressed = false;
             return false;
         }
+
+	    private bool _unPressed;
+	    public bool UnpressedOnce()
+	    {
+		    if(WinApi.IsKeyDown(value))
+		    {
+			    _unPressed = true;
+		    }
+		    else
+		    {
+			    if (_unPressed)
+			    {
+				    _unPressed = false;
+				    return true;
+			    }
+		    }
+
+		    return false;
+	    }
     }
 }

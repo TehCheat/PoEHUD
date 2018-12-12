@@ -1,10 +1,13 @@
 using SharpDX;
 using System.Collections.Generic;
 using System.Linq;
+using PoeHUD.Controllers;
 using PoeHUD.Poe.Elements;
 
 namespace PoeHUD.Poe
 {
+    using RemoteMemoryObjects;
+
     public class Element : RemoteMemoryObject
     {
         public const int OffsetBuffers = 0x6EC;
@@ -22,9 +25,9 @@ namespace PoeHUD.Poe
         public float Y => M.ReadFloat(Address + 0xD8 + OffsetBuffers);
         public Element Tooltip => ReadObject<Element>(Address + 0x104 + OffsetBuffers); //0x7F0
         public float Scale => M.ReadFloat(Address + 0x1D0 + OffsetBuffers);
-        public float Width => M.ReadFloat(Address + 0x214 + OffsetBuffers);
-        public float Height => M.ReadFloat(Address + 0x218 + OffsetBuffers);
-        public string Text => !string.IsNullOrWhiteSpace(AsObject<EntityLabel>().Text) ? AsObject<EntityLabel>().Text : null;
+        public float Width => M.ReadFloat(Address + 0x21C + OffsetBuffers);
+        public float Height => M.ReadFloat(Address + 0x220 + OffsetBuffers);
+        public string Text => AsObject<EntityLabel>().Text;
         public bool isHighlighted => M.ReadByte(Address + 0x948) > 0;
 
         public bool IsVisible
@@ -69,10 +72,11 @@ namespace PoeHUD.Poe
         {
             float num = 0;
             float num2 = 0;
-            foreach (Element current in GetParentChain())
+	        var rootScale = Game.IngameState.UIRoot.Scale;
+            foreach (var current in GetParentChain())
             {
-                num += current.X;
-                num2 += current.Y;
+                num += current.X * current.Scale / rootScale;
+                num2 += current.Y * current.Scale / rootScale;
             }
             return new Vector2(num, num2);
         }
@@ -86,9 +90,11 @@ namespace PoeHUD.Poe
             float xScale = width / 2560f / ratioFixMult;
             float yScale = height / 1600f;
 
-            float num = (vPos.X + X) * xScale;
-            float num2 = (vPos.Y + Y) * yScale;
-            return new RectangleF(num, num2, xScale * Width, yScale * Height);
+	        var rootScale = Game.IngameState.UIRoot.Scale;
+
+            float num = (vPos.X + X * Scale / rootScale) * xScale;
+            float num2 = (vPos.Y + Y * Scale / rootScale) * yScale;
+            return new RectangleF(num, num2, xScale * Width * Scale / rootScale, yScale * Height * Scale / rootScale);
         }
 
         public Element GetChildFromIndices(params int[] indices)
@@ -109,5 +115,7 @@ namespace PoeHUD.Poe
         {
             return index >= ChildCount ? null : GetObject<Element>(M.ReadLong(Address + 0x24 + OffsetBuffers, index * 8));
         }
+
+	    public Element this[int index] => GetChildAtIndex(index);
     }
 }

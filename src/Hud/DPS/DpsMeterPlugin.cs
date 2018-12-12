@@ -156,6 +156,9 @@ namespace PoeHUD.Hud.Dps
                         if (lastHP != hp)
                         {
                             int dmg = lastHP - hp;
+	                        if (dmg > life.MaxHP + life.MaxES)
+		                        dmg = life.MaxHP + life.MaxES;
+
                             aoeDamage += dmg;
                             singleDamage = Math.Max(singleDamage, dmg);
                         }

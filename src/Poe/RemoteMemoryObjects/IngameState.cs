@@ -8,48 +8,49 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 	{
         private Cache _cache => GameController.Instance.Cache;
 
-        public Camera Camera => _cache.Enable && _cache.Camera != null ? _cache.Camera :
-			_cache.Enable ? _cache.Camera = CameraReal : CameraReal;
-
-		private Camera CameraReal => GetObject<Camera>(Address + 0x17B4 + Offsets.IgsOffsetDelta);
+		public long EntityLabelMap => M.ReadLong(Address + 0x98, 0xA88);
 
 		public IngameData Data => _cache.Enable && _cache.Data != null ? _cache.Data : _cache.Enable ? _cache.Data = DataReal : DataReal;
-		private IngameData DataReal => ReadObject<IngameData>(Address + 0x1F0 + Offsets.IgsOffset);
+		private IngameData DataReal => ReadObject<IngameData>(Address + 0x370 + Offsets.IgsOffset);
 
 		public bool InGame => ServerDataReal.IsInGame;
 
 		public ServerData ServerData => _cache.Enable && _cache.ServerData != null ? _cache.ServerData : _cache.Enable ? _cache.ServerData = ServerDataReal : ServerDataReal;
-		private ServerData ServerDataReal => ReadObjectAt<ServerData>(0x1F8 + Offsets.IgsOffset);
+		private ServerData ServerDataReal => ReadObjectAt<ServerData>(0x378 + Offsets.IgsOffset);
 
 		public IngameUIElements IngameUi => _cache.Enable && _cache.IngameUi != null ? _cache.IngameUi : _cache.Enable ? _cache.IngameUi = IngameUiReal : IngameUiReal;
-		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x650 + Offsets.IgsOffset);
+		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x7D0 + Offsets.IgsOffset);
+
+		public float CurentUIElementPosX => M.ReadFloat(Address + 0xAC8 + Offsets.IgsOffset);
+		public float CurentUIElementPosY => M.ReadFloat(Address + 0xACC + Offsets.IgsOffset);
 
 		public Element UIRoot => _cache.Enable && _cache.UIRoot != null ? _cache.UIRoot : _cache.Enable ? _cache.UIRoot = UIRootReal : UIRootReal;
-		private Element UIRootReal => ReadObjectAt<Element>(0xD08 + Offsets.IgsOffset);
+		private Element UIRootReal => ReadObjectAt<Element>(0xE88 + Offsets.IgsOffset);
+		public Element UIHoverTooltip => ReadObjectAt<Element>(0xEC0 + Offsets.IgsOffset);
+		public float UIHoverX => M.ReadFloat(Address + 0xEC8 + Offsets.IgsOffset);
+		public float UIHoverY => M.ReadFloat(Address + 0xECC + Offsets.IgsOffset);
+		public Element UIHover => ReadObjectAt<Element>(0xED0 + Offsets.IgsOffset);
 
-		public Element UIHover => ReadObjectAt<Element>(0xD50 + Offsets.IgsOffset);
-		public float UIHoverX => M.ReadFloat(Address + 0xD48 + Offsets.IgsOffset);
-		public float UIHoverY => M.ReadFloat(Address + 0xD4C + Offsets.IgsOffset);
-		public Element UIHoverTooltip => ReadObjectAt<Element>(0xD40 + Offsets.IgsOffset);
+		public TimeSpan TimeInGame => TimeSpan.FromSeconds(M.ReadFloat(Address + 0xF50 + Offsets.IgsOffset));
+		public float TimeInGameF => M.ReadFloat(Address + 0xF54 + Offsets.IgsOffset);
 
-		public float CurentUIElementPosX => M.ReadFloat(Address + 0x948 + Offsets.IgsOffset);
-		public float CurentUIElementPosY => M.ReadFloat(Address + 0x94C + Offsets.IgsOffset);
-
-		public long EntityLabelMap => M.ReadLong(Address + 0x98, 0xA80);
-		public DiagnosticInfoType DiagnosticInfoType => (DiagnosticInfoType)M.ReadInt(Address + 0xDE8 + Offsets.IgsOffset);
+		public DiagnosticInfoType DiagnosticInfoType => (DiagnosticInfoType)M.ReadInt(Address + 0xF68 + Offsets.IgsOffset);
 
 		public DiagnosticElement LatencyRectangle => _cache.Enable && _cache.LatencyRectangle != null ? _cache.LatencyRectangle : _cache.Enable ? _cache.LatencyRectangle = LatencyRectangleReal : LatencyRectangleReal;
-		private DiagnosticElement LatencyRectangleReal => GetObjectAt<DiagnosticElement>(0x1018 + Offsets.IgsOffset);
+		private DiagnosticElement LatencyRectangleReal => GetObjectAt<DiagnosticElement>(0x1198 + Offsets.IgsOffset);
 
-		public DiagnosticElement FrameTimeRectangle => GetObjectAt<DiagnosticElement>(0x14A8 + Offsets.IgsOffset);
+		public DiagnosticElement FrameTimeRectangle => GetObjectAt<DiagnosticElement>(0x1628 + Offsets.IgsOffset);
 
 		public DiagnosticElement FPSRectangle => _cache.Enable && _cache.FPSRectangle != null ? _cache.FPSRectangle : _cache.Enable ? _cache.FPSRectangle = FPSRectangleReal : FPSRectangleReal;
-		private DiagnosticElement FPSRectangleReal => GetObjectAt<DiagnosticElement>(0x16F0 + Offsets.IgsOffset);
+		private DiagnosticElement FPSRectangleReal => GetObjectAt<DiagnosticElement>(0x1870 + Offsets.IgsOffset);
 
 		public float CurLatency => LatencyRectangle.CurrValue;
 		public float CurFrameTime => FrameTimeRectangle.CurrValue;
 		public float CurFps => FPSRectangle.CurrValue;
-		public TimeSpan TimeInGame => TimeSpan.FromSeconds(M.ReadFloat(Address + 0xDD0 + Offsets.IgsOffset));
-		public float TimeInGameF => M.ReadFloat(Address + 0xDD4 + Offsets.IgsOffset);
+
+		public Camera Camera => _cache.Enable && _cache.Camera != null ? _cache.Camera :
+			_cache.Enable ? _cache.Camera = CameraReal : CameraReal;
+
+		private Camera CameraReal => GetObject<Camera>(Address + 0x1934 + Offsets.IgsOffsetDelta);
 	}
 }

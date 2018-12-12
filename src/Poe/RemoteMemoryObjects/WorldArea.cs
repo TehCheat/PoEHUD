@@ -52,8 +52,13 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                     var m = GameController.Instance.Memory;
 
                     var connectionsCount = M.ReadInt(Address + 0x16);
-                    var connectionsPtr = M.ReadLong(Address + 0x1e);
+                    if (connectionsCount > 10)
+                    {
+                        DebugPlug.DebugPlugin.LogMsg("Error reading WorldArea.Connections. Exceeded limit (5): " + connectionsCount, 1);
+                        return connections;
+                    }
 
+                    var connectionsPtr = M.ReadLong(Address + 0x1e);            
                     for (int i = 0; i < connectionsCount; i++)
                     {
                         var newArea = GameController.Instance.Files.WorldAreas.GetByAddress(m.ReadLong(connectionsPtr));
@@ -75,9 +80,13 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                     corruptedAreas = new List<WorldArea>();
                     var m = GameController.Instance.Memory;
 
-                    var corruptedAreasPtr = M.ReadLong(Address + 0x103);
                     var corruptedAreasCount = M.ReadInt(Address + 0xfb);
-
+                    if (corruptedAreasCount > 10)
+                    {
+                        DebugPlug.DebugPlugin.LogMsg("Error reading WorldArea.CorruptedAreas. Exceeded limit (5): " + corruptedAreasCount, 1);
+                        return connections;
+                    }
+                    var corruptedAreasPtr = M.ReadLong(Address + 0x103);
                     for (int i = 0; i < corruptedAreasCount; i++)
                     {
                         var newArea = GameController.Instance.Files.WorldAreas.GetByAddress(m.ReadLong(corruptedAreasPtr));

@@ -13,6 +13,8 @@ using System.Diagnostics;
 
 namespace PoeHUD.Hud.PluginExtension
 {
+    using System.Linq;
+
     public class PluginExtensionPlugin : IPlugin
     {
         public readonly GameController GameController;
@@ -56,6 +58,8 @@ namespace PoeHUD.Hud.PluginExtension
 
                 LoadPluginFromDirectory(pluginDirectoryInfo.FullName);
             }
+
+            Plugins = Plugins.OrderBy(x => x.PluginName).ToList();
         }
 
         public static void ApplyUpdateFiles(string pluginDirectory)
@@ -212,20 +216,15 @@ namespace PoeHUD.Hud.PluginExtension
             {
                 asmTypes = myAsm.GetTypes();
             }
-            catch (System.Reflection.ReflectionTypeLoadException reflEx)
+            catch (ReflectionTypeLoadException typeLoadException)
             {
-                if (reflEx is System.Reflection.ReflectionTypeLoadException)
-                {
-                    var typeLoadException = reflEx as ReflectionTypeLoadException;
-                    var loaderExceptions = typeLoadException.LoaderExceptions;
+	            var loaderExceptions = typeLoadException.LoaderExceptions;
 
-                    LogError($"Can't load plugin dll. LoaderExceptions:", 10);
-                    foreach (Exception e in loaderExceptions)
-                    {
-                        LogError(e.Message, 10);
-                    }
-
-                }
+	            LogError($"Can't load plugin dll. LoaderExceptions:", 10);
+	            foreach (Exception e in loaderExceptions)
+	            {
+		            LogError(e.Message, 10);
+	            }
                 return;
             }
             catch (Exception ex)

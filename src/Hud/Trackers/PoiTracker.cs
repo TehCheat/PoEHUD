@@ -79,19 +79,48 @@ namespace PoeHUD.Hud.Trackers
             }
             if (e.HasComponent<Chest>() && perandus.Contains(e.Path))
             {
-                return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.PerandusChestColor), () => Settings.PerandusChest, Settings.PerandusChestIcon);
+                return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.PerandusChestColor), () => Settings.PerandusChest, Settings.PerandusChestIconSize);
             }
             if (e.HasComponent<Chest>() && !e.GetComponent<Chest>().IsOpened)
             {
-                if (e.Path.Contains("BreachChest"))
+	            if (e.Path.Contains("BreachChest"))
                 {
                     return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.BreachChestColor), () => Settings.BreachChest, Settings.BreachChestIcon);
                 }
 
-                return e.GetComponent<Chest>().IsStrongbox
-                    ? new ChestMapIcon(e, new HudTexture("strongbox.png",
-                    e.GetComponent<ObjectMagicProperties>().Rarity), () => Settings.Strongboxes, Settings.StrongboxesIcon)
-                    : new ChestMapIcon(e, new HudTexture("chest.png"), () => Settings.Chests, Settings.ChestsIcon);
+	            if (e.GetComponent<Chest>().IsStrongbox)
+	            {
+		            var chestIcon = "chest.png";
+		            switch (e.Path)
+		            {
+			            case "Metadata/Chests/StrongBoxes/StrongboxDivination":
+				            chestIcon = "chest_divination.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Ornate":
+				            chestIcon = "chest_ornate.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Large":
+				            chestIcon = "chest_large.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Jeweller":
+				            chestIcon = "chest_jewelers.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Gemcutter":
+				            chestIcon = "chest_gemscutter.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Artisan":
+				            chestIcon = "chest_quality.png"; break;
+			            case "Metadata/Chests/StrongBoxes/Armory":
+				            chestIcon = "chest_weapon.png"; break;
+						default:
+							if(e.Path.StartsWith("Metadata/Chests/StrongBoxes/Cartographer"))
+								chestIcon = "chest_map.png";
+							else if(e.Path.StartsWith("Metadata/Chests/StrongBoxes/Arcanist"))
+								chestIcon = "chest_no_quality.png"; 
+							break;
+		            }
+
+
+		            return new ChestMapIcon(e, new HudTexture("strongboxes/" + chestIcon,
+				            e.GetComponent<ObjectMagicProperties>().Rarity), () => Settings.Strongboxes, Settings.StrongboxesIconSize);
+	            }
+
+		        return new ChestMapIcon(e, new HudTexture("chest.png"), () => Settings.Chests, Settings.ChestsIcon);
             }
             return null;
         }

@@ -60,7 +60,7 @@ namespace PoeHUD.Poe.FilesInMemory
         private int id = -1;
         public int Id => id != -1 ? id : id = M.ReadInt(Address + 0x10);
 
-        public WorldArea area;
+        private WorldArea area;
         public WorldArea Area
         {
             get
@@ -73,5 +73,10 @@ namespace PoeHUD.Poe.FilesInMemory
                 return area;
             }
         }
+
+	    public override string ToString()
+	    {
+		    return $"{Area.Name} ({Area.AreaLevel}lvl). Id: {Id}";
+	    }
     }
 }

@@ -7,20 +7,22 @@ namespace PoeHUD.Poe.Elements
     {
         public long TotalStashes => StashInventoryPanel.ChildCount;
 
-        public Element ExitButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xA90)) : null;
+        public Element ExitButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAA0)) : null;//or (10, A88) or (708, AA0) or (998, 100) or better (AA0, 708)
 
         // Nice struct starts at 0xB80 till 0xBD0 and all are 8 byte long pointers.
-        private Element StashTitlePanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xB88)) : null;
-        private Element StashInventoryPanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xB98)) : null;
+        public Element StashTitlePanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC08)) : null;
+        public Element StashInventoryPanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC20)) : null;
  
-        public Element ViewAllStashButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xBa0)) : null;
-        public Element ViewAllStashPanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xBA8, 0xB80)) : null; // going extra inside.
+        public Element ViewAllStashButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC28)) : null;
 
-        public Element MoveStashTabLabelsLeft_Button => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xBb0)) : null;
-        public Element MoveStashTabLabelsRight_Button => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAB8, 0xBb8)) : null;
+        //Not easy to find it, coz it like a tooltipe element. Use IngameState.UIHoverTooltip instead IngameState.UIHover. Use it's address and StructureSpiderAdvanced to find it's offset fast.
+        public Element ViewAllStashPanel => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC30)) : null;
+
+        public Element MoveStashTabLabelsLeft_Button => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC38)) : null;
+        public Element MoveStashTabLabelsRight_Button => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAC0, 0xC40)) : null;
 
 
-        public int IndexVisibleStash => M.ReadInt(Address + 0xAB8, 0xBE0);
+        public int IndexVisibleStash => M.ReadInt(Address + 0xAC0, 0xC68);
         public Inventory VisibleStash => GetVisibleStash();
         private Inventory GetVisibleStash()
         {
@@ -50,7 +52,7 @@ namespace PoeHUD.Poe.Elements
         {
             if (index >= TotalStashes || index < 0)
                 return string.Empty;
-            return ViewAllStashPanel.Children[index].AsObject<EntityLabel>().Text;
+            return ViewAllStashPanel.GetChildAtIndex(2).GetChildAtIndex(index).GetChildAtIndex(1).AsObject<EntityLabel>().Text;
         }
     }
 }

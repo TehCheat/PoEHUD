@@ -79,6 +79,8 @@ namespace PoeHUD.Framework
             int result = num;
             for (var index = 0; index < offsets.Length; index++)
             {
+                if (result == 0)
+                    break;
                 var offset = offsets[index];
                 result = ReadInt(result + offset);
             }
@@ -92,13 +94,15 @@ namespace PoeHUD.Framework
             long result = num;
             for (var index = 0; index < offsets.Length; index++)
             {
+                if (result == 0)
+                    break;
                 var offset = offsets[index];
                 result = ReadLong(result + offset);
             }
             return (int)result;
         }
 
-      
+
 
 
         public float ReadFloat(long addr)
@@ -118,6 +122,8 @@ namespace PoeHUD.Framework
             long result = num;
             for (var index = 0; index < offsets.Length; index++)
             {
+                if (result == 0)
+                    break;
                 var offset = offsets[index];
                 result = ReadLong(result + offset);
             }
@@ -181,7 +187,7 @@ namespace PoeHUD.Framework
             if (mem[0] == 0 && mem[1] == 0)
             {
                 var checkByte = ReadByte(addr);
-                if(checkByte != 0)  
+                if (checkByte != 0)
                 {
                     //Reading an array of bytes gives us a 0 first byte and manual reading the first byte gives us not 0,
                     //mean that this was a reading out of memory region, we will try to read with step of 10 bytes, 
@@ -190,7 +196,7 @@ namespace PoeHUD.Framework
                     const int step = 8;//should be 'even' number (2,4,6,8, etc) (or remove if (bytes[0] == 0) check) 
                                        //because each second byte of string is 0
                     string result = "";
-                
+
                     for (int offset = 0; offset < length; offset += step)
                     {
                         var bytes = ReadMem(addr + offset, step);
@@ -200,8 +206,8 @@ namespace PoeHUD.Framework
 
                         var partialString = Encoding.Unicode.GetString(bytes);
                         result += partialString;
-                       
-                        if(replaceNull && partialString.Contains('\0'))
+
+                        if (replaceNull && partialString.Contains('\0'))
                         {
                             return RTrimNull(result);
                         }
@@ -230,7 +236,7 @@ namespace PoeHUD.Framework
             {
                 var offset = offsets[index];
 
-                if(index < offsets.Length - 1)
+                if (index < offsets.Length - 1)
                     result = ReadLong(result + offset);
                 else
                     result = ReadByte(result + offset);
@@ -266,7 +272,7 @@ namespace PoeHUD.Framework
             var range = endAddress - startAddress;
             if (range < 0 || range / structSize > maxCountLimit)
             {
-                if(PoeHUD.Hud.MainMenuWindow.Settings.DeveloperMode.Value)
+                if (PoeHUD.Hud.MainMenuWindow.Settings.DeveloperMode.Value)
                     DebugPlug.DebugPlugin.LogMsg($"Fixed possible memory leak while reading array of struct '{typeof(T).Name}'", 1, SharpDX.Color.Yellow);
                 return result;
             }
@@ -276,25 +282,37 @@ namespace PoeHUD.Framework
             return result;
         }
 
-        public List<T> ReadDoublePtrVectorClasses<T>(long address, bool noNullPointers = false) where T : RemoteMemoryObject, new()
-        {
-            var start = ReadLong(address);
-            //var end = ReadLong(address + 0x8);
-            var last = ReadLong(address + 0x10);
+	    public List<T> ReadDoublePtrVectorClasses<T>(long address, bool noNullPointers = false) where T : RemoteMemoryObject, new()
+	    {
+		    var start = ReadLong(address);
+		    var last = ReadLong(address + 0x10);
 
-            var length = (int)(last - start);
-            var bytes = ReadBytes(start, length);
+		    var length = (int)(last - start);
+		    var bytes = ReadBytes(start, length);
 
-            var result = new List<T>();
-            for (int readOffset = 0; readOffset < length; readOffset += 16)
-            {
-                var pointer = BitConverter.ToInt64(bytes, readOffset);
-                if (pointer == 0 && noNullPointers)
-                    continue;
-                result.Add(GameController.Instance.Game.GetObject<T>(pointer));
-            }
-            return result;
-        }
+		    var result = new List<T>();
+		    for (int readOffset = 0; readOffset < length; readOffset += 16)
+		    {
+			    var pointer = BitConverter.ToInt64(bytes, readOffset);
+			    if (pointer == 0 && noNullPointers)
+				    continue;
+			    result.Add(GameController.Instance.Game.GetObject<T>(pointer));
+		    }
+		    return result;
+	    }
+
+	    public List<T> ReadClassesFromPointerArray<T>(long address, int count) where T : RemoteMemoryObject, new()
+	    {
+		    var result = new List<T>(count);
+
+		    var addr = ReadLong(address);
+		    for (int i = 0; i < count; i++)
+		    {
+			    result.Add(GameController.Instance.Game.GetObject<T>(ReadLong(addr)));
+			    addr += 8;
+		    }
+		    return result;
+	    }
 
         public List<long> ReadPointersArray(long startAddress, long endAddress, int offset = 8)
         {
@@ -340,7 +358,7 @@ namespace PoeHUD.Framework
 
         //Temporary for reading QustStates
         //Hope some day this will be replaced with GrayMagic dll to read generic structs https://github.com/Konctantin/GreyMagic
-        public List<Tuple<long, int>> ReadDoublePointerIntList(long address) 
+        public List<Tuple<long, int>> ReadDoublePointerIntList(long address)
         {
             var list = new List<Tuple<long, int>>();
             var head = ReadLong(address + 0x8);
@@ -353,8 +371,8 @@ namespace PoeHUD.Framework
 
                 list.Add(new Tuple<long, int>(node.Ptr2_Key, node.Value));
             }
-            if (list.Count > 0)
-                list.RemoveAt(list.Count - 1);//bug fix, useless reading last element
+
+            list.RemoveAt(list.Count - 1);//bug fix, useless reading last element
             return list;
         }
         private unsafe ListDoublePointerIntNode ReadDoublePointerIntListNode(long pointer)
@@ -453,7 +471,7 @@ namespace PoeHUD.Framework
 
                 bool found = false;
 
-                for (int offset = 0; offset < exeImage.Length - patternLength; offset ++)
+                for (int offset = 0; offset < exeImage.Length - patternLength; offset++)
                 {
                     if (CompareData(pattern, exeImage, offset))
                     {
@@ -464,7 +482,7 @@ namespace PoeHUD.Framework
                     }
                 }
 
-                if(!found)
+                if (!found)
                 {
                     DebugStr += "Pattern " + iPattern + " is not found!" + Environment.NewLine;
                 }

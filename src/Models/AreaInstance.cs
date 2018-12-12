@@ -15,15 +15,18 @@ namespace PoeHUD.Models
 
         public DateTime TimeEntered = DateTime.Now;
 
+		public AreaTemplate Area { get; }
+
         public AreaInstance(AreaTemplate area, uint hash, int realLevel)
         {
+	        Area = area;
             Hash = hash;
             RealLevel = realLevel;
             Name = area.Name;
             Act = area.Act;
             IsTown = area.IsTown;
             HasWaypoint = area.HasWaypoint;
-            IsHideout = Name.Contains("Hideout");
+            IsHideout = area.RawName.ToLower().Contains("hideout");
         }
 
         public override string ToString()

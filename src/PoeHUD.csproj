@@ -132,8 +132,8 @@
       <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PoeFilterParser, Version=1.0.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\PoeFilterParser.1.0.26\lib\net46\PoeFilterParser.dll</HintPath>
+    <Reference Include="PoeFilterParser, Version=1.0.38.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PoeFilterParser.1.0.38\lib\net46\PoeFilterParser.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
@@ -190,7 +190,6 @@
     <Compile Include="Framework\WinApi.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipPlugin.cs" />
     <Compile Include="Hud\AdvancedTooltip\AdvancedTooltipSettings.cs" />
-    <Compile Include="Hud\CustomColorDialog.cs" />
     <Compile Include="Hud\DebugPlugin\DebugPlugin.cs" />
     <Compile Include="Hud\DebugPlugin\DebugPluginSettings.cs" />
     <Compile Include="Hud\Dps\DpsMeterSettings.cs" />
@@ -240,6 +239,7 @@
     <Compile Include="Hud\UI\Renderers\ImGuiRender.cs" />
     <Compile Include="Hud\UI\Vertexes\GuiVertex.cs" />
     <Compile Include="Models\Attributes\HideInReflectionAttibute.cs" />
+    <Compile Include="Models\Attributes\StaticOffsetFieldDebugAttribute.cs" />
     <Compile Include="Models\BaseItemType.cs" />
     <Compile Include="Models\Cache.cs" />
     <Compile Include="Models\CacheComponent\PlayerCache.cs" />

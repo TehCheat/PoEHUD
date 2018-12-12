@@ -6,7 +6,7 @@ namespace PoeHUD.Poe.Elements
 {
     public class InventoryElement : Element
     {
-        private InventoryList AllInventories => GetObjectAt<InventoryList>(OffsetBuffers + 0x434);
+        private InventoryList AllInventories => GetObjectAt<InventoryList>(OffsetBuffers + 0x434 + 0x08);
         public Inventory this[InventoryIndex k]
         {
             get

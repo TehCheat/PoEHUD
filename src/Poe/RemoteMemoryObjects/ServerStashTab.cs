@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using PoeHUD.Poe.Elements;
-using PoeHUD.Poe.RemoteMemoryObjects;
+using SharpDX;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
     public class ServerStashTab : RemoteMemoryObject
     {
-        internal const int StructSize = 0x48;
-        public string Name => GetObject<NativeStringReader>(Address + 0x8).Value;
-        public uint Color => M.ReadUInt(Address + 0x2c);
-        public InventoryTabPermissions MemberFlags => (InventoryTabPermissions)M.ReadUInt(Address + 0x30);
-        public InventoryTabPermissions OfficerFlags => (InventoryTabPermissions)M.ReadUInt(Address + 0x34);
-        public InventoryTabType TabType => (InventoryTabType)M.ReadUInt(Address + 0x38);
-        public ushort VisibleIndex => M.ReadUShort(Address + 0x3c);
-        //public ushort LinkedParentId => M.ReadUShort(Address + 0x26);
-        public InventoryTabFlags Flags => (InventoryTabFlags)M.ReadByte(Address + 0x41);
+        internal const int StructSize = 0x40;  
+        private const int ColorOffset = 0x2c;
 
-        public override string ToString()
+        public string Name => NativeStringReader.ReadString(Address + 0x8) + (RemoveOnly ? " (Remove-only)" : string.Empty);   
+        public Color Color => new Color(M.ReadByte(Address + ColorOffset), M.ReadByte(Address + ColorOffset + 1), M.ReadByte(Address + ColorOffset + 2));//for aplpha + 3
+        public InventoryTabPermissions MemberFlags => (InventoryTabPermissions)M.ReadUInt(Address + 0x3C);
+        public InventoryTabPermissions OfficerFlags => (InventoryTabPermissions)M.ReadUInt(Address + 0x34);
+        public InventoryTabType TabType => (InventoryTabType)M.ReadUInt(Address + 0x34);
+        public ushort VisibleIndex => M.ReadUShort(Address + 0x38);
+        //public ushort LinkedParentId => M.ReadUShort(Address + 0x26);
+        public InventoryTabFlags Flags => (InventoryTabFlags)M.ReadByte(Address + 0x3D);
+	    public bool RemoveOnly => (Flags & InventoryTabFlags.RemoveOnly) == InventoryTabFlags.RemoveOnly;
+	    public bool IsHidden => (Flags & InventoryTabFlags.Hidden) == InventoryTabFlags.Hidden;
+
+	    public override string ToString()
         {
-            return $"{Name}, DisplayIndex: {VisibleIndex}, {TabType}";
+            return $"{Name}{(RemoveOnly ? " (Remove-only)" : string.Empty)}, DisplayIndex: {VisibleIndex}, {TabType}";
         }
 
         [Flags]

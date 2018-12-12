@@ -13,6 +13,8 @@ using Vector2 = System.Numerics.Vector2;
 
 namespace PoeHUD.Hud.Menu.SettingsDrawers
 {
+    using System.CodeDom;
+
     public class BaseSettingsDrawer
     {
         public BaseSettingsDrawer(string settingName, int settingId) { SettingName = settingName; SettingId = settingId; }
@@ -188,11 +190,22 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
 
             if (MainMenuWindow.Settings.DeveloperMode.Value)
             {
-                ImGuiExtension.Label($"Ex:{StashNode.Exist}, Ind:{StashNode.VisibleIndex}, Id:{StashNode.Id}, Name: {StashNode.Name}");
+                ImGuiExtension.Label($"(Debug: Exist:{StashNode.Exist}, Index:{StashNode.VisibleIndex}, Id:{StashNode.Id}, Name: {StashNode.Name})");
                 ImGui.SameLine();
             }
 
-            if (ImGui.Combo(ImguiUniqLabel, ref selectedIndex, StashTabController.StashTabNames, StashTabController.StashTabNames.Length * 20))
+            //Tryna fix possible null values that crash imgui
+            var names = StashTabController.StashTabNames;
+            for (var i = 0; i < names.Length; i++)
+            {
+                if (names[i] == null)
+                    names[i] = "%ERROR. NULL VALUE%";
+            }
+
+            if (selectedIndex >= names.Length)
+                selectedIndex = -1;
+
+            if (ImGui.Combo(ImguiUniqLabel, ref selectedIndex, names, names.Length * 20))
             {
                 var node = StashTabController.GetStashTabNodeByVisibleIndex(selectedIndex);
                 StashNode.Name = node.Name;
@@ -263,8 +276,8 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
                         bool isSelected = SelectedFile == file.FullName;
                         if (ImGui.Selectable(file.Name, isSelected, SelectableFlags.DontClosePopups))
                         {
-                            selected = SelectedFile;
                             SelectedFile = file.FullName;
+                            selected = SelectedFile;
                             result = true;
                         }
                     }

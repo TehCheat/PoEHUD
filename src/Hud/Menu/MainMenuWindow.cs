@@ -97,10 +97,11 @@ namespace PoeHUD.Hud
 
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Xph & area", settingsHub.XpRateSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Preload alert", settingsHub.PreloadAlertSettings) });
-            CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster alert", settingsHub.MonsterTrackerSettings) });
+            CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster alert", settingsHub.MonsterTrackerSettings) });  
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster kills", settingsHub.KillCounterSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Show dps", settingsHub.DpsMeterSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Map Icons", settingsHub.MapIconsSettings) });
+	        CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Map Icons Size", settingsHub.PoiTrackerSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Perfomance", settingsHub.PerformanceSettings) });
 
 
@@ -186,10 +187,11 @@ namespace PoeHUD.Hud
                     {
                         foreach (var plugin in PluginExtensionPlugin.Plugins)
                         {
-                            
                             if (Settings.DeveloperMode.Value && Settings.ShowPluginsMS.Value)
                             {
                                 var extPlugin = (plugin as ExternalPluginHolder).BPlugin;
+	                            if (extPlugin == null)//This can happen while plugin update (using plugin updator) or recompile
+		                            continue;
                                 ImGuiExtension.Label(extPlugin.AwerageMs.ToString());
                                 ImGui.SameLine();
                             }

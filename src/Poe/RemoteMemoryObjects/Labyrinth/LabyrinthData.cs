@@ -26,7 +26,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                 int roomIndex = 0;
                 for (var addr = firstPtr; addr < lastPtr; addr += 0x60)
                 {
-                    DebugPlug.DebugPlugin.LogMsg($"Room {roomIndex} Addr: {addr.ToString("x")}", 0);
+                    //DebugPlug.DebugPlugin.LogMsg($"Room {roomIndex} Addr: {addr.ToString("x")}", 0);
                     if (addr == 0) continue;
                     var room = new LabyrinthRoom(M, addr);
                     room.Id = roomIndex++;

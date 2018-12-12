@@ -2,15 +2,17 @@
 
 namespace PoeHUD.Poe.Elements
 {
+    using RemoteMemoryObjects;
+
     public class PoeChatElement : Element
     {
         public long TotalMessageCount => ChildCount;
-        public EntityLabel this[int index]
+        public string this[int index]
         {
             get
             {
                 if (index < TotalMessageCount)
-                    return Children[index].AsObject<EntityLabel>();
+                    return Children[index].AsObject<EntityLabel>().Text;
                 return null;
             }
         }

@@ -1,4 +1,6 @@
-namespace PoeHUD.Poe.EntityComponents
+using System;
+
+namespace PoeHUD.Poe.Components
 {
     public class Charges : Component
 	{

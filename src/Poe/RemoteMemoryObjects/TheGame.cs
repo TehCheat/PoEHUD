@@ -17,7 +17,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                     IngameStateReal
                 : IngameStateReal);
 
-        private IngameState IngameStateReal => GameController.UseGameStateController ? GameStateController.IngameState : ReadObject<IngameState>(Address + 0x38);
+        private IngameState IngameStateReal => true ? GameStateController.IngameState : ReadObject<IngameState>(Address + 0x38);
 
         public int AreaChangeCount => M.ReadInt(M.AddressOfProcess + Offsets.AreaChangeCount);
         public bool IsGameLoading => GameStateController.IsLoading;
