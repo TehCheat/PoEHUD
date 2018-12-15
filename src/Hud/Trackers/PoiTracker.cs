@@ -47,6 +47,11 @@ namespace PoeHUD.Hud.Trackers
             "Metadata/Chests/PerandusChests/PerandusManorLostTreasureChest"
         };
 
+        private static readonly List<string> masters_without_npc_component = new List<string>
+        {
+            "Metadata/Terrain/Leagues/Incursion/Objects/IncursionPortal1"
+        };
+
         public PoiTracker(GameController gameController, Graphics graphics, PoiTrackerSettings settings)
             : base(gameController, graphics, settings)
         { }
@@ -70,6 +75,10 @@ namespace PoeHUD.Hud.Trackers
         private MapIcon GetMapIcon(EntityWrapper e)
         {
             if (e.HasComponent<NPC>() && masters.Contains(e.Path))
+            {
+                return new CreatureMapIcon(e, "ms-cyan.png", () => Settings.Masters, Settings.MastersIcon);
+            }
+            if (masters_without_npc_component.Contains(e.Path))
             {
                 return new CreatureMapIcon(e, "ms-cyan.png", () => Settings.Masters, Settings.MastersIcon);
             }

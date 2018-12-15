@@ -5,7 +5,7 @@ namespace PoeHUD.Poe.Components
 {
     public class Map : Component
     {
-        public WorldArea Area => GetObject<WorldArea>(M.ReadLong(Address + 0x10, 0x18, 0x8));// GameController.Instance.Files.WorldAreas.GetByAddress(M.ReadLong(Address + 0x10, 0x18));
+        public WorldArea Area => GameController.Instance.Files.WorldAreas.GetByAddress(M.ReadLong(Address + 0x10, 0x28)); 
         public int Tier => M.ReadByte(Address + 0x18);//let it be int to not break some plugins
         //public InventoryTabMapSeries MapSeries => (InventoryTabMapSeries)M.ReadByte(Address + 0x10, 0x9c);
     }

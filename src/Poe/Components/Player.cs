@@ -26,13 +26,20 @@ namespace PoeHUD.Poe.Components
 	    public PantheonGod PantheonMajor => (PantheonGod)M.ReadByte(Address + 0x5c);
 
 	    #region Prophecy
-	    public byte PropheciesCount => M.ReadByte(Address + 0x257);
+	    public byte PropheciesCount => M.ReadByte(Address + 0x1EA);
+
+        //How to fix prophecies:
+        //PropheciesCount is ez to find (use Structure Spider Advanced)
+        //Prophecies reading offset: 
+        //seek some prophecy, find it in GameFiles.Prophecies.List (qvin debug plugin), read it's id and search it in Structure Spider Advanced
+        //Fx prophecy The Cursed Choir has ProphecyId 18633 (use Id, not prophecy index!)
+        //Prophecies offset goes directly after PropheciesCount offset, maybe 1 byte distance.
 	    public List<ProphecyDat> Prophecies
 	    {
 		    get
 		    {
 			    var result = new List<ProphecyDat>();
-			    var readAddr = Address + 0x258;
+			    var readAddr = Address + 0x1EC;
 
 			    for (int i = 0; i < 7; i++)
 			    {

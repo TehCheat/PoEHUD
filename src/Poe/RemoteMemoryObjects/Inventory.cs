@@ -82,10 +82,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                 var InvRoot = InventoryUiElement;
                 if (InvRoot == null || InvRoot.Address == 0x00)
                     //throw new InvalidOperationException("InventoryUiElement is incorrect (address is '0')");
-                    return list;
+                    return null;
                 if (!InvRoot.IsVisible)
                     //throw new InvalidOperationException("InventoryUiElement is not visible");
-                return list;
+                return null;
            
 
                 switch (InvType)

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace PoeHUD.Poe.Elements
 {
+    using System;
+
     public class StashElement : Element
     {
         public long TotalStashes => StashInventoryPanel.ChildCount;
+        public bool HasScrollBar => TotalStashes >= 30;
 
         public Element ExitButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0xAA0)) : null;//or (10, A88) or (708, AA0) or (998, 100) or better (AA0, 708)
 
@@ -48,11 +51,15 @@ namespace PoeHUD.Poe.Elements
                 return null;
             return StashInventoryPanel.Children[index].Children[0].Children[0].AsObject<Inventory>();
         }
+
         public string GetStashName(int index)
         {
             if (index >= TotalStashes || index < 0)
                 return string.Empty;
-            return ViewAllStashPanel.GetChildAtIndex(2).GetChildAtIndex(index).GetChildAtIndex(1).AsObject<EntityLabel>().Text;
+
+            //When users have a scrollbar we should read child 1 instead of 2
+            var readChild = ViewAllStashPanel.GetChildAtIndex(HasScrollBar ? 1 : 2);
+            return readChild.GetChildAtIndex(index).GetChildAtIndex(1).AsObject<EntityLabel>().Text;
         }
     }
 }

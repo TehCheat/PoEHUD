@@ -25,7 +25,7 @@ namespace PoeHUD.Models
         public ICollection<EntityWrapper> Entities => entityCache.Values;
 
         private EntityWrapper player;
-        public Dictionary<Enums.GameStat, int> PlayerStats { get; private set; } = new Dictionary<Enums.GameStat, int>();
+        public Dictionary<int, int> PlayerStats { get; private set; } = new Dictionary<int, int>();
         public EntityWrapper Player
         {
             get
