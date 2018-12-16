@@ -473,3 +473,6 @@ Metadata/Terrain/Missions/CraftingUnlocks/RecipeUnlockRunestone; Crafting Recipe
 Metadata/Terrain/Missions/CraftingUnlocks/RecipeUnlockTemplarBook; Crafting Recipe; ff964DF1
 Metadata/Terrain/Missions/CraftingUnlocks/RecipeUnlockTemplarBookNoHelena; Crafting Recipe; ff964DF1
 Metadata/Terrain/Missions/CraftingUnlocks/RecipeUnlockVaal; Crafting Recipe; ff964DF1
+
+# HIDEOUTS
+Metadata/NPC/Missions/HelenaClaim; Unlockable Hideout; ffff0000
