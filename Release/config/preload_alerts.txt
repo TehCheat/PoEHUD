@@ -451,6 +451,7 @@ Metadata/Monsters/LeagueBetrayal/BetrayalKeema; Korell Goya, Son of Stone; ff36b
 Metadata/NPC/League/TreasureHunterWild; Alva, Master Explorer; ff64ffff 
 Metadata/Monsters/Masters/Einhar; Einhar, Beastmaster; ff64ffff
 Metadata/NPC/League/DelveMinerWildVein; Niko, Master of the Depths; ff64ffff
+Metadata/NPC/League/DelveMinerWildChest; Niko, Master of the Depths; ff64ffff
 
 # CRAFTING RECIPES
 Metadata/Terrain/Missions/CraftingUnlocks/BeastRecipe; Crafting Recipe; ff964DF1
