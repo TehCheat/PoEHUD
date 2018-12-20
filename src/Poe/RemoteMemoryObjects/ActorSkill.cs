@@ -15,10 +15,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 
         public bool CanBeUsedWithWeapon => M.ReadByte(Address + 0x46) > 0;
         public bool CanBeUsed => M.ReadByte(Address + 0x47) == 0;
-        public int Cost => M.ReadByte(Address + 0x48);
+        public int Cost => M.ReadByte(Address + 0x4C);
         //public int Unknown_Old_MaxUses => M.ReadInt(Address + 0x4c);
         public int TotalUses => M.ReadInt(Address + 0x50);
-        public float Cooldown => M.ReadInt(Address + 0x54) / 100f; //Converted milliseconds to seconds
+        public float Cooldown => M.ReadInt(Address + 0x58) / 100f; //Converted milliseconds to seconds
 
         public int SoulsPerUse => M.ReadInt(Address + 0x68);
         public int TotalVaalUses => M.ReadInt(Address + 0x6c);
