@@ -33,18 +33,21 @@ namespace PoeHUD.Hud
         private string CurrentSelected = "";
         private int CurrentSelectedInt = 0;
         private ImGuiVector2 newcontentRegionArea;
-        private PluginHolder SelectedPlugin;
+        public PluginHolder SelectedPlugin;
         private float PluginNameWidth = 100;
 
         private InbuildPluginMenu CoreMenu;
         public static CoreSettings Settings;
+        public static MainMenuWindow Instance;
         private readonly SettingsHub SettingsHub;
         private string PoeHUDVersion;
+
         public MainMenuWindow(CoreSettings settings, SettingsHub settingsHub)
         {
             Settings = settings;
             SettingsHub = settingsHub;
-            
+            Instance = this;
+
             //https://stackoverflow.com/questions/826777/how-to-have-an-auto-incrementing-version-number-visual-studio
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             //DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
@@ -278,6 +281,7 @@ namespace PoeHUD.Hud
                 {
                     SelectedPlugin = plugin;
                     SelectedPlugin.OnPluginSelectedInMenu();
+                    Settings.LastOpenedPlugin = plugin.PluginName;
                 }   
             }
         }

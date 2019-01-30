@@ -185,6 +185,9 @@ namespace PoeHUD.Hud
                 plugins.Add(new PluginExtensionPlugin(gameController, graphics)); //Should be after MenuPlugin
             //});
 
+            MainMenuWindow.Instance.SelectedPlugin = PluginExtensionPlugin.Plugins.Find(x => x.PluginName == MainMenuWindow.Settings.LastOpenedPlugin);
+
+
             Deactivate += OnDeactivate;
             FormClosing += OnClosing;
 

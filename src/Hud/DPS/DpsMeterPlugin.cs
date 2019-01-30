@@ -139,7 +139,7 @@ namespace PoeHUD.Hud.Dps
         {
             aoeDamage = 0;
             singleDamage = 0;
-            foreach (var monster in CachedMonsters)
+            foreach (var monster in CachedMonsters.ToArray())
             {
                 var life = monster.GetComponent<Life>();
                 if(!monster.IsAlive && Settings.HasCullingStrike.Value)

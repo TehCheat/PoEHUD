@@ -59,5 +59,10 @@ namespace PoeHUD.Hud.Menu
 
         [Menu("Use State Controller (BETA)", "Everything should works same, even better, but if you got some bugs - don't use it")]
         public ToggleNode UseStateController { get; set; } = false;
+
+        /// <summary>
+        /// Used for opening the last opened plugin after hud start
+        /// </summary>
+        public string LastOpenedPlugin = "";
     }
 }
