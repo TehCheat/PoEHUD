@@ -80,7 +80,7 @@ namespace PoeHUD.Poe.Components
                 for (int i = 0; i < 6; i++)
                 {
                     int num2 = M.ReadInt(num);
-                    if (num2 >= 1 && num2 <= 5)
+                    if (num2 >= 1 && num2 <= 6)
                     {
                         list.Add(M.ReadInt(num));
                     }
@@ -121,7 +121,11 @@ namespace PoeHUD.Poe.Components
                             case 4:
                                 sb.Append("W"); break;
                             case 5:
-                                sb.Append('A'); break;
+                                // For Abyssal Socket, found it by CTRL+C on an item
+                                sb.Append("A"); break;
+                            case 6:
+                                // For Delve Resonator, found it by CTRL+C on an item
+                                sb.Append("D"); break;
                         }
                     }
                     list.Add(sb.ToString());
