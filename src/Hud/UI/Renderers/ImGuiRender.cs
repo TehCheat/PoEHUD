@@ -17,19 +17,20 @@ namespace PoeHUD.Hud.UI.Renderers
     {
         private readonly Device device;
 
-        public ImGuiRender(Device dev, RenderForm form)
+        public unsafe ImGuiRender(Device dev, RenderForm form)
         {
             device = dev;
-            IO io = ImGui.GetIO();
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
+            var io = ImGui.GetIO();
+            io.Fonts.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
             UpdateCanvasSize(form.ClientSize.Width, form.ClientSize.Height);
             PrepareTextureImGui();
-            SetupKeyMapping(io);
+            SetupKeyMapping(*io.NativePtr);
+        
         }
         public void Dispose()
         {
@@ -54,44 +55,45 @@ namespace PoeHUD.Hud.UI.Renderers
         private unsafe void PrepareTextureImGui()
         {
             var io = ImGui.GetIO();
-            var texDataAsRgba32 = io.FontAtlas.GetTexDataAsRGBA32();
-            var t = new Texture(device, texDataAsRgba32.Width, texDataAsRgba32.Height, 1, Usage.Dynamic,
+
+         io.Fonts.GetTexDataAsRGBA32(out var pixels,out var w,out var h,out int perPixel);
+            var t = new Texture(device, w, h, 1, Usage.Dynamic,
                 Format.A8R8G8B8, Pool.Default);
             var rect = t.LockRectangle(0, LockFlags.None);
-            for (int y = 0; y < texDataAsRgba32.Height; y++)
+            for (int y = 0; y < h; y++)
             {
-                memcpy((byte*)(rect.DataPointer + rect.Pitch * y), texDataAsRgba32.Pixels + (texDataAsRgba32.Width * texDataAsRgba32.BytesPerPixel) * y, (texDataAsRgba32.Width * texDataAsRgba32.BytesPerPixel));
+                memcpy((byte*)(rect.DataPointer + rect.Pitch * y), pixels + ((w * perPixel) * y),w * perPixel);
             }
             t.UnlockRectangle(0);
-            io.FontAtlas.SetTexID(t.NativePointer);
-            io.FontAtlas.ClearTexData();
+            io.Fonts.SetTexID(t.NativePointer);
+            io.Fonts.ClearTexData();
         }
-        private void SetupKeyMapping(IO io)
+        private unsafe void SetupKeyMapping(ImGuiIO io)
         {
-            io.KeyMap[GuiKey.Tab] = (int)Keys.Tab;
-            io.KeyMap[GuiKey.LeftArrow] = (int)Keys.Left;
-            io.KeyMap[GuiKey.RightArrow] = (int)Keys.Right;
-            io.KeyMap[GuiKey.UpArrow] = (int)Keys.Up;
-            io.KeyMap[GuiKey.DownArrow] = (int)Keys.Down;
-            io.KeyMap[GuiKey.PageUp] = (int)Keys.PageUp;
-            io.KeyMap[GuiKey.PageDown] = (int)Keys.PageDown;
-            io.KeyMap[GuiKey.Home] = (int)Keys.Home;
-            io.KeyMap[GuiKey.End] = (int)Keys.End;
-            io.KeyMap[GuiKey.Delete] = (int)Keys.Delete;
-            io.KeyMap[GuiKey.Backspace] = (int)Keys.Back;
-            io.KeyMap[GuiKey.Enter] = (int)Keys.Enter;
-            io.KeyMap[GuiKey.Escape] = (int)Keys.Escape;
-            io.KeyMap[GuiKey.A] = (int)Keys.A;
-            io.KeyMap[GuiKey.C] = (int)Keys.C;
-            io.KeyMap[GuiKey.V] = (int)Keys.V;
-            io.KeyMap[GuiKey.X] = (int)Keys.X;
-            io.KeyMap[GuiKey.Y] = (int)Keys.Y;
-            io.KeyMap[GuiKey.Z] = (int)Keys.Z;
+            io.KeyMap[(int)ImGuiKey.Tab] = (int)Keys.Tab;
+            io.KeyMap[(int)ImGuiKey.LeftArrow] = (int)Keys.Left;
+            io.KeyMap[(int)ImGuiKey.RightArrow] = (int)Keys.Right;
+            io.KeyMap[(int)ImGuiKey.UpArrow] = (int)Keys.Up;
+            io.KeyMap[(int)ImGuiKey.DownArrow] = (int)Keys.Down;
+            io.KeyMap[(int)ImGuiKey.PageUp] = (int)Keys.PageUp;
+            io.KeyMap[(int)ImGuiKey.PageDown] = (int)Keys.PageDown;
+            io.KeyMap[(int)ImGuiKey.Home] = (int)Keys.Home;
+            io.KeyMap[(int)ImGuiKey.End] = (int)Keys.End;
+            io.KeyMap[(int)ImGuiKey.Delete] = (int)Keys.Delete;
+            io.KeyMap[(int)ImGuiKey.Backspace] = (int)Keys.Back;
+            io.KeyMap[(int)ImGuiKey.Enter] = (int)Keys.Enter;
+            io.KeyMap[(int)ImGuiKey.Escape] = (int)Keys.Escape;
+            io.KeyMap[(int)ImGuiKey.A] = (int)Keys.A;
+            io.KeyMap[(int)ImGuiKey.C] = (int)Keys.C;
+            io.KeyMap[(int)ImGuiKey.V] = (int)Keys.V;
+            io.KeyMap[(int)ImGuiKey.X] = (int)Keys.X;
+            io.KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y;
+            io.KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z;
         }
 
         public void UpdateCanvasSize(float width, float height)
         {
-            IO io = ImGui.GetIO();
+            var io = ImGui.GetIO();
             io.DisplaySize = new System.Numerics.Vector2(width, height);
             io.DisplayFramebufferScale = new System.Numerics.Vector2(width / height);
         }
@@ -102,13 +104,12 @@ namespace PoeHUD.Hud.UI.Renderers
         public unsafe void Draw()
         {
             ImGui.Render();
-            DrawData* data = ImGui.GetDrawData();
+            var data = ImGui.GetDrawData();
             ImGuiRenderDraw(data);
         }
-        private unsafe void ImGuiRenderDraw(DrawData* drawData)
+        private unsafe void ImGuiRenderDraw(ImDrawDataPtr drawData)
         {
-            if (drawData == null)
-                return;
+     
             var io = ImGui.GetIO();
             if (io.DisplaySize.X <= 0.0f || io.DisplaySize.Y <= 0.0f)
                 return;
@@ -160,43 +161,46 @@ namespace PoeHUD.Hud.UI.Renderers
             }
             using (device.VertexDeclaration = new VertexDeclaration(device, GuiVertex.VertexElements))
             {
-                for (var n = 0; n < drawData->CmdListsCount; n++)
+                for (var n = 0; n < drawData.CmdListsCount; n++)
                 {
-                    NativeDrawList* cmdList = drawData->CmdLists[n];
-                    DrawVert* vtx_buffer = (DrawVert*)cmdList->VtxBuffer.Data;
-                    ushort* idx_buffer = (ushort*)cmdList->IdxBuffer.Data;
+                   
+                        
+                   ImDrawListPtr cmdList = drawData.CmdLists + n;
+                
+                    ImDrawVertPtr vtx_buffer = cmdList.VtxBuffer.Data;
+                    var  idx_buffer = (ushort*)cmdList.IdxBuffer.Data;
 
-                    var myCustomVertices = new GuiVertex[cmdList->VtxBuffer.Size];
+                    var myCustomVertices = new GuiVertex[cmdList.VtxBuffer.Size];
                     for (var i = 0; i < myCustomVertices.Length; i++)
                     {
-                        var cl = (vtx_buffer[i].col & 0xFF00FF00) | ((vtx_buffer[i].col & 0xFF0000) >> 16) | ((vtx_buffer[i].col & 0xFF) << 16);
+                        var cl = (vtx_buffer.NativePtr[i].col & 0xFF00FF00) | ((vtx_buffer.NativePtr[i].col & 0xFF0000) >> 16) | ((vtx_buffer.NativePtr[i].col & 0xFF) << 16);
                         myCustomVertices[i] =
-                            new GuiVertex(vtx_buffer[i].pos.X, vtx_buffer[i].pos.Y, vtx_buffer[i].uv.X, vtx_buffer[i].uv.Y, cl);
+                            new GuiVertex(vtx_buffer.NativePtr[i].pos.X, vtx_buffer.NativePtr[i].pos.Y, vtx_buffer.NativePtr[i].uv.X, vtx_buffer.NativePtr[i].uv.Y, cl);
                     }
 
-                    for (var i = 0; i < cmdList->CmdBuffer.Size; i++)
+                    for (var i = 0; i < cmdList.CmdBuffer.Size; i++)
                     {
-                        DrawCmd* pcmd = &((DrawCmd*)cmdList->CmdBuffer.Data)[i];
-                        if (pcmd->UserCallback != IntPtr.Zero)
+                      ImDrawCmdPtr pcmd = cmdList.CmdBuffer.Data+i;
+                        if (pcmd.UserCallback != IntPtr.Zero)
                         {
                             throw new NotImplementedException();
                         }
                         else
                         {
-                            device.SetTexture(0, new Texture(pcmd->TextureId));
-                            device.ScissorRect = new RectangleF((int)pcmd->ClipRect.X,
-                                (int)pcmd->ClipRect.Y,
-                                (int)(pcmd->ClipRect.Z - pcmd->ClipRect.X),
-                                (int)(pcmd->ClipRect.W - pcmd->ClipRect.Y));
-                            ushort[] indices = new ushort[pcmd->ElemCount];
+                            device.SetTexture(0, new Texture(pcmd.TextureId));
+                            device.ScissorRect = new RectangleF((int)pcmd.ClipRect.X,
+                                (int)pcmd.ClipRect.Y,
+                                (int)(pcmd.ClipRect.Z - pcmd.ClipRect.X),
+                                (int)(pcmd.ClipRect.W - pcmd.ClipRect.Y));
+                            ushort[] indices = new ushort[pcmd.ElemCount];
                             for (int j = 0; j < indices.Length; j++)
                             {
                                 indices[j] = idx_buffer[j];
                             }
 
-                            device.DrawIndexedUserPrimitives(PrimitiveType.TriangleList, 0, myCustomVertices.Length, (int)(pcmd->ElemCount / 3), indices, Format.Index16, myCustomVertices);
+                            device.DrawIndexedUserPrimitives(PrimitiveType.TriangleList, 0, myCustomVertices.Length, (int)(pcmd.ElemCount / 3), indices, Format.Index16, myCustomVertices);
                         }
-                        idx_buffer += pcmd->ElemCount;
+                        idx_buffer += pcmd.ElemCount;
                     }
                 }
             }

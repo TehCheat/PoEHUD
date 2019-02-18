@@ -79,3 +79,4 @@ bld/
 settings.json
 /src/.vs/ExileHUD/v15/Server/sqlite3
 /.vs
+/Release.rar
