@@ -138,6 +138,11 @@ namespace PoeHUD.Hud.Trackers
 
 		        return new ChestMapIcon(e, new HudTexture("chest.png"), () => Settings.Chests, Settings.ChestsIcon);
             }
+
+            if (ePath == "Metadata/Terrain/Leagues/Synthesis/Objects/SynthesisAirlockController")
+            {
+                return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.BreachChestColor), () => Settings.BreachChest, Settings.BreachChestIcon);
+            }
             return null;
         }
     }

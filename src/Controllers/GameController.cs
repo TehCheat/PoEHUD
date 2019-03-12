@@ -34,7 +34,7 @@ namespace PoeHUD.Controllers
             Cache = new Cache();
           
             Files = new FsController(memory);
-            StashController = new StashTabController();
+            //StashController = new StashTabController();
             InGame = InGameReal;
             IsForeGroundCache = WinApi.IsForegroundWindow(Window.Process.MainWindowHandle);
             MainTimer = Stopwatch.StartNew();

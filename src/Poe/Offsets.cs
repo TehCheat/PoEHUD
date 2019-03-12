@@ -105,22 +105,15 @@ namespace PoeHUD.Poe
 
         public void DoPatternScans(Memory m)
         {
-            long[] array = m.FindPatterns(basePtrPattern, fileRootPattern, areaChangePattern, GameStatePattern);
-            System.Console.WriteLine("Base Pattern: " + (m.AddressOfProcess + array[0]).ToString("x8"));
+            long[] array = m.FindPatterns(fileRootPattern, areaChangePattern, GameStatePattern);
 
-            Base = m.ReadInt(m.AddressOfProcess + array[0] + 0xF) + array[0] + 0x13;
-            System.Console.WriteLine("Base Address: " + (Base + m.AddressOfProcess).ToString("x8"));
-
-            long InGameState = m.ReadLong(Base + m.AddressOfProcess, 0x8, 0x110, 0x8A0);
-            System.Console.WriteLine("InGameState: " + InGameState.ToString("x8"));
-
-            FileRoot = m.ReadInt(m.AddressOfProcess + array[1] + 0x3) + array[1] + 0x7;
+            FileRoot = m.ReadInt(m.AddressOfProcess + array[0] + 0x3) + array[0] + 0x7;
             System.Console.WriteLine("FileRoot Pointer: " + (FileRoot + m.AddressOfProcess).ToString("x8"));
 
-			AreaChangeCount = m.ReadInt(m.AddressOfProcess + array[2] + 0xB) + array[2] + 0xF;
+			AreaChangeCount = m.ReadInt(m.AddressOfProcess + array[1] + 0xB) + array[1] + 0xF;
 			System.Console.WriteLine("AreaChangeCount: " + m.ReadInt(AreaChangeCount + m.AddressOfProcess).ToString());
 
-            GameStateOffset = m.ReadInt(m.AddressOfProcess + array[3] + 0x03) + array[3] + 0x07;
+            GameStateOffset = m.ReadInt(m.AddressOfProcess + array[2] + 0x03) + array[2] + 0x07;
             System.Console.WriteLine("Game State Offset:" + (GameStateOffset + m.AddressOfProcess).ToString("x8"));
         }
     }
