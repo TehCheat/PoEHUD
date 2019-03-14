@@ -1,39 +1,39 @@
 using PoeHUD.Poe.Elements;
-using System.Collections;
 using System.Collections.Generic;
-using PoeHUD.Poe.FilesInMemory;
 using PoeHUD.Controllers;
 using System;
 using System.Linq;
-using PoeHUD.Framework;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
 	public class IngameUIElements : RemoteMemoryObject
 	{
-		public SkillBarElement SkillBar => ReadObjectAt<SkillBarElement>(0xB58);
-		public SkillBarElement HiddenSkillBar => ReadObjectAt<SkillBarElement>(0xB60);
-		public PoeChatElement ChatBox => GetObject<PoeChatElement>(M.ReadLong(Address + 0xBD8, 0xAB8, 0xC30));
-		public Element QuestTracker => ReadObjectAt<Element>(0xC80);
-		public Element OpenLeftPanel => ReadObjectAt<Element>(0xCC0);
-		public Element OpenRightPanel => ReadObjectAt<Element>(0xCC8);
-		public InventoryElement InventoryPanel => ReadObjectAt<InventoryElement>(0xCF8);
-		public Element TreePanel => ReadObjectAt<Element>(0xD28);
-		public Element AtlasPanel => ReadObjectAt<Element>(0xD30);
-		public Map Map => ReadObjectAt<Map>(0xD80);
+		public SkillBarElement SkillBar => ReadObjectAt<SkillBarElement>(0x370);
+		public SkillBarElement HiddenSkillBar => ReadObjectAt<SkillBarElement>(0x378);
+		public PoeChatElement ChatBox => GetObject<PoeChatElement>(M.ReadLong(Address + 0x3F8, 0x2D0, 0xF80));
+		public Element QuestTracker => ReadObjectAt<Element>(0x478);
+		public Element OpenLeftPanel => ReadObjectAt<Element>(0x4E0/*4F0*/);
+		public Element OpenRightPanel => ReadObjectAt<Element>(0x4E8/*4F8 */);
+		public InventoryElement InventoryPanel => ReadObjectAt<InventoryElement>(0x518);
+		public StashElement StashElement => ReadObjectAt<StashElement>(0x520); //This element was in serverdata
+		public Element TreePanel => ReadObjectAt<Element>(0x548);
+		public Element AtlasPanel => ReadObjectAt<Element>(0x550);
+		public Map Map => ReadObjectAt<Map>(0x5A0);
+		public SyndicatePanel SyndicatePanel => GetObject<SyndicatePanel>(M.ReadLong(Address + 0xEF8, 0xA50));
+        public SubterraneanChart MineMap => ReadObjectAt<SubterraneanChart>(0x6F8/*0xED8*/);
+		public WorldMapElement WorldMap => ReadObjectAt<WorldMapElement>(0xCC0);
+		public WorldMapElement AreaInstanceUi => ReadObjectAt<WorldMapElement>(0x7A8);
+
 		public IEnumerable<ItemsOnGroundLabelElement> ItemsOnGroundLabels
 		{
 			get
 			{
-				var itemsOnGroundLabelRoot = ReadObjectAt<ItemsOnGroundLabelElement>(0xD88);
+				var itemsOnGroundLabelRoot = GetObject<ItemsOnGroundLabelElement>(M.ReadLong(Address + 0x5A8));
 				return itemsOnGroundLabelRoot.Children;
 			}
 		}
 		public Element GemLvlUpPanel => ReadObjectAt<Element>(0x1068);
-		public ItemOnGroundTooltip ItemOnGroundTooltip => ReadObjectAt<ItemOnGroundTooltip>(0x10E8);
+		public ItemOnGroundTooltip ItemOnGroundTooltip => ReadObjectAt<ItemOnGroundTooltip>(0x248);//or 0x250
 
 		//public bool IsDndEnabled => M.ReadByte(Address + 0xf92) == 1;
 		//public string DndMessage => M.ReadStringU(M.ReadLong(Address + 0xf98));

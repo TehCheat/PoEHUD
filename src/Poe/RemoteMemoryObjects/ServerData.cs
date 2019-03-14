@@ -8,19 +8,21 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 {
 	public class ServerData : RemoteMemoryObject
 	{
-		//[Obsolete("Obsolete. Use StashTabs instead")]
-		public StashElement StashPanel => Address != 0 ? GetObject<StashElement>(M.ReadLong(Address + 0x4C8, 0xA0, 0x78)) : null;
+		public BetrayalData BetrayalData => GetObject<BetrayalData>(M.ReadLong(Address + 0x1FC8));
 
-		public PartyStatus PartyStatusType => (PartyStatus)M.ReadByte(Address + 0x5D88);
+		[Obsolete("Obsolete. Use GameController.Game.IngameState.IngameUi.StashElement instead")]
+	    public StashElement StashPanel => GameController.Instance.Game.IngameState.IngameUi.StashElement;// Address != 0 ? GetObject<StashElement>(M.ReadLong(Address + 0x4C8, 0xA0, 0x78)) : null; // needs fixed, but if it's obsolete, just remove it
 
-		public CharacterClass PlayerClass => (CharacterClass)(M.ReadByte(Address + 0x5B90) & 0xF);
+		public PartyStatus PartyStatusType => (PartyStatus)M.ReadByte(Address + 0x6188);
+
+		public CharacterClass PlayerClass => (CharacterClass)(M.ReadByte(Address + 0x5F90) & 0xF);
 
 		public List<ushort> PassiveSkillIds
 		{
 			get
 			{
-				var fisrPtr = M.ReadLong(Address + 0x5B20);
-				var endPtr = M.ReadLong(Address + 0x5B28);
+				var fisrPtr = M.ReadLong(Address + 0x5F20);
+				var endPtr = M.ReadLong(Address + 0x5F28);
 
 				int skillIds = (int)(endPtr - fisrPtr);
 
@@ -38,30 +40,30 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 			}
 		}
 		#region PlayerData
-		public int CharacterLevel => M.ReadInt(Address + 0x5B94);
-		public int PassiveRefundPointsLeft => M.ReadInt(Address + 0x5018);//TODO Fixme
-		public int QuestPassiveSkillPoints => M.ReadInt(Address + 0x501C);//TODO Fixme
-		public int FreePassiveSkillPointsLeft => M.ReadInt(Address + 0x5020);//TODO Fixme
-		public int TotalAscendencyPoints => M.ReadInt(Address + 0x5024);//TODO Fixme
-		public int SpentAscendencyPoints => M.ReadInt(Address + 0x5028);//TODO Fixme
-		public float TimeInGame => M.ReadFloat(Address + 0x5C48);
+		public int CharacterLevel => M.ReadInt(Address + 0x5F94);
+		public int PassiveRefundPointsLeft => M.ReadInt(Address + 0x5F98);
+		public int QuestPassiveSkillPoints => M.ReadInt(Address + 0x5F9C);
+		public int FreePassiveSkillPointsLeft => M.ReadInt(Address + 0x5FA0);
+		public int TotalAscendencyPoints => M.ReadInt(Address + 0x5FA4);
+		public int SpentAscendencyPoints => M.ReadInt(Address + 0x5FA8);
+		public int TimeInGame => M.ReadInt(Address + 0x6048);
 
-		public NetworkStateE NetworkState => (NetworkStateE)M.ReadByte(Address + 0x5BD0);
+		public NetworkStateE NetworkState => (NetworkStateE)M.ReadByte(Address + 0x5FD0);
 		public bool IsInGame => true ? GameStateController.IsInGameState : NetworkState == NetworkStateE.Connected;
 
-		public string League => NativeStringReader.ReadString(Address + 0x5BE8);
-		public PartyAllocation PartyAllocationType => (PartyAllocation)M.ReadByte(Address + 0x50B5);//TODO Fixme
-		public int Latency => M.ReadInt(Address + 0x5C50);
+		public string League => NativeStringReader.ReadString(Address + 0x5FE8);
+		public PartyAllocation PartyAllocationType => (PartyAllocation)M.ReadByte(Address + 0x6035);
+		public int Latency => M.ReadInt(Address + 0x6050);
 		#endregion
 		#region Stash Tabs
-		public List<ServerStashTab> PlayerStashTabs => GetStashTabs(0x5C60, 0x5C68);
-		public List<ServerStashTab> GuildStashTabs => GetStashTabs(0x5C78, 0x5C80);
+		public List<ServerStashTab> PlayerStashTabs => GetStashTabs(0x6060, 0x6068);
+		public List<ServerStashTab> GuildStashTabs => GetStashTabs(0x6078, 0x6080);
 		private List<ServerStashTab> GetStashTabs(int offsetBegin, int offsetEnd)
 		{
 			var firstAddr = M.ReadLong(Address + offsetBegin);
 			var lastAddr = M.ReadLong(Address + offsetEnd);
 
-			var tabs = M.ReadStructsArray<ServerStashTab>(firstAddr, lastAddr, ServerStashTab.StructSize, 200);
+			var tabs = M.ReadStructsArray<ServerStashTab>(firstAddr, lastAddr, ServerStashTab.StructSize, 5000);//Some players have 300 stash tabs, lol
 
 			//Skipping hidden tabs of premium maps tab (read notes in StashTabController.cs)
 			tabs.RemoveAll(x => x.IsHidden);
@@ -69,7 +71,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		}
 		#endregion
 
-		public string Guild => NativeStringReader.ReadString(M.ReadLong(Address + 0x5290));//TODO Fixme
+		// New Guild is a structure pointed to at 0x6210
+		// 0x10 - Length of Guild Name
+		// 0x00 - Name (either a pointer if length > 8 else Ustring)
+		// public string Guild => NativeStringReader.ReadString(M.ReadLong(Address + 0x5290));//TODO Fixme
 
 		public List<ushort> SkillBarIds
 		{
@@ -77,7 +82,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 			{
 				var result = new List<ushort>();
 
-				var readAddr = Address + 0x5E18;
+				var readAddr = Address + 0x6218;
 				for (var i = 0; i < 8; i++)
 				{
 					result.Add(M.ReadUShort(readAddr));
@@ -90,8 +95,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		{
 			get
 			{
-				var startPtr = M.ReadLong(Address + 0x5E58);
-				var endPtr = M.ReadLong(Address + 0x5E60);
+				var startPtr = M.ReadLong(Address + 0x6258);
+				var endPtr = M.ReadLong(Address + 0x6260);
 
 			    if (Math.Abs(endPtr - startPtr) / 8 > 50)
 			        return null;
@@ -112,8 +117,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		{
 			get
 			{
-				var firstAddr = M.ReadLong(Address + 0x5F38);
-				var lastAddr = M.ReadLong(Address + 0x5F40);
+				var firstAddr = M.ReadLong(Address + 0x6348);
+				var lastAddr = M.ReadLong(Address + 0x6350);
 				return M.ReadStructsArray<InventoryHolder>(firstAddr, lastAddr, InventoryHolder.StructSize, 400);
 			}
 		}
@@ -121,8 +126,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		{
 			get
 			{
-				var firstAddr = M.ReadLong(Address + 0x5FE8);
-				var lastAddr = M.ReadLong(Address + 0x5FF0);
+				var firstAddr = M.ReadLong(Address + 0x6400);
+				var lastAddr = M.ReadLong(Address + 0x6408);
 
 				if (firstAddr == 0)
 					return new List<InventoryHolder>();
@@ -135,8 +140,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		{
 			get
 			{
-				var firstAddr = M.ReadLong(Address + 0x6098);
-				var lastAddr = M.ReadLong(Address + 0x60A0);
+				var firstAddr = M.ReadLong(Address + 0x64B8); // double check these
+				var lastAddr = M.ReadLong(Address + 0x64C0);
 				return M.ReadStructsArray<InventoryHolder>(firstAddr, lastAddr, InventoryHolder.StructSize, 100);
 			}
 		}
@@ -180,18 +185,18 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		#endregion
 		#endregion
 
-		public ushort TradeChatChannel => M.ReadUShort(Address + 0x6190);
-		public ushort GlobalChatChannel => M.ReadUShort(Address + 0x6198);
-		public ushort LastActionId => M.ReadUShort(Address + 0x61E4);
+		public ushort TradeChatChannel => M.ReadUShort(Address + 0x65D0);
+		public ushort GlobalChatChannel => M.ReadUShort(Address + 0x65D8);
+		public ushort LastActionId => M.ReadUShort(Address + 0x6624);
 
 		#region Completed Areas
-		public List<WorldArea> ElderGuardiansAreas=> GetAreas(0x6230);//TODO Fixme
-		public List<WorldArea> CompletedAreas => GetAreas(0x6260);
-		public List<WorldArea> ShapedMaps => GetAreas(0x62A0);
-		public List<WorldArea> BonusCompletedAreas => GetAreas(0x62E0);
-		public List<WorldArea> UnknownAreas => GetAreas(0x6320);//TODO Fixme
-		public List<WorldArea> MasterAreas => GetAreas(0x6360);
-		public List<WorldArea> ShaperElderAreas => GetAreas(0x63A0);
+		public List<WorldArea> UnknownAreas => GetAreas(0x6670);
+		public List<WorldArea> CompletedAreas => GetAreas(0x66A0);
+		public List<WorldArea> ShapedMaps => GetAreas(0x66E0);
+		public List<WorldArea> BonusCompletedAreas => GetAreas(0x6720);
+		public List<WorldArea> ElderGuardiansAreas => GetAreas(0x6760);
+		public List<WorldArea> MasterAreas => GetAreas(0x67A0);
+		public List<WorldArea> ShaperElderAreas => GetAreas(0x67E0);
 
 		private List<WorldArea> GetAreas(int offset)
 		{
@@ -201,22 +206,24 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 
 		    if (size == 0 || size > 300)
 		        return result;
-		    listStart = M.ReadLong(listStart);
+		    //listStart = M.ReadLong(listStart);
 			for (var addr = M.ReadLong(listStart); addr != listStart; addr = M.ReadLong(addr))
 			{
-				result.Add(GameController.Instance.Files.WorldAreas.GetByAddress(M.ReadLong(addr + 0x18)));
 				if (--size < 0) break;
+				var areaAddr = M.ReadLong(addr + 0x18);
+				if(areaAddr != 0)
+					result.Add(GameController.Instance.Files.WorldAreas.GetByAddress(areaAddr));
 			}
 			return result;
 		}
 		#endregion
 		#region Monster Info
-		public byte MonsterLevel => M.ReadByte(Address + 0x6D44);
-		public byte MonstersRemaining => M.ReadByte(Address + 0x6D45); // 51 = 50+, 255 = N/A (Town, etc.)
+		public byte MonsterLevel => M.ReadByte(Address + 0x7184);
+		public byte MonstersRemaining => M.ReadByte(Address + 0x7185); // 51 = 50+, 255 = N/A (Town, etc.)
 		#endregion
 		#region Delve Info
-		public int CurrentSulphiteAmount => M.ReadUShort(Address + 0x6DDC);
-		public int CurrentAzuriteAmount => M.ReadInt(Address + 0x6DE8);
+		public int CurrentSulphiteAmount => M.ReadUShort(Address + 0x721C);
+		public int CurrentAzuriteAmount => M.ReadInt(Address + 0x7228);
 		#endregion
 		public enum NetworkStateE : byte
 		{

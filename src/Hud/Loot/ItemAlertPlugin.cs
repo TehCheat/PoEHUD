@@ -55,6 +55,7 @@ namespace PoeHUD.Hud.Loot
             {
                 if (!string.IsNullOrEmpty(path))
                 {
+                    DebugPlug.DebugPlugin.LogMsg("Loading the Filter File", 4);
                     using (var fileStream = new StreamReader(path))
                     {
                         var input = new AntlrInputStream(fileStream.ReadToEnd());

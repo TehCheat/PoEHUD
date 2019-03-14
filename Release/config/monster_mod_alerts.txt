@@ -16,10 +16,12 @@ MonsterItems1; Wealth monsters nearby; ; ffFFFF66; wealth.png
 MonsterExplodesOnDeathFire1; Volatile Flameblood nearby; volatile.wav; ff669999; volatile.png
 MonsterExplodesOnDeathLightning1; Volatile Stormblood nearby; volatile.wav; ff669999; volatile.png
 MonsterExplodesOnDeathCold1; Volatile Iceblood nearby; volatile.wav; ff669999; volatile.png
+MonsterNemesisLightningCloneLarge; Lightning Mirage nearby; volatile.wav; ff669999; volatile.png
 MonsterThornsPhysical1; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
 MonsterThornsElemental1; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
 MonsterThornsPhysical1Large; Physical Reflect nearby; physical.wav; ffF7941D; pReflect.png
 MonsterThornsElemental1Large; Elemental Reflect nearby; elemental.wav; ff00FFFF; eReflect.png
+MonsterNemesisVines; Vine Snare nearby
 
 TalismanMonsterUnsetAmulet; Has 1 Socket Talisman; ; ffCC3399; ms-talisman.png
 TalismanMonsterManaAmulet; Increased Mana Talisman; ; ffCC3399; ms-talisman.png

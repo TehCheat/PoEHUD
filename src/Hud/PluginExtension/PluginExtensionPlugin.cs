@@ -220,7 +220,7 @@ namespace PoeHUD.Hud.PluginExtension
             {
 	            var loaderExceptions = typeLoadException.LoaderExceptions;
 
-	            LogError($"Can't load plugin dll. LoaderExceptions:", 10);
+	            LogError($"Can't load plugin {Path.GetFileNameWithoutExtension(path)}. LoaderExceptions:", 10);
 	            foreach (Exception e in loaderExceptions)
 	            {
 		            LogError(e.Message, 10);

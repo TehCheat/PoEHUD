@@ -154,6 +154,10 @@ namespace PoeHUD.Hud.PluginExtension
                     {
                         drawer = new ButtonSettingDrawer(property.GetValue(Settings) as ButtonNode, menuAttrib.MenuName, drawerId);
                     }
+                    else if (propType == typeof(TextNode) || propType.IsSubclassOf(typeof(TextNode)))
+                    {
+                        drawer = new TextSettingsDrawer(property.GetValue(Settings) as TextNode, menuAttrib.MenuName, drawerId);
+                    }
                     else if (propType == typeof(EmptyNode) || propType.IsSubclassOf(typeof(EmptyNode)))
                     {
                         drawer = new LabelSettingDrawer(menuAttrib.MenuName, drawerId);

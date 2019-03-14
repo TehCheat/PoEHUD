@@ -37,7 +37,6 @@ namespace PoeHUD.Poe.FilesInMemory
                 var r = new StatRecord(M, addr, iCounter++);
                 if (!records.ContainsKey(r.Key))
                     records.Add(r.Key, r);
-				iCounter++;
             }
         }
 

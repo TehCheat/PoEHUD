@@ -11,7 +11,7 @@ namespace PoeHUD.Hud.Settings
     {
         [JsonIgnore]
         public Action OnValueChanged = delegate { };
-        private string value;
+        private string value = "";
 
         public TextNode()
         {

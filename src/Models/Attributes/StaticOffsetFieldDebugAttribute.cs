@@ -9,16 +9,21 @@
     /// <seealso cref="System.Attribute" />
     public class StaticOffsetFieldDebugAttribute : Attribute
     {
-        public int SliderOffsetMinMaxDelta = -1;
-        public StaticOffsetFieldDebugAttribute() { }
+        public int SliderMin = -1;
+        public int SliderMax;
+
+        public StaticOffsetFieldDebugAttribute()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StaticOffsetFieldDebugAttribute"/> class.
         /// </summary>
-        /// <param name="sliderOffsetMinMaxDelta">You can set the slider min max using this.</param>
-        public StaticOffsetFieldDebugAttribute(int sliderOffsetMinMaxDelta)
+        /// <param name="sliderMin">You can set the slider min max using this.</param>
+        public StaticOffsetFieldDebugAttribute(int sliderMin, int sliderMax)
         {
-            SliderOffsetMinMaxDelta = sliderOffsetMinMaxDelta;
+            SliderMin = sliderMin;
+            SliderMax = sliderMax;
         }
     }
 }

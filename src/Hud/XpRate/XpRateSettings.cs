@@ -20,6 +20,7 @@ namespace PoeHUD.Hud.XpRate
             FpsTextColor = new ColorBGRA(220, 190, 130, 255);
             TimerTextColor = new ColorBGRA(220, 190, 130, 255);
             LatencyTextColor = new ColorBGRA(220, 190, 130, 255);
+            DelveInfoTextcolor = new ColorBGRA(220, 190, 130, 255);
         }
 
         public ToggleNode ShowInTown { get; set; }
@@ -34,5 +35,6 @@ namespace PoeHUD.Hud.XpRate
         public ColorNode FpsTextColor { get; set; }
         public ColorNode TimerTextColor { get; set; }
         public ColorNode LatencyTextColor { get; set; }
+        public ColorNode DelveInfoTextcolor { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SharpDX;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
@@ -24,9 +25,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             var queue = new Queue<long>();
             queue.Enqueue(addr);
             int loopcount = 0;
-            while (queue.Count > 0 && loopcount < 10000)
+            while (queue.Count > 0)
             {
-                loopcount++;
                 long nextAddr = queue.Dequeue();
                 if (hashSet.Contains(nextAddr))
                     continue;
@@ -43,6 +43,12 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
                     }
                     queue.Enqueue(M.ReadLong(nextAddr));
                     queue.Enqueue(M.ReadLong(nextAddr + 0x10));
+                }
+
+                if (loopcount++ > 10000)
+                {
+                    DebugPlug.DebugPlugin.LogMsg("Entities processing limit reached (10k)", 10, Color.Yellow);
+					break;
                 }
             }
         }

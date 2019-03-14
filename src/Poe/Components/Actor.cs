@@ -17,8 +17,8 @@ namespace PoeHUD.Poe.Components
         public int ActionId => Address != 0 ? M.ReadInt(Address + 0xD8) : 1;
 
         public ActionFlags Action => Address != 0 ? (ActionFlags)M.ReadInt(Address + 0xD8) : ActionFlags.None;
-        public bool isMoving => Action == ActionFlags.Moving;
-        public bool isAttacking => Action == ActionFlags.UsingAbility;
+        public bool isMoving => (Action & ActionFlags.Moving) > 0;
+        public bool isAttacking => (Action & ActionFlags.UsingAbility) > 0;
 
         public bool HasMinion(Entity entity)
         {
@@ -43,7 +43,7 @@ namespace PoeHUD.Poe.Components
         public float TimeSinseLastMove => -M.ReadFloat(Address + 0x110);
         public float TimeSinseLastAction => -M.ReadFloat(Address + 0x114);
 
-        public ActionWrapper CurrentAction => Action == ActionFlags.UsingAbility ? ReadObject<ActionWrapper>(Address + 0x60) : null;
+        public ActionWrapper CurrentAction => (Action & ActionFlags.UsingAbility) > 0 ? ReadObject<ActionWrapper>(Address + 0x60) : null;
 
         // e.g minions, mines
         private long DeployedObjectStart => M.ReadLong(Address + 0x328);
@@ -54,11 +54,18 @@ namespace PoeHUD.Poe.Components
             get
             {
                 var result = new List<DeployedObject>();
+                var LIMIT = 300;
                 for (var addr = DeployedObjectStart; addr < DeployedObjectEnd; addr += 8)
                 {
                     var objectId = M.ReadUInt(addr);
                     var objectKey = M.ReadUShort(addr + 4);//in list of entities
                     result.Add(new DeployedObject(objectId, objectKey));
+
+                    if (--LIMIT < 0)
+                    {
+                        DebugPlug.DebugPlugin.LogMsg("Fixed stuck in Actor.DeployedObjects", 2);
+                        break;
+                    }
                 }
                 return result;
             }
@@ -106,8 +113,8 @@ namespace PoeHUD.Poe.Components
 
 		public class ActionWrapper : RemoteMemoryObject
         {
-            public float DestinationX => M.ReadInt(Address + 0x40);
-            public float DestinationY => M.ReadInt(Address + 0x44);
+            public float DestinationX => M.ReadInt(Address + 0x48);
+            public float DestinationY => M.ReadInt(Address + 0x4C);
 
             public Vector2 CastDestination => new Vector2(DestinationX, DestinationY);
 
@@ -129,7 +136,7 @@ namespace PoeHUD.Poe.Components
 
             /// actor is in the washed up state and false otherwise.
             WashedUpState = 256,
-            LocalPlayer = 2048
+            HasMines = 2048
         }
     }
 }

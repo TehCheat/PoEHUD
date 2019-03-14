@@ -37,6 +37,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 			IngameState = AllGameStates["InGameState"].AsObject<IngameState>();
 		}
 
+        //How to reversing it
+        //you should search for string of current active state, something like "IngameState" then you should search who using it (maybe on area change)..
+        //then after few scans you will got the green address. Then you know what to do..
+
 		//I hope this caching will works fine
 		private static long PreGameStatePtr = -1;
         private static long LoginStatePtr = -1;

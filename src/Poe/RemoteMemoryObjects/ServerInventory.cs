@@ -124,7 +124,16 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         PassiveTree = 13,
         RightHand = 3,
         Rings = 6,
+        Unknown1 = 14,
         Stash = 15,
-        Trade = 0x12
+        Unknown2 = 17,
+        Trade = 18,
+	    TinysTrialCraftTableCurrency_undefined = 24,
+
+		/// <summary>
+		/// Transmute, alter, regal, exalts
+		/// </summary>
+	    TinysTrialCraftTableCurrency = 25,
+	    TinysTrialCraftTableItem = 26
     }
 }

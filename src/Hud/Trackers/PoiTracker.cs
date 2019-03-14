@@ -74,36 +74,43 @@ namespace PoeHUD.Hud.Trackers
 
         private MapIcon GetMapIcon(EntityWrapper e)
         {
-            if (e.HasComponent<NPC>() && masters.Contains(e.Path))
+            var ePath = e.Path;
+
+            if (e.HasComponent<NPC>() && masters.Contains(ePath))
             {
                 return new CreatureMapIcon(e, "ms-cyan.png", () => Settings.Masters, Settings.MastersIcon);
             }
-            if (masters_without_npc_component.Contains(e.Path))
+            if (masters_without_npc_component.Contains(ePath))
             {
                 return new CreatureMapIcon(e, "ms-cyan.png", () => Settings.Masters, Settings.MastersIcon);
             }
-            if (e.HasComponent<NPC>() && cadiro.Contains(e.Path))
+            if (e.HasComponent<NPC>() && cadiro.Contains(ePath))
             {
                 return new CreatureMapIcon(e, "ms-green.png", () => Settings.Cadiro, Settings.CadiroIcon);
             }
-            if (e.HasComponent<Chest>() && perandus.Contains(e.Path))
+            if (e.HasComponent<Chest>() && perandus.Contains(ePath))
             {
                 return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.PerandusChestColor), () => Settings.PerandusChest, Settings.PerandusChestIconSize);
             }
             if (e.HasComponent<Chest>() && !e.GetComponent<Chest>().IsOpened)
             {
-	            if (e.Path.Contains("BreachChest"))
+	            if (ePath.Contains("BreachChest"))
                 {
                     return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.BreachChestColor), () => Settings.BreachChest, Settings.BreachChestIcon);
                 }
 
+                if (ePath == "Metadata/Chests/Prophecy/Divination")//From prophecy The Fortune Teller's Collection
+                {
+                    return new ChestMapIcon(e, new HudTexture("strongboxes/chest_divination.png",
+                                                              e.GetComponent<ObjectMagicProperties>().Rarity), () => Settings.Strongboxes, Settings.StrongboxesIconSize);
+                }
 	            if (e.GetComponent<Chest>().IsStrongbox)
 	            {
 		            var chestIcon = "chest.png";
-		            switch (e.Path)
+		            switch (ePath)
 		            {
-			            case "Metadata/Chests/StrongBoxes/StrongboxDivination":
-				            chestIcon = "chest_divination.png"; break;
+		                case "Metadata/Chests/StrongBoxes/StrongboxDivination":
+		                    chestIcon = "chest_divination.png"; break;
 			            case "Metadata/Chests/StrongBoxes/Ornate":
 				            chestIcon = "chest_ornate.png"; break;
 			            case "Metadata/Chests/StrongBoxes/Large":
@@ -117,9 +124,9 @@ namespace PoeHUD.Hud.Trackers
 			            case "Metadata/Chests/StrongBoxes/Armory":
 				            chestIcon = "chest_weapon.png"; break;
 						default:
-							if(e.Path.StartsWith("Metadata/Chests/StrongBoxes/Cartographer"))
+							if(ePath.StartsWith("Metadata/Chests/StrongBoxes/Cartographer"))
 								chestIcon = "chest_map.png";
-							else if(e.Path.StartsWith("Metadata/Chests/StrongBoxes/Arcanist"))
+							else if(ePath.StartsWith("Metadata/Chests/StrongBoxes/Arcanist"))
 								chestIcon = "chest_no_quality.png"; 
 							break;
 		            }
@@ -130,6 +137,11 @@ namespace PoeHUD.Hud.Trackers
 	            }
 
 		        return new ChestMapIcon(e, new HudTexture("chest.png"), () => Settings.Chests, Settings.ChestsIcon);
+            }
+
+            if (ePath == "Metadata/Terrain/Leagues/Synthesis/Objects/SynthesisAirlockController")
+            {
+                return new ChestMapIcon(e, new HudTexture("strongbox.png", Settings.BreachChestColor), () => Settings.BreachChest, Settings.BreachChestIcon);
             }
             return null;
         }

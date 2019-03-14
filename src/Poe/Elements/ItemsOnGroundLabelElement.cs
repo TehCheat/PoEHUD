@@ -51,7 +51,7 @@ namespace PoeHUD.Poe.Elements
 
         private long GetLabelInfo()
         {
-            return Label.Address != 0 ? M.ReadLong(Label.Address + OffsetBuffers + 0x69C) : 0;
+            return Label.Address != 0 ? M.ReadLong(Label.Address + OffsetBuffers + 0x6A4) : 0;
         }
     }
 }

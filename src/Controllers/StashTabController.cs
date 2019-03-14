@@ -134,7 +134,7 @@ namespace PoeHUD.Controllers
             if (!GameController.Instance.Area.CurrentArea.IsHideout && !GameController.Instance.Area.CurrentArea.IsTown)
                 return;
 
-            if (!GameController.Instance.Game.IngameState.IngameUi.InventoryPanel.IsVisible)
+            if (!GameController.Instance.Game.IngameState.IngameUi.StashElement.IsVisible)
                 return;
 
             if(!StashTabsIsInitialized)

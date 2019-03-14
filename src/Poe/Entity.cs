@@ -17,7 +17,7 @@ namespace PoeHUD.Poe
         /// </summary>
         public bool IsValid => M.ReadInt(Address, 0x20, 0) == 0x65004D;
 
-        public long Id => (long)M.ReadInt(Address + 0x40) << 32 ^ Address;
+        public long Id => (long)M.ReadInt(Address + 0x40);// << 32 ^ Address;
         public int InventoryId => M.ReadInt(Address + 0x58);
 
         /// if you want to find parent(child) of Entity (for essence mobs) - it will be at 0x48 in a deph of 2-3 in first pointers
@@ -25,9 +25,6 @@ namespace PoeHUD.Poe
         public Positioned PositionedComp => ReadObject<Positioned>(Address + 0x50);
 
         public bool IsHostile => (PositionedComp.Reaction & 0x7f) != 1;
-        //IsHostile should looks like this: 
-        //(GameController.Instance.Player.InternalEntity.PositionedComp.Reaction & 0x7f) != (PositionedComp.Reaction & 0x7f);
-        //We will hope that player's value will be always 1
 
         public bool HasComponent<T>() where T : Component, new()
         {
@@ -54,7 +51,7 @@ namespace PoeHUD.Poe
         public T GetComponent<T>() where T : Component, new()
         {
             long addr;
-            return HasComponent<T>(out addr) ? ReadObject<T>(ComponentList + M.ReadInt(addr + 0x18) * 8) : GetObject<T>(0);
+            return HasComponent<T>(out addr) ? ReadObject<T>(ComponentList + M.ReadInt(addr + 0x18) * 8) : ReadObject<T>(0);
         }
 
         public Dictionary<string, long> GetComponents()

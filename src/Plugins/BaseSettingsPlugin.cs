@@ -35,7 +35,14 @@ namespace PoeHUD.Plugins
                 if (File.Exists(settingsFullPath))
                 {
                     string json = File.ReadAllText(settingsFullPath);
-                    Settings = JsonConvert.DeserializeObject<TSettings>(json, SettingsHub.jsonSettings);
+                    if (!string.IsNullOrEmpty(json))
+	                {
+		                Settings = JsonConvert.DeserializeObject<TSettings>(json, SettingsHub.jsonSettings);
+	                }
+	                else
+	                {
+		                LogError($"Plugin: {PluginName}: Settings file is empty (bug?), generating new config...", 4);
+	                }
                 }
 
                 if (Settings == null)

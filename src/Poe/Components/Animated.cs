@@ -8,6 +8,6 @@ namespace PoeHUD.Poe.Components
 {
     public class Animated : Component
     {
-        public Entity BaseAnimatedObjectEntity => GetObject<Entity>(M.ReadLong(Address + 0x78));
+        public Entity BaseAnimatedObjectEntity => GetObject<Entity>(M.ReadLong(Address + 0x88));
     }
 }

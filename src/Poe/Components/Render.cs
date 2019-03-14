@@ -10,7 +10,7 @@ namespace PoeHUD.Poe.Components
         public float Z => Address != 0 ? M.ReadFloat(Address + 0x80) : 0f;
         public Vector3 Pos => new Vector3(X, Y, Z);
 
-        public string Name => ReadObject<NativeStringReader>(Address + 0x98).Value;
+        public string Name => GetObject<NativeStringReader>(Address + 0x98).Text;
         public Vector3 Bounds => new Vector3(M.ReadFloat(Address + 0x84), M.ReadFloat(Address + 0x88), M.ReadFloat(Address + 0x8C));
         public Vector3 MeshRoration => new Vector3(M.ReadFloat(Address + 0xB8), M.ReadFloat(Address + 0xBC), M.ReadFloat(Address + 0xC0));
 

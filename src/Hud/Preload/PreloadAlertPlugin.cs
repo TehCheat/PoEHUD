@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace PoeHUD.Hud.Preload
@@ -18,7 +19,7 @@ namespace PoeHUD.Hud.Preload
     public class PreloadAlertPlugin : SizedPlugin<PreloadAlertSettings>
     {
         public static event Action<List<string>> OnPreloadReceived = delegate { };
-        private readonly HashSet<PreloadConfigLine> alerts;
+        public static HashSet<PreloadConfigLine> alerts;
         private readonly Dictionary<string, PreloadConfigLine> alertStrings;
         private readonly Dictionary<string, PreloadConfigLine> personalAlertStrings;
         private bool foundSpecificPerandusChest = false;
@@ -210,8 +211,9 @@ namespace PoeHUD.Hud.Preload
 
         public override void Render()
         {
-            if (WinApi.IsKeyDown(Keys.F5)) // do a full refresh if F5 is hit
+            if (Settings.ReloadButton.PressedOnce()) // do a full refresh if F5 is hit
             {
+                DebugPlug.DebugPlugin.LogMsg("Looking for new preloads.", 1);
                 ResetArea();
                 Parse();
             }
@@ -334,7 +336,8 @@ namespace PoeHUD.Hud.Preload
             }
 
             preloadStrings.Sort();
-
+			if(Settings.DumpPreloads.Value)
+				File.WriteAllLines(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "DumpPreloads.txt"), preloadStrings);
             OnPreloadReceived(preloadStrings);
 
             foreach (var strings in preloadStrings)

@@ -16,6 +16,7 @@ using Graphics = PoeHUD.Hud.UI.Graphics;
 using PoeHUD.Hud.Menu.SettingsDrawers;
 using System.Diagnostics;
 using PoeHUD.Hud;
+using PoeHUD.Poe.RemoteMemoryObjects;
 
 namespace PoeHUD.Plugins
 {
@@ -53,6 +54,11 @@ namespace PoeHUD.Plugins
 
         public static PluginExtensionPlugin API;
         public GameController GameController => API.GameController;
+        public IngameState IngameState => GameController.Game.IngameState;
+        public ServerData ServerData => IngameState.ServerData;
+        public IngameUIElements IngameUi => IngameState.IngameUi;
+        public EntityWrapper Player => GameController.Player;
+
         public Graphics Graphics => API.Graphics;
         public Memory Memory => GameController.Memory;
 

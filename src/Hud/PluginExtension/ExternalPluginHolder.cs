@@ -64,8 +64,15 @@ namespace PoeHUD.Hud.PluginExtension
                 State = PluginState.Reload_DllNotFound;
                 return;
             }
-            BasePlugin.LogMessage("Reloading dll: " + DllPath, 3);
-            ReloadPlugin();
+	        try
+	        {
+		        ReloadPlugin();
+		        BasePlugin.LogMessage($"Reloaded dll: {Path.GetFileName(DllPath)}", 3);
+	        }
+	        catch (Exception ex)
+	        {
+		        BasePlugin.LogError($"Cannot reload dll: {Path.GetFileName(DllPath)}, Error: {ex.Message}", 3);
+	        }
         }
 
         public void ReloadPlugin()

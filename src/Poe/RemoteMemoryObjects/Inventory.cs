@@ -4,71 +4,72 @@ using System.Collections.Generic;
 
 namespace PoeHUD.Poe.RemoteMemoryObjects
 {
-    using System;
-    using System.Linq;
-
-    public class Inventory : RemoteMemoryObject
+    public class Inventory : Element
     {
-        public long ItemCount => M.ReadLong(Address + 0x410, 0x640, 0x50);//This one is correct
-        public long TotalBoxesInInventoryRow => M.ReadInt(Address + 0x410, 0x640, 0x0C);
+        public long ItemCount => M.ReadLong(Address + 0x3B8);
+        public long TotalBoxesInInventoryRow => M.ReadInt(Address + 0x4A0);
 
-        private InventoryType GetInvType()
+        public InventoryType InvType
         {
-        // For Poe MemoryLeak bug where ChildCount of PlayerInventory keep
-        // Increasing on Area/Map Change. Ref:
-        // http://www.ownedcore.com/forums/mmo/path-of-exile/poe-bots-programs/511580-poehud-overlay-updated-362.html#post3718876
-        // Orriginal Value of ChildCount should be 0x18
-            for (int j = 1; j < InventoryList.InventoryCount; j++)
-                if (Game.IngameState.IngameUi.InventoryPanel[(InventoryIndex)j].Address == Address)
-                    return InventoryType.PlayerInventory;
-
-            switch (this.AsObject<Element>().Parent.ChildCount)
+            get
             {
-                case 0x6f:
-                    return InventoryType.EssenceStash;
-                case 0x36:
-                    return InventoryType.CurrencyStash;
-                case 0x1C:
-                    return InventoryType.FragmentStash;
-                case 0x05:
-                    if (this.AsObject<Element>().Parent.Children[0].ChildCount == 9)
-                        return InventoryType.MapStash;
-                    return InventoryType.DivinationStash;
-                case 0x01:
-                    // Normal Stash and Quad Stash is same.
-                    if (TotalBoxesInInventoryRow == 24)
-                    {
-                        return InventoryType.QuadStash;
-                    }
-                    return InventoryType.NormalStash;
-                default:
-                    return InventoryType.InvalidInventory;
+                // For Poe MemoryLeak bug where ChildCount of PlayerInventory keep
+                // Increasing on Area/Map Change. Ref:
+                // http://www.ownedcore.com/forums/mmo/path-of-exile/poe-bots-programs/511580-poehud-overlay-updated-362.html#post3718876
+                // Orriginal Value of ChildCount should be 0x18
+                for (int j = 1; j < InventoryList.InventoryCount; j++)
+                    if (Game.IngameState.IngameUi.InventoryPanel[(InventoryIndex)j].Address == Address)
+                        return InventoryType.PlayerInventory;
+
+                switch (this.AsObject<Element>().Parent.ChildCount)
+                {
+                    case 0x6f:
+                        return InventoryType.EssenceStash;
+                    case 0x36:
+                        return InventoryType.CurrencyStash;
+                    case 0x40:
+                        return InventoryType.FragmentStash;
+                    case 0x05:
+                        if (this.AsObject<Element>().Parent.Children[0].ChildCount == 9)
+                            return InventoryType.MapStash;
+                        return InventoryType.DivinationStash;
+                    case 0x01:
+                        // Normal Stash and Quad Stash is same.
+                        if (TotalBoxesInInventoryRow == 24)
+                        {
+                            return InventoryType.QuadStash;
+                        }
+                        return InventoryType.NormalStash;
+                    default:
+                        return InventoryType.InvalidInventory;
+                }
             }
         }
-        public InventoryType InvType => GetInvType();
 
-        private Element getInventoryElement()
+        public Element InventoryUiElement
         {
-            switch(InvType)
+            get
             {
-                case InventoryType.PlayerInventory:
-                case InventoryType.NormalStash:
-                case InventoryType.QuadStash:
-                    return this.AsObject<Element>();
-                case InventoryType.CurrencyStash:
-                case InventoryType.EssenceStash:
-                case InventoryType.FragmentStash:
-                    return this.AsObject<Element>().Parent;
-                case InventoryType.DivinationStash:
-                    // There are many children  but we are only interested in one of them i.e. Owned Cards
-                    return GetObject<Element>(M.ReadLong(Address + Element.OffsetBuffers + 0x24, 0x08));
-                case InventoryType.MapStash:
-                    return this.AsObject<Element>().Parent;
-                default:
-                    return null;
+                switch(InvType)
+                {
+                    case InventoryType.PlayerInventory:
+                    case InventoryType.NormalStash:
+                    case InventoryType.QuadStash:
+                        return this.AsObject<Element>();
+                    case InventoryType.CurrencyStash:
+                    case InventoryType.EssenceStash:
+                    case InventoryType.FragmentStash:
+                        return this.AsObject<Element>().Parent;
+                    case InventoryType.DivinationStash:
+                        // There are many children  but we are only interested in one of them i.e. Owned Cards
+                        return GetObject<Element>(M.ReadLong(Address + Element.OffsetBuffers + 0x24, 0x08));
+                    case InventoryType.MapStash:
+                        return this.AsObject<Element>().Parent;
+                    default:
+                        return null;
+                }
             }
         }
-        public Element InventoryUiElement => getInventoryElement();
 
         //I'm using this to debug all items (NormalInventoryItem.InventPosX), etc..
         //public List<NormalInventoryItem> _DebugVisibleInventoryItems => InventoryUiElement.Children.Select(x => InventoryUiElement.GetObject<NormalInventoryItem>(x.Address)).ToList();

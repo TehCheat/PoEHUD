@@ -139,6 +139,18 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
         }
     }
 
+    public class TextSettingsDrawer : BaseSettingsDrawer
+    {
+        public TextNode TextNode;
+        public TextSettingsDrawer(TextNode node, string settingName, int settingId) : base(settingName, settingId) => TextNode = node;
+        public override void Draw()
+        {
+            if (TextNode.Value == null)
+                TextNode.Value = string.Empty;
+            TextNode.Value = ImGuiExtension.InputText(ImguiUniqLabel, TextNode.Value, 1000, InputTextFlags.AllowTabInput);
+        }
+    }
+
     public class IntegerSettingsDrawer : BaseSettingsDrawer
     {
         public RangeNode<int> IntegerNode;

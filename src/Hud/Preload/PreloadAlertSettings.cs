@@ -15,6 +15,9 @@ namespace PoeHUD.Hud.Preload
             Essence = true;
             CorruptedArea = true;
             CorruptedTitle = true;
+
+            ReloadButton = new HotkeyNode(System.Windows.Forms.Keys.F5);
+
             TextSize = new RangeNode<int>(16, 10, 50);
             BackgroundColor = new ColorBGRA(0, 0, 0, 255);
             DefaultTextColor = new ColorBGRA(210, 210, 210, 255);
@@ -126,6 +129,8 @@ namespace PoeHUD.Hud.Preload
             AurelioVoidsinger = new ColorBGRA(254, 192, 118, 255);
         }
 
+	    public ToggleNode DumpPreloads { get; set; } = false;
+        public HotkeyNode ReloadButton { get; set; }
         public ColorNode CadiroTrader { get; set; }
 
         public ToggleNode Essence { get; set; }

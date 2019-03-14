@@ -2,6 +2,8 @@ using SharpDX;
 
 namespace PoeHUD.Poe.Components
 {
+    using Models.Attributes;
+
     public class Positioned : Component
     {
         public int GridX => Address != 0 ? M.ReadInt(Address + 0x20) : 0;
@@ -15,6 +17,6 @@ namespace PoeHUD.Poe.Components
         public float Rotation => M.ReadFloat(Address + 0x100);
         public float RotationDeg => Rotation * (180 / MathUtil.Pi);
 
-        public byte Reaction => M.ReadByte(Address + 0x138);
+        public byte Reaction => M.ReadByte(Address + 0x39);
     }
 }

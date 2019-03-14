@@ -1,4 +1,4 @@
-﻿using System;
+﻿using PoeHUD.Poe.RemoteMemoryObjects;
 
 namespace PoeHUD.Poe.Components
 {
@@ -9,7 +9,7 @@ namespace PoeHUD.Poe.Components
         {
             get
             {
-                return M.ReadStringU(M.ReadLong(Address + 0x10, 0x18), 256);
+                return NativeStringReader.ReadString(M.ReadLong(Address + 0x10) + 0x18);
             }
         }
 
