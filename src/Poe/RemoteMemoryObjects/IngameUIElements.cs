@@ -24,12 +24,12 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		public WorldMapElement WorldMap => ReadObjectAt<WorldMapElement>(0xCC0);
 		public WorldMapElement AreaInstanceUi => ReadObjectAt<WorldMapElement>(0x7A8);
 
-		public IEnumerable<ItemsOnGroundLabelElement> ItemsOnGroundLabels
+		public IEnumerable<LabelOnGround> ItemsOnGroundLabels
 		{
 			get
 			{
 				var itemsOnGroundLabelRoot = GetObject<ItemsOnGroundLabelElement>(M.ReadLong(Address + 0x5A8));
-				return itemsOnGroundLabelRoot.Children;
+				return itemsOnGroundLabelRoot.LabelsOnGround;
 			}
 		}
 		public Element GemLvlUpPanel => ReadObjectAt<Element>(0x1068);
