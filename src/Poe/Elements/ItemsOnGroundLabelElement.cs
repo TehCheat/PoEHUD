@@ -35,7 +35,7 @@ namespace PoeHUD.Poe.Elements
             get
             {
                 long address = M.ReadLong(Address + 0x2A0);
-
+                var breakCounter = 1000;
                 var result = new List<LabelOnGround>();
                 if (address <= 0)
                     return null;
