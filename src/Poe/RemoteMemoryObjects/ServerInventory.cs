@@ -31,7 +31,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             {
                 HashNode node = stack.Pop();
                 if (!node.IsNull)
-                    result.Add(node.Key, node.Value1);
+                    result[node.Key] = node.Value1;
 
                 HashNode prev = node.Previous;
                 if (!prev.IsNull)
@@ -51,7 +51,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             public HashNode Root => ReadObject<HashNode>(Address + 0x8);
             public HashNode Next => ReadObject<HashNode>(Address + 0x10);
             //public readonly byte Unknown;
-            public bool IsNull => M.ReadByte(Address + 0x19) != 0;
+            public bool IsNull => Address != 0 && M.ReadByte(Address + 0x19) != 0;
             //private readonly byte byte_0;
             //private readonly byte byte_1;
             public int Key => M.ReadInt(Address + 0x20);
