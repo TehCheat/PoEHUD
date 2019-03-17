@@ -1,6 +1,18 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Hud",
+    "\\src\\Hud\\Menu",
+    "\\src\\Hud\\Menu\\SettingsDrawers",
+    "\\src\\Hud\\PluginExtension",
+    "\\src\\Hud\\Settings",
+    "\\src\\Models\\Enums",
+    "\\src\\Poe",
+    "\\src\\Poe\\Elements",
+    "\\src\\Poe\\Elements\\InventoryElements",
+    "\\src\\Poe\\RemoteMemoryObjects"
   ],
+  "SelectedNode": "\\src\\ExileHUD.sln",
   "PreviewInSolutionExplorer": false
 }

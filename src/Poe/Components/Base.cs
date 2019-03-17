@@ -18,6 +18,9 @@ namespace PoeHUD.Poe.Components
         public bool isCorrupted => M.ReadByte(Address + 0xD8) == 1;
         public bool isShaper => M.ReadByte(Address + 0xD9) == 1;
         public bool isElder => M.ReadByte(Address + 0xDA) == 1;
+        //experimental
+        public bool isVeiled => M.ReadByte(Address + 0xDD) == 1;        //doesnt work
+        public bool isFractured => M.ReadByte(Address + 0xDE) == 1;     //seems to be used for veiled aswell
 
         // 0x8 - link to base item
         // +0x10 - Name
