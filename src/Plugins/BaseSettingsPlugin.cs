@@ -48,9 +48,10 @@ namespace PoeHUD.Plugins
                 if (Settings == null)
                     Settings = new TSettings();
             }
-            catch
+            catch (Exception ex)
             {
-                LogError($"Plugin {PluginName} error load settings!", 3);
+                //LogError($"Plugin {PluginName} error load settings!", 3);
+                HandlePluginError("LoadSettings", ex, true);
                 Settings = new TSettings();
             }
 
@@ -76,15 +77,18 @@ namespace PoeHUD.Plugins
                 if (!Directory.Exists(settingsDirName))
                     Directory.CreateDirectory(settingsDirName);
 
-                using (var stream = new StreamWriter(File.Create(SettingsFullPath)))
+                string jsonStringData = JsonConvert.SerializeObject(Settings, Formatting.Indented, SettingsHub.jsonSettings);
+
+                if (string.IsNullOrEmpty(jsonStringData))
                 {
-                    string json = JsonConvert.SerializeObject(Settings, Formatting.Indented, SettingsHub.jsonSettings);
-                    stream.Write(json);
+                    HandlePluginError("LoadSettings", new Exception("EmptySerializedObjString"), false);
+                    return;
                 }
+                File.WriteAllText(SettingsFullPath, jsonStringData);
             }
-            catch
+            catch (Exception ex)
             {
-                LogError($"Plugin {PluginName} error save settings!", 3);
+                HandlePluginError("SaveSettings", ex, true);
             }
         }
         #endregion

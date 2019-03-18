@@ -448,10 +448,10 @@ Metadata/Monsters/LeagueBetrayal/BetrayalVagan; Vagan, Victory's Herald; ff36b4b
 Metadata/Monsters/LeagueBetrayal/BetrayalThane; Thane Jorgin the Banished; ff36b4b4
 Metadata/Monsters/LeagueBetrayal/BetrayalKeema; Korell Goya, Son of Stone; ff36b4b4
 
-Metadata/NPC/League/TreasureHunterWild; Alva, Master Explorer; ff64ffff 
+Metadata/NPC/League/Incursion/TreasureHunterWild; Alva, Master Explorer; ff64ffff
 Metadata/Monsters/Masters/Einhar; Einhar, Beastmaster; ff64ffff
-Metadata/NPC/League/DelveMinerWildVein; Niko, Master of the Depths; ff64ffff
-Metadata/NPC/League/DelveMinerWildChest; Niko, Master of the Depths; ff64ffff
+Metadata/NPC/League/Delve/DelveMinerWildVein; Niko, Master of the Depths; ff64ffff
+Metadata/NPC/League/Delve/DelveMinerWildChest; Niko, Master of the Depths; ff64ffff
 
 # CRAFTING RECIPES
 Metadata/Terrain/Missions/CraftingUnlocks/BeastRecipe; Crafting Recipe; ff964DF1

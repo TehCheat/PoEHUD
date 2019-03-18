@@ -8,7 +8,10 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 	{
         private Cache _cache => GameController.Instance.Cache;
 
-		public long EntityLabelMap => M.ReadLong(Address + 0x98, 0xA88);
+		public IngameUIElements IngameUi => _cache.Enable && _cache.IngameUi != null ? _cache.IngameUi : _cache.Enable ? _cache.IngameUi = IngameUiReal : IngameUiReal;
+		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x78); // also at 0xF8...
+
+		public long EntityLabelMap => M.ReadLong(Address + 0x98, 0x2A0);
 
 		public IngameData Data => _cache.Enable && _cache.Data != null ? _cache.Data : _cache.Enable ? _cache.Data = DataReal : DataReal;
 		private IngameData DataReal => ReadObject<IngameData>(Address + 0x370 + Offsets.IgsOffset);
@@ -17,9 +20,6 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 
 		public ServerData ServerData => _cache.Enable && _cache.ServerData != null ? _cache.ServerData : _cache.Enable ? _cache.ServerData = ServerDataReal : ServerDataReal;
 		private ServerData ServerDataReal => ReadObjectAt<ServerData>(0x378 + Offsets.IgsOffset);
-
-		public IngameUIElements IngameUi => _cache.Enable && _cache.IngameUi != null ? _cache.IngameUi : _cache.Enable ? _cache.IngameUi = IngameUiReal : IngameUiReal;
-		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x78 + Offsets.IgsOffset);
 
 		public float CurentUIElementPosX => M.ReadFloat(Address + 0x524 + Offsets.IgsOffset);
 		public float CurentUIElementPosY => M.ReadFloat(Address + 0x528 + Offsets.IgsOffset);
@@ -51,6 +51,6 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		public Camera Camera => _cache.Enable && _cache.Camera != null ? _cache.Camera :
 			_cache.Enable ? _cache.Camera = CameraReal : CameraReal;
 
-		private Camera CameraReal => GetObject<Camera>(Address + 0xF54 + Offsets.IgsOffsetDelta);
+		private Camera CameraReal => GetObject<Camera>(Address + 0xF54 + Offsets.IgsOffset);
 	}
 }

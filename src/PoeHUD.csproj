@@ -312,6 +312,7 @@
     <Compile Include="Poe\RemoteMemoryObjects\BetrayalSyndicateLeadersData.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\BetrayalTarget.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\ChestDat.cs" />
+    <Compile Include="Poe\RemoteMemoryObjects\LabelOnGround.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\GenericFileInMemory.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\Labyrinth\LabyrinthData.cs" />
     <Compile Include="Poe\RemoteMemoryObjects\MonsterVariety.cs" />

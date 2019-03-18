@@ -1,57 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PoeHUD.Poe.RemoteMemoryObjects;
 
 namespace PoeHUD.Poe.Elements
 {
     public class ItemsOnGroundLabelElement : Element
     {
-        private readonly Lazy<long> labelInfo;
-
-        public ItemsOnGroundLabelElement()
-        {
-            labelInfo = new Lazy<long>(GetLabelInfo);
-        }
-
-        public Element Label => ReadObjectAt<Element>(0x10); // LabelsOnGround
-        public Entity ItemOnGround => ReadObjectAt<Entity>(0x18); //ItemsOnGround
-
-        public Element LabelOnHover => ReadObjectAt<Element>(OffsetBuffers + 0x344);
-        public Entity ItemOnHover => ReadObjectAt<Entity>(OffsetBuffers + 0x34C);
-
-        public bool CanPickUp => labelInfo.Value == 0;
-
-        public TimeSpan TimeLeft
+        public Element LabelOnHover
         {
             get
             {
-                if (!CanPickUp)
-                {
-                    int futureTime = M.ReadInt(labelInfo.Value + 0x38);
-                    return TimeSpan.FromMilliseconds(futureTime - Environment.TickCount);
-                }
-                return new TimeSpan();
+                var readObjectAt = ReadObjectAt<Element>(0x248);
+                return readObjectAt.Address == 0 ? null : readObjectAt;
             }
         }
 
-        public TimeSpan MaxTimeForPickUp => !CanPickUp ? TimeSpan.FromMilliseconds(M.ReadInt(labelInfo.Value + 0x34)) : new TimeSpan();
-        public new bool IsVisible => Label.IsVisible;
-
-        public new IEnumerable<ItemsOnGroundLabelElement> Children
+        public Entity ItemOnHover
         {
             get
             {
-                long address = M.ReadLong(Address + OffsetBuffers + 0x35C);
+                var readObjectAt = ReadObjectAt<Entity>(0x250);
+                return readObjectAt.Address == 0 ? null : readObjectAt;
+            }
+        }
 
+        public string ItemOnHoverPath => ItemOnHover != null ? ItemOnHover.Path : "Null";
+        public string LabelOnHoverText => LabelOnHover != null ? LabelOnHover.Text : "Null";
+
+
+        public int CountLabels => M.ReadInt(Address + 0x268);
+        public int CountLabels2 => M.ReadInt(Address + 0x2A8);
+
+        public new List<LabelOnGround> LabelsOnGround
+        {
+            get
+            {
+                long address = M.ReadLong(Address + 0x2A0);
+                var breakCounter = 1000;
+                var result = new List<LabelOnGround>();
+                if (address <= 0)
+                    return null;
+                var limit = 0;
                 for (long nextAddress = M.ReadLong(address); nextAddress != address; nextAddress = M.ReadLong(nextAddress))
                 {
-                    yield return GetObject<ItemsOnGroundLabelElement>(nextAddress);
+                    result.Add(GetObject<LabelOnGround>(nextAddress));
+                    limit++;
+                    if (limit > 1000)
+                        return null;
                 }
-            }
-        }
 
-        private long GetLabelInfo()
-        {
-            return Label.Address != 0 ? M.ReadLong(Label.Address + OffsetBuffers + 0x6A4) : 0;
+                return result;
+            }
         }
     }
 }

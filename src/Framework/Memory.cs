@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using PoeHUD.Controllers;
 using System.Runtime.InteropServices;
 using PoeHUD.Poe.RemoteMemoryObjects;
+using SharpDX;
 
 namespace PoeHUD.Framework
 {
@@ -364,12 +365,18 @@ namespace PoeHUD.Framework
             var head = ReadLong(address + 0x8);
             ListDoublePointerIntNode node = ReadDoublePointerIntListNode(head);
             list.Add(new Tuple<long, int>(node.Ptr2_Key, node.Value));
-
+            var breakCounter = 10000;
             for (var ptr2 = node.NextPtr; ptr2 != head; ptr2 = node.NextPtr)
             {
                 node = ReadDoublePointerIntListNode(ptr2);
 
                 list.Add(new Tuple<long, int>(node.Ptr2_Key, node.Value));
+
+                if (--breakCounter < 0)
+                {
+                    DebugPlug.DebugPlugin.LogMsg("Freeze fix in ReadDoublePointerIntList. Break after 10000 iterations", 10, Color.Red);
+                    break;
+                }
             }
 
             list.RemoveAt(list.Count - 1);//bug fix, useless reading last element

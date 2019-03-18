@@ -10,8 +10,8 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 	{
 		public BetrayalData BetrayalData => GetObject<BetrayalData>(M.ReadLong(Address + 0x1FC8));
 
-		//[Obsolete("Obsolete. Use StashTabs instead")]
-		public StashElement StashPanel => Address != 0 ? GetObject<StashElement>(M.ReadLong(Address + 0x4C8, 0xA0, 0x78)) : null; // needs fixed, but if it's obsolete, just remove it
+		[Obsolete("Obsolete. Use GameController.Game.IngameState.IngameUi.StashElement instead")]
+	    public StashElement StashPanel => GameController.Instance.Game.IngameState.IngameUi.StashElement;// Address != 0 ? GetObject<StashElement>(M.ReadLong(Address + 0x4C8, 0xA0, 0x78)) : null; // needs fixed, but if it's obsolete, just remove it
 
 		public PartyStatus PartyStatusType => (PartyStatus)M.ReadByte(Address + 0x6188);
 
@@ -202,17 +202,24 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		{
 			var result = new List<WorldArea>();
 			var size = M.ReadInt(Address + offset - 0x8);
-			var listStart = M.ReadLong(Address + offset);
-
+	
 		    if (size == 0 || size > 300)
 		        return result;
-		    //listStart = M.ReadLong(listStart);
+		    var listStart = M.ReadLong(Address + offset);
+
 			for (var addr = M.ReadLong(listStart); addr != listStart; addr = M.ReadLong(addr))
 			{
-				if (--size < 0) break;
+		
 				var areaAddr = M.ReadLong(addr + 0x18);
-				if(areaAddr != 0)
-					result.Add(GameController.Instance.Files.WorldAreas.GetByAddress(areaAddr));
+
+			    if (areaAddr != 0)
+			    {
+			        var area = GameController.Instance.Files.WorldAreas.GetByAddress(areaAddr);
+                    if(area != null)
+			            result.Add(area);
+			    }
+
+			    if (--size < 0) break;
 			}
 			return result;
 		}

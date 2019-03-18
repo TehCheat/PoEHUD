@@ -8,7 +8,7 @@ namespace PoeHUD.Poe.Elements
     public class StashElement : Element
     {
         public long TotalStashes => StashInventoryPanel.ChildCount;
-        public bool HasScrollBar => TotalStashes >= 30;
+        public bool HasScrollBar => TotalStashes > 30;
 
         public Element ExitButton => Address != 0 ? GetObject<Element>(M.ReadLong(Address + 0x2B8)) : null;//or (10, A88) or (708, AA0) or (998, 100) or better (AA0, 708)
 

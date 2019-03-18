@@ -64,7 +64,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         public static bool IsLoginState => GameStateActive(LoginStatePtr);
         public static bool IsSelectCharacterState => GameStateActive(SelectCharacterStatePtr);
         public static bool IsWaitingState => GameStateActive(WaitingStatePtr);//This happens after selecting character, maybe other cases
-        public static bool IsInGameState => GameStateActive(InGameStatePtr);//In game, with selected character
+        public static bool IsInGameState => GameStateActive(InGameStatePtr) && !IsLoading;//In game, with selected character
         public static bool IsLoading => LoadingState.IsLoading;
 
         private static bool GameStateActive(long stateAddress)
@@ -99,7 +99,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             {
                 GameStateHashNode node = stack.Pop();
                 if (!node.IsNull)
-                    result.Add(node.Key, node.Value1);
+                    result[node.Key] = node.Value1;
 
                 GameStateHashNode prev = node.Previous;
                 if (!prev.IsNull)
@@ -117,7 +117,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             public GameStateHashNode Root => ReadObject<GameStateHashNode>(Address + 0x8);
             public GameStateHashNode Next => ReadObject<GameStateHashNode>(Address + 0x10);
             //public readonly byte Unknown;
-            public bool IsNull => M.ReadByte(Address + 0x19) != 0;
+            public bool IsNull => Address != 0 && M.ReadByte(Address + 0x19) != 0;
             //private readonly byte byte_0;
             //private readonly byte byte_1;
             public string Key => M.ReadNativeString(Address + 0x20);
@@ -142,7 +142,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
     public class AreaLoadingState : GameState
     {
         //This is actualy pointer to loading screen stuff (image, etc), but should works fine.
-        public bool IsLoading => M.ReadLong(Address + 0xAC0) == 1; 
+        public bool IsLoading => M.ReadLong(Address + 0xD8) == 1; 
         public string AreaName => M.ReadStringU(M.ReadLong(Address + 0xBF0));
 
         public override string ToString()
