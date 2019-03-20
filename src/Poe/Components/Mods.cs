@@ -22,6 +22,9 @@ namespace PoeHUD.Poe.Components
             }
         }
 
+        public int FracturedMods => M.ReadByte(Address + 0x89);
+        public bool Synthesised => M.ReadByte(Address + 0x437) == 1;
+        
         public int ItemLevel => M.ReadInt(Address + 0x42c);
         public int RequiredLevel => M.ReadInt(Address + 0x430);
         public bool IsUsable => M.ReadByte(Address + 0x370) != 0;

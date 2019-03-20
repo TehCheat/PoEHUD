@@ -18,7 +18,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             });
         }
 
-        private long GetLabelInfo() { return Label.Address != 0 ? M.ReadLong(Label.Address + 0x6A4) : 0; }
+        private long GetLabelInfo() { return Label.Address != 0 ? M.ReadLong(Label.Address + 0x3A8) : 0; } // No idea if this is correct, but it's not 0x6A4
 
         //Probably CanPickUp
         public int PickTest => M.ReadInt(Address + 0x10c);
