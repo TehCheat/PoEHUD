@@ -173,18 +173,7 @@ namespace PoeHUD.Hud.Themes
                 if (count-- == -1)
                     ImGui.NextColumn();
             }
-            //foreach (ColorTarget type in colorTypes)
-            //{
 
-            //    var nameFixed = Regex.Replace(type.ToString(), "(\\B[A-Z])", " $1");
-            //    var colorValue = style.Colors[(int)type];
-
-            //    if (ImGui.ColorEdit4(nameFixed, ref colorValue, ColorEditFlags.AlphaBar | ColorEditFlags.NoInputs | ColorEditFlags.AlphaPreviewHalf))
-            //        style.Colors[(int)type] = colorValue;
-
-            //    if (count-- == -1)
-            //        ImGui.NextColumn();
-            //}
             #endregion
         }
 
