@@ -1,23 +1,23 @@
-﻿using PoeHUD.Plugins;
-using System;
-using System.Reflection;
-using System.IO;
+﻿using ImGuiNET;
+using PoeHUD.Controllers;
 using PoeHUD.Hud.Menu.SettingsDrawers;
-using PoeHUD.Hud.UI;
 using PoeHUD.Hud.Settings;
-using System.Collections.Generic;
+using PoeHUD.Hud.UI;
+using PoeHUD.Plugins;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using ImGuiNET;
+using System.Reflection;
 using ImGuiVector2 = System.Numerics.Vector2;
 using ImGuiVector4 = System.Numerics.Vector4;
 using Vector2 = System.Numerics.Vector2;
-using PoeHUD.Controllers;
-
+using WindowFlags = ImGuiNET.ImGuiWindowFlags;
 namespace PoeHUD.Hud.PluginExtension
 {
     public class PluginHolder
-    {        
+    {
         internal readonly List<BaseSettingsDrawer> SettingPropertyDrawers = new List<BaseSettingsDrawer>();
 
         public string PluginDirectory { get; internal set; } //Will be used for loading resources (images, sounds, etc.) from plugin floder
@@ -61,10 +61,10 @@ namespace PoeHUD.Hud.PluginExtension
             foreach (var drawer in drawers.ToList())
             {
                 if (!drawer.IsVisibleFunc()) continue;
-           
-                if(drawer.Children.Count > 0)
+
+                if (drawer.Children.Count > 0)
                 {
-                    ImGuiNative.igGetContentRegionAvail(out var newcontentRegionArea);
+                    var newcontentRegionArea =  ImGui.GetContentRegionAvail();
                     //We are not going to make IF on this childs coz we don't want inteface jumping while scrollings
                     ImGui.BeginChild($"##{ChildUniqId++}", new Vector2(newcontentRegionArea.X, drawer.ChildHeight + 40), true, WindowFlags.NoScrollWithMouse);
 
@@ -73,8 +73,8 @@ namespace PoeHUD.Hud.PluginExtension
                     ImGui.Text("    ");
                     ImGui.SameLine();
 
-                    ImGuiNative.igGetContentRegionAvail(out var newcontentRegionArea2);
-                    ImGui.BeginChild($"##{ChildUniqId++}", new Vector2(newcontentRegionArea2.X, drawer.ChildHeight), false, WindowFlags.NoScrollWithMouse);
+                    newcontentRegionArea =  ImGui.GetContentRegionAvail();
+                    ImGui.BeginChild($"##{ChildUniqId++}", new Vector2(newcontentRegionArea.X, drawer.ChildHeight), false, WindowFlags.NoScrollWithMouse);
 
                     DrawSettingsRecursively(drawer.Children, drawer);
                     childSize += drawer.ChildHeight + 15;
@@ -110,14 +110,14 @@ namespace PoeHUD.Hud.PluginExtension
 
         private void GetDrawersRecurs(List<BaseSettingsDrawer> drawers, List<BaseSettingsDrawer> result)
         {
-            foreach(var drawer in drawers)
+            foreach (var drawer in drawers)
             {
                 if (!result.Contains(drawer))
                     result.Add(drawer);
                 else
                     BasePlugin.LogError($"{PluginName}: Possible stashoverflow or duplicating drawers detected while generating menu. Drawer SettingName: {drawer.SettingName}, Id: {drawer.SettingId}", 5);
             }
-            
+
             drawers.ForEach(x => GetDrawersRecurs(x.Children, result));
         }
 
@@ -146,7 +146,7 @@ namespace PoeHUD.Hud.PluginExtension
                     if (DrawersIds.Contains(drawerId))
                     {
                         BasePlugin.LogError($"{PluginName}: Already contain settings child with id {menuAttrib.parentIndex}. Fixed by giving a new uniq ID. Property " + property.Name, 5);
-                       // drawer.SettingId = GetUniqDrawerId();
+                        // drawer.SettingId = GetUniqDrawerId();
                     }
                     var propType = property.PropertyType;
 
@@ -264,7 +264,7 @@ namespace PoeHUD.Hud.PluginExtension
                                     valueDrawer.DrawDelegate = delegate
                                     {
                                         var val = vect.Value;
-                                        ImGui.SliderVector2(valueDrawer.ImguiUniqLabel, ref val, vect.Min.X, vect.Max.X, "%.0f", 1);
+                                        ImGui.SliderFloat2(valueDrawer.ImguiUniqLabel, ref val, vect.Min.X, vect.Max.X, "%.0f", 1);
                                         vect.Value = val;
                                     };
                                 }

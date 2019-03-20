@@ -10,23 +10,33 @@ using SharpDX.Windows;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using DrawCmd = ImGuiNET.ImDrawCmd;
+using DrawData = ImGuiNET.ImDrawData;
+using DrawVert = ImGuiNET.ImDrawVert;
+using GuiKey = ImGuiNET.ImGuiKey;
+using IO = ImGuiNET.ImGuiIO;
+using NativeDrawList = ImGuiNET.ImDrawList;
 
 namespace PoeHUD.Hud.UI.Renderers
 {
-    class ImGuiRender
+    unsafe class ImGuiRender
     {
         private readonly Device device;
 
         public ImGuiRender(Device dev, RenderForm form)
         {
             device = dev;
-            IO io = ImGui.GetIO();
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
-            io.FontAtlas.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
+
+            IntPtr context = ImGui.CreateContext();
+            ImGui.SetCurrentContext(context);
+
+            var io = ImGui.GetIO();
+            io.Fonts.AddFontFromFileTTF("fonts\\Cousine-Regular.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\DroidSans.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\Karla-Regular.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\ProggyClean.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\ProggyTiny.ttf", 15f);
+            io.Fonts.AddFontFromFileTTF("fonts\\Roboto-Medium.ttf", 15f);
             UpdateCanvasSize(form.ClientSize.Width, form.ClientSize.Height);
             PrepareTextureImGui();
             SetupKeyMapping(io);
@@ -54,44 +64,67 @@ namespace PoeHUD.Hud.UI.Renderers
         private unsafe void PrepareTextureImGui()
         {
             var io = ImGui.GetIO();
-            var texDataAsRgba32 = io.FontAtlas.GetTexDataAsRGBA32();
-            var t = new Texture(device, texDataAsRgba32.Width, texDataAsRgba32.Height, 1, Usage.Dynamic,
+            io.Fonts.GetTexDataAsRGBA32(out var pixels, out var w, out var h, out var bytesPerPixel);
+            //var texDataAsRgba32 = io.Fonts.GetTexDataAsRGBA32();
+            var t = new Texture(device, w, h, 1, Usage.Dynamic,
                 Format.A8R8G8B8, Pool.Default);
             var rect = t.LockRectangle(0, LockFlags.None);
-            for (int y = 0; y < texDataAsRgba32.Height; y++)
+            for (int y = 0; y < h; y++)
             {
-                memcpy((byte*)(rect.DataPointer + rect.Pitch * y), texDataAsRgba32.Pixels + (texDataAsRgba32.Width * texDataAsRgba32.BytesPerPixel) * y, (texDataAsRgba32.Width * texDataAsRgba32.BytesPerPixel));
+                memcpy((byte*)(rect.DataPointer + rect.Pitch * y), pixels + (w * bytesPerPixel * y), w * bytesPerPixel);
             }
             t.UnlockRectangle(0);
-            io.FontAtlas.SetTexID(t.NativePointer);
-            io.FontAtlas.ClearTexData();
+            io.Fonts.SetTexID(t.NativePointer);
+            io.Fonts.ClearTexData();
+        }
+        private void SetupKeyMapping(ImGuiIOPtr io)
+        {
+            io.KeyMap[(int)GuiKey.Tab] = (int)Keys.Tab;
+            io.KeyMap[(int)GuiKey.LeftArrow] = (int)Keys.Left;
+            io.KeyMap[(int)GuiKey.RightArrow] = (int)Keys.Right;
+            io.KeyMap[(int)GuiKey.UpArrow] = (int)Keys.Up;
+            io.KeyMap[(int)GuiKey.DownArrow] = (int)Keys.Down;
+            io.KeyMap[(int)GuiKey.PageUp] = (int)Keys.PageUp;
+            io.KeyMap[(int)GuiKey.PageDown] = (int)Keys.PageDown;
+            io.KeyMap[(int)GuiKey.Home] = (int)Keys.Home;
+            io.KeyMap[(int)GuiKey.End] = (int)Keys.End;
+            io.KeyMap[(int)GuiKey.Delete] = (int)Keys.Delete;
+            io.KeyMap[(int)GuiKey.Backspace] = (int)Keys.Back;
+            io.KeyMap[(int)GuiKey.Enter] = (int)Keys.Enter;
+            io.KeyMap[(int)GuiKey.Escape] = (int)Keys.Escape;
+            io.KeyMap[(int)GuiKey.A] = (int)Keys.A;
+            io.KeyMap[(int)GuiKey.C] = (int)Keys.C;
+            io.KeyMap[(int)GuiKey.V] = (int)Keys.V;
+            io.KeyMap[(int)GuiKey.X] = (int)Keys.X;
+            io.KeyMap[(int)GuiKey.Y] = (int)Keys.Y;
+            io.KeyMap[(int)GuiKey.Z] = (int)Keys.Z;
         }
         private void SetupKeyMapping(IO io)
         {
-            io.KeyMap[GuiKey.Tab] = (int)Keys.Tab;
-            io.KeyMap[GuiKey.LeftArrow] = (int)Keys.Left;
-            io.KeyMap[GuiKey.RightArrow] = (int)Keys.Right;
-            io.KeyMap[GuiKey.UpArrow] = (int)Keys.Up;
-            io.KeyMap[GuiKey.DownArrow] = (int)Keys.Down;
-            io.KeyMap[GuiKey.PageUp] = (int)Keys.PageUp;
-            io.KeyMap[GuiKey.PageDown] = (int)Keys.PageDown;
-            io.KeyMap[GuiKey.Home] = (int)Keys.Home;
-            io.KeyMap[GuiKey.End] = (int)Keys.End;
-            io.KeyMap[GuiKey.Delete] = (int)Keys.Delete;
-            io.KeyMap[GuiKey.Backspace] = (int)Keys.Back;
-            io.KeyMap[GuiKey.Enter] = (int)Keys.Enter;
-            io.KeyMap[GuiKey.Escape] = (int)Keys.Escape;
-            io.KeyMap[GuiKey.A] = (int)Keys.A;
-            io.KeyMap[GuiKey.C] = (int)Keys.C;
-            io.KeyMap[GuiKey.V] = (int)Keys.V;
-            io.KeyMap[GuiKey.X] = (int)Keys.X;
-            io.KeyMap[GuiKey.Y] = (int)Keys.Y;
-            io.KeyMap[GuiKey.Z] = (int)Keys.Z;
+            io.KeyMap[(int)GuiKey.Tab] = (int)Keys.Tab;
+            io.KeyMap[(int)GuiKey.LeftArrow] = (int)Keys.Left;
+            io.KeyMap[(int)GuiKey.RightArrow] = (int)Keys.Right;
+            io.KeyMap[(int)GuiKey.UpArrow] = (int)Keys.Up;
+            io.KeyMap[(int)GuiKey.DownArrow] = (int)Keys.Down;
+            io.KeyMap[(int)GuiKey.PageUp] = (int)Keys.PageUp;
+            io.KeyMap[(int)GuiKey.PageDown] = (int)Keys.PageDown;
+            io.KeyMap[(int)GuiKey.Home] = (int)Keys.Home;
+            io.KeyMap[(int)GuiKey.End] = (int)Keys.End;
+            io.KeyMap[(int)GuiKey.Delete] = (int)Keys.Delete;
+            io.KeyMap[(int)GuiKey.Backspace] = (int)Keys.Back;
+            io.KeyMap[(int)GuiKey.Enter] = (int)Keys.Enter;
+            io.KeyMap[(int)GuiKey.Escape] = (int)Keys.Escape;
+            io.KeyMap[(int)GuiKey.A] = (int)Keys.A;
+            io.KeyMap[(int)GuiKey.C] = (int)Keys.C;
+            io.KeyMap[(int)GuiKey.V] = (int)Keys.V;
+            io.KeyMap[(int)GuiKey.X] = (int)Keys.X;
+            io.KeyMap[(int)GuiKey.Y] = (int)Keys.Y;
+            io.KeyMap[(int)GuiKey.Z] = (int)Keys.Z;
         }
 
         public void UpdateCanvasSize(float width, float height)
         {
-            IO io = ImGui.GetIO();
+            var io = ImGui.GetIO();
             io.DisplaySize = new System.Numerics.Vector2(width, height);
             io.DisplayFramebufferScale = new System.Numerics.Vector2(width / height);
         }
@@ -102,8 +135,8 @@ namespace PoeHUD.Hud.UI.Renderers
         public unsafe void Draw()
         {
             ImGui.Render();
-            DrawData* data = ImGui.GetDrawData();
-            ImGuiRenderDraw(data);
+            var data = ImGui.GetDrawData();
+            ImGuiRenderDraw(data.NativePtr);
         }
         private unsafe void ImGuiRenderDraw(DrawData* drawData)
         {

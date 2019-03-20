@@ -1,49 +1,51 @@
-﻿using System;
-using SharpDX.Direct3D9;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using PoeHUD.Hud.Menu;
-using PoeHUD.Hud.Settings;
-using PoeHUD.Models.Enums;
-using PoeHUD.Plugins;
-using PoeHUD.Poe;
-using PoeHUD.Models;
-using PoeHUD.Poe.Components;
-using PoeHUD.Poe.Elements;
-using PoeHUD.Poe.EntityComponents;
-using PoeHUD.Poe.RemoteMemoryObjects;
-using PoeHUD.Poe.FilesInMemory;
-using System.Windows.Forms;
-using ImGuiNET;
-using ImGuiVector2 = System.Numerics.Vector2;
-using ImGuiVector4 = System.Numerics.Vector4;
-using Vector2 = System.Numerics.Vector2;
-using PoeHUD.Hud.PluginExtension;
-using PoeHUD.Controllers;
-using PoeHUD.Hud.UI;
-using PoeHUD.Plugins;
-using PoeHUD.Hud.Menu.SettingsDrawers;
-using System.Text.RegularExpressions;
-using System.Linq;
+﻿using ImGuiNET;
 using Newtonsoft.Json;
-using PoeHUD.Hud.Menu;
-using PoeHUD.Hud.Settings;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using SharpDX;
+using PoeHUD.Controllers;
 using PoeHUD.Controllers;
 using PoeHUD.Framework;
 using PoeHUD.Hud.Menu;
+using PoeHUD.Hud.Menu;
+using PoeHUD.Hud.Menu;
+using PoeHUD.Hud.Menu.SettingsDrawers;
 using PoeHUD.Hud.PluginExtension;
+using PoeHUD.Hud.PluginExtension;
+using PoeHUD.Hud.Settings;
+using PoeHUD.Hud.Settings;
+using PoeHUD.Hud.UI;
 using PoeHUD.Models;
+using PoeHUD.Models;
+using PoeHUD.Models.Enums;
+using PoeHUD.Plugins;
+using PoeHUD.Plugins;
+using PoeHUD.Poe;
+using PoeHUD.Poe.Components;
+using PoeHUD.Poe.Elements;
+using PoeHUD.Poe.EntityComponents;
+using PoeHUD.Poe.FilesInMemory;
+using PoeHUD.Poe.RemoteMemoryObjects;
+using SharpDX;
+using SharpDX.Direct3D9;
 using System;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
+using System.IO;
+using System.IO;
+using System.Linq;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using ColorEditFlags = ImGuiNET.ImGuiColorEditFlags;
+using ColorTarget = ImGuiNET.ImGuiCol;
 using Graphics = PoeHUD.Hud.UI.Graphics;
-
+using ImGuiVector2 = System.Numerics.Vector2;
+using ImGuiVector4 = System.Numerics.Vector4;
+using InputTextFlags = ImGuiNET.ImGuiInputTextFlags;
+using Vector2 = System.Numerics.Vector2;
 namespace PoeHUD.Hud.Themes
 {
     public class ThemeEditor : PluginHolder
@@ -86,7 +88,7 @@ namespace PoeHUD.Hud.Themes
         {
             #region
             var newSelectedTheme = ImGuiExtension.ComboBox("Select Theme", "Themes", SelectedThemeName, MainMenuWindow.Settings.Theme.Values);
-            if(SelectedThemeName != newSelectedTheme)
+            if (SelectedThemeName != newSelectedTheme)
             {
                 SelectedThemeName = newSelectedTheme;
                 LoadedTheme = LoadTheme(newSelectedTheme, false);
@@ -99,8 +101,8 @@ namespace PoeHUD.Hud.Themes
             }
 
             ImGui.Text("");
-            NewThemeName = ImGuiExtension.InputText("New theme name", NewThemeName, 200, InputTextFlags.Default);
-           
+            NewThemeName = ImGuiExtension.InputText("New theme name", NewThemeName, 200, InputTextFlags.None);
+
             if (ImGuiExtension.Button("Create new theme from current"))
             {
                 if (!string.IsNullOrEmpty(NewThemeName))
@@ -117,7 +119,7 @@ namespace PoeHUD.Hud.Themes
             }
             #endregion
             ImGui.Text("");
-            
+
             var style = ImGui.GetStyle();
 
             if (ImGui.TreeNode("Theme settings"))
@@ -145,32 +147,44 @@ namespace PoeHUD.Hud.Themes
 
                 style.WindowTitleAlign = DrawVectorSetting("WindowTitleAlign", style.WindowTitleAlign, 0, 1, 0.1f);
                 style.WindowRounding = DrawFloatSetting("WindowRounding", style.WindowRounding, 0, 14);
-                style.ChildWindowRounding = DrawFloatSetting("ChildWindowRounding", style.ChildWindowRounding, 0, 16);
+                style.ChildRounding = DrawFloatSetting("ChildWindowRounding", style.ChildRounding, 0, 16);
                 style.FrameRounding = DrawFloatSetting("FrameRounding", style.FrameRounding, 0, 12);
                 style.ColumnsMinSpacing = DrawFloatSetting("ColumnsMinSpacing", style.ColumnsMinSpacing, 0, 30);
 
-                style.CurveTessellationTolerance = DrawFloatSetting("CurveTessellationTolerance", style.CurveTessellationTolerance * 100, 0, 100) / 100;
+                style.CurveTessellationTol = DrawFloatSetting("CurveTessellationTolerance", style.CurveTessellationTol * 100, 0, 100) / 100;
             }
 
             ImGui.Text("");
             #region ColorsDraw
             ImGui.Text("Colors:");
             ImGui.Columns(2, "Columns", true);
-      
-            var colorTypes = Enum.GetValues(typeof(ColorTarget)).Cast<ColorTarget>();
-            var count = colorTypes.Count() / 2;
 
-            foreach (var type in colorTypes)
+            // var colorTypes = Enum.GetValues(typeof(ColorTarget)).Cast<ColorTarget>();
+            var count = (int)ColorTarget.COUNT / 2;
+            for (int i = 0; i < (int)ColorTarget.COUNT; i++)
             {
+                var type = (ColorTarget)i;
                 var nameFixed = Regex.Replace(type.ToString(), "(\\B[A-Z])", " $1");
-                var colorValue = style.GetColor(type);
+                var colorValue = style.Colors[i];
 
                 if (ImGui.ColorEdit4(nameFixed, ref colorValue, ColorEditFlags.AlphaBar | ColorEditFlags.NoInputs | ColorEditFlags.AlphaPreviewHalf))
-                    style.SetColor(type, colorValue);
+                    style.Colors[i] = colorValue;
 
                 if (count-- == -1)
                     ImGui.NextColumn();
             }
+            //foreach (ColorTarget type in colorTypes)
+            //{
+
+            //    var nameFixed = Regex.Replace(type.ToString(), "(\\B[A-Z])", " $1");
+            //    var colorValue = style.Colors[(int)type];
+
+            //    if (ImGui.ColorEdit4(nameFixed, ref colorValue, ColorEditFlags.AlphaBar | ColorEditFlags.NoInputs | ColorEditFlags.AlphaPreviewHalf))
+            //        style.Colors[(int)type] = colorValue;
+
+            //    if (count-- == -1)
+            //        ImGui.NextColumn();
+            //}
             #endregion
         }
 
@@ -187,7 +201,7 @@ namespace PoeHUD.Hud.Themes
 
         private Vector2 DrawVectorSetting(string name, Vector2 result, float min, float max, float power = 1)
         {
-            ImGui.SliderVector2(name, ref result, min, max, "%.0f", power);
+            ImGui.SliderFloat2(name, ref result, min, max, "%.0f", power);
             return result;
         }
 
@@ -195,11 +209,11 @@ namespace PoeHUD.Hud.Themes
         {
             var theme = LoadTheme(fileName, true);
 
-            if(theme == null)
+            if (theme == null)
             {
                 BasePlugin.LogMessage($"Can't find theme file {fileName}, loading default.", 3);
                 theme = LoadTheme(DefaultThemeName, true);
-                if(theme == null)
+                if (theme == null)
                 {
                     BasePlugin.LogMessage($"Can't find default theme file {DefaultThemeName}, Generating default and saving...", 3);
                     theme = GenerateDefaultTheme();
@@ -210,7 +224,7 @@ namespace PoeHUD.Hud.Themes
         }
 
         public static void ApplyTheme(ThemeConfig theme)
-        {  
+        {
             var style = ImGui.GetStyle();
 
             style.AntiAliasedLines = theme.AntiAliasedLines;
@@ -224,27 +238,33 @@ namespace PoeHUD.Hud.Themes
             style.IndentSpacing = theme.IndentSpacing;
             style.TouchExtraPadding = theme.TouchExtraPadding;
             style.ItemInnerSpacing = theme.ItemInnerSpacing;
-         
+
             style.ItemSpacing = theme.ItemSpacing;
             style.FrameRounding = theme.FrameRounding;
             style.FramePadding = theme.FramePadding;
-            style.ChildWindowRounding = theme.ChildWindowRounding;
+            style.ChildRounding = theme.ChildWindowRounding;
             style.WindowTitleAlign = theme.WindowTitleAlign;
             style.WindowRounding = theme.WindowRounding;
             //style.WindowMinSize = theme.WindowMinSize;
             style.WindowPadding = theme.WindowPadding;
             style.Alpha = theme.Alpha;
             style.AntiAliasedFill = theme.AntiAliasedFill;
-            style.CurveTessellationTolerance = theme.CurveTessellationTolerance;
+            style.CurveTessellationTol = theme.CurveTessellationTolerance;
 
-       
+
             foreach (var color in theme.Colors)
             {
                 try
                 {
-                    if(color.Key == ColorTarget.Count)//This shit made a crash
+                    //@TODO
+                    if (color.Key == ColorTarget.COUNT)//This shit made a crash
                         continue;
-                    style.SetColor(color.Key, color.Value);
+                    style.Colors[(int)color.Key] = color.Value;
+                    //c.W = color.Value.W;
+                    //c.X = color.Value.X;
+                    //c.Y = color.Value.Y;
+                    //c.Z = color.Value.Z;
+
                 }
                 catch (Exception ex) { BasePlugin.LogError(ex.Message, 5); }
 
@@ -268,22 +288,22 @@ namespace PoeHUD.Hud.Themes
             result.ItemSpacing = style.ItemSpacing;
             result.FrameRounding = style.FrameRounding;
             result.FramePadding = style.FramePadding;
-            result.ChildWindowRounding = style.ChildWindowRounding;
+            result.ChildWindowRounding = style.ChildRounding;
             result.WindowTitleAlign = style.WindowTitleAlign;
             result.WindowRounding = style.WindowRounding;
             //result.WindowMinSize = style.WindowMinSize;
             result.WindowPadding = style.WindowPadding;
             result.Alpha = style.Alpha;
             result.AntiAliasedFill = style.AntiAliasedFill;
-            result.CurveTessellationTolerance = style.CurveTessellationTolerance;
+            result.CurveTessellationTolerance = style.CurveTessellationTol;
 
             var colorTypeValues = Enum.GetValues(typeof(ColorTarget)).Cast<ColorTarget>();
             //Read colors
             foreach (var colorType in colorTypeValues)
             {
-                if (colorType == ColorTarget.Count)//This shit made a crash
+                if (colorType == ColorTarget.COUNT)//This shit made a crash
                     continue;
-                result.Colors.Add(colorType, style.GetColor(colorType));
+                result.Colors.Add(colorType, style.Colors[(int)colorType]);
             }
 
             return result;
@@ -325,15 +345,16 @@ namespace PoeHUD.Hud.Themes
             resultTheme.Colors.Add(ColorTarget.ResizeGrip, new ImGuiVector4(1.00f, 1.00f, 1.00f, 0.16f));
             resultTheme.Colors.Add(ColorTarget.ResizeGripHovered, new ImGuiVector4(0.78f, 0.82f, 1.00f, 0.60f));
             resultTheme.Colors.Add(ColorTarget.ResizeGripActive, new ImGuiVector4(0.78f, 0.82f, 1.00f, 0.90f));
-            resultTheme.Colors.Add(ColorTarget.CloseButton, new ImGuiVector4(0.50f, 0.50f, 0.90f, 0.50f));
-            resultTheme.Colors.Add(ColorTarget.CloseButtonHovered, new ImGuiVector4(0.70f, 0.70f, 0.90f, 0.60f));
-            resultTheme.Colors.Add(ColorTarget.CloseButtonActive, new ImGuiVector4(0.70f, 0.70f, 0.70f, 1.00f));
+            //            resultTheme.Colors.Add(ColorTarget.CloseButton, new ImGuiVector4(0.50f, 0.50f, 0.90f, 0.50f));
+            //            resultTheme.Colors.Add(ColorTarget.CloseButtonHovered, new ImGuiVector4(0.70f, 0.70f, 0.90f, 0.60f));
+            //            resultTheme.Colors.Add(ColorTarget.CloseButtonActive, new ImGuiVector4(0.70f, 0.70f, 0.70f, 1.00f));
             resultTheme.Colors.Add(ColorTarget.PlotLines, new ImGuiVector4(1.00f, 1.00f, 1.00f, 1.00f));
             resultTheme.Colors.Add(ColorTarget.PlotLinesHovered, new ImGuiVector4(0.90f, 0.70f, 0.00f, 1.00f));
             resultTheme.Colors.Add(ColorTarget.PlotHistogram, new ImGuiVector4(0.90f, 0.70f, 0.00f, 1.00f));
             resultTheme.Colors.Add(ColorTarget.PlotHistogramHovered, new ImGuiVector4(1.00f, 0.60f, 0.00f, 1.00f));
             resultTheme.Colors.Add(ColorTarget.TextSelectedBg, new ImGuiVector4(1.00f, 0.03f, 0.03f, 0.35f));
-            resultTheme.Colors.Add(ColorTarget.ModalWindowDarkening, new ImGuiVector4(0.20f, 0.20f, 0.20f, 0.35f));
+            resultTheme.Colors.Add(ColorTarget.ModalWindowDimBg, new ImGuiVector4(0.20f, 0.20f, 0.20f, 0.35f));
+            // resultTheme.Colors.Add(ColorTarget.ModalWindowDarkening, new ImGuiVector4(0.20f, 0.20f, 0.20f, 0.35f));
             resultTheme.Colors.Add(ColorTarget.DragDropTarget, new ImGuiVector4(1.00f, 1.00f, 0.00f, 0.90f));
             return resultTheme;
         }

@@ -1,5 +1,6 @@
 ﻿using ImGuiNET;
 using PoeHUD.Framework;
+using PoeHUD.Hud.Menu;
 using PoeHUD.Hud.Settings;
 using SharpDX;
 using System;
@@ -7,10 +8,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using PoeHUD.Hud.Menu;
+using ColorEditFlags = ImGuiNET.ImGuiColorEditFlags;
+using ColorTarget = ImGuiNET.ImGuiCol;
+using ComboFlags = ImGuiNET.ImGuiComboFlags;
+using Condition = ImGuiNET.ImGuiCond;
+using HoveredFlags = ImGuiNET.ImGuiHoveredFlags;
 using ImGuiVector2 = System.Numerics.Vector2;
 using ImGuiVector4 = System.Numerics.Vector4;
-
+using InputTextFlags = ImGuiNET.ImGuiInputTextFlags;
+using StyleVar = ImGuiNET.ImGuiStyleVar;
+using TextEditCallbackData = ImGuiNET.ImGuiInputTextCallbackData;
+using WindowFlags = ImGuiNET.ImGuiWindowFlags;
 namespace PoeHUD.Hud.UI
 {
     public class ImGuiExtension
@@ -19,14 +27,14 @@ namespace PoeHUD.Hud.UI
         {
             ImGui.SetNextWindowPos(new ImGuiVector2(width + x, height + y), Condition.Appearing, new ImGuiVector2(1, 1));
             ImGui.SetNextWindowSize(new ImGuiVector2(width, height), Condition.Appearing);
-            return ImGui.BeginWindow(title, ref isOpened, autoResize ? WindowFlags.AlwaysAutoResize : WindowFlags.Default);
+            return ImGui.Begin(title, ref isOpened, autoResize ? WindowFlags.AlwaysAutoResize : WindowFlags.NavFlattened);
         }
 
         public static bool BeginWindow(string title, ref bool isOpened, float x, float y, float width, float height, bool autoResize = false)
         {
             ImGui.SetNextWindowPos(new ImGuiVector2(width + x, height + y), Condition.Appearing, new ImGuiVector2(1, 1));
             ImGui.SetNextWindowSize(new ImGuiVector2(width, height), Condition.Appearing);
-            return ImGui.BeginWindow(title, ref isOpened, autoResize ? WindowFlags.AlwaysAutoResize : WindowFlags.Default);
+            return ImGui.Begin(title, ref isOpened, autoResize ? WindowFlags.AlwaysAutoResize : WindowFlags.None);
         }
 
         public static bool Button(string label)
@@ -151,7 +159,9 @@ namespace PoeHUD.Hud.UI
                 MenuPlugin.HandleForKeySelector = true;
                 ImGui.OpenPopup(buttonName);
             }
-            if (ImGui.BeginPopupModal(buttonName, (WindowFlags)35))
+
+
+            if (ImGui.BeginPopup(buttonName, (WindowFlags)35))
             {
                 if (!MenuPlugin.HandleForKeySelector)
                 {
@@ -178,7 +188,8 @@ namespace PoeHUD.Hud.UI
                 buttonName = buttonName.Substring(0, buttonName.LastIndexOf("##"));
             ImGui.PushID(buttonName);
             if (ImGui.Button($"{buttonName}: {currentKey} ")) ImGui.OpenPopup(popupTitle);
-            if (ImGui.BeginPopupModal(popupTitle, (WindowFlags)35))
+
+            if (ImGui.BeginPopup(popupTitle, (WindowFlags)35))
             {
                 if (!MenuPlugin.HandleForKeySelector)
                 {
@@ -222,13 +233,14 @@ namespace PoeHUD.Hud.UI
 
         public static int ComboBox(string sideLabel, int currentSelectedItem, List<string> objectList, ComboFlags comboFlags = ComboFlags.HeightRegular)
         {
-            ImGui.Combo(sideLabel, ref currentSelectedItem, objectList.ToArray());
+            var ary = objectList.ToArray();
+            ImGui.Combo(sideLabel, ref currentSelectedItem, ary, ary.Length);
             return currentSelectedItem;
         }
 
         public static string ComboBox(string sideLabel, string previewString, string currentSelectedItem, List<string> objectList, ComboFlags comboFlags = ComboFlags.HeightRegular)
         {
-            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null? previewString : currentSelectedItem, comboFlags))
+            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null ? previewString : currentSelectedItem, comboFlags))
             {
                 var refObject = currentSelectedItem;
                 for (var n = 0; n < objectList.Count; n++)
@@ -251,7 +263,7 @@ namespace PoeHUD.Hud.UI
 
         public static string ComboBox(string sideLabel, string previewString, string currentSelectedItem, List<string> objectList, out bool didChange, ComboFlags comboFlags = ComboFlags.HeightRegular)
         {
-            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null? previewString : currentSelectedItem, comboFlags))
+            if (ImGui.BeginCombo(sideLabel, currentSelectedItem == null ? previewString : currentSelectedItem, comboFlags))
             {
                 var refObject = currentSelectedItem;
                 for (var n = 0; n < objectList.Count; n++)
@@ -284,7 +296,7 @@ namespace PoeHUD.Hud.UI
             int Callback(TextEditCallbackData* data)
             {
                 var pCursorPos = (int*)data->UserData;
-                if (!data->HasSelection()) *pCursorPos = data->CursorPos;
+                if (data->SelectionStart < data->SelectionEnd) *pCursorPos = data->CursorPos;
                 return 0;
             }
 
@@ -295,20 +307,20 @@ namespace PoeHUD.Hud.UI
         // ImColor_HSV Maker
         public static ImGuiVector4 ImColor_HSV(float h, float s, float v)
         {
-            ImGui.ColorConvertHSVToRGB(h, s, v, out var r, out var g, out var b);
+            ImGui.ColorConvertHSVtoRGB(h, s, v, out var r, out var g, out var b);
             return new ImGuiVector4(r, g, b, 255);
         }
 
         public static ImGuiVector4 ImColor_HSV(float h, float s, float v, float a)
         {
-            ImGui.ColorConvertHSVToRGB(h, s, v, out var r, out var g, out var b);
+            ImGui.ColorConvertHSVtoRGB(h, s, v, out var r, out var g, out var b);
             return new ImGuiVector4(r, g, b, a);
         }
 
         // Color menu tabs
         public static void ImGuiExtension_ColorTabs(string idString, int height, IReadOnlyList<string> settingList, ref int selectedItem, ref int uniqueIdPop)
         {
-            ImGuiNative.igGetContentRegionAvail(out var newcontentRegionArea);
+            var newcontentRegionArea = ImGui.GetContentRegionAvail();
             var boxRegion = new ImGuiVector2(newcontentRegionArea.X, height);
             if (ImGui.BeginChild(idString, boxRegion, true, WindowFlags.HorizontalScrollbar))
             {
@@ -338,7 +350,7 @@ namespace PoeHUD.Hud.UI
         {
             ImGui.SameLine();
             ImGui.TextDisabled("(?)");
-            if (ImGui.IsItemHovered(HoveredFlags.Default))
+            if (ImGui.IsItemHovered(HoveredFlags.None))
             {
                 ImGui.SetTooltip(desc);
             }

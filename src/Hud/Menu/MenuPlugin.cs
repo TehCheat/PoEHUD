@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows.Forms;
-using Gma.System.MouseKeyHook;
+﻿using Gma.System.MouseKeyHook;
 using ImGuiNET;
 using PoeHUD.Controllers;
 using PoeHUD.Hud.Settings;
 using PoeHUD.Hud.UI;
 using SharpDX;
 using SharpDX.Direct3D9;
-
+using System;
+using System.Diagnostics;
+using System.Windows.Forms;
+using IO = ImGuiNET.ImGuiIO;
 namespace PoeHUD.Hud.Menu
 {
-    public class MenuPlugin : Plugin<CoreSettings>
+    public unsafe class MenuPlugin : Plugin<CoreSettings>
     {
         //For spawning the menu in external plugins
         public static event Action<int> eInitMenu = delegate { };
@@ -48,9 +49,9 @@ namespace PoeHUD.Hud.Menu
             KeyboardMouseEvents.Dispose();
         }
 
-   
+
         public override void Render()
-        {            
+        {
             if (Settings.ShowMenuButton)
             {
                 Graphics.DrawImage("menu-background.png", MenuToggleButtonRect, new ColorBGRA(0, 0, 0, 230));
@@ -59,18 +60,33 @@ namespace PoeHUD.Hud.Menu
             MenuWindow.Render();
         }
 
-        private bool ImGuiWantCaptureMouse(IO io)
+        //        private bool ImGuiWantCaptureMouse(IO io)
+        //        {
+        //            unsafe
+        //            {
+        //                return io.WantCaptureKeyboard == 1 && isPoeGameVisible;
+        //            }
+        //        }
+        private bool ImGuiWantCaptureMouse(ImGuiIOPtr io)
         {
             unsafe
             {
-                return io.GetNativePointer()->WantCaptureMouse == 1 && isPoeGameVisible;
+
+                return io.WantCaptureMouse && isPoeGameVisible;
             }
         }
-        private bool ImGuiWantTextInput(IO io)
+        //        private bool ImGuiWantTextInput(IO io)
+        //        {
+        //            unsafe
+        //            {
+        //                return io.WantTextInput == 1 && isPoeGameVisible;
+        //            }
+        //        }
+        private bool ImGuiWantTextInput(ImGuiIOPtr io)
         {
             unsafe
             {
-                return io.GetNativePointer()->WantTextInput == 1 && isPoeGameVisible;
+                return io.WantTextInput == true && isPoeGameVisible;
             }
         }
         private bool PoeIsHoveringInventoryStashTradeItem()
@@ -85,14 +101,14 @@ namespace PoeHUD.Hud.Menu
         {
             var io = ImGui.GetIO();
 
-            if (io.AltPressed)
+            if (io.KeyAlt)
                 return;
 
             unsafe
             {
                 if (ImGuiWantTextInput(io))
                 {
-                    ImGui.AddInputCharacter(e.KeyChar);
+                    io.AddInputCharacter(e.KeyChar);
                     e.Handled = true;
                 }
             }
@@ -100,10 +116,13 @@ namespace PoeHUD.Hud.Menu
         private void KeyboardMouseEvents_KeyUp(object sender, KeyEventArgs e)
         {
             var io = ImGui.GetIO();
-            io.CtrlPressed = false;
-            io.AltPressed = false;
-            io.ShiftPressed = false;
+            io.KeyCtrl = false;
+            io.KeyAlt = false;
+            io.KeyShift = false;
+
+
             io.KeysDown[e.KeyValue] = false;
+            //io.KeysDown[e.KeyValue] = false;
         }
 
         public static bool HandleForKeySelector = false;
@@ -126,7 +145,7 @@ namespace PoeHUD.Hud.Menu
                     SettingsHub.Save(settingsHub);
                     e.Handled = true;
                 }
-                if(Settings.Enable.Value)
+                if (Settings.Enable.Value)
                 {
                     if (Settings.CloseOnEsc.Value && e.KeyCode == Keys.Escape)
                     {
@@ -144,21 +163,22 @@ namespace PoeHUD.Hud.Menu
             }
 
             var io = ImGui.GetIO();
-            io.CtrlPressed = e.Control || e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey;
+            io.KeyCtrl = e.Control || e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey;
             // Don't know why but Alt is LMenu/RMenu
-            io.AltPressed = e.Alt || e.KeyCode == Keys.LMenu || e.KeyCode == Keys.RMenu;
-            io.ShiftPressed = e.Shift || e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey;
+            io.KeyAlt = e.Alt || e.KeyCode == Keys.LMenu || e.KeyCode == Keys.RMenu;
+            io.KeyShift = e.Shift || e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey;
 
-            if (io.AltPressed)
+            if (io.KeyAlt)
                 return;
 
             unsafe
             {
                 if (ImGuiWantTextInput(io))
                 {
-               
+
+
                     io.KeysDown[e.KeyValue] = true;
-                    if(e.KeyCode != Keys.Capital &&
+                    if (e.KeyCode != Keys.Capital &&
                         e.KeyCode != Keys.LShiftKey && e.KeyCode != Keys.RShiftKey &&
                         e.KeyCode != Keys.LControlKey && e.KeyCode != Keys.RControlKey &&
                         e.KeyCode != Keys.LWin && e.KeyCode != Keys.Apps)
@@ -188,7 +208,7 @@ namespace PoeHUD.Hud.Menu
         {
             var io = ImGui.GetIO();
             Vector2 mousePosition = GameController.Window.ScreenToClient(e.X, e.Y);
-            io.MousePosition = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
+            io.MousePos = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
             switch (e.Button)
             {
                 case MouseButtons.Left:
@@ -221,22 +241,27 @@ namespace PoeHUD.Hud.Menu
 
             if (isPoeGameVisible)
             {
+
                 if (Settings.ShowMenuButton && MenuToggleButtonRect.Contains(mousePosition))
                 {
+                    Debug.WriteLine("isPoeGameVisible");
                     Settings.Enable.Value = !Settings.Enable.Value;
+
                     e.Handled = true;
                     return;
                 }
             }
 
             var io = ImGui.GetIO();
-            io.MousePosition = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
+            io.MousePos = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
 
             if (ImGuiWantCaptureMouse(io))
             {
+                Debug.WriteLine("ImGuiWantCaptureMouse");
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
+
                         io.MouseDown[0] = true;
                         e.Handled = true;
                         break;
@@ -263,7 +288,7 @@ namespace PoeHUD.Hud.Menu
         {
             var io = ImGui.GetIO();
             Vector2 mousePosition = GameController.Window.ScreenToClient(e.X, e.Y);
-            io.MousePosition = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
+            io.MousePos = new System.Numerics.Vector2(mousePosition.X, mousePosition.Y);
         }
         #endregion
     }

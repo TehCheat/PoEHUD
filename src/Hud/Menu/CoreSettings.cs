@@ -1,11 +1,11 @@
-﻿using PoeHUD.Hud.Settings;
-using SharpDX;
-using ImGuiVector2 = System.Numerics.Vector2;
-using ImGuiNET;
+﻿using ImGuiNET;
 using Newtonsoft.Json;
-using PoeHUD.Plugins;
+using PoeHUD.Hud.Settings;
 using PoeHUD.Hud.Themes;
+using PoeHUD.Plugins;
+using SharpDX;
 using System.Windows.Forms;
+using ImGuiVector2 = System.Numerics.Vector2;
 
 namespace PoeHUD.Hud.Menu
 {
@@ -20,8 +20,8 @@ namespace PoeHUD.Hud.Menu
         public ImGuiVector2 MenuWindowSize = new ImGuiVector2(600, 600);
 
         public bool IsCollapsed = false;
-        public TreeNodeFlags CorePluginsTreeState;
-        public TreeNodeFlags InstalledPluginsTreeNode;
+        public ImGuiTreeNodeFlags CorePluginsTreeState;
+        public ImGuiTreeNodeFlags InstalledPluginsTreeNode;
 
         [Menu("Key Settings", 0)]
         public EmptyNode KeyMenuRoot { get; set; } = new EmptyNode();

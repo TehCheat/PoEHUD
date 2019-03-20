@@ -1,16 +1,28 @@
-﻿using System;
+﻿using ImGuiNET;
+using PoeHUD.Controllers;
+using PoeHUD.Hud;
+using PoeHUD.Hud.Settings;
+using PoeHUD.Hud.UI;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PoeHUD.Hud;
-using PoeHUD.Hud.UI;
-using PoeHUD.Hud.Settings;
-using ImGuiNET;
-using System.IO;
-using PoeHUD.Controllers;
+using ColorEditFlags = ImGuiNET.ImGuiColorEditFlags;
+using ColorTarget = ImGuiNET.ImGuiCol;
+using ComboFlags = ImGuiNET.ImGuiComboFlags;
+using Condition = ImGuiNET.ImGuiCond;
+using HoveredFlags = ImGuiNET.ImGuiHoveredFlags;
+using ImGuiVector2 = System.Numerics.Vector2;
+using ImGuiVector4 = System.Numerics.Vector4;
+using InputTextFlags = ImGuiNET.ImGuiInputTextFlags;
+using SelectableFlags = ImGuiNET.ImGuiSelectableFlags;
+using StyleVar = ImGuiNET.ImGuiStyleVar;
+using TextEditCallbackData = ImGuiNET.ImGuiInputTextCallbackData;
+using TreeNodeFlags = ImGuiNET.ImGuiTreeNodeFlags;
 using Vector2 = System.Numerics.Vector2;
-
+using WindowFlags = ImGuiNET.ImGuiWindowFlags;
 namespace PoeHUD.Hud.Menu.SettingsDrawers
 {
     using System.CodeDom;
@@ -178,7 +190,7 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
 
         public override void Draw()
         {
-            Toggle.Value = ImGuiExtension.InputText(ImguiUniqLabel, Toggle.Value, 500, InputTextFlags.Default);
+            Toggle.Value = ImGuiExtension.InputText(ImguiUniqLabel, Toggle.Value, 500, InputTextFlags.None);
         }
     }
 
@@ -258,7 +270,7 @@ namespace PoeHUD.Hud.Menu.SettingsDrawers
         {
             bool result = false;
             ImGui.Text("Current Folder: " + CurrentFolder);
-            if (ImGui.BeginChildFrame(1, new Vector2(0, 300), WindowFlags.Default))
+            if (ImGui.BeginChildFrame(1, new Vector2(0, 300), WindowFlags.None))
             {
                 DirectoryInfo di = new DirectoryInfo(CurrentFolder);
                 if (di.Exists)

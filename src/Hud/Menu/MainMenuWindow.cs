@@ -1,31 +1,41 @@
-using System;
-using SharpDX.Direct3D9;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
+﻿using ImGuiNET;
+using PoeHUD.Controllers;
 using PoeHUD.Hud.Menu;
+using PoeHUD.Hud.PluginExtension;
 using PoeHUD.Hud.Settings;
+using PoeHUD.Hud.Themes;
+using PoeHUD.Hud.UI;
+using PoeHUD.Models;
 using PoeHUD.Models.Enums;
 using PoeHUD.Plugins;
 using PoeHUD.Poe;
-using PoeHUD.Models;
 using PoeHUD.Poe.Components;
 using PoeHUD.Poe.Elements;
 using PoeHUD.Poe.EntityComponents;
-using PoeHUD.Poe.RemoteMemoryObjects;
 using PoeHUD.Poe.FilesInMemory;
+using PoeHUD.Poe.RemoteMemoryObjects;
+using SharpDX.Direct3D9;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
-using ImGuiNET;
+using ColorEditFlags = ImGuiNET.ImGuiColorEditFlags;
+using ColorTarget = ImGuiNET.ImGuiCol;
+using ComboFlags = ImGuiNET.ImGuiComboFlags;
+using Condition = ImGuiNET.ImGuiCond;
+using HoveredFlags = ImGuiNET.ImGuiHoveredFlags;
 using ImGuiVector2 = System.Numerics.Vector2;
 using ImGuiVector4 = System.Numerics.Vector4;
+using InputTextFlags = ImGuiNET.ImGuiInputTextFlags;
+using StyleVar = ImGuiNET.ImGuiStyleVar;
+using TextEditCallbackData = ImGuiNET.ImGuiInputTextCallbackData;
+using TreeNodeFlags = ImGuiNET.ImGuiTreeNodeFlags;
 using Vector2 = System.Numerics.Vector2;
-using PoeHUD.Hud.PluginExtension;
-using PoeHUD.Controllers;
-using PoeHUD.Hud.UI;
-using PoeHUD.Hud.Themes;
-
+using WindowFlags = ImGuiNET.ImGuiWindowFlags;
 namespace PoeHUD.Hud
 {
     public class MainMenuWindow
@@ -100,11 +110,11 @@ namespace PoeHUD.Hud
 
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Xph & area", settingsHub.XpRateSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Preload alert", settingsHub.PreloadAlertSettings) });
-            CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster alert", settingsHub.MonsterTrackerSettings) });  
+            CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster alert", settingsHub.MonsterTrackerSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Monster kills", settingsHub.KillCounterSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Show dps", settingsHub.DpsMeterSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Map Icons", settingsHub.MapIconsSettings) });
-	        CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Map Icons Size", settingsHub.PoiTrackerSettings) });
+            CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Map Icons Size", settingsHub.PoiTrackerSettings) });
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = new PluginHolder("Perfomance", settingsHub.PerformanceSettings) });
 
 
@@ -114,7 +124,7 @@ namespace PoeHUD.Hud
             CoreMenu.Childs.Add(new InbuildPluginMenu() { Plugin = themeEditorDraw });
         }
 
- 
+
         private class InbuildPluginMenu
         {
             public PluginHolder Plugin;
@@ -128,13 +138,14 @@ namespace PoeHUD.Hud
             var opened = Settings.Enable.Value;
             Settings.IsCollapsed = !DrawInfoWindow("PoeHUD  " + PoeHUDVersion, ref opened,
                 Settings.MenuWindowPos.X, Settings.MenuWindowPos.Y, Settings.MenuWindowSize.X, Settings.MenuWindowSize.Y,
-                 WindowFlags.Default, Condition.Appearing);
+                 WindowFlags.None, Condition.Appearing);
             Settings.Enable.Value = opened;
 
             if (!Settings.IsCollapsed)
             {
-                ImGuiNative.igGetContentRegionAvail(out newcontentRegionArea);
-                if (ImGui.BeginChild("PluginsList", new Vector2(PluginNameWidth + 60, newcontentRegionArea.Y), true, WindowFlags.Default))
+
+                var newcontentRegionArea = ImGui.GetContentRegionAvail();
+                if (ImGui.BeginChild("PluginsList", new Vector2(PluginNameWidth + 60, newcontentRegionArea.Y), true, WindowFlags.None))
                 {
                     PluginNameWidth = 120;
                     var coreOpened = ImGui.TreeNodeEx("", Settings.CorePluginsTreeState);
@@ -151,16 +162,17 @@ namespace PoeHUD.Hud
                             {
                                 DrawPlugin(defPlugin.Plugin, 20);
                             }
-                            else 
+                            else
                             {
-                                defPlugin.Plugin.Settings.Enable = 
+                              //  Debug.WriteLine(defPlugin.Plugin.PluginName);
+                                defPlugin.Plugin.Settings.Enable =
                                     ImGuiExtension.Checkbox($"##{defPlugin.Plugin.PluginName}Enabled", defPlugin.Plugin.Settings.Enable.Value);
 
                                 ImGui.SameLine();
                                 var pluginOpened = ImGui.TreeNodeEx($"##{defPlugin.Plugin.PluginName}", TreeNodeFlags.OpenOnArrow);
                                 ImGui.SameLine();
 
-                                var labelSize = ImGui.GetTextSize(defPlugin.Plugin.PluginName).X + 30;
+                                var labelSize = ImGui.CalcTextSize(defPlugin.Plugin.PluginName).X + 30;
                                 if (PluginNameWidth < labelSize)
                                     PluginNameWidth = labelSize;
 
@@ -171,8 +183,8 @@ namespace PoeHUD.Hud
                                 {
                                     foreach (var plugin in defPlugin.Childs)
                                         DrawPlugin(plugin.Plugin, 30);
+                                    ImGui.Unindent();
 
-                                    ImGuiNative.igUnindent();
                                 }
                             }
                         }
@@ -184,8 +196,8 @@ namespace PoeHUD.Hud
                     else
                     {
                         Settings.CorePluginsTreeState = TreeNodeFlags.OpenOnArrow;
-                    }             
-                 
+                    }
+
                     if (ImGui.TreeNodeEx("Installed Plugins", Settings.InstalledPluginsTreeNode))
                     {
                         foreach (var plugin in PluginExtensionPlugin.Plugins)
@@ -193,12 +205,12 @@ namespace PoeHUD.Hud
                             if (Settings.DeveloperMode.Value && Settings.ShowPluginsMS.Value)
                             {
                                 var extPlugin = (plugin as ExternalPluginHolder).BPlugin;
-	                            if (extPlugin == null)//This can happen while plugin update (using plugin updator) or recompile
-		                            continue;
+                                if (extPlugin == null)//This can happen while plugin update (using plugin updator) or recompile
+                                    continue;
                                 ImGuiExtension.Label(extPlugin.AwerageMs.ToString());
                                 ImGui.SameLine();
                             }
-                            
+
                             DrawPlugin(plugin, 20);
                         }
 
@@ -217,8 +229,8 @@ namespace PoeHUD.Hud
 
                 if (SelectedPlugin != null)
                 {
-                    ImGuiNative.igGetContentRegionAvail(out newcontentRegionArea);
-                    ImGui.BeginChild("PluginOptions", new Vector2(newcontentRegionArea.X, newcontentRegionArea.Y), true, WindowFlags.Default);
+                    newcontentRegionArea = ImGui.GetContentRegionAvail();
+                    ImGui.BeginChild("PluginOptions", new Vector2(newcontentRegionArea.X, newcontentRegionArea.Y), true, WindowFlags.None);
 
                     var extPlugin = SelectedPlugin as ExternalPluginHolder;
                     if (Settings.DeveloperMode.Value && extPlugin != null)
@@ -244,13 +256,13 @@ namespace PoeHUD.Hud
                 Settings.MenuWindowSize = ImGui.GetWindowSize();
             }
 
-            Settings.MenuWindowPos = ImGui.GetWindowPosition(); 
-            ImGui.EndWindow();
+            Settings.MenuWindowPos = ImGui.GetWindowPos();
+            ImGui.End();
 
             if (Settings.ShowImguiDemo.Value)
             {
                 bool tmp = Settings.ShowImguiDemo.Value;
-                ImGuiNative.igShowDemoWindow(ref tmp);
+                ImGui.ShowDemoWindow(ref tmp);
                 Settings.ShowImguiDemo.Value = tmp;
             }
 
@@ -271,18 +283,18 @@ namespace PoeHUD.Hud
                 ImGui.SameLine();
             }
 
-            var labelSize = ImGui.GetTextSize(plugin.PluginName).X + offsetX;
+            var labelSize = ImGui.CalcTextSize(plugin.PluginName).X + offsetX;
             if (PluginNameWidth < labelSize)
                 PluginNameWidth = labelSize;
 
             if (ImGui.Selectable(plugin.PluginName, SelectedPlugin == plugin))
             {
-                if(SelectedPlugin != plugin)
+                if (SelectedPlugin != plugin)
                 {
                     SelectedPlugin = plugin;
                     SelectedPlugin.OnPluginSelectedInMenu();
                     Settings.LastOpenedPlugin = plugin.PluginName;
-                }   
+                }
             }
         }
 
@@ -290,8 +302,9 @@ namespace PoeHUD.Hud
         {
             ImGui.SetNextWindowPos(new ImGuiVector2(width + x, height + y), conditions, new ImGuiVector2(1, 1));
             ImGui.SetNextWindowSize(new ImGuiVector2(width, height), conditions);
-            ImGuiNative.igSetNextWindowCollapsed(Settings.IsCollapsed, Condition.Appearing);
-            return ImGui.BeginWindow(windowLabel, ref isOpened, flags);
+
+            ImGui.SetNextWindowCollapsed(Settings.IsCollapsed, Condition.Appearing);
+            return ImGui.Begin(windowLabel, ref isOpened, flags);
         }
     }
 }
