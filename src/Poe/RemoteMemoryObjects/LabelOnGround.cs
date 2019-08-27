@@ -18,9 +18,26 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             });
         }
 
-        private long GetLabelInfo() { return Label.Address != 0 ? M.ReadLong(Label.Address + 0x3A8) : 0; } // No idea if this is correct, but it's not 0x6A4
+		private long GetLabelInfo()
+		{
+			if (Label != null)
+			{
+				return Label.Address != 0 ? M.ReadLong(Label.Address + 0x3A8) : 0; // No idea if this is correct, but it's not 0x6A4
+			}
+			else return 0;
+		}
 
-        public bool IsVisible => Label.IsVisible;
+        public bool IsVisible
+		{
+			get
+			{
+				if (Label != null)
+				{
+					return Label.IsVisible;
+				}
+				return false;
+			}
+		}
 
         public Entity ItemOnGround
         {
@@ -52,7 +69,21 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         //Compare type: Equal
         //Do scan. Then do scan again but with address of label that rolled to party member just switch to "Compare type: NotEqual"
         //Repeat this multiple time with different labels and you get ur offset in 5-7 iterations.
-        public bool CanPickUp => M.ReadLong(Label.Address + 0x420) == 0;
+        public bool CanPickUp
+		{
+			get
+			{
+				if (Label != null)
+				{
+					return M.ReadLong(Label.Address + 0x420) == 0;
+				}
+				else
+				{
+					// default to true?
+					return true;
+				}
+			}
+		}
 
         public TimeSpan TimeLeft
         {
