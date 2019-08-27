@@ -91,8 +91,12 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
             {
                 if (!CanPickUp)
                 {
-                    int futureTime = M.ReadInt(labelInfo.Value + 0x38);
-                    return TimeSpan.FromMilliseconds(futureTime - Environment.TickCount);
+					if (labelInfo.Value != 0)
+					{
+						int futureTime = M.ReadInt(labelInfo.Value + 0x38);
+						return TimeSpan.FromMilliseconds(futureTime - Environment.TickCount);
+					}
+					else return MaxTimeForPickUp;
                 }
 
                 return new TimeSpan();
