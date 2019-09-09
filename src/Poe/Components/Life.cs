@@ -6,6 +6,7 @@ namespace PoeHUD.Poe.Components
 {
 	public class Life : Component
 	{
+        public float Regen => Address != 0 ? M.ReadInt(Address + 0x90) : 1;
 		public int MaxHP => Address != 0 ? M.ReadInt(Address + 0x154) : 1;
 		public int ReservedFlatHP => Address != 0 ? M.ReadInt(Address + 0x158) : 0;
 		public int CurHP => Address != 0 ? M.ReadInt(Address + 0x15C) : 1;

@@ -9,7 +9,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
         private Cache _cache => GameController.Instance.Cache;
 
 		public IngameUIElements IngameUi => _cache.Enable && _cache.IngameUi != null ? _cache.IngameUi : _cache.Enable ? _cache.IngameUi = IngameUiReal : IngameUiReal;
-		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x78); // also at 0xF8...
+		private IngameUIElements IngameUiReal => ReadObjectAt<IngameUIElements>(0x78);
 
 		public long EntityLabelMap => M.ReadLong(Address + 0x98, 0x2A0);
 
@@ -24,7 +24,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 		public Element UIRoot => _cache.Enable && _cache.UIRoot != null ? _cache.UIRoot : _cache.Enable ? _cache.UIRoot = UIRootReal : UIRootReal;
 		private Element UIRootReal => ReadObjectAt<Element>(0x4A0 + Offsets.IgsOffset);
 
-		public Element UIHoverTooltip => ReadObjectAt<Element>(0x4D8 + Offsets.IgsOffset);
+		public Element UIHoverTooltip => ReadObjectAt<Element>(0x4E8 + Offsets.IgsOffset);
 
 		public float CurentUIElementPosX => M.ReadFloat(Address + 0x4E0 + Offsets.IgsOffset);
 		public float CurentUIElementPosY => M.ReadFloat(Address + 0x4E4 + Offsets.IgsOffset);

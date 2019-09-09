@@ -1,22 +1,19 @@
 using System.Collections.Generic;
 using System;
 using PoeHUD.Poe.RemoteMemoryObjects;
-using PoeHUD.Controllers;
-using PoeHUD.Models;
 using SharpDX;
 
 namespace PoeHUD.Poe.Components
 {
-    public partial class Actor : Component
+    public class Actor : Component
     {
         /// <summary>
         ///     Standing still = 2048 =bit 11 set
         ///     running = 2178 = bit 11 & 7
         ///     Maybe Bit-field : Bit 7 set = running
         /// </summary>
-        public int ActionId => Address != 0 ? M.ReadInt(Address + 0xF8) : 1;
-
-        public ActionFlags Action => Address != 0 ? (ActionFlags)M.ReadInt(Address + 0xF8) : ActionFlags.None;
+        public int ActionId => Address != 0 ? M.ReadInt(Address + 0x98) : 1;
+        public ActionFlags Action => Address != 0 ? (ActionFlags)ActionId : ActionFlags.None;
         public bool isMoving => (Action & ActionFlags.Moving) > 0;
         public bool isAttacking => (Action & ActionFlags.UsingAbility) > 0;
 
@@ -114,11 +111,9 @@ namespace PoeHUD.Poe.Components
         {
             public float DestinationX => M.ReadInt(Address + 0x60);
             public float DestinationY => M.ReadInt(Address + 0x64);
-
+            public long Target => M.ReadLong(Address + 0x38);
             public Vector2 CastDestination => new Vector2(DestinationX, DestinationY);
-
             public ActorSkill Skill => ReadObject<ActorSkill>(Address + 0x18);
-
         }
 
 

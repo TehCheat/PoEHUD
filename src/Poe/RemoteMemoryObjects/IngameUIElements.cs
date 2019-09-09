@@ -9,22 +9,22 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
 	public class IngameUIElements : RemoteMemoryObject
 	{
         public Element FlaskBar => GetObject<Element>(M.ReadLong(Address + 0x260, 0x1B0));
-		public SkillBarElement SkillBar => ReadObjectAt<SkillBarElement>(0x370);
-		public SkillBarElement HiddenSkillBar => ReadObjectAt<SkillBarElement>(0x378);
+		public SkillBarElement SkillBar => ReadObjectAt<SkillBarElement>(0x388);
+		public SkillBarElement HiddenSkillBar => ReadObjectAt<SkillBarElement>(0x390);
 		public PoeChatElement ChatBox => GetObject<PoeChatElement>(M.ReadLong(Address + 0x3F8, 0x2D0, 0xF80));
-		public Element QuestTracker => ReadObjectAt<Element>(0x478);
-		public Element OpenLeftPanel => ReadObjectAt<Element>(0x4E0/*508*/);
-		public Element OpenRightPanel => ReadObjectAt<Element>(0x4E8/*510 */);
+		public Element QuestTracker => ReadObjectAt<Element>(0x490);
+		public Element OpenLeftPanel => ReadObjectAt<Element>(0x4E0);
+		public Element OpenRightPanel => ReadObjectAt<Element>(0x4E8);
 		public InventoryElement InventoryPanel => ReadObjectAt<InventoryElement>(0x518);
 		public StashElement StashElement => ReadObjectAt<StashElement>(0x520); //This element was in serverdata
 		public Element TreePanel => ReadObjectAt<Element>(0x548);
 		public Element AtlasPanel => ReadObjectAt<Element>(0x550);
 		public Map Map => ReadObjectAt<Map>(0x5A0);
         public SyndicatePanel SyndicatePanel => GameController.Instance.Game.IngameState.UIRoot.GetChildFromIndices(1, 64).AsObject<SyndicatePanel>();
-        public SubterraneanChart MineMap => ReadObjectAt<SubterraneanChart>(0x6F8/*0xED8*/);
+        public SubterraneanChart MineMap => ReadObjectAt<SubterraneanChart>(0x6F8);
 		public WorldMapElement WorldMap => ReadObjectAt<WorldMapElement>(0xCC0);
 		public WorldMapElement AreaInstanceUi => ReadObjectAt<WorldMapElement>(0x7A8);
-	    public IncursionWindow IncursionWindow => GameController.Instance.Game.IngameState.UIRoot.GetChildFromIndices(1, 58).AsObject<IncursionWindow>();
+	    public IncursionWindow IncursionWindow => ReadObjectAt<IncursionWindow>(0x6D8);
 
 		public ItemsOnGroundLabelElement itemOnGroundLabelElement => ReadObjectAt<ItemsOnGroundLabelElement>(0x5A8);
 		public IEnumerable<LabelOnGround> ItemsOnGroundLabels => itemOnGroundLabelElement.LabelsOnGround;

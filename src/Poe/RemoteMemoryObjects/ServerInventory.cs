@@ -9,7 +9,7 @@ namespace PoeHUD.Poe.RemoteMemoryObjects
     public class ServerInventory : RemoteMemoryObject
     {
         public InventoryTypeE InventType => (InventoryTypeE) M.ReadInt(Address);
-        public InventorySlotE InventSlot => (InventorySlotE) M.ReadInt(Address + 0x04);
+        public InventorySlotE InventSlot => (InventorySlotE) M.ReadByte(Address + 0x01);//was M.ReadInt(Address + 0x04);
         public int Columns => M.ReadInt(Address + 0x0C);
         public int Rows => M.ReadInt(Address + 0x10);
 

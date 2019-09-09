@@ -12,7 +12,5 @@ namespace PoeHUD.Poe.Elements
         public Entity Item => ReadObject<Entity>(Address + 0x388);
         public ToolTipType toolTipType => ToolTipType.InventoryItem;
         public Element ToolTip => ReadObject<Element>(Address + 0xB20);
-       // Element already have it
-       // public bool IsHighlighted => M.ReadByte(Address + 0x958) > 0;
     }
 }

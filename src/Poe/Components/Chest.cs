@@ -2,10 +2,10 @@ namespace PoeHUD.Poe.Components
 {
     public class Chest : Component
     {
-        public bool IsOpened => Address != 0 && M.ReadByte(Address + 0x58) == 1;
-        public bool IsLocked => Address != 0 && M.ReadByte(Address + 0x59) > 1;
-        public bool IsStrongbox => Address != 0 && M.ReadLong(Address + 0x98) > 0;
-        public byte Quality => M.ReadByte(Address + 0x5C);
+        public bool IsOpened => Address != 0 && M.ReadByte(Address + 0x78) == 1;
+        public bool IsLocked => Address != 0 && M.ReadByte(Address + 0x79) > 1;
+        public bool IsStrongbox => Address != 0 && M.ReadLong(Address + 0xB8) > 0;
+        public byte Quality => M.ReadByte(Address + 0x7C);
 
         private long StrongboxData => M.ReadLong(Address + 0x20);
         public bool DestroyingAfterOpen => Address != 0 && M.ReadByte(StrongboxData + 0x20) == 1;

@@ -9,7 +9,7 @@ namespace PoeHUD.Poe
 
     public class Element : RemoteMemoryObject
     {
-        public const int OffsetBuffers = 0;//0x6EC;
+        public const int OffsetBuffers = 0x6EC;
         const int ChildOffset = 0x38;
 
         // dd id
